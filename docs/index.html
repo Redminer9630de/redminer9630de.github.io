@@ -240,6 +240,10 @@ footer .version {
     color: #A900B2;
 }
 
+footer .version {
+    margin-right: 50%;
+}
+
 /* Dark Theme Styles */
 @media (prefers-color-scheme: dark) {
     body {
@@ -377,7 +381,7 @@ footer .version {
 
     <footer>
         <span class="version">0.9.1</span>
-        <p>© 2024 Offizieller Kanal von Redminer9630 - Alle Rechte vorbehalten.</p>
+        <span class="ad">© 2024 Offizieller Kanal von Redminer9630 - Alle Rechte vorbehalten.</span>
     </footer>
     
     <audio id="audioPlayer" controls></audio>
@@ -576,6 +580,21 @@ footer .version {
             6: "generator/recipe_generator.html",
             7: "tools.html"
         };
+
+        function getURLParameter(name) {
+            const params = new URLSearchParams(window.location.search);
+            return params.get(name);
+        }
+
+        const adElement = document.querySelector('footer .ad');
+        
+        if (adElement) {
+            const adWidthParam = getURLParameter('ad-width');
+
+            if (adWidthParam && !isNaN(adWidthParam)) {
+                adElement.style.marginRight = adWidthParam + '%';
+            }
+        }
 
         if (openLink && links[openLink]) {
             window.location.href = links[openLink];
