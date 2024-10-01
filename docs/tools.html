@@ -164,23 +164,23 @@
                 <div class="calculator-display" id="calc-display">0</div>
                 <div class="calculator-buttons">
                     <div class="calculator-grid">
-                        <button class="calculator-button" onclick="appendNumber('1')">1</button>
-                        <button class="calculator-button" onclick="appendNumber('2')">2</button>
-                        <button class="calculator-button" onclick="appendNumber('3')">3</button>
-                        <button class="calculator-button" onclick="chooseOperation('+')">+</button>
-                        <button class="calculator-button" onclick="appendNumber('4')">4</button>
-                        <button class="calculator-button" onclick="appendNumber('5')">5</button>
-                        <button class="calculator-button" onclick="appendNumber('6')">6</button>
-                        <button class="calculator-button" onclick="chooseOperation('-')">-</button>
-                        <button class="calculator-button" onclick="appendNumber('7')">7</button>
-                        <button class="calculator-button" onclick="appendNumber('8')">8</button>
-                        <button class="calculator-button" onclick="appendNumber('9')">9</button>
-                        <button class="calculator-button" onclick="chooseOperation('/')">/</button>
-                        <button class="calculator-button" onclick="appendNumber('0')">0</button>
-                        <button class="calculator-button" onclick="clearCalculator()">AC</button>
-                        <button class="calculator-button" onclick="appendNumber(',')">,</button>
-                        <button class="calculator-button" onclick="chooseOperation('*')">*</button>
-                        <button class="calculator-button calculator-button-equal" onclick="calculate()">=</button>
+                        <button class="calculator-button" onclick="appendOp('1')">1</button>
+                        <button class="calculator-button" onclick="appendOp('2')">2</button>
+                        <button class="calculator-button" onclick="appendOp('3')">3</button>
+                        <button class="calculator-button" onclick="appendOp('+')">+</button>
+                        <button class="calculator-button" onclick="appendOp('4')">4</button>
+                        <button class="calculator-button" onclick="appendOp('5')">5</button>
+                        <button class="calculator-button" onclick="appendOp('6')">6</button>
+                        <button class="calculator-button" onclick="appendOp('-')">-</button>
+                        <button class="calculator-button" onclick="appendOp('7')">7</button>
+                        <button class="calculator-button" onclick="appendOp('8')">8</button>
+                        <button class="calculator-button" onclick="appendOp('9')">9</button>
+                        <button class="calculator-button" onclick="appendOp('/')">/</button>
+                        <button class="calculator-button" onclick="appendOp('0')">0</button>
+                        <button class="calculator-button" onclick="clearCalc()">AC</button>
+                        <button class="calculator-button" onclick="appendOp(',')">,</button>
+                        <button class="calculator-button" onclick="appendOp('*')">*</button>
+                        <button class="calculator-button calculator-button-equal" onclick="calc()">=</button>
                     </div>
                 </div>
                 <div class="history" id="calc-history">Verlauf:</div>
@@ -209,70 +209,19 @@
     </div>
 
     <script>
-        // Taschenrechner
-        let currentOperand = '';
-        let previousOperand = '';
-        let operation = null;
-        let history = [];
+        const display = document.getElementById('calc-display');
 
-        function appendNumber(number) {
-            if (number === '.' && currentOperand.includes('.')) return;
-            currentOperand += number;
-            updateDisplay();
+        function appendOp(input) {
+            calc-display.value += input;
         }
 
-        function chooseOperation(op) {
-            if (currentOperand === '') return;
-            if (previousOperand !== '') calculate();
-            operation = op;
-            previousOperand = currentOperand;
-            currentOperand = '';
+        function clearCalc() {
+            calc-display.value = "";
         }
 
-        function calculate() {
-            let result;
-            const prev = parseFloat(previousOperand);
-            const current = parseFloat(currentOperand);
-            if (isNaN(prev) || isNaN(current)) return;
-
-            switch (operation) {
-                case '+':
-                    result = prev + current;
-                    break;
-                case '-':
-                    result = prev - current;
-                    break;
-                case '*':
-                    result = prev * current;
-                    break;
-                case '/':
-                    result = prev / current;
-                    break;
-                default:
-                    return;
-            }
-
-            currentOperand = result;
-            operation = null;
-            previousOperand = '';
-            updateDisplay();
-
-            // Add to history
-            history.push(`${prev} ${operation || ''} ${current} = ${result}`);
-            document.getElementById('calc-history').textContent = 'Verlauf:\n' + history.join('\n');
+        function calc() {
+            calc-display.value = eval(calc-display.value);
         }
-
-        function updateDisplay() {
-            document.getElementById('calc-display').textContent = currentOperand || '0';
-        }
-
-        function clearCalculator() {
-            currentOperand = '';
-            previousOperand = '';
-            operation = null;
-            updateDisplay();
-        }
-
         // Stoppuhr
         let stopwatchInterval;
         let stopwatchStartTime = 0;
