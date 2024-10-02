@@ -54,10 +54,10 @@
             background-image: url('downloads/info_hover.png');
         }
 
-        .button {
+        button {
             font-weight: bold;
             display: inline-block;
-            background-color: #4CAF50;
+            background-color: hsl(122, 40%, 45%);
             color: white;
             padding: 15px;
             margin: 5px;
@@ -80,26 +80,43 @@
             border-radius: 8px;
             background-color: #333;
             margin-bottom: 10px;
+            color: white;
+            text-align: left;
         }
 
-tt        .calculator-button:hover {
-            background-color: #45a049;
+        button:hover {
+            background-color: hsl(122, 40%, 55%);
         }
 
-tt        .calculator-grid button {
-            padding: 15px;
-            font-size: 20px;
+        button:active {
+            background-color: hsl(122, 40%, 65%);
         }
 
-tt        .calculator-button-equal {
+        .op-btn {
+            background-color: hsl(35, 100%, 60%);
+        }
+
+        .op-btn:hover {
+            background-color: hsl(35, 100%, 70%);
+        }
+
+        .op-btn:active {
+            background-color: hsl(35, 100%, 80%);
+        }
+        
+        .equal {
             grid-column: span 4;
-            background-color: #2196F3;
+            background-color: hsl(206, 90%, 55%);
             color: white;
             font-size: 24px;
         }
 
-tt        .calculator-button-equal:hover {
-            background-color: #1976D2;
+        .equal:hover {
+            background-color: hsl(206, 90%, 65%);
+        }
+
+        .equal:active {
+            background-color: hsl(206, 90%, 75%)
         }
     </style>
 </head>
@@ -111,26 +128,40 @@ tt        .calculator-button-equal:hover {
     <div id="calculator">
         <input id="display" readonly>
         <div id="keys">
-            <button onclick="appendToDisplay('+')">+</button>        
+            <button onclick="appendToDisplay('+')" class="op-btn">+</button>        
             <button onclick="appendToDisplay('7')"></button>       
             <button onclick="appendToDisplay('8')"></button>
             <button onclick="appendToDisplay('9')"></button>
-            <button onclick="appendToDisplay('-')"></button>
+            <button onclick="appendToDisplay('-')" class="op-btn"></button>
             <button onclick="appendToDisplay('4')"></button>
             <button onclick="appendToDisplay('5')"></button>
             <button onclick="appendToDisplay('6')"></button>
-            <button onclick="appendToDisplay('*')"></button>
+            <button onclick="appendToDisplay('*')" class="op-btn"></button>
             <button onclick="appendToDisplay('1')"></button>
             <button onclick="appendToDisplay('2')"></button>
             <button onclick="appendToDisplay('3')"></button>
-            <button onclick="appendToDisplay('/')"></button>
+            <button onclick="appendToDisplay('/')" class="op-btn"></button>
             <button onclick="appendToDisplay('0')"></button>
             <button onclick="appendToDisplay('.')"></button>
-            <button onclick="calculate()">=</button>   
-            <button onclick="clear()">C</button>
+            <button onclick="calc()" class="equal">=</button>   
+            <button onclick="clear()" class="op-btn">C</button>
         </div>
     </div>
     <script>
+        const display = document.getElementById('display');
+
+        function appendToDisplay(input) {
+            display.value += input;
+        }
+
+        function clear() {
+            display.value = "";
+        }
+
+        function calc() {
+            display.value = eval(display.value);
+        }
+        
         function openInfoPage() {
             window.location.href = "https://github.com/Redminer9630GitHub/Redminer9630.de/wiki/Downloads-%E2%80%90-Redminer9630";
         }
