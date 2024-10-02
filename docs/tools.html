@@ -54,34 +54,8 @@
             background-image: url('downloads/info_hover.png');
         }
 
-        .tool-section {
-            margin-top: 20px;
-            border-top: 2px solid #fff;
-            padding-top: 20px;
-        }
-
-        .tool-section:not(:first-child) {
-            margin-top: 40px;
-        }
-
-        .tool-content {
-            display: flex;
-            justify-content: space-between;
-            gap: 20px;
-        }
-
-        .calculator-container {
-            width: 48%;
-        }
-
-        .calculator-buttons {
-            background-color: #333;
-            padding: 10px;
-            border-radius: 8px;
-            text-align: center;
-        }
-
-        .calculator-button {
+        .button {
+            font-weight: bold;
             display: inline-block;
             background-color: #4CAF50;
             color: white;
@@ -93,39 +67,39 @@
             font-size: 18px;
         }
 
-        .calculator-button:hover {
-            background-color: #45a049;
-        }
-
-        .calculator-grid {
+        #keys {
             display: grid;
             grid-template-columns: repeat(4, 1fr);
             gap: 5px;
         }
 
-        .calculator-grid button {
-            padding: 15px;
-            font-size: 20px;
-        }
-
-        .calculator-button-equal {
-            grid-column: span 4;
-            background-color: #2196F3;
-            color: white;
-            font-size: 24px;
-        }
-
-        .calculator-button-equal:hover {
-            background-color: #1976D2;
-        }
-
-        .calculator-display {
+        #display {
             font-size: 24px;
             padding: 10px;
             border: 1px solid #ddd;
             border-radius: 8px;
             background-color: #333;
             margin-bottom: 10px;
+        }
+
+tt        .calculator-button:hover {
+            background-color: #45a049;
+        }
+
+tt        .calculator-grid button {
+            padding: 15px;
+            font-size: 20px;
+        }
+
+tt        .calculator-button-equal {
+            grid-column: span 4;
+            background-color: #2196F3;
+            color: white;
+            font-size: 24px;
+        }
+
+tt        .calculator-button-equal:hover {
+            background-color: #1976D2;
         }
     </style>
 </head>
@@ -134,51 +108,29 @@
     <div class="info-button" onclick="openInfoPage()"></div>
     <h1>Tools - Redminer9630</h1>
 
-    <div class="tool-section">
-        <div class="tool-content">
-            <div class="calculator-container">
-                <h2>Taschenrechner</h2>
-                <div class="calculator-display" id="calc-display">0</div>
-                <div class="calculator-buttons">
-                    <div class="calculator-grid">
-                        <button class="calculator-button" onclick="appendOp('1')">1</button>
-                        <button class="calculator-button" onclick="appendOp('2')">2</button>
-                        <button class="calculator-button" onclick="appendOp('3')">3</button>
-                        <button class="calculator-button" onclick="appendOp('+')">+</button>
-                        <button class="calculator-button" onclick="appendOp('4')">4</button>
-                        <button class="calculator-button" onclick="appendOp('5')">5</button>
-                        <button class="calculator-button" onclick="appendOp('6')">6</button>
-                        <button class="calculator-button" onclick="appendOp('-')">-</button>
-                        <button class="calculator-button" onclick="appendOp('7')">7</button>
-                        <button class="calculator-button" onclick="appendOp('8')">8</button>
-                        <button class="calculator-button" onclick="appendOp('9')">9</button>
-                        <button class="calculator-button" onclick="appendOp('/')">/</button>
-                        <button class="calculator-button" onclick="appendOp('0')">0</button>
-                        <button class="calculator-button" onclick="clearCalc()">AC</button>
-                        <button class="calculator-button" onclick="appendOp(',')">,</button>
-                        <button class="calculator-button" onclick="appendOp('*')">*</button>
-                        <button class="calculator-button calculator-button-equal" onclick="calc()">=</button>
-                    </div>
-                </div>
-            </div>
+    <div id="calculator">
+        <input id="display" readonly>
+        <div id="keys">
+            <button onclick="appendToDisplay('+')">+</button>        
+            <button onclick="appendToDisplay('7')"></button>       
+            <button onclick="appendToDisplay('8')"></button>
+            <button onclick="appendToDisplay('9')"></button>
+            <button onclick="appendToDisplay('-')"></button>
+            <button onclick="appendToDisplay('4')"></button>
+            <button onclick="appendToDisplay('5')"></button>
+            <button onclick="appendToDisplay('6')"></button>
+            <button onclick="appendToDisplay('*')"></button>
+            <button onclick="appendToDisplay('1')"></button>
+            <button onclick="appendToDisplay('2')"></button>
+            <button onclick="appendToDisplay('3')"></button>
+            <button onclick="appendToDisplay('/')"></button>
+            <button onclick="appendToDisplay('0')"></button>
+            <button onclick="appendToDisplay('.')"></button>
+            <button onclick="calculate()">=</button>   
+            <button onclick="clear()">C</button>
         </div>
     </div>
-
     <script>
-        const display = document.getElementById('calc-display');
-
-        function appendOp(input) {
-            calc-display.value += input;
-        }
-
-        function clearCalc() {
-            calc-display.value = "";
-        }
-
-        function calc() {
-            calc-display.value = eval(calc-display.value);
-        }
-
         function openInfoPage() {
             window.location.href = "https://github.com/Redminer9630GitHub/Redminer9630.de/wiki/Downloads-%E2%80%90-Redminer9630";
         }
