@@ -200,92 +200,294 @@
     <a href="https://redminer9630github.github.io/Redminer9630.de/" tabindex="1" class="header-link">Zurueck ></a>
     <h1>Minecraft Wiki(Alpha)</h1>
 
-    <button class="shortcut-button" tabindex="2" onclick="showKeyBindings()">Tastenkombinationen</button>
-    <button class="shortcut-button" tabindex="3" onclick="showCommands()">Minecraft Commands</button>
-    <button class="info-button" tabindex="4" onclick="showUsefulInfo()">Nuetzliche Infos</button>
-    <button class="shortcut-button" tabindex="5" onclick="showTrading()">Handeln</button>
-
+    <button class="shortcut-button" tabindex="6" onclick="showTrading()">Handeln</button>
+    <button class="shortcut-button" tabindex="7" onclick="showBrewing()">Brauen</button>
+    <button class="shortcut-button" tabindex="8" onclick="showEnchanting()">Verzaubern</button>
+    <button class="shortcut-button" tabindex="9" onclick="showMobs()">Mobs</button>
+    <button class="shortcut-button" tabindex="10" onclick="showBlocks()">Blöcke</button>
+    <button class="shortcut-button" tabindex="11" onclick="showItems()">Items</button>
+    <button class="shortcut-button" tabindex="12" onclick="showBiomes()">Biome</button>
+    <button class="shortcut-button" tabindex="13" onclick="showEffects()">Effekte</button>
+    <button class="shortcut-button" tabindex="14" onclick="showCrafting()">Crafting</button>
+    <button class="shortcut-button" tabindex="15" onclick="showSmelting()">Schmelzen</button>
+    <button class="shortcut-button" tabindex="16" onclick="showStructures()">Strukturen</button>
+    <button class="shortcut-button" tabindex="17" onclick="showRedstone()">Redstone</button>
+    <button class="shortcut-button" tabindex="18" onclick="showArchaeology()"></button> 
+    
     <div id="content">
-        <!-- Inhalt wird hier angezeigt -->
     </div>
-
-    <div id="keyboard-display" style="margin-top: 20px;">
-        <!-- Tastaturbilder werden hier angezeigt -->
-    </div>
-
+    
     <script>
-        const keys = {
-            'normal': 'normal.jpg',
-            '0': '0.tiff',            
-            '1': '1.tiff',
-            '2': '2.tiff',
-            '3': '3.tiff',
-            '4': '4.tiff',
-            '5': '5.tiff',
-            '6': '6.tiff',
-            '7': '7.tiff',
-            '8': '8.tiff',
-            '9': '9.tiff',
-            'a': 'a.tiff',
-            'alt': 'alt.tiff',
-            'alt2': 'alt2.tiff',
-            'b': 'b.tiff',
-            'backspace': 'backspace.tiff',
-            'c': 'c.tiff',
-            'ctrl': 'ctrl.tiff',
-            'ctrl2': 'ctrl2.tiff',
-            'd': 'd.tiff',
-            'e': 'e.tiff',
-            'enter': 'enter.tiff',
-            'esc': 'esc.tiff',
-            'f': 'f.tiff',
-            'f1': 'f1.tiff',
-            'f2': 'f2.tiff',
-            'f3': 'f3.tiff',
-            'f4': 'f4.tiff',
-            'f5': 'f5.tiff',
-            'f11': 'f11.tiff',
-            'g': 'g.tiff',
-            'h': 'h.tiff',
-            'n': 'n.tiff',
-            'q': 'q.tiff',
-            'r': 'r.tiff',
-            's': 's.tiff',
-            'shift': 'shift.tiff',
-            'shift2': 'shift2.tiff',
-            'tab': 'tab.tiff',
-            'wasd': 'wasd.tiff',
-            'windows': 'windows.tiff',
-            'x': 'x.tiff'
-        };
-
-        function simulateShortcut(sequence) {
-            let display = document.getElementById('keyboard-display');
-            display.innerHTML = ''; // Leere den Display-Bereich
-
-            sequence.forEach((key, index) => {
-                setTimeout(() => {
-                    let img = document.createElement('img');
-                    img.src = keys[key];
-                    img.classList.add('key-image');
-                    display.appendChild(img);
-                }, index * 2); // 1.2 Sekunden Verzögerung pro Taste
-            });
-
-            // Nach der Sequenz normale Ansicht wiederherstellen
-            setTimeout(() => {
-                display.innerHTML = '<p>Keine Kombination ausgewaehlt</p>';
-            }, sequence.length * 500 + 15000); // 10 Sekunden Verzögerung nach der letzten Taste
-        }
-
-        function showKeyBindings() {
+        function showTrading() {
             document.getElementById('content').innerHTML = `
-                <h2>Minecraft Tastenkombinationen:</h2>
+                <h2>Handel</h2>
+                <h4>Es werden nur Max. 2 Trades ausgewaelt pro Stufe. Nicht für Trade Balance.</h4>
                 <ul>
-                    <li><button class="shortcut-button" onclick="simulateShortcut(['f3', 'q'])">F3 + Q</button> Zeigt alle F3 Shortcuts</li>
-                    <li><button class="shortcut-button" onclick="simulateShortcut(['f3', 'a'])">F3 + A</button> Laedt die Chunks neu</li>
-                    <li><button class="shortcut-button" onclick="simulateShortcut(['f3', 't'])">F3 + T</button> Laedt alle Ressourcepacks neu</li>
-                    <!-- ... weitere Shortcuts ... -->
+                    <li><button class="info-button" onclick="toggleInfo('farmer-info')">Bauer</button></li>
+                    <div id="farmer-info" class="info-content">
+                        <h4><p><span class="trading-one">Neuling</span> | Rote Bete 15x |<span class="trading-emerald"> Smaragd 1x</span></p>                        
+                        <p><span class="trading-one">Neuling</span> | Weizen 20x |<span class="trading-emerald"> Smaragd 1x</span></p>
+                        <p><span class="trading-one">Neuling</span> | Karotte 22x |<span class="trading-emerald"> Smaragd 1x</span></p>
+                        <p><span class="trading-one">Neuling</span> | Kartoffel 26x |<span class="trading-emerald"> Smaragd 1x</span></p>
+                        <p><span class="trading-one">Neuling</span> |<span class="trading-emerald"> Smaragd 1x</span> | Brot 6x</p>
+                        <p><span class="trading-two">Lehrling</span> | Kuerbis 6x |<span class="trading-emerald"> Smaragd 1x</span></p>
+                        <p><span class="trading-two">Lehrling</span> |<span class="trading-emerald"> Smaragd 1x</span> | Kuerbiskuchen 4x</p>
+                        <p><span class="trading-two">Lehrling</span> |<span class="trading-emerald"> Smaragd 1x </span>| Apfel 4x</p>    
+                        <p><span class="trading-three">Geselle</span> | Melone 4x |<span class="trading-emerald"> Smaragd 1x</span></p>
+                        <p><span class="trading-three">Geselle</span> |<span class="trading-emerald"> Smaragd 3x </span>| Keks 18x</p>
+                        <p><span class="trading-four">Experte</span> |<span class="trading-emerald"> Smaragd 1x </span>| Kuchen 1x</p>
+                        <p><span class="trading-four">Experte</span> |<span class="trading-emerald"> Smaragd 1x </span>| 1-2 Seltsame Suppe 1x</p>
+                        <p><span class="trading-five">Meister</span> |<span class="trading-emerald"> Smaragd 3x </span>| Goldene Karotte 3x</p>
+                        <p><span class="trading-five">Meister</span> |<span class="trading-emerald"> Smaragd 4x </span>| Glitzernde Melonenscheibe 3x</p></h4>
+                    </div>
+                </ul>
+                <ul>
+                    <li><button class="info-button" onclick="toggleInfo('librarian-info')">Bibliothekar</button></li>
+                    <div id="librarian-info" class="info-content">
+                        <h4><p><span class=trading-one">Neuling</span> | Papier 24x |<span class="trading-emerald"> Smaragd 1x</span></p>                        
+                        <p><span class="trading-one">Neuling</span> |<span class="trading-emerald"> Smaragd 5-64x </span>+ Buch 1x | <span class="rarity-uncommon">Verzaubertes Buch 1x</span></p>
+                        <p><span class="trading-one">Neuling</span> |<span class="trading-emerald"> Smaragd 6x </span>| Buecherregal 3x</p>
+                        <p><span class="trading-two">Lehrling</span> | Buch 4x |<span class="trading-emerald"> Smaragd 1x</span></p>
+                        <p><span class="trading-two">Lehrling</span> |<span class="trading-emerald"> Smaragd 5-64x </span>+ Buch 1x | <span class="rarity-uncommon">Verzaubertes Buch 1x</span></p>
+                        <p><span class="trading-two">Lehrling</span> |<span class="trading-emerald"> Smaragd 1x </span>| Laterne 1x</p>
+                        <p><span class="trading-three">Geselle</span> | Tintenbeutel 5x |<span class="trading-emerald"> Smaragd 1x</span></p>
+                        <p><span class="trading-three">Geselle</span> |<span class="trading-emerald"> Smaragd 5-64x </span>+ Buch 1x | <span class="rarity-uncommon">Verzaubertes Buch 1x</span></p>    
+                        <p><span class="trading-three">Geselle</span> |<span class="trading-emerald"> Smaragd 1x </span>| Glas 4x</p>
+                        <p><span class="trading-four">Experte</span> | Buch und Feder 1x |<span class="trading-emerald"> Smaragd 1x</span></p>    
+                        <p><span class="trading-four">Experte</span> |<span class="trading-emerald"> Smaragd 5-64x </span>+ Buch 1x | <span class="rarity-uncommon">Verzaubertes Buch 1x</span></p>
+                        <p><span class="trading-four">Experte</span> |<span class="trading-emerald"> Smaragd 4x </span>| Kompass 1x</p>
+                        <p><span class="trading-four">Experte</span> |<span class="trading-emerald"> Smaragd 5x </span>| Uhr 1x</p>
+                        <p><span class="trading-five">Meister</span> |<span class="trading-emerald"> Smaragd 20x </span>| Namensschild 1x</p></h4>
+                    </div>
+                </ul>
+                <ul>
+                    <li><button class="info-button" onclick="toggleInfo('fisher-info')">Fisher</button></li>
+                    <div id="fisher-info" class="info-content">
+                        <h4><p><span class="trading-one">Neuling</span> | Kohle 10x |<span class="trading-emerald"> Smaragd 1x</span></p>
+                        <p><span class="trading-one">Neuling</span> | Faden 20x |<span class="trading-emerald"> Smaragd 1x</span></p>
+                        <p><span class="trading-one">Neuling</span> |<span class="trading-emerald"> Smaragd 1x </span>+ Roher Kabeljau 6x | Gebratener Kabeljau 6x</p>
+                        <p><span class="trading-one">Neuling</span> |<span class="trading-emerald"> Smaragd 3x </span>| Kabeljaueimer 1x</p>
+                        <p><span class="trading-two">Lehrling</span> | Roher Kabeljau 15x |<span class="trading-emerald"> Smaragd 1x</span></p>
+                        <p><span class="trading-two">Lehrling</span> |<span class="trading-emerald"> Smaragd 1x </span>+ Roher Lachs 6x | Gebratener Lachs 6x</p>
+                        <p><span class="trading-two">Lehrling</span> |<span class="trading-emerald"> Smaragd 2x </span>| Lagerfeuer 1</p>
+                        <p><span class="trading-three">Geselle</span> | Roher Lachs 13x |<span class="trading-emerald"> Smaragd 1x</span></p>
+                        <p><span class="trading-three">Geselle</span> |<span class="trading-emerald"> Smaragd 7-22x </span>| Verzauberte Angel 1x</p>
+                        <p><span class="trading-four">Experte</span> | Tropenfisch 6x |<span class="trading-emerald"> Smaragd 1x</span></p>
+                        <p><span class="trading-five">Meister</span> | Kugelfisch 4x |<span class="trading-emerald"> Smaragd 1x</span></p>
+                        <p><span class="trading-five">Meister</span> | Boot 1x |<span class="trading-emerald"> Smaragd 1x</span></p></h4>
+                    </div>
+                </ul>
+                <ul>
+                    <li><button class="info-button" onclick="toggleInfo('cleric-info')">Geistlicher</button></li>
+                    <div id="cleric-info" class="info-content">
+                        <h4><p><span class="trading-one">Neuling</span> | Verrottetes Fleisch 32x |<span class="trading-emerald"> Smaragd 1x</span></p>
+                        <p><span class="trading-one">Neuling</span> |<span class="trading-emerald"> Smaragd 1x </span>| Redstone Staub 2x</p>
+                        <p><span class="trading-two">Lehrling</span> | Goldbaren 3x |<span class="trading-emerald"> Smaragd 1x</span></p>
+                        <p><span class="trading-two">Lehrling</span> |<span class="trading-emerald"> Smaragd 1x </span>| Lapislazuli 1x</p>
+                        <p><span class="trading-three">Geselle</span> | Hasenpfote 2x |<span class="trading-emerald"> Smaragd 1x</span></p>
+                        <p><span class="trading-three">Geselle</span> |<span class="trading-emerald"> Smaragd 4x </span>| Leuchtstein 1x</p>
+                        <p><span class="trading-four">Experte</span> | Schildkroeten-Hornschild 4x |<span class="trading-emerald"> Smaragd 1x</span></p>
+                        <p><span class="trading-four">Experte</span> | Glasflasche 9x |<span class="trading-emerald"> Smaragd 1x</span></p>
+                        <p><span class="trading-four">Experte</span> |<span class="trading-emerald"> Smaragd 5x </span>| Enderperle 1x</p>
+                        <p><span class="trading-five">Meister</span> | Netherwarze 22x |<span class="trading-emerald"> Smaragd 1x</span></p>
+                        <p><span class="trading-five">Meister</span> |<span class="trading-emerald"> Smaragd 3x </span>| <span class="rarity-uncommon">Erfahrungsflaeschchen 1x</span></p></h4>
+                    </div>
+                </ul>
+                <ul>
+                    <li><button class="info-button" onclick="toggleInfo('leatherworker-info')">Gerber</button></li>
+                    <div id="leatherworker-info" class="info-content">
+                        <h4><p><span class="trading-one">Neuling</span> | Leder 6x |<span class="trading-emerald"> Smaragd 1x</span></p>
+                        <p><span class="trading-one">Neuling</span> |<span class="trading-emerald"> Smaragd 3x </span>| Lederhose 1x</p>
+                        <p><span class="trading-one">Neuling</span> |<span class="trading-emerald"> Smaragd 7x </span>| Lederjacke 1x</p>
+                        <p><span class="trading-two">Lehrling</span> | Feuerstein 26x |<span class="trading-emerald"> Smaragd 1x</span></p>
+                        <p><span class="trading-two">Lehrling</span> |<span class="trading-emerald"> Smaragd 4x </span>| Lederstiefel 1x</p>
+                        <p><span class="trading-two">Lehrling</span> |<span class="trading-emerald"> Smaragd 5x </span>| Lederkappe 5x</p>
+                        <p><span class="trading-three">Geselle</span> | Kaninchenfell 9x |<span class="trading-emerald"> Smaragd 1x</span></p>
+                        <p><span class="trading-three">Geselle</span> |<span class="trading-emerald"> Smaragd 7x </span>| Verzauberte Lederjacke 1x</p>
+                        <p><span class="trading-four">Experte</span> | Schildkroeten-Hornschild 4x |<span class="trading-emerald"> Smaragd 1x</span></p>
+                        <p><span class="trading-four">Experte</span> |<span class="trading-emerald"> Smaragd 4x </span>| Lederner Rossharnisch 1x</p>
+                        <p><span class="trading-five">Meister</span> |<span class="trading-emerald"> Smaragd 6x </span>| Verzauberte Lederkappe 1x</p>
+                        <p><span class="trading-five">Meister</span> |<span class="trading-emerald"> Smaragd 5x </span>| Sattel 1x</p></h4>
+                    </div>
+                </ul>
+                <ul>
+                    <li><button class="info-button" onclick="toggleInfo('schimd-info')">Grobschmied</button></li>
+                    <div id="schimd-info" class="info-content">
+                        <h4><p><span class="trading-one">Neuling</span> | Kohle 15x |<span class="trading-emerald"> Smaragd 1x</span></p>
+                        <p><span class="trading-one">Neuling</span> |<span class="trading-emerald"> Smaragd 1x </span>| Steinaxt 1x<p>
+                        <p><span class="trading-one">Neuling</span> |<span class="trading-emerald"> Smaragd 1x </span>| Steinschaufel 1x<p>
+                        <p><span class="trading-one">Neuling</span> |<span class="trading-emerald"> Smaragd 1x </span>| Steinspitzhacke 1x<p>
+                        <p><span class="trading-one">Neuling</span> |<span class="trading-emerald"> Smaragd 1x </span>| Steinhacke 1x<p>
+                        <p><span class="trading-two">Lehrling</span> | Eisenbaren 4x |<span class="trading-emerald"> Smaragd 1x</span><p>
+                        <p><span class="trading-two">Lehrling</span> |<span class="trading-emerald"> Smaragd 36x </span>| Glocke 1x<p>
+                        <p><span class="trading-three">Geselle</span> | Feuerstein 30x |<span class="trading-emerald"> Smaragd 1x</span><p>
+                        <p><span class="trading-three">Geselle</span> |<span class="trading-emerald"> Smaragd 4x </span>| Diamandhacke 1x<p>
+                        <p><span class="trading-three">Geselle</span> |<span class="trading-emerald"> Smaragd 7-22x </span>| Verzauberte Eisenaxt 1x<p>
+                        <p><span class="trading-three">Geselle</span> |<span class="trading-emerald"> Smaragd 7-22x </span>| Verzauberte Eisenschaufel 1x<p>
+                        <p><span class="trading-three">Geselle</span> |<span class="trading-emerald"> Smaragd 7-22x </span>| Verzauberte Eisenspitzhacke 1x<p>
+                        <p><span class="trading-four">Experte</span> | Diamand 1x |<span class="trading-emerald"> Smaragd 1x</span><p>
+                        <p><span class="trading-four">Experte</span> |<span class="trading-emerald"> Smaragd 18-35x </span>| Verzauberte Diamandaxt 1x<p>
+                        <p><span class="trading-four">Experte</span> |<span class="trading-emerald"> Smaragd 11-27x </span>| Verzauberte Diamandschaufel 1x<p>
+                        <p><span class="trading-five">Meister</span> |<span class="trading-emerald"> Smaragd 18-35x </span>| Verzauberte Diamandspitzhacke 1x</p></h4>
+                    </div>
+                </ul>
+                <ul>
+                    <li><button class="info-button" onclick="toggleInfo('cartographer-info')">Kartograf</button></li>
+                    <div id="cartographer-info" class="info-content">
+                        <h4><p><span class="trading-one">Neuling</span> | Papier 24x |<span class="trading-emerald"> Smaragd 1x</span><p>
+                        <p><span class="trading-one">Neuling</span> |<span class="trading-emerald"> Smaragd 7x </span>| Leere Karte 1x<p>
+                        <p><span class="trading-two">Lehrling</span> | Glasscheibe 11x |<span class="trading-emerald"> Smaragd 1x</span><p>
+                        <p><span class="trading-two">Lehrling</span> |<span class="trading-emerald"> Smaragd 13x </span>+ Kompass 1x | Ozean-Entdeckerkarte 1x<p>
+                        <p><span class="trading-three">Geselle</span> | Kompass 1x |<span class="trading-emerald"> Smaragd 1x</span><p>
+                        <p><span class="trading-three">Geselle</span> |<span class="trading-emerald"> Smaragd 14x </span>+ Kompass 1x | Wald-Entdeckerkarte 1x<p>
+                        <p><span class="trading-four">Experte</span> |<span class="trading-emerald"> Smaragd 3x </span>| 1-2 Banner 1x<p>
+                        <p><span class="trading-four">Experte</span> |<span class="trading-emerald"> Smaragd 7x </span>| Rahmen 1x<p>
+                        <p><span class="trading-five">Meister</span> |<span class="trading-emerald"> Smaragd 8x </span>| Bannervorlage(Globus) 1x</p></h4>
+                    </div>
+                </ul>
+                <ul>
+                    <li><button class="info-button" onclick="toggleInfo('mason-info')">Maurer</button></li>
+                    <div id="mason-info" class="info-content">
+                        <h4><p><span class="trading-one">Neuling</span> | Tonklumpen 10x |<span class="trading-emerald"> Smaragd 1x</span></p>
+                        <p><span class="trading-one">Neuling</span> |<span class="trading-emerald"> Smaragd 1x </span>| Ziegel 10x</p>
+                        <p><span class="trading-two">Lehrling</span> | Stein 20x |<span class="trading-emerald"> Smaragd 1x</span></p>
+                        <p><span class="trading-two">Lehrling</span> |<span class="trading-emerald"> Smaragd 1x </span>| Gemeißelte Steinziegel 4x</p>
+                        <p><span class="trading-three">Geselle</span> | Andesit 16x |<span class="trading-emerald"> Smaragd 1x</span></p>
+                        <p><span class="trading-three">Geselle</span> | Diorit 16x |<span class="trading-emerald"> Smaragd 1x</span></p>
+                        <p><span class="trading-three">Geselle</span> | Granit 16x |<span class="trading-emerald"> Smaragd 1x</span></p>
+                        <p><span class="trading-three">Geselle</span> |<span class="trading-emerald"> Smaragd 1x </span>| Polierter Andesit</p>
+                        <p><span class="trading-three">Geselle</span> |<span class="trading-emerald"> Smaragd 1x </span>| Polierter Diorit</p>
+                        <p><span class="trading-three">Geselle</span> |<span class="trading-emerald"> Smaragd 1x </span>| Polierter Granit</p>
+                        <p><span class="trading-four">Experte</span> | Netherquarz 12x |<span class="trading-emerald"> Smaragd 1x</span></p>
+                        <p><span class="trading-four">Experte</span> |<span class="trading-emerald"> Smaragd 1x </span>| 1-2 Keramik</p>
+                        <p><span class="trading-four">Experte</span> |<span class="trading-emerald"> Smaragd 1x </span>| 1-2 Glasierte Keramik</p>
+                        <p><span class="trading-five">Meister</span> |<span class="trading-emerald"> Smaragd 1x </span>| Quartzblock 1x</p>
+                        <p><span class="trading-five">Meister</span> |<span class="trading-emerald"> Smaragd 1x </span>| Quartzsaeule 1x</p></h4>
+                    </div>
+                </ul>
+                <ul>
+                    <li><button class="info-button" onclick="toggleInfo('butcher-info')">Metzger</button></li>
+                    <div id="butcher-info" class="info-content">
+                        <h4><p><span class="trading-one">Neuling</span> | Rohes Kaninchen 4x |<span class="trading-emerald"> Smaragd 1x</span></p>
+                        <p><span class="trading-one">Neuling</span> | Rohes Schweinefleisch 7x |<span class="trading-emerald"> Smaragd 1x</span></p>
+                        <p><span class="trading-one">Neuling</span> | Rohes Huehnchen 14x |<span class="trading-emerald"> Smaragd 1x</span></p>
+                        <p><span class="trading-one">Neuling</span> |<span class="trading-emerald"> Smaragd 1x </span>| Kanichenragout 1x</p>
+                        <p><span class="trading-two">Lehrling</span> | Kohle 15x |<span class="trading-emerald"> Smaragd 1x</span></p>
+                        <p><span class="trading-two">Lehrling</span> |<span class="trading-emerald"> Smaragd 1x </span>| Gebratenes Huehnchen 8x</p>
+                        <p><span class="trading-two">Lehrling</span> |<span class="trading-emerald"> Smaragd 1x </span>| Gebratenes Schweinefleisch 5x</p>
+                        <p><span class="trading-three">Geselle</span> | Rohes Hammelfleisch 7x |<span class="trading-emerald"> Smaragd 1x</span></p>
+                        <p><span class="trading-three">Geselle</span> | Rohes Rindfleisch 10x |<span class="trading-emerald"> Smaragd 1x</span></p>
+                        <p><span class="trading-four">Experte</span> | Getrockneter Seetankblock 10x |<span class="trading-emerald"> Smaragd 1x</span></p>
+                        <p><span class="trading-five">Meister</span> | Suessbeeren 10x |<span class="trading-emerald"> Smaragd 1x</span></p></h4>
+                    </div>
+                </ul>
+                <ul>
+                    <li><button class="info-button" onclick="toggleInfo('armorer-info')">Panzermacher</button></li>
+                    <div id="armorer-info" class="info-content">
+                        <h4><p><span class="trading-one">Neuling</span> | Kohle 15x |<span class="trading-emerald"> Smaragd 1x</span></p>
+                        <p><span class="trading-one">Neuling</span> |<span class="trading-emerald"> Smaragd 4x </span>| Eisenstiefel 1x</p>
+                        <p><span class="trading-one">Neuling</span> |<span class="trading-emerald"> Smaragd 5x </span>| Eisenhelm 1x</p>
+                        <p><span class="trading-one">Neuling</span> |<span class="trading-emerald"> Smaragd 7x </span>| Eisenbeinschutz 1x</p>
+                        <p><span class="trading-one">Neuling</span> |<span class="trading-emerald"> Smaragd 9x </span>| Eisenharnisch 1x</p>
+                        <p><span class="trading-two">Lehrling</span> | Eisenbaren 4x |<span class="trading-emerald"> Smaragd 1x</span></p>
+                        <p><span class="trading-two">Lehrling</span> |<span class="trading-emerald"> Smaragd 1x </span>| <span class="rarity-uncommon">Kettenstiefel 1x</span></p>
+                        <p><span class="trading-two">Lehrling</span> |<span class="trading-emerald"> Smaragd 3x </span>| <span class="rarity-uncommon">Kettenhose 1x</span></p>
+                        <p><span class="trading-two">Lehrling</span> |<span class="trading-emerald"> Smaragd 36x </span>| Glocke 1x</p>
+                        <p><span class="trading-three">Geselle</span> | Lavaeimer 1x |<span class="trading-emerald"> Smaragd 1x</span></p>
+                        <p><span class="trading-three">Geselle</span> | Diamand 1x |<span class="trading-emerald"> Smaragd 1x</span></p>
+                        <p><span class="trading-three">Geselle</span> |<span class="trading-emerald"> Smaragd 1x </span>| <span class="rarity-uncommon">Kettenhaube 1x</span></p>
+                        <p><span class="trading-three">Geselle</span> |<span class="trading-emerald"> Smaragd 4x </span>| <span class="rarity-uncommon">Kettenhemd 1x</span></p> 
+                        <p><span class="trading-three">Geselle</span> |<span class="trading-emerald"> Smaragd 5x </span>| Schild(Kampf) 1x</p>
+                        <p><span class="trading-four">Experte</span> |<span class="trading-emerald"> Smaragd 11-27x </span>| Verzauberte Diamandstiefel 1x</p>
+                        <p><span class="trading-four">Experte</span> |<span class="trading-emerald"> Smaragd 18-35x </span>| Verzauberter Diamandbeinschutz 1x</p>
+                        <p><span class="trading-five">Meister</span> |<span class="trading-emerald"> Smaragd 11-27x </span>| Verzauberter Diamandhelm 1x</p>
+                        <p><span class="trading-five">Meister</span> |<span class="trading-emerald"> Smaragd 18-35x </span>| Verzauberter Diamandharnisch 1x</p></h4>
+                    </div>
+                </ul>
+                <ul>
+                    <li><button class="info-button" onclick="toggleInfo('fletcher-info')">Pfeilmacher</button></li>
+                    <div id="fletcher-info" class="info-content">
+                        <h4><p><span class="trading-one">Neuling</span> | Stock 32x |<span class="trading-emerald"> Smaragd 1x</span></p>
+                        <p><span class="trading-one">Neuling</span> |<span class="trading-emerald"> Smaragd 1x </span>| Pfeil 16x</p>
+                        <p><span class="trading-one">Neuling</span> |<span class="trading-emerald"> Smaragd 1x </span>+ Kies 10x | Feuerstein 10x</p>
+                        <p><span class="trading-two">Lehrling</span> | Feuerstein 26x |<span class="trading-emerald"> Smaragd 1x</span></p>
+                        <p><span class="trading-two">Lehrling</span> |<span class="trading-emerald"> Smaragd 2x </span>| Bogen 1x</p>
+                        <p><span class="trading-three">Geselle</span> | Faden 14x |<span class="trading-emerald"> Smaragd 1x</span></p>
+                        <p><span class="trading-three">Geselle</span> |<span class="trading-emerald"> Smaragd 3x </span>| Armbrust 1x</p>
+                        <p><span class="trading-four">Experte</span> | Feder 24x |<span class="trading-emerald"> Smaragd 1x</span></p>
+                        <p><span class="trading-four">Experte</span> |<span class="trading-emerald"> Smaragd 7-22x </span>| Verzauberter Bogen 1x</p>
+                        <p><span class="trading-five">Meister</span> | Haken 8x |<span class="trading-emerald"> Smaragd 1x</span></p>
+                        <p><span class="trading-five">Meister</span> |<span class="trading-emerald"> Smaragd 7-22x </span>| Verzauberte Armbrust 1x</p>
+                        <p><span class="trading-five">Meister</span> |<span class="trading-emerald"> Smaragd 2x </span>+ Pfeil 5x | Getränkter Pfeil 5x</p></h4>
+                    </div>
+                </ul>
+                <ul>
+                    <li><button class="info-button" onclick="toggleInfo('sheperd-info')">Schaefer</button></li>
+                    <div id="sheperd-info" class="info-content">
+                        <h4><p><span class="trading-one">Neuling</span> | Schwarze Wolle |<span class="trading-emerald"> Smaragd 1x</span></p>
+                        <p><span class="trading-one">Neuling</span> | Graue Wolle |<span class="trading-emerald"> Smaragd 1x</span></p>
+                        <p><span class="trading-one">Neuling</span> | Weiße Wolle |<span class="trading-emerald"> Smaragd 1x</span></p>
+                        <p><span class="trading-one">Neuling</span> | Braune Wolle |<span class="trading-emerald"> Smaragd 1x</span></p>
+                        <p><span class="trading-one">Neuling</span> |<span class="trading-emerald"> Smaragd 2x </span>| Schere 1x</p>
+                        <p><span class="trading-two">Lehrling</span> | Schwarzer Farbstoff 12x |<span class="trading-emerald"> Smaragd 1x</span></p>
+                        <p><span class="trading-two">Lehrling</span> | Grauer Farbstoff 12x |<span class="trading-emerald"> Smaragd 1x</span></p>
+                        <p><span class="trading-two">Lehrling</span> | Weißer Farbstoff 12x |<span class="trading-emerald"> Smaragd 1x</span></p>
+                        <p><span class="trading-two">Lehrling</span> | Hellblauer Farbstoff 12x |<span class="trading-emerald"> Smaragd 1x</span></p>
+                        <p><span class="trading-two">Lehrling</span> | Hellgruener Farbstoff 12x |<span class="trading-emerald"> Smaragd 1x</span></p>
+                        <p><span class="trading-two">Lehrling</span> |<span class="trading-emerald"> Smaragd 1x </span>| 1-2 Wolle 1x</p>
+                        <p><span class="trading-two">Lehrling</span> |<span class="trading-emerald"> Smaragd 1x </span>| 1-2 Teppich 1x</p>
+                        <p><span class="trading-three">Geselle</span> | Hellgruener Farbstoff 12x |<span class="trading-emerald"> Smaragd 1x</span></p>
+                        <p><span class="trading-three">Geselle</span> | Gelber Farbstoff 12x |<span class="trading-emerald"> Smaragd 1x</span></p>
+                        <p><span class="trading-three">Geselle</span> | Oranger Farbstoff 12x |<span class="trading-emerald"> Smaragd 1x</span></p>
+                        <p><span class="trading-three">Geselle</span> | Roter Farbstoff 12x |<span class="trading-emerald"> Smaragd 1x</span></p>
+                        <p><span class="trading-three">Geselle</span> | Rosa Farbstoff 12x |<span class="trading-emerald"> Smaragd 1x</span></p>
+                        <p><span class="trading-three">Geselle</span> |<span class="trading-emerald"> Smaragd 3x </span>| 1-2 Bett 1x</p>
+                        <p><span class="trading-four">Experte</span> | Magenta Farbstoff 12x |<span class="trading-emerald"> Smaragd 1x</span></p>
+                        <p><span class="trading-four">Experte</span> | Violetter Farbstoff 12x |<span class="trading-emerald"> Smaragd 1x</span></p>
+                        <p><span class="trading-four">Experte</span> | Blauer Farbstoff 12x |<span class="trading-emerald"> Smaragd 1x</span></p>
+                        <p><span class="trading-four">Experte</span> | Tuerkiser Farbstoff 12x |<span class="trading-emerald"> Smaragd 1x</span></p>
+                        <p><span class="trading-four">Experte</span> | Gruener Farbstoff 12x |<span class="trading-emerald"> Smaragd 1x</span></p>
+                        <p><span class="trading-four">Experte</span> | Brauner Farbstoff 12x |<span class="trading-emerald"> Smaragd 1x</span></p>
+                        <p><span class="trading-four">Experte</span> |<span class="trading-emerald"> Smaragd 3x </span>| 1-2 Banner 1x</p>
+                        <p><span class="trading-five">Meister</span> |<span class="trading-emerald"> Smaragd 2x </span>| Gemaelde 3x</p></h4>
+                    </div>
+                </ul>
+                <ul>
+                    <li><button class="info-button" onclick="toggleInfo('weaponssmith-info')">Waffenschmied</button></li>
+                    <div id="weaponssmith-info" class="info-content">
+                        <h4><p><span class="trading-one">Neuling</span> | Kohle |<span class="trading-emerald"> Smaragd 1x</span></p>
+                        <p><span class="trading-one">Neuling</span> |<span class="trading-emerald"> Smaragd 3x </span>| Eisenaxt 1x</p>
+                        <p><span class="trading-one">Neuling</span> |<span class="trading-emerald"> Smaragd 7-22x </span>| Verzaubertes Eisenschwert 1x</p>
+                        <p><span class="trading-two">Lehrling</span> | Eisenbaren 4x |<span class="trading-emerald">  Smaragd 1x</span></p>
+                        <p><span class="trading-two">Lehrling</span> |<span class="trading-emerald"> Smaragd 36x </span>| Glocke 1x</p>
+                        <p><span class="trading-three">Geselle</span> | Feuerstein 24x |<span class="trading-emerald"> Smaragd 1x</span></p>
+                        <p><span class="trading-four">Experte</span> | Diamand 1x |<span class="trading-emerald"> Smaragd 1x</span></p>
+                        <p><span class="trading-four">Experte</span> |<span class="trading-emerald"> Smaragd 18-35x </span>| Verzauberte Diamandaxt 1x</p>
+                        <p><span class="trading-five">Meister</span> |<span class="trading-emerald"> Smaragd 11-27x </span>| Verzaubertes Diamandschwert 1x</p></h4>
+                    </div>
+                </ul>
+                <ul>
+                    <li><button class="info-button" onclick="toggleInfo('trader-info')"><span class="trading-four">Fahrender Haendler</span></button></li>
+                    <div id="trader-info" class="info-content">
+                        <h4<p><span class="trading-emerald">1 Smaragd:</span> #Blumen, #Große Blumen, Farn, Weizenkörner, Rote-Bete-Samen, Kuerbiskerne, Melonenkerne, Brauner Pilz, Roter Pilz, Ranken, Kakaobohnen 3x, #Farbstoffe 3x, Lapislazuli 3x, Tintenbeutel 3x, Blaue Orchidee, Schwarzpulver, Zuckerrohr, Sand 8x, Maigloekchen, Roter Sand 4x, Seerose 2x, Kleines Tropfblatt 2x, Spitzer Tropfstein 2x, Moosblock 2x, Wurzelerde 2x, Kuerbis
+                        <p><span class="trading-emerald">2 Smaragde:</span> Meeresgurke, Leuchtstein
+                        <p><span class="trading-emerald">3 Smaragde:</span> Seetang, Kaktus, #Korallenblock, Packeis, Podsol 3x
+                        <p><span class="trading-emerald">4 Smaragde:</span> Schleimball
+                        <p><span class="trading-emerald">5 Smaragde:</span> #Setzlinge, <span class="rarity-uncommon">Nautilusschale</span>, Kugelfischeimer, Tropenfischeimer
+                        <p><span class="trading-emerald">6 Smaragde:</span> Blaueis
+                    </div>
+                </ul>
+                <ul>
+                    <li><button class="info-button" onclick="toggleInfo('sellable-info')"><span class="trading-five">Verkaufbar</span></button></li>
+                    <div id="sellable-info" class="info-content">
+                        <h4><p>Andesit, Braune Wolle, Buch, Buch und Feder, Diamand, Diorit, Eisenbaren, Faden, Feder, Feuerstein, Getrockneter Seetankblock, Glasflasche, Glasscheibe, Goldbaren, Granit, Graue Wolle, Haken, Hasenpfote, Kaninchenfell, Karotte, Kartoffel, Kohle, Kompass, Kuerbis, Kugelfisch, Lavaeimer, Leder, Melone, Netherquartz, Netherwarze, Papier, Rohes Hammelfleisch, Rohes Huenchen, Roher Kabeljau, Rohes Kaninchen, Roher Lachs, Rohes Rindfleisch, Rohes Scheinefleisch, Rote Bete, Schildkroeten Hornschild, Schwarze Wolle, Stein, Stock, Suesbeeren, Tintenbeutel, Tonklumpen, Tropenfisch, Verottetes Fleisch, Weizen, Weiße Wolle, #Boote</p></h4>
+                    </div>
+                </ul>
+                <ul>
+                    <li><button class="info-button" onclick="toggleInfo('buyable-info')"><span class="trading-five">Kaufbar</span></button></li>
+                    <div id="buyable-info" class="info-content">
+                        <h4><p>Apfel, Armbrust, Banner, Bannervorlage(Globus), Bett, Bogen, Brot, Buecherregal, Eisenaxt, Eisenbeinschutz, Eisenharnisch, Eisenhelm, Eisenschwert, Eisenstiefel, Enderperle, <span class="rarity-uncommon">Erfahrungsflaeschen</span>, Feuerstein, Gebratenes Huenchen, Gebratener Kabeljau, Gebratener Lachs, Gebratener Schweinefleisch, Gemaelde, Gemeißelte Steinziegel, Getränkter Pfeil, Glas, Glasierte Keramik, Glitzernde Melonenscheibe, Glocke, Goldene Karotte, Kabeljaueimer, Kaninchenragout, Keks, Keramik, <span class="rarity-uncommon">Kettenhaube</span>, <span class="rarity-uncommon">Kettenhemd</span>, <span class="rarity-uncommon">Kettenhose</span>, <span class="rarity-uncommon">Kettenstiefel</span>, Kompass, Kuchen, Kuerbiskuchen, Lagerfeuer, Lapislazuli, Laterne, Lederhose, Lederjacke, Lederkappe, Lederner Rossharnisch, Lederstiefel, Leere Karte, Leuchtstein, Namensschild, Ozean Entdeckerkarte, Polierter Andesit, Polierter Diorit, Polierter Granit, Pfeil, Quartzblock, Quartzsaeule, Rahmen, Redstone Staub, Sattel, Schere, Seltame Suppe, Steinaxt, Steinschaufel, Steinhacke, Steinspitzhacke, Uhr, Verzauberte Armbrust, Verzaubertes Angel, Verzauberter Bogen, Verzauberte Buch, Verzauberte Diamandaxt, Verzauberter Diamandbeinschutz, Verzauberter Diamandhelm, Verzauberter Diamandharnisch, Verzauberte Diamandschwert, Verzaubertes Diamandstiefel, Verzauberte Eisenaxt, Verzauberte Eisenschaufel, Verzauberte Eisenspitzhacke, Verzauberte Lederjacke, Verzauberte Lederkappe, Wald Entdeckerkarte, Ziegel, #Wolle, #Teppich</p></h4>
+                    </div>
                 </ul>
             `;
         }
@@ -1057,297 +1259,7 @@
                 </table>
             `;
         }
-
-        function showUsefulInfo() {
-            document.getElementById('content').innerHTML = `
-                <h2>Nuetzliche Infos:</h2>
-                <ul>
-                    <li><button class="info-button" onclick="toggleInfo('calibrated-info')">Calibrierter Sculk Sensor</button></li>
-                    <div id="calibrated-info" class="info-content">
-                        <!-- Calibrierter Sculk Sensor Infos -->
-                    </div>
-                    <li><button class="info-button" onclick="toggleInfo('brewing-info')">Brauen</button></li>
-                    <div id="brewing-info" class="info-content">
-                        <!-- Brauinfos -->
-                    </div>
-                </ul>
-            `;
-        }
-
-        function showTrading() {
-            document.getElementById('content').innerHTML = `
-                <h2>Handel</h2>
-                <h4>Es werden nur Max. 2 Trades ausgewaelt pro Stufe. Nicht für Trade Balance.</h4>
-                <ul>
-                    <li><button class="info-button" onclick="toggleInfo('farmer-info')">Bauer</button></li>
-                    <div id="farmer-info" class="info-content">
-                        <h4><p><span class="trading-one">Neuling</span> | Rote Bete 15x |<span class="trading-emerald"> Smaragd 1x</span></p>                        
-                        <p><span class="trading-one">Neuling</span> | Weizen 20x |<span class="trading-emerald"> Smaragd 1x</span></p>
-                        <p><span class="trading-one">Neuling</span> | Karotte 22x |<span class="trading-emerald"> Smaragd 1x</span></p>
-                        <p><span class="trading-one">Neuling</span> | Kartoffel 26x |<span class="trading-emerald"> Smaragd 1x</span></p>
-                        <p><span class="trading-one">Neuling</span> |<span class="trading-emerald"> Smaragd 1x</span> | Brot 6x</p>
-                        <p><span class="trading-two">Lehrling</span> | Kuerbis 6x |<span class="trading-emerald"> Smaragd 1x</span></p>
-                        <p><span class="trading-two">Lehrling</span> |<span class="trading-emerald"> Smaragd 1x</span> | Kuerbiskuchen 4x</p>
-                        <p><span class="trading-two">Lehrling</span> |<span class="trading-emerald"> Smaragd 1x </span>| Apfel 4x</p>    
-                        <p><span class="trading-three">Geselle</span> | Melone 4x |<span class="trading-emerald"> Smaragd 1x</span></p>
-                        <p><span class="trading-three">Geselle</span> |<span class="trading-emerald"> Smaragd 3x </span>| Keks 18x</p>
-                        <p><span class="trading-four">Experte</span> |<span class="trading-emerald"> Smaragd 1x </span>| Kuchen 1x</p>
-                        <p><span class="trading-four">Experte</span> |<span class="trading-emerald"> Smaragd 1x </span>| 1-2 Seltsame Suppe 1x</p>
-                        <p><span class="trading-five">Meister</span> |<span class="trading-emerald"> Smaragd 3x </span>| Goldene Karotte 3x</p>
-                        <p><span class="trading-five">Meister</span> |<span class="trading-emerald"> Smaragd 4x </span>| Glitzernde Melonenscheibe 3x</p></h4>
-                    </div>
-                </ul>
-                <ul>
-                    <li><button class="info-button" onclick="toggleInfo('librarian-info')">Bibliothekar</button></li>
-                    <div id="librarian-info" class="info-content">
-                        <h4><p><span class=trading-one">Neuling</span> | Papier 24x |<span class="trading-emerald"> Smaragd 1x</span></p>                        
-                        <p><span class="trading-one">Neuling</span> |<span class="trading-emerald"> Smaragd 5-64x </span>+ Buch 1x | <span class="rarity-uncommon">Verzaubertes Buch 1x</span></p>
-                        <p><span class="trading-one">Neuling</span> |<span class="trading-emerald"> Smaragd 6x </span>| Buecherregal 3x</p>
-                        <p><span class="trading-two">Lehrling</span> | Buch 4x |<span class="trading-emerald"> Smaragd 1x</span></p>
-                        <p><span class="trading-two">Lehrling</span> |<span class="trading-emerald"> Smaragd 5-64x </span>+ Buch 1x | <span class="rarity-uncommon">Verzaubertes Buch 1x</span></p>
-                        <p><span class="trading-two">Lehrling</span> |<span class="trading-emerald"> Smaragd 1x </span>| Laterne 1x</p>
-                        <p><span class="trading-three">Geselle</span> | Tintenbeutel 5x |<span class="trading-emerald"> Smaragd 1x</span></p>
-                        <p><span class="trading-three">Geselle</span> |<span class="trading-emerald"> Smaragd 5-64x </span>+ Buch 1x | <span class="rarity-uncommon">Verzaubertes Buch 1x</span></p>    
-                        <p><span class="trading-three">Geselle</span> |<span class="trading-emerald"> Smaragd 1x </span>| Glas 4x</p>
-                        <p><span class="trading-four">Experte</span> | Buch und Feder 1x |<span class="trading-emerald"> Smaragd 1x</span></p>    
-                        <p><span class="trading-four">Experte</span> |<span class="trading-emerald"> Smaragd 5-64x </span>+ Buch 1x | <span class="rarity-uncommon">Verzaubertes Buch 1x</span></p>
-                        <p><span class="trading-four">Experte</span> |<span class="trading-emerald"> Smaragd 4x </span>| Kompass 1x</p>
-                        <p><span class="trading-four">Experte</span> |<span class="trading-emerald"> Smaragd 5x </span>| Uhr 1x</p>
-                        <p><span class="trading-five">Meister</span> |<span class="trading-emerald"> Smaragd 20x </span>| Namensschild 1x</p></h4>
-                    </div>
-                </ul>
-                <ul>
-                    <li><button class="info-button" onclick="toggleInfo('fisher-info')">Fisher</button></li>
-                    <div id="fisher-info" class="info-content">
-                        <h4><p><span class="trading-one">Neuling</span> | Kohle 10x |<span class="trading-emerald"> Smaragd 1x</span></p>
-                        <p><span class="trading-one">Neuling</span> | Faden 20x |<span class="trading-emerald"> Smaragd 1x</span></p>
-                        <p><span class="trading-one">Neuling</span> |<span class="trading-emerald"> Smaragd 1x </span>+ Roher Kabeljau 6x | Gebratener Kabeljau 6x</p>
-                        <p><span class="trading-one">Neuling</span> |<span class="trading-emerald"> Smaragd 3x </span>| Kabeljaueimer 1x</p>
-                        <p><span class="trading-two">Lehrling</span> | Roher Kabeljau 15x |<span class="trading-emerald"> Smaragd 1x</span></p>
-                        <p><span class="trading-two">Lehrling</span> |<span class="trading-emerald"> Smaragd 1x </span>+ Roher Lachs 6x | Gebratener Lachs 6x</p>
-                        <p><span class="trading-two">Lehrling</span> |<span class="trading-emerald"> Smaragd 2x </span>| Lagerfeuer 1</p>
-                        <p><span class="trading-three">Geselle</span> | Roher Lachs 13x |<span class="trading-emerald"> Smaragd 1x</span></p>
-                        <p><span class="trading-three">Geselle</span> |<span class="trading-emerald"> Smaragd 7-22x </span>| Verzauberte Angel 1x</p>
-                        <p><span class="trading-four">Experte</span> | Tropenfisch 6x |<span class="trading-emerald"> Smaragd 1x</span></p>
-                        <p><span class="trading-five">Meister</span> | Kugelfisch 4x |<span class="trading-emerald"> Smaragd 1x</span></p>
-                        <p><span class="trading-five">Meister</span> | Boot 1x |<span class="trading-emerald"> Smaragd 1x</span></p></h4>
-                    </div>
-                </ul>
-                <ul>
-                    <li><button class="info-button" onclick="toggleInfo('cleric-info')">Geistlicher</button></li>
-                    <div id="cleric-info" class="info-content">
-                        <h4><p><span class="trading-one">Neuling</span> | Verrottetes Fleisch 32x |<span class="trading-emerald"> Smaragd 1x</span></p>
-                        <p><span class="trading-one">Neuling</span> |<span class="trading-emerald"> Smaragd 1x </span>| Redstone Staub 2x</p>
-                        <p><span class="trading-two">Lehrling</span> | Goldbaren 3x |<span class="trading-emerald"> Smaragd 1x</span></p>
-                        <p><span class="trading-two">Lehrling</span> |<span class="trading-emerald"> Smaragd 1x </span>| Lapislazuli 1x</p>
-                        <p><span class="trading-three">Geselle</span> | Hasenpfote 2x |<span class="trading-emerald"> Smaragd 1x</span></p>
-                        <p><span class="trading-three">Geselle</span> |<span class="trading-emerald"> Smaragd 4x </span>| Leuchtstein 1x</p>
-                        <p><span class="trading-four">Experte</span> | Schildkroeten-Hornschild 4x |<span class="trading-emerald"> Smaragd 1x</span></p>
-                        <p><span class="trading-four">Experte</span> | Glasflasche 9x |<span class="trading-emerald"> Smaragd 1x</span></p>
-                        <p><span class="trading-four">Experte</span> |<span class="trading-emerald"> Smaragd 5x </span>| Enderperle 1x</p>
-                        <p><span class="trading-five">Meister</span> | Netherwarze 22x |<span class="trading-emerald"> Smaragd 1x</span></p>
-                        <p><span class="trading-five">Meister</span> |<span class="trading-emerald"> Smaragd 3x </span>| <span class="rarity-uncommon">Erfahrungsflaeschchen 1x</span></p></h4>
-                    </div>
-                </ul>
-                <ul>
-                    <li><button class="info-button" onclick="toggleInfo('leatherworker-info')">Gerber</button></li>
-                    <div id="leatherworker-info" class="info-content">
-                        <h4><p><span class="trading-one">Neuling</span> | Leder 6x |<span class="trading-emerald"> Smaragd 1x</span></p>
-                        <p><span class="trading-one">Neuling</span> |<span class="trading-emerald"> Smaragd 3x </span>| Lederhose 1x</p>
-                        <p><span class="trading-one">Neuling</span> |<span class="trading-emerald"> Smaragd 7x </span>| Lederjacke 1x</p>
-                        <p><span class="trading-two">Lehrling</span> | Feuerstein 26x |<span class="trading-emerald"> Smaragd 1x</span></p>
-                        <p><span class="trading-two">Lehrling</span> |<span class="trading-emerald"> Smaragd 4x </span>| Lederstiefel 1x</p>
-                        <p><span class="trading-two">Lehrling</span> |<span class="trading-emerald"> Smaragd 5x </span>| Lederkappe 5x</p>
-                        <p><span class="trading-three">Geselle</span> | Kaninchenfell 9x |<span class="trading-emerald"> Smaragd 1x</span></p>
-                        <p><span class="trading-three">Geselle</span> |<span class="trading-emerald"> Smaragd 7x </span>| Verzauberte Lederjacke 1x</p>
-                        <p><span class="trading-four">Experte</span> | Schildkroeten-Hornschild 4x |<span class="trading-emerald"> Smaragd 1x</span></p>
-                        <p><span class="trading-four">Experte</span> |<span class="trading-emerald"> Smaragd 4x </span>| Lederner Rossharnisch 1x</p>
-                        <p><span class="trading-five">Meister</span> |<span class="trading-emerald"> Smaragd 6x </span>| Verzauberte Lederkappe 1x</p>
-                        <p><span class="trading-five">Meister</span> |<span class="trading-emerald"> Smaragd 5x </span>| Sattel 1x</p></h4>
-                    </div>
-                </ul>
-                <ul>
-                    <li><button class="info-button" onclick="toggleInfo('schimd-info')">Grobschmied</button></li>
-                    <div id="schimd-info" class="info-content">
-                        <h4><p><span class="trading-one">Neuling</span> | Kohle 15x |<span class="trading-emerald"> Smaragd 1x</span></p>
-                        <p><span class="trading-one">Neuling</span> |<span class="trading-emerald"> Smaragd 1x </span>| Steinaxt 1x<p>
-                        <p><span class="trading-one">Neuling</span> |<span class="trading-emerald"> Smaragd 1x </span>| Steinschaufel 1x<p>
-                        <p><span class="trading-one">Neuling</span> |<span class="trading-emerald"> Smaragd 1x </span>| Steinspitzhacke 1x<p>
-                        <p><span class="trading-one">Neuling</span> |<span class="trading-emerald"> Smaragd 1x </span>| Steinhacke 1x<p>
-                        <p><span class="trading-two">Lehrling</span> | Eisenbaren 4x |<span class="trading-emerald"> Smaragd 1x</span><p>
-                        <p><span class="trading-two">Lehrling</span> |<span class="trading-emerald"> Smaragd 36x </span>| Glocke 1x<p>
-                        <p><span class="trading-three">Geselle</span> | Feuerstein 30x |<span class="trading-emerald"> Smaragd 1x</span><p>
-                        <p><span class="trading-three">Geselle</span> |<span class="trading-emerald"> Smaragd 4x </span>| Diamandhacke 1x<p>
-                        <p><span class="trading-three">Geselle</span> |<span class="trading-emerald"> Smaragd 7-22x </span>| Verzauberte Eisenaxt 1x<p>
-                        <p><span class="trading-three">Geselle</span> |<span class="trading-emerald"> Smaragd 7-22x </span>| Verzauberte Eisenschaufel 1x<p>
-                        <p><span class="trading-three">Geselle</span> |<span class="trading-emerald"> Smaragd 7-22x </span>| Verzauberte Eisenspitzhacke 1x<p>
-                        <p><span class="trading-four">Experte</span> | Diamand 1x |<span class="trading-emerald"> Smaragd 1x</span><p>
-                        <p><span class="trading-four">Experte</span> |<span class="trading-emerald"> Smaragd 18-35x </span>| Verzauberte Diamandaxt 1x<p>
-                        <p><span class="trading-four">Experte</span> |<span class="trading-emerald"> Smaragd 11-27x </span>| Verzauberte Diamandschaufel 1x<p>
-                        <p><span class="trading-five">Meister</span> |<span class="trading-emerald"> Smaragd 18-35x </span>| Verzauberte Diamandspitzhacke 1x</p></h4>
-                    </div>
-                </ul>
-                <ul>
-                    <li><button class="info-button" onclick="toggleInfo('cartographer-info')">Kartograf</button></li>
-                    <div id="cartographer-info" class="info-content">
-                        <h4><p><span class="trading-one">Neuling</span> | Papier 24x |<span class="trading-emerald"> Smaragd 1x</span><p>
-                        <p><span class="trading-one">Neuling</span> |<span class="trading-emerald"> Smaragd 7x </span>| Leere Karte 1x<p>
-                        <p><span class="trading-two">Lehrling</span> | Glasscheibe 11x |<span class="trading-emerald"> Smaragd 1x</span><p>
-                        <p><span class="trading-two">Lehrling</span> |<span class="trading-emerald"> Smaragd 13x </span>+ Kompass 1x | Ozean-Entdeckerkarte 1x<p>
-                        <p><span class="trading-three">Geselle</span> | Kompass 1x |<span class="trading-emerald"> Smaragd 1x</span><p>
-                        <p><span class="trading-three">Geselle</span> |<span class="trading-emerald"> Smaragd 14x </span>+ Kompass 1x | Wald-Entdeckerkarte 1x<p>
-                        <p><span class="trading-four">Experte</span> |<span class="trading-emerald"> Smaragd 3x </span>| 1-2 Banner 1x<p>
-                        <p><span class="trading-four">Experte</span> |<span class="trading-emerald"> Smaragd 7x </span>| Rahmen 1x<p>
-                        <p><span class="trading-five">Meister</span> |<span class="trading-emerald"> Smaragd 8x </span>| Bannervorlage(Globus) 1x</p></h4>
-                    </div>
-                </ul>
-                <ul>
-                    <li><button class="info-button" onclick="toggleInfo('mason-info')">Maurer</button></li>
-                    <div id="mason-info" class="info-content">
-                        <h4><p><span class="trading-one">Neuling</span> | Tonklumpen 10x |<span class="trading-emerald"> Smaragd 1x</span></p>
-                        <p><span class="trading-one">Neuling</span> |<span class="trading-emerald"> Smaragd 1x </span>| Ziegel 10x</p>
-                        <p><span class="trading-two">Lehrling</span> | Stein 20x |<span class="trading-emerald"> Smaragd 1x</span></p>
-                        <p><span class="trading-two">Lehrling</span> |<span class="trading-emerald"> Smaragd 1x </span>| Gemeißelte Steinziegel 4x</p>
-                        <p><span class="trading-three">Geselle</span> | Andesit 16x |<span class="trading-emerald"> Smaragd 1x</span></p>
-                        <p><span class="trading-three">Geselle</span> | Diorit 16x |<span class="trading-emerald"> Smaragd 1x</span></p>
-                        <p><span class="trading-three">Geselle</span> | Granit 16x |<span class="trading-emerald"> Smaragd 1x</span></p>
-                        <p><span class="trading-three">Geselle</span> |<span class="trading-emerald"> Smaragd 1x </span>| Polierter Andesit</p>
-                        <p><span class="trading-three">Geselle</span> |<span class="trading-emerald"> Smaragd 1x </span>| Polierter Diorit</p>
-                        <p><span class="trading-three">Geselle</span> |<span class="trading-emerald"> Smaragd 1x </span>| Polierter Granit</p>
-                        <p><span class="trading-four">Experte</span> | Netherquarz 12x |<span class="trading-emerald"> Smaragd 1x</span></p>
-                        <p><span class="trading-four">Experte</span> |<span class="trading-emerald"> Smaragd 1x </span>| 1-2 Keramik</p>
-                        <p><span class="trading-four">Experte</span> |<span class="trading-emerald"> Smaragd 1x </span>| 1-2 Glasierte Keramik</p>
-                        <p><span class="trading-five">Meister</span> |<span class="trading-emerald"> Smaragd 1x </span>| Quartzblock 1x</p>
-                        <p><span class="trading-five">Meister</span> |<span class="trading-emerald"> Smaragd 1x </span>| Quartzsaeule 1x</p></h4>
-                    </div>
-                </ul>
-                <ul>
-                    <li><button class="info-button" onclick="toggleInfo('butcher-info')">Metzger</button></li>
-                    <div id="butcher-info" class="info-content">
-                        <h4><p><span class="trading-one">Neuling</span> | Rohes Kaninchen 4x |<span class="trading-emerald"> Smaragd 1x</span></p>
-                        <p><span class="trading-one">Neuling</span> | Rohes Schweinefleisch 7x |<span class="trading-emerald"> Smaragd 1x</span></p>
-                        <p><span class="trading-one">Neuling</span> | Rohes Huehnchen 14x |<span class="trading-emerald"> Smaragd 1x</span></p>
-                        <p><span class="trading-one">Neuling</span> |<span class="trading-emerald"> Smaragd 1x </span>| Kanichenragout 1x</p>
-                        <p><span class="trading-two">Lehrling</span> | Kohle 15x |<span class="trading-emerald"> Smaragd 1x</span></p>
-                        <p><span class="trading-two">Lehrling</span> |<span class="trading-emerald"> Smaragd 1x </span>| Gebratenes Huehnchen 8x</p>
-                        <p><span class="trading-two">Lehrling</span> |<span class="trading-emerald"> Smaragd 1x </span>| Gebratenes Schweinefleisch 5x</p>
-                        <p><span class="trading-three">Geselle</span> | Rohes Hammelfleisch 7x |<span class="trading-emerald"> Smaragd 1x</span></p>
-                        <p><span class="trading-three">Geselle</span> | Rohes Rindfleisch 10x |<span class="trading-emerald"> Smaragd 1x</span></p>
-                        <p><span class="trading-four">Experte</span> | Getrockneter Seetankblock 10x |<span class="trading-emerald"> Smaragd 1x</span></p>
-                        <p><span class="trading-five">Meister</span> | Suessbeeren 10x |<span class="trading-emerald"> Smaragd 1x</span></p></h4>
-                    </div>
-                </ul>
-                <ul>
-                    <li><button class="info-button" onclick="toggleInfo('armorer-info')">Panzermacher</button></li>
-                    <div id="armorer-info" class="info-content">
-                        <h4><p><span class="trading-one">Neuling</span> | Kohle 15x |<span class="trading-emerald"> Smaragd 1x</span></p>
-                        <p><span class="trading-one">Neuling</span> |<span class="trading-emerald"> Smaragd 4x </span>| Eisenstiefel 1x</p>
-                        <p><span class="trading-one">Neuling</span> |<span class="trading-emerald"> Smaragd 5x </span>| Eisenhelm 1x</p>
-                        <p><span class="trading-one">Neuling</span> |<span class="trading-emerald"> Smaragd 7x </span>| Eisenbeinschutz 1x</p>
-                        <p><span class="trading-one">Neuling</span> |<span class="trading-emerald"> Smaragd 9x </span>| Eisenharnisch 1x</p>
-                        <p><span class="trading-two">Lehrling</span> | Eisenbaren 4x |<span class="trading-emerald"> Smaragd 1x</span></p>
-                        <p><span class="trading-two">Lehrling</span> |<span class="trading-emerald"> Smaragd 1x </span>| <span class="rarity-uncommon">Kettenstiefel 1x</span></p>
-                        <p><span class="trading-two">Lehrling</span> |<span class="trading-emerald"> Smaragd 3x </span>| <span class="rarity-uncommon">Kettenhose 1x</span></p>
-                        <p><span class="trading-two">Lehrling</span> |<span class="trading-emerald"> Smaragd 36x </span>| Glocke 1x</p>
-                        <p><span class="trading-three">Geselle</span> | Lavaeimer 1x |<span class="trading-emerald"> Smaragd 1x</span></p>
-                        <p><span class="trading-three">Geselle</span> | Diamand 1x |<span class="trading-emerald"> Smaragd 1x</span></p>
-                        <p><span class="trading-three">Geselle</span> |<span class="trading-emerald"> Smaragd 1x </span>| <span class="rarity-uncommon">Kettenhaube 1x</span></p>
-                        <p><span class="trading-three">Geselle</span> |<span class="trading-emerald"> Smaragd 4x </span>| <span class="rarity-uncommon">Kettenhemd 1x</span></p> 
-                        <p><span class="trading-three">Geselle</span> |<span class="trading-emerald"> Smaragd 5x </span>| Schild(Kampf) 1x</p>
-                        <p><span class="trading-four">Experte</span> |<span class="trading-emerald"> Smaragd 11-27x </span>| Verzauberte Diamandstiefel 1x</p>
-                        <p><span class="trading-four">Experte</span> |<span class="trading-emerald"> Smaragd 18-35x </span>| Verzauberter Diamandbeinschutz 1x</p>
-                        <p><span class="trading-five">Meister</span> |<span class="trading-emerald"> Smaragd 11-27x </span>| Verzauberter Diamandhelm 1x</p>
-                        <p><span class="trading-five">Meister</span> |<span class="trading-emerald"> Smaragd 18-35x </span>| Verzauberter Diamandharnisch 1x</p></h4>
-                    </div>
-                </ul>
-                <ul>
-                    <li><button class="info-button" onclick="toggleInfo('fletcher-info')">Pfeilmacher</button></li>
-                    <div id="fletcher-info" class="info-content">
-                        <h4><p><span class="trading-one">Neuling</span> | Stock 32x |<span class="trading-emerald"> Smaragd 1x</span></p>
-                        <p><span class="trading-one">Neuling</span> |<span class="trading-emerald"> Smaragd 1x </span>| Pfeil 16x</p>
-                        <p><span class="trading-one">Neuling</span> |<span class="trading-emerald"> Smaragd 1x </span>+ Kies 10x | Feuerstein 10x</p>
-                        <p><span class="trading-two">Lehrling</span> | Feuerstein 26x |<span class="trading-emerald"> Smaragd 1x</span></p>
-                        <p><span class="trading-two">Lehrling</span> |<span class="trading-emerald"> Smaragd 2x </span>| Bogen 1x</p>
-                        <p><span class="trading-three">Geselle</span> | Faden 14x |<span class="trading-emerald"> Smaragd 1x</span></p>
-                        <p><span class="trading-three">Geselle</span> |<span class="trading-emerald"> Smaragd 3x </span>| Armbrust 1x</p>
-                        <p><span class="trading-four">Experte</span> | Feder 24x |<span class="trading-emerald"> Smaragd 1x</span></p>
-                        <p><span class="trading-four">Experte</span> |<span class="trading-emerald"> Smaragd 7-22x </span>| Verzauberter Bogen 1x</p>
-                        <p><span class="trading-five">Meister</span> | Haken 8x |<span class="trading-emerald"> Smaragd 1x</span></p>
-                        <p><span class="trading-five">Meister</span> |<span class="trading-emerald"> Smaragd 7-22x </span>| Verzauberte Armbrust 1x</p>
-                        <p><span class="trading-five">Meister</span> |<span class="trading-emerald"> Smaragd 2x </span>+ Pfeil 5x | Getränkter Pfeil 5x</p></h4>
-                    </div>
-                </ul>
-                <ul>
-                    <li><button class="info-button" onclick="toggleInfo('sheperd-info')">Schaefer</button></li>
-                    <div id="sheperd-info" class="info-content">
-                        <h4><p><span class="trading-one">Neuling</span> | Schwarze Wolle |<span class="trading-emerald"> Smaragd 1x</span></p>
-                        <p><span class="trading-one">Neuling</span> | Graue Wolle |<span class="trading-emerald"> Smaragd 1x</span></p>
-                        <p><span class="trading-one">Neuling</span> | Weiße Wolle |<span class="trading-emerald"> Smaragd 1x</span></p>
-                        <p><span class="trading-one">Neuling</span> | Braune Wolle |<span class="trading-emerald"> Smaragd 1x</span></p>
-                        <p><span class="trading-one">Neuling</span> |<span class="trading-emerald"> Smaragd 2x </span>| Schere 1x</p>
-                        <p><span class="trading-two">Lehrling</span> | Schwarzer Farbstoff 12x |<span class="trading-emerald"> Smaragd 1x</span></p>
-                        <p><span class="trading-two">Lehrling</span> | Grauer Farbstoff 12x |<span class="trading-emerald"> Smaragd 1x</span></p>
-                        <p><span class="trading-two">Lehrling</span> | Weißer Farbstoff 12x |<span class="trading-emerald"> Smaragd 1x</span></p>
-                        <p><span class="trading-two">Lehrling</span> | Hellblauer Farbstoff 12x |<span class="trading-emerald"> Smaragd 1x</span></p>
-                        <p><span class="trading-two">Lehrling</span> | Hellgruener Farbstoff 12x |<span class="trading-emerald"> Smaragd 1x</span></p>
-                        <p><span class="trading-two">Lehrling</span> |<span class="trading-emerald"> Smaragd 1x </span>| 1-2 Wolle 1x</p>
-                        <p><span class="trading-two">Lehrling</span> |<span class="trading-emerald"> Smaragd 1x </span>| 1-2 Teppich 1x</p>
-                        <p><span class="trading-three">Geselle</span> | Hellgruener Farbstoff 12x |<span class="trading-emerald"> Smaragd 1x</span></p>
-                        <p><span class="trading-three">Geselle</span> | Gelber Farbstoff 12x |<span class="trading-emerald"> Smaragd 1x</span></p>
-                        <p><span class="trading-three">Geselle</span> | Oranger Farbstoff 12x |<span class="trading-emerald"> Smaragd 1x</span></p>
-                        <p><span class="trading-three">Geselle</span> | Roter Farbstoff 12x |<span class="trading-emerald"> Smaragd 1x</span></p>
-                        <p><span class="trading-three">Geselle</span> | Rosa Farbstoff 12x |<span class="trading-emerald"> Smaragd 1x</span></p>
-                        <p><span class="trading-three">Geselle</span> |<span class="trading-emerald"> Smaragd 3x </span>| 1-2 Bett 1x</p>
-                        <p><span class="trading-four">Experte</span> | Magenta Farbstoff 12x |<span class="trading-emerald"> Smaragd 1x</span></p>
-                        <p><span class="trading-four">Experte</span> | Violetter Farbstoff 12x |<span class="trading-emerald"> Smaragd 1x</span></p>
-                        <p><span class="trading-four">Experte</span> | Blauer Farbstoff 12x |<span class="trading-emerald"> Smaragd 1x</span></p>
-                        <p><span class="trading-four">Experte</span> | Tuerkiser Farbstoff 12x |<span class="trading-emerald"> Smaragd 1x</span></p>
-                        <p><span class="trading-four">Experte</span> | Gruener Farbstoff 12x |<span class="trading-emerald"> Smaragd 1x</span></p>
-                        <p><span class="trading-four">Experte</span> | Brauner Farbstoff 12x |<span class="trading-emerald"> Smaragd 1x</span></p>
-                        <p><span class="trading-four">Experte</span> |<span class="trading-emerald"> Smaragd 3x </span>| 1-2 Banner 1x</p>
-                        <p><span class="trading-five">Meister</span> |<span class="trading-emerald"> Smaragd 2x </span>| Gemaelde 3x</p></h4>
-                    </div>
-                </ul>
-                <ul>
-                    <li><button class="info-button" onclick="toggleInfo('weaponssmith-info')">Waffenschmied</button></li>
-                    <div id="weaponssmith-info" class="info-content">
-                        <h4><p><span class="trading-one">Neuling</span> | Kohle |<span class="trading-emerald"> Smaragd 1x</span></p>
-                        <p><span class="trading-one">Neuling</span> |<span class="trading-emerald"> Smaragd 3x </span>| Eisenaxt 1x</p>
-                        <p><span class="trading-one">Neuling</span> |<span class="trading-emerald"> Smaragd 7-22x </span>| Verzaubertes Eisenschwert 1x</p>
-                        <p><span class="trading-two">Lehrling</span> | Eisenbaren 4x |<span class="trading-emerald">  Smaragd 1x</span></p>
-                        <p><span class="trading-two">Lehrling</span> |<span class="trading-emerald"> Smaragd 36x </span>| Glocke 1x</p>
-                        <p><span class="trading-three">Geselle</span> | Feuerstein 24x |<span class="trading-emerald"> Smaragd 1x</span></p>
-                        <p><span class="trading-four">Experte</span> | Diamand 1x |<span class="trading-emerald"> Smaragd 1x</span></p>
-                        <p><span class="trading-four">Experte</span> |<span class="trading-emerald"> Smaragd 18-35x </span>| Verzauberte Diamandaxt 1x</p>
-                        <p><span class="trading-five">Meister</span> |<span class="trading-emerald"> Smaragd 11-27x </span>| Verzaubertes Diamandschwert 1x</p></h4>
-                    </div>
-                </ul>
-                <ul>
-                    <li><button class="info-button" onclick="toggleInfo('trader-info')"><span class="trading-four">Fahrender Haendler</span></button></li>
-                    <div id="trader-info" class="info-content">
-                        <h4<p><span class="trading-emerald">1 Smaragd:</span> #Blumen, #Große Blumen, Farn, Weizenkörner, Rote-Bete-Samen, Kuerbiskerne, Melonenkerne, Brauner Pilz, Roter Pilz, Ranken, Kakaobohnen 3x, #Farbstoffe 3x, Lapislazuli 3x, Tintenbeutel 3x, Blaue Orchidee, Schwarzpulver, Zuckerrohr, Sand 8x, Maigloekchen, Roter Sand 4x, Seerose 2x, Kleines Tropfblatt 2x, Spitzer Tropfstein 2x, Moosblock 2x, Wurzelerde 2x, Kuerbis
-                        <p><span class="trading-emerald">2 Smaragde:</span> Meeresgurke, Leuchtstein
-                        <p><span class="trading-emerald">3 Smaragde:</span> Seetang, Kaktus, #Korallenblock, Packeis, Podsol 3x
-                        <p><span class="trading-emerald">4 Smaragde:</span> Schleimball
-                        <p><span class="trading-emerald">5 Smaragde:</span> #Setzlinge, <span class="rarity-uncommon">Nautilusschale</span>, Kugelfischeimer, Tropenfischeimer
-                        <p><span class="trading-emerald">6 Smaragde:</span> Blaueis
-                    </div>
-                </ul>
-                <ul>
-                    <li><button class="info-button" onclick="toggleInfo('sellable-info')"><span class="trading-five">Verkaufbar</span></button></li>
-                    <div id="sellable-info" class="info-content">
-                        <h4><p>Andesit, Braune Wolle, Buch, Buch und Feder, Diamand, Diorit, Eisenbaren, Faden, Feder, Feuerstein, Getrockneter Seetankblock, Glasflasche, Glasscheibe, Goldbaren, Granit, Graue Wolle, Haken, Hasenpfote, Kaninchenfell, Karotte, Kartoffel, Kohle, Kompass, Kuerbis, Kugelfisch, Lavaeimer, Leder, Melone, Netherquartz, Netherwarze, Papier, Rohes Hammelfleisch, Rohes Huenchen, Roher Kabeljau, Rohes Kaninchen, Roher Lachs, Rohes Rindfleisch, Rohes Scheinefleisch, Rote Bete, Schildkroeten Hornschild, Schwarze Wolle, Stein, Stock, Suesbeeren, Tintenbeutel, Tonklumpen, Tropenfisch, Verottetes Fleisch, Weizen, Weiße Wolle, #Boote</p></h4>
-                    </div>
-                </ul>
-                <ul>
-                    <li><button class="info-button" onclick="toggleInfo('buyable-info')"><span class="trading-five">Kaufbar</span></button></li>
-                    <div id="buyable-info" class="info-content">
-                        <h4><p>Apfel, Armbrust, Banner, Bannervorlage(Globus), Bett, Bogen, Brot, Buecherregal, Eisenaxt, Eisenbeinschutz, Eisenharnisch, Eisenhelm, Eisenschwert, Eisenstiefel, Enderperle, <span class="rarity-uncommon">Erfahrungsflaeschen</span>, Feuerstein, Gebratenes Huenchen, Gebratener Kabeljau, Gebratener Lachs, Gebratener Schweinefleisch, Gemaelde, Gemeißelte Steinziegel, Getränkter Pfeil, Glas, Glasierte Keramik, Glitzernde Melonenscheibe, Glocke, Goldene Karotte, Kabeljaueimer, Kaninchenragout, Keks, Keramik, <span class="rarity-uncommon">Kettenhaube</span>, <span class="rarity-uncommon">Kettenhemd</span>, <span class="rarity-uncommon">Kettenhose</span>, <span class="rarity-uncommon">Kettenstiefel</span>, Kompass, Kuchen, Kuerbiskuchen, Lagerfeuer, Lapislazuli, Laterne, Lederhose, Lederjacke, Lederkappe, Lederner Rossharnisch, Lederstiefel, Leere Karte, Leuchtstein, Namensschild, Ozean Entdeckerkarte, Polierter Andesit, Polierter Diorit, Polierter Granit, Pfeil, Quartzblock, Quartzsaeule, Rahmen, Redstone Staub, Sattel, Schere, Seltame Suppe, Steinaxt, Steinschaufel, Steinhacke, Steinspitzhacke, Uhr, Verzauberte Armbrust, Verzaubertes Angel, Verzauberter Bogen, Verzauberte Buch, Verzauberte Diamandaxt, Verzauberter Diamandbeinschutz, Verzauberter Diamandhelm, Verzauberter Diamandharnisch, Verzauberte Diamandschwert, Verzaubertes Diamandstiefel, Verzauberte Eisenaxt, Verzauberte Eisenschaufel, Verzauberte Eisenspitzhacke, Verzauberte Lederjacke, Verzauberte Lederkappe, Wald Entdeckerkarte, Ziegel, #Wolle, #Teppich</p></h4>
-                    </div>
-                </ul>
-            `;
-        }
-
+        
         function toggleInfo(infoId) {
             const infoElement = document.getElementById(infoId);
             const isVisible = infoElement.style.display === "block";
