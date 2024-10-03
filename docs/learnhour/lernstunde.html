@@ -579,6 +579,7 @@
         document.querySelector('.url-input').addEventListener('keypress', function(event) {
             if (event.key === 'Enter') {
                 navigateToPage();
+                document.querySelector('.url-input').blur();
             }
         });
     </script>
