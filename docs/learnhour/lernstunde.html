@@ -218,9 +218,12 @@
             text-decoration: bold; /* Unterstreichung beim Hover */
         }
 
+        .url-label {
+            margin-top: 5px;
+
         .url-input {
-            font-size: 18px;
-            background-color: #282c34; /* Gleiche Farbe wie der Rest */
+            font-size: 12px;
+            background-color: #3B4048; /* Gleiche Farbe wie der Rest */
             color: white; /* Textfarbe */
             padding: 10px;
             border: none;
@@ -244,12 +247,11 @@
         .go-button:hover {
             background-color: #45a049; /* Farbe beim Hover */
         }
-
     </style>
 </head>
 <body onload="showHomePage()">
     <div class="url-bar">
-        <label for="urlInput">URL: </label>
+        <label class="url-label" for="urlInput">URL: </label>
         <input class="url-input" type="text" id="urlInput" value="redminer9630.de/wiki/home" style="width: 400px; margin-left: 10px;" />
         <button class="go-button" onclick="navigateToPage()">Aufrufen</button>
     </div>
