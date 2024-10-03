@@ -195,21 +195,32 @@
             box-sizing: border-box;
         }
 
-        .urlbar {
-            display: flex;
-            font-size: 14px;
-            padding: 10px;
-            border: 1px solid #ddd;
-            border-radius: 1px;
-            background-color: white;
-            margin-bottom: 10px;
-            color: #333;
-            text-align: left;
+        .url-bar {
+            background-color: #f0f0f0; /* Hintergrundfarbe */
+            padding: 10px; /* Innenabstand */
+            border-radius: 6px; /* Abgerundete Ecken */
+            display: flex; /* Flex-Layout für Elemente */
+            flex-direction: column; /* Elemente in einer Spalte anordnen */
+            margin-bottom: 20px; /* Abstand nach unten */
+        }
+
+        .url-bar span {
+            margin: 5px 0; /* Abstand zwischen den Zeilen */
+            font-size: 16px; /* Schriftgröße */
+        }
+
+        .url-bar a {
+            color: #007BFF; /* Linkfarbe */
+            text-decoration: none; /* Unterstreichung entfernen */
+        }
+
+        .url-bar a:hover {
+            text-decoration: bold; /* Unterstreichung beim Hover */
         }
     </style>
 </head>
 <body onload="showHomePage()">
-    <div class="urlbar">
+    <div class="url-bar">
         <label for="urlInput">URL: </label>
         <input type="text" id="urlInput" value="redminer9630.de/wiki/home" style="width: 400px; margin-left: 10px;" />
         <button onclick="navigateToPage()">Aufrufen</button>
