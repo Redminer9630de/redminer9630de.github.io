@@ -217,13 +217,37 @@
         .url-bar a:hover {
             text-decoration: bold; /* Unterstreichung beim Hover */
         }
+
+        .url-input {
+            background-color: #282c34; /* Gleiche Farbe wie der Rest */
+            color: white; /* Textfarbe */
+            padding: 10px;
+            border: none;
+            border-radius: 5px;
+            width: 300px; /* Breite des Eingabefelds */
+        }    
+
+        .go-button {
+            background-color: #4CAF50; /* Farbe für den Button */
+            color: white; /* Textfarbe des Buttons */
+            padding: 10px 15px;
+            border: none;
+            border-radius: 5px;
+            cursor: pointer;
+            transition: background-color 0.3s;
+        }
+
+        .go-button:hover {
+            background-color: #45a049; /* Farbe beim Hover */
+}
+
     </style>
 </head>
 <body onload="showHomePage()">
     <div class="url-bar">
         <label for="urlInput">URL: </label>
-        <input type="text" id="urlInput" value="redminer9630.de/wiki/home" style="width: 400px; margin-left: 10px;" />
-        <button onclick="navigateToPage()">Aufrufen</button>
+        <input class="url-input" type="text" id="urlInput" value="redminer9630.de/wiki/home" style="width: 400px; margin-left: 10px;" />
+        <button class="go-button" onclick="navigateToPage()">Aufrufen</button>
     </div>
     <a href="https://redminer9630github.github.io/Redminer9630.de/" tabindex="1" class="header-link">Zurueck ></a>
     <h1>Minecraft Wiki</h1>
