@@ -194,10 +194,22 @@
             padding: 10px;
             box-sizing: border-box;
         }
+
+        .urlbar {
+            display: flex;
+            font-size: 14px;
+            padding: 10px;
+            border: 1px solid #ddd;
+            border-radius: 1px;
+            background-color: white;
+            margin-bottom: 10px;
+            color: #333;
+            text-align: left;
+        }
     </style>
 </head>
 <body onload="showHomePage()">
-    <div style="display: flex; align-items: left; margin-bottom: 10px;">
+    <div class="urlbar">
         <label for="urlInput">URL: </label>
         <input type="text" id="urlInput" value="redminer9630.de/wiki/home" style="width: 400px; margin-left: 10px;" />
         <button onclick="navigateToPage()">Aufrufen</button>
