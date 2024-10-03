@@ -196,7 +196,7 @@
         }
     </style>
 </head>
-<body>
+<body onload="showHomePage()">
     <a href="https://redminer9630github.github.io/Redminer9630.de/" tabindex="1" class="header-link">Zurueck ></a>
     <h1>Minecraft Wiki</h1>
 
@@ -219,6 +219,10 @@
     </div>
     
     <script>
+        function showHomePage() {
+            document.getElementById('content').innerHTML = 'Willkommen auf der Redminer9630.de Minecraft Wiki.';
+        }
+
         function showTrading() {
             fetch('wiki/trading.html')
                 .then(response => {
@@ -469,6 +473,30 @@
             });
 
             rows.forEach(row => tbody.appendChild(row));
+        }
+
+        function navigateToPage() {
+            const input = document.getElementById('urlInput').value;
+
+            if (input.startsWith("redminer9630.de/wiki/")) {
+                const page = input.split('/').pop(); 
+        
+                switch (page.toLowerCase()) {
+                    case 'home':
+                        showHomePage();
+                        break;
+                    case 'commands':
+                        showCommands();
+                        break;
+                    case 'trading':
+                        showTrading();
+                        break;
+                    default:
+                        alert('Seite nicht gefunden.');
+                }
+            } else {
+                alert('Seite nicht gefunden.');
+            }
         }
     </script>
 </body>
