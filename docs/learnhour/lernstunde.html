@@ -251,7 +251,7 @@
 </head>
 <body onload="showHomePage()">
     <div class="url-bar">
-        <label class="url-label" for="urlInput">URL: </label>
+        <label for="urlInput">URL: </label>
         <input class="url-input" type="text" id="urlInput" value="redminer9630.de/wiki/home" style="width: 400px; margin-left: 10px;" />
         <button class="go-button" onclick="navigateToPage()">Aufrufen</button>
     </div>
@@ -575,6 +575,12 @@
                 alert('Seite nicht gefunden.');
             }
         }
+
+        document.querySelector('.url-input').addEventListener('keypress', function(event) {
+            if (event.key === 'Enter') {
+                navigateToPage();
+            }
+        });
     </script>
 </body>
 </html>
