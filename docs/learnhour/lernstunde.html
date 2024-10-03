@@ -205,30 +205,36 @@
     <a href="https://redminer9630github.github.io/Redminer9630.de/" tabindex="1" class="header-link">Zurueck ></a>
     <h1>Minecraft Wiki</h1>
 
-    <button class="shortcut-button" tabindex="5" onclick="showCommands()">Befehle</button>
-    <button class="shortcut-button" tabindex="6" onclick="showTrading()">Handeln</button>
-    <button class="shortcut-button" tabindex="7" onclick="showBrewing()">Brauen</button>
-    <button class="shortcut-button" tabindex="8" onclick="showEnchanting()">Verzaubern</button>
-    <button class="shortcut-button" tabindex="9" onclick="showMobs()">Mobs</button>
-    <button class="shortcut-button" tabindex="10" onclick="showBlocks()">Blöcke</button>
-    <button class="shortcut-button" tabindex="11" onclick="showItems()">Items</button>
-    <button class="shortcut-button" tabindex="12" onclick="showBiomes()">Biome</button>
-    <button class="shortcut-button" tabindex="13" onclick="showEffects()">Effekte</button>
-    <button class="shortcut-button" tabindex="14" onclick="showCrafting()">Crafting</button>
-    <button class="shortcut-button" tabindex="15" onclick="showSmelting()">Schmelzen</button>
-    <button class="shortcut-button" tabindex="16" onclick="showStructures()">Strukturen</button>
-    <button class="shortcut-button" tabindex="17" onclick="showRedstone()">Redstone</button>
-    <button class="shortcut-button" tabindex="18" onclick="showArchaeology()">Archeology</button> 
-    
+    <div id="categories">
+        <button class="shortcut-button" tabindex="5" onclick="showCommands()">Befehle</button>
+        <button class="shortcut-button" tabindex="6" onclick="showTrading()">Handeln</button>
+        <button class="shortcut-button" tabindex="7" onclick="showBrewing()">Brauen</button>
+        <button class="shortcut-button" tabindex="8" onclick="showEnchanting()">Verzaubern</button>    
+        <button class="shortcut-button" tabindex="9" onclick="showMobs()">Mobs</button>
+        <button class="shortcut-button" tabindex="10" onclick="showBlocks()">Blöcke</button>
+        <button class="shortcut-button" tabindex="11" onclick="showItems()">Items</button>
+        <button class="shortcut-button" tabindex="12" onclick="showBiomes()">Biome</button>
+        <button class="shortcut-button" tabindex="13" onclick="showEffects()">Effekte</button>
+        <button class="shortcut-button" tabindex="14" onclick="showCrafting()">Crafting</button>    
+        <button class="shortcut-button" tabindex="15" onclick="showSmelting()">Schmelzen</button>
+        <button class="shortcut-button" tabindex="16" onclick="showStructures()">Strukturen</button>
+        <button class="shortcut-button" tabindex="17" onclick="showRedstone()">Redstone</button>
+        <button class="shortcut-button" tabindex="18" onclick="showArchaeology()">Archeology</button> 
+    </div>
+        
     <div id="content">
     </div>
     
     <script>
+        let categoriesVisible = true;
+
         function showHomePage() {
-            document.getElementById('content').innerHTML = 'Willkommen auf der Redminer9630.de Minecraft Wiki.';
+            document.getElementById('categories').style.display = 'block'; 
+            document.getElementById('content').innerHTML = '';
         }
 
         function showTrading() {
+            categoriesVisible = false;
             fetch('wiki/trading.html')
                 .then(response => {
                     if (!response.ok) {
@@ -245,6 +251,7 @@
         }
 
         function showCommands() {
+            categoriesVisible = false;
             fetch('wiki/commands.html')
                 .then(response => {
                     if (!response.ok) {    
@@ -261,6 +268,7 @@
         }
 
         function showBrewing() {
+            categoriesVisible = false;
             fetch('wiki/brewing.html')
                 .then(response => {
                     if (!response.ok) {
@@ -277,6 +285,7 @@
         }
         
         function showEnchanting() {
+            categoriesVisible = false;
             fetch('wiki/enchating.html')
                 .then(response => {
                     if (!response.ok) {
@@ -293,6 +302,7 @@
         }
         
         function showMobs() {
+            categoriesVisible = false;
             fetch('wiki/mobs.html')
                 .then(response => {
                     if (!response.ok) {
@@ -309,6 +319,7 @@
         }
         
         function showBlocks() {
+            categoriesVisible = false;
             fetch('wiki/blocks.html')
                 .then(response => {
                     if (!response.ok) {
@@ -325,6 +336,7 @@
         }
         
         function showItems() {
+            categoriesVisible = false;
             fetch('wiki/items.html')
                 .then(response => {
                     if (!response.ok) {
@@ -341,6 +353,7 @@
         }
         
         function showBiomes() {
+            categoriesVisible = false;
             fetch('wiki/biomes.html')
                 .then(response => {
                     if (!response.ok) {
@@ -357,6 +370,7 @@
         }
         
         function showEffects() {
+            categoriesVisible = false;
             fetch('wiki/effects.html')
                 .then(response => {
                     if (!response.ok) {
@@ -373,6 +387,7 @@
         }
         
         function showCrafting() {
+            categoriesVisible = false;
             fetch('wiki/crafting.html')
                 .then(response => {
                     if (!response.ok) {
@@ -389,6 +404,7 @@
         }
         
         function showSmelting() {
+            categoriesVisible = false;
             fetch('wiki/smelting.html')
                 .then(response => {
                     if (!response.ok) {
@@ -405,6 +421,7 @@
         }
         
         function showStructures() {
+            categoriesVisible = false;
             fetch('wiki/structures.html')
                 .then(response => {
                     if (!response.ok) {
@@ -421,6 +438,7 @@
         }
         
         function showRedstone() {
+            categoriesVisible = false;
             fetch('wiki/redstone.html')
                 .then(response => {
                     if (!response.ok) {
@@ -437,6 +455,7 @@
         }
         
         function showArchaeology() {
+            categoriesVisible = false;
             fetch('wiki/archaeology.html')
                 .then(response => {
                     if (!response.ok) {
