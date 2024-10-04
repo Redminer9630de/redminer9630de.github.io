@@ -1,0 +1,250 @@
+<h2>Brauen<h2>
+<ul>
+    <li><button class="info-button" onclick="toggleInfo('base_ingredients')">Grundstoffe</button></li>
+    <div id="base_ingredients" class="info-content">
+        <h4><p>Netherwarze | Zutat für den <i>Seltsamen Trank</i>, der Grundlage für die meisten Tränke ist.</p>
+        <p>Redstone | Mit diesem Grundstoff kann die Wirkungsdauer vieler Tränke verlängert werden.</p>
+        <p>Leuchtsteinstaub | Mit diesem Grundstoff kann die Stärke vieler Tränke erhöht werden, was die Wirkungsdauer reduziert.</p>
+        <p>Fermentiertes Spinnenauge | Mit diesem Grundstoff kann aus vielen positiven Tränken ein negativer Trank gebraut werden.</p>
+        <p>Schwarzpulver | Mit diesem Grundstoff wird eine werfbare Version des Trankes gebraut. Allerdings wird dadurch die Wirkungsdauer reduziert.</p>
+        <p>Drachenatem | Mit diesem Grundstoff wird eine verweilende Version des Wurftrankes gebraut.</p></h4>
+    </div>
+</ul>
+<ul>
+    <li><button class="info-button" onclick="toggleInfo('effect_ingredients')"></button>Effektzutaten</li>
+    <div id="effect_ingredients" class="info-content">
+        <table>
+            <thead>
+                <tr>
+                    <th onclick="sortTable(0)">Item</th>
+                    <th onclick="sortTable(1)">Effekt</th>
+                </tr>
+            </thead>
+            <tbody>
+                <tr>
+                    <th>Böenrute</th>
+                    <th>Windgeladen</th>
+                </tr>
+                <tr>
+                    <th>Ghast-Träne</th>
+                    <th>Regeneration</th>
+                </tr>
+                <tr>
+                    <th>Glitzernde Melonenscheibe</th>
+                    <th>Direktheilung</th>
+                </tr>
+                <tr>
+                    <th>Goldene Karotte</th>
+                    <th>Nachtsicht</th>
+                </tr>
+                <tr>
+                    <th>Hasenpfote</th>
+                    <th>Sprungkraft</th>
+                </tr>
+                <tr>
+                    <th>Kugelfisch</th>
+                    <th>Unterwasseratmung</th>
+                </tr>
+                <tr>
+                    <th>Lohenstaub</th>
+                    <th>Stärke</th>
+                </tr>
+                <tr>
+                    <th>Magmacreme</th>
+                    <th>Feuerresistenz</th>
+                </tr>
+                <tr>
+                    <th>Phantomhaut</th>
+                    <th>Sanfter Fall</th>
+                </tr>
+                <tr>
+                    <th>Schildkrötenpanzer</th>
+                    <th>Langsamkeit und Resistenz</th>
+                </tr>
+                <tr>
+                    <th>Schleimblock</th>
+                    <th>Schleimen</th>
+                </tr>
+                <tr>
+                    <th>Spinnenauge</th>
+                    <th>Vergiftung</th>
+                </tr>
+                <tr>
+                    <th>Spinnennetz</th>
+                    <th>Weben</th>
+                </tr>
+                <tr>
+                    <th>Stein</th>
+                    <th>Befallen</th>
+                </tr>
+                <tr>
+                    <th>Zucker</th>
+                    <th>Schnelligkeit</th>
+                </tr>
+            </tbody>
+        </table>
+    </div>
+</ul>
+<ul>
+    <li><button class="info-button" onclick="toggleInfo('')">Brauen</button></li>
+    <div id="effect_ingredients" class="info-content">
+        <table>
+            <thead>
+                <tr>
+                    <th onclick="sortTable(0)">Trank</th>
+                    <th onclick="sortTable(1)">Weg</th>
+                </tr>
+            </thead>
+            <tbody>
+<tr>
+<th>Feuerresistenz
+<th>Netherwarze → Magmacreme
+</tr>
+<tr>
+<th>Feuerresistenz (verlängert)
+<th>Netherwarze → Magmacreme → Redstone
+</tr>
+<tr>
+<th>Heilung
+<th>Netherwarze → Glitzernde Melonenscheibe
+</tr>
+<tr>
+<th>Heilung II
+<th>Netherwarze → Glitzernde Melonenscheibe → Leuchtsteinstaub
+</tr>
+<tr>
+<th>Langsamkeit
+<th>Netherwarze → Hasenpfote/Zucker → Fermentiertes Spinnenauge
+</tr>
+<tr>
+<th>Langsamkeit (verlängert)
+<th>Netherwarze → Hasenpfote/Zucker → Fermentiertes Spinnenauge ↔ Redstone
+</tr>
+<tr>
+<th>Langsamkeit IV
+<th>Netherwarze → Hasenpfote → Leuchtsteinstaub
+</tr>
+<tr>
+<th>Nachtsicht
+<th>Netherwarze → Goldene Karotte
+</tr>
+<tr>
+<th>Nachtsicht (verlängert)
+<th>Netherwarze → Goldene Karotte → Redstone
+</tr>
+<tr>
+<th>Regeneration
+<th>Netherwarze → Ghast-Träne
+</tr>
+<tr>
+<th>Regeneration (verlängert)
+<th>Netherwarze → Ghast-Träne → Redstone
+</tr>
+<tr>
+<th>Regeneration II
+<th>Netherwarze → Ghast-Träne → Leuchtsteinstaub
+</tr>
+<tr>
+<th>Sanfter Fall
+<th>Netherwarze → Phantomhaut
+</tr>
+<tr>
+<th>Sanfter Fall (verlängert)
+<th>Netherwarze → Phantomhaut → Redstone
+</tr>
+<tr>
+<th>Schaden
+<th>Netherwarze → Glitzernde Melonenscheibe/Spinnenauge → Fermentiertes Spinnenauge
+</tr>
+<tr>
+<th>Schaden II
+<th>Netherwarze → Glitzernde Melonenscheibe/Spinnenauge → Fermentiertes Spinnenauge ↔ Leuchtsteinstaub
+</tr>
+<tr>
+<th>Schildkrötenmeister IV
+<th>Netherwarze → Schildkrötenpanzer
+</tr>
+<tr>
+<th>Schildkrötenmeister IV (verlängert)
+<th>Netherwarze → Schildkrötenpanzer → Redstone
+</tr>
+<tr>
+<th>Schildkrötenmeister VI
+<th>Netherwarze → Schildkrötenpanzer → Leuchtsteinstaub
+</tr>
+<tr>
+<th>Schnelligkeit
+<th>Netherwarze → Zucker
+</tr>
+<tr>
+<th>Schnelligkeit (verlängert)
+<th>Netherwarze → Zucker → Redstone
+</tr>
+<tr>
+<th>Schnelligkeit II
+<th>Netherwarze → Zucker → Leuchtsteinstaub
+</tr>
+<tr>
+<th>Schwäche
+<th>Fermentiertes Spinnenauge
+</tr>
+<tr>
+<th>Schwäche (verlängert)
+<th>Fermentiertes Spinnenauge → Redstone
+</tr>
+<tr>
+<th>Sprungkraft
+<th>Netherwarze → Hasenpfote
+</tr>
+<tr>
+<th>Sprungkraft (verlängert)
+<th>Netherwarze → Hasenpfote → Redstone
+</tr>
+<tr>
+<th>Sprungkraft II
+<th>Netherwarze → Hasenpfote → Leuchtsteinstaub
+</tr>
+<tr>
+<th>Stärke
+<th>Netherwarze → Lohenstaub
+</tr>
+<tr>
+<th>Stärke (verlängert)
+<th>Netherwarze → Lohenstaub → Redstone
+</tr>
+<tr>
+<th>Stärke II
+<th>Netherwarze → Lohenstaub → Leuchtsteinstaub
+</tr>
+<tr>
+<th>Unsichtbarkeit
+<th>Netherwarze → Goldene Karotte → Fermentiertes Spinnenauge
+</tr>
+<tr>
+<th>Unsichtbarkeit (verlängert)
+<th>Netherwarze → Goldene Karotte → Fermentiertes Spinnenauge ↔ Redstone
+</tr>
+<tr>
+<th>Unterwasseratmung
+<th>Netherwarze → Kugelfisch
+</tr>
+<tr>
+<th>Unterwasseratmung (verlängert)
+<th>Netherwarze → Kugelfisch → Redstone
+</tr>
+<tr>
+<th>Vergiftung
+<th>Netherwarze → Spinnenauge
+</tr>
+<tr>
+<th>Vergiftung (verlängert)
+<th>Netherwarze → Spinnenauge → Redstone</th>
+</tr>
+<tr>
+<th>Vergiftung II</th>
+<th>Netherwarze → Spinnenauge → Leuchtsteinstaub</th>
+</tr>
+            </tbody>
+        </table>
+    </div>
+</ul>
