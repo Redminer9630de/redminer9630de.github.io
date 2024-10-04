@@ -287,12 +287,15 @@
         let categoriesVisible = true;
 
         function showHomePage() {
-            document.getElementById('categories').style.display = 'block'; 
+            document.getElementById('categories').style.display = 'block'; // Kategorien einblenden
+            document.getElementById('urlInput').value = "redminer9630.de/wiki/home"; // URL aktualisieren
             document.getElementById('content').innerHTML = 'Willkommen auf der Redminer9630.de Minecraft Wiki';
         }
 
         function showTrading() {
-            categoriesVisible = false;
+            categoriesVisible = fals  
+            document.getElementById('categories').style.display = 'none'; // Kategorien ausblenden
+            document.getElementById('urlInput').value = "redminer9630.de/wiki/trading"; // URL aktualisieren
             fetch('wiki/trading.html')
                 .then(response => {
                     if (!response.ok) {
@@ -310,6 +313,8 @@
 
         function showCommands() {
             categoriesVisible = false;
+            document.getElementById('categories').style.display = 'none'; // Kategorien ausblenden
+            document.getElementById('urlInput').value = "redminer9630.de/wiki/commands"; // URL aktualisieren
             fetch('wiki/commands.html')
                 .then(response => {
                     if (!response.ok) {    
@@ -327,6 +332,8 @@
 
         function showBrewing() {
             categoriesVisible = false;
+            document.getElementById('categories').style.display = 'none'; // Kategorien ausblenden
+            document.getElementById('urlInput').value = "redminer9630.de/wiki/brewing"; // URL aktualisieren
             fetch('wiki/brewing.html')
                 .then(response => {
                     if (!response.ok) {
@@ -344,6 +351,8 @@
         
         function showEnchanting() {
             categoriesVisible = false;
+            document.getElementById('categories').style.display = 'none'; // Kategorien ausblenden
+            document.getElementById('urlInput').value = "redminer9630.de/wiki/enchanting"; // URL aktualisieren
             fetch('wiki/enchating.html')
                 .then(response => {
                     if (!response.ok) {
@@ -361,6 +370,8 @@
         
         function showMobs() {
             categoriesVisible = false;
+            document.getElementById('categories').style.display = 'none'; // Kategorien ausblenden
+            document.getElementById('urlInput').value = "redminer9630.de/wiki/mobs"; // URL aktualisieren
             fetch('wiki/mobs.html')
                 .then(response => {
                     if (!response.ok) {
@@ -378,6 +389,8 @@
         
         function showBlocks() {
             categoriesVisible = false;
+            document.getElementById('categories').style.display = 'none'; // Kategorien ausblenden
+            document.getElementById('urlInput').value = "redminer9630.de/wiki/blocks"; // URL aktualisieren
             fetch('wiki/blocks.html')
                 .then(response => {
                     if (!response.ok) {
@@ -395,6 +408,8 @@
         
         function showItems() {
             categoriesVisible = false;
+            document.getElementById('categories').style.display = 'none'; // Kategorien ausblenden
+            document.getElementById('urlInput').value = "redminer9630.de/wiki/items"; // URL aktualisieren
             fetch('wiki/items.html')
                 .then(response => {
                     if (!response.ok) {
@@ -412,6 +427,8 @@
         
         function showBiomes() {
             categoriesVisible = false;
+            document.getElementById('categories').style.display = 'none'; // Kategorien ausblenden
+            document.getElementById('urlInput').value = "redminer9630.de/wiki/biomes"; // URL aktualisieren
             fetch('wiki/biomes.html')
                 .then(response => {
                     if (!response.ok) {
@@ -429,6 +446,8 @@
         
         function showEffects() {
             categoriesVisible = false;
+            document.getElementById('categories').style.display = 'none'; // Kategorien ausblenden
+            document.getElementById('urlInput').value = "redminer9630.de/wiki/effects"; // URL aktualisieren
             fetch('wiki/effects.html')
                 .then(response => {
                     if (!response.ok) {
@@ -446,6 +465,8 @@
         
         function showCrafting() {
             categoriesVisible = false;
+            document.getElementById('categories').style.display = 'none'; // Kategorien ausblenden
+            document.getElementById('urlInput').value = "redminer9630.de/wiki/crafting"; // URL aktualisieren
             fetch('wiki/crafting.html')
                 .then(response => {
                     if (!response.ok) {
@@ -463,6 +484,8 @@
         
         function showSmelting() {
             categoriesVisible = false;
+            document.getElementById('categories').style.display = 'none'; // Kategorien ausblenden
+            document.getElementById('urlInput').value = "redminer9630.de/wiki/smelting"; // URL aktualisieren
             fetch('wiki/smelting.html')
                 .then(response => {
                     if (!response.ok) {
@@ -480,6 +503,8 @@
         
         function showStructures() {
             categoriesVisible = false;
+            document.getElementById('categories').style.display = 'none'; // Kategorien ausblenden
+            document.getElementById('urlInput').value = "redminer9630.de/wiki/structures"; // URL aktualisieren
             fetch('wiki/structures.html')
                 .then(response => {
                     if (!response.ok) {
@@ -497,6 +522,8 @@
         
         function showRedstone() {
             categoriesVisible = false;
+            document.getElementById('categories').style.display = 'none'; // Kategorien ausblenden
+            document.getElementById('urlInput').value = "redminer9630.de/wiki/redstone"; // URL aktualisieren
             fetch('wiki/redstone.html')
                 .then(response => {
                     if (!response.ok) {
@@ -514,6 +541,8 @@
         
         function showArchaeology() {
             categoriesVisible = false;
+            document.getElementById('categories').style.display = 'none'; // Kategorien ausblenden
+            document.getElementById('urlInput').value = "redminer9630.de/wiki/archaeology"; // URL aktualisieren
             fetch('wiki/archaeology.html')
                 .then(response => {
                     if (!response.ok) {
