@@ -71,6 +71,7 @@
             position: absolute;
             top: 20px;
             right: 20px;
+            cursor: pointer;
         }
 
         .header-link:hover {
@@ -81,15 +82,15 @@
             position: absolute;
             top: 20px;
             left: 20px;
-            width: 96px;
-            height: 96px;
-            background-image: url('info.png');
+            width: 32px;
+            height: 32px;
+            background-image: url('downloads/info.png');
             background-size: cover;
             cursor: pointer;
         }
 
         .info-button:hover {
-            background-image: url('info_hover.png');
+            background-image: url('downloads/info_hover.png');
         }
 
         table {
@@ -110,6 +111,7 @@
             text-decoration: none;
             border-radius: 5px;
             font-size: 10px;
+            cursor: pointer;
         }
 
         .download-button:hover {
@@ -129,7 +131,7 @@
                 <th onclick="sortTable(1)">Titel</th>
                 <th onclick="sortTable(2)">Beschreibung</th>
                 <th onclick="sortTable(3)">Typ</th>
-                <th>Datei</th>
+                <th onclick="sortTable(4)">Datei</th>
             </tr>
         </thead>
         <tbody>
