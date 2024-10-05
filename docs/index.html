@@ -233,16 +233,7 @@ footer {
     bottom: 0; /* Fix the footer at the bottom */
     left: 0; /* Ensure it spans the entire width */
     display: flex;
-    align-items: space-between;
-}
-
-footer .version {
-    margin-left: 20px;
-    color: #A900B2;
-}
-
-footer .ad {
-    margin-right: 50%;
+    align-items: center;
 }
 
 /* Dark Theme Styles */
@@ -378,8 +369,7 @@ footer .ad {
     </main>
 
     <footer>
-        <span class="version">0.9.1</span>
-        <span class="ad">© 2024 Offizieller Kanal von Redminer9630 - Alle Rechte vorbehalten.</span>
+        <span>© 2024 Offizieller Kanal von Redminer9630 - Alle Rechte vorbehalten.</span>
     </footer>
     
     <script>
@@ -452,10 +442,10 @@ footer .ad {
         }
 
         <!-- Unsichtbarer Audio Player -->
-        <audio id="audioPlayer" controls></audio>
+        //<audio id="audioPlayer" controls></audio>
 
         // Liste der Songs mit zugehöriger Lautstärke und Aktivitätslevel
-        const songs = [
+        /*const songs = [
             { src: 'musik/1-Dual_Speeder.mp3', volume: 1.0, level: 1 },
             { src: 'musik/1-Gatcha.mp3', volume: 1.0, level: 1 },
             { src: 'musik/1-Push_The_Boat_Out.mp3', volume: 1.0, level: 1 },
@@ -551,6 +541,8 @@ footer .ad {
             window.onkeydown = resetIdleTimer;
             window.onclick = resetIdleTimer;
         };
+        */
+        
         document.getElementById('hamburger').addEventListener('click', function() {
             var navMenu = document.getElementById('navMenu');
             navMenu.classList.toggle('active');
@@ -576,26 +568,6 @@ footer .ad {
             6: "generator/recipe_generator.html",
             7: "tools.html"
         };
-
-        function getURLParameter(name) {
-            const params = new URLSearchParams(window.location.search);
-            return params.get(name);
-        }
-
-        const adElement = document.querySelector('footer .ad');
-        
-        if (adElement) {
-            const adWidthParam = getURLParameter('ad-width');
-
-            if (adWidthParam && !isNaN(adWidthParam)) {
-                adElement.style.marginRight = adWidthParam + '%';
-            }
-        }
-
-        if (openLink && links[openLink]) {
-            window.location.href = links[openLink];
-        }
-
     </script>
 </body>
 </html>
