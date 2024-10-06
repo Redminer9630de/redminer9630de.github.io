@@ -248,9 +248,6 @@
     </style>
 </head>
 <body onload="showHomePage()">
-    <button id="lang-switch" style="position: absolute; top: 10px; left: 10px; width: 16px; height: 16px;">
-        <img src="images/itemDe.png" alt="DE/EN">
-    </button>
     
     <div class="url-bar">
         <label for="urlInput">URL: </label>
@@ -276,11 +273,9 @@
         <button class="shortcut-button" tabindex="18" onclick="showArchaeology()">Archeology</button> 
     </div>
         
-    <div id="content">
-    </div>
+    <div id="content></div>
     
     <script>
-        let language = 'de';
         let categoriesVisible = true;
 
         function showHomePage() {
@@ -649,58 +644,6 @@
                 document.querySelector('.url-input').blur();
             }
         });
-
-        async function loadLanguage(lang) {
-            const response = await fetch(`${lang}_lang.txt`);
-            const text = await response.text();
-            const lines = text.split('\n');
-            let translations = {};
-
-            lines.forEach(line => {
-                const [id, name] = line.split(', ');
-                translations[id] = name;
-            });
-
-            return translations;
-        }
-
-        async function switchLanguage(lang) {
-            language = lang;
-            const translations = await loadLanguage(lang);
-
-            document.querySelectorAll('.item').forEach(item => {
-                const id = item.getAttribute('data-id');
-                item.textContent = translations[id];
-            });
-        }
-
-        document.getElementById('lang-switch').addEventListener('click', () => {
-            const newLang = language === 'de' ? 'en' : 'de';
-            switchLanguage(newLang);
-        });
-
-        window.onload = () => {
-            switchLanguage('de');
-        };
-
-        class CustomItem extends HTMLElement {
-            constructor() {
-                super();
-            }
-
-            connectedCallback() {
-                const itemId = this.getAttribute('id');
-                this.updateText(itemId);
-            }
-
-            async updateText(itemId) {
-                const lang = 'de'; // oder je nach Auswahl
-                const translations = await loadLanguage(lang); // Sprachdatei laden
-                this.textContent = translations[itemId] || itemId; // Fallback auf ID, falls nicht gefunden
-            }
-        }
-
-        customElements.define('citem', CustomItem);
     </script>
 </body>
 </html>
