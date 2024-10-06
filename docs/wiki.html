@@ -577,62 +577,19 @@
 
             rows.forEach(row => tbody.appendChild(row));
         }
-
-        function navigateToPage() {
+        
+        async function navigateToPage() {
             const input = document.getElementById('urlInput').value;
-
+    
             if (input.startsWith("redminer9630.de/wiki/")) {
                 const page = input.split('/').pop(); 
         
-                switch (page.toLowerCase()) {
-                    case 'home':
-                        showHomePage();
-                        break;
-                    case 'commands':
-                        showCommands();
-                        break;
-                    case 'trading':
-                        showTrading();
-                        break;
-                    case 'brewing':
-                        showBrewing();
-                        break;
-                    case 'enchanting':
-                        showEnchanting();
-                        break;
-                    case 'mobs':
-                        showMobs();
-                        break;
-                    case 'blocks':
-                        showBlocks();
-                        break;
-                    case 'items':
-                        showItems();
-                        break;
-                    case 'biomes':
-                        showBiomes();
-                        break;
-                    case 'effects':
-                        showEffects();
-                        break;
-                    case 'crafting':
-                        showCrafting();
-                        break;
-                    case 'smelting':
-                        showSmelting();
-                        break;
-                    case 'structures':
-                        showStructures();
-                        break;
-                    case 'redstone':
-                        showRedstone();
-                        break;
-                    case 'archaeology':
-                        showArchaeology();
-                        break;
-                    default:
-                        alert('Seite nicht gefunden.');
-                }
+                // Hier wird die fetchWikiData-Funktion aufgerufen
+                const wikiContent = await fetchWikiData(page);
+                document.getElementById('content').innerHTML = wikiContent;
+        
+                // URL aktualisieren
+                document.getElementById('urlInput').value = input;             
             } else {
                 alert('Seite nicht gefunden.');
             }
@@ -644,6 +601,17 @@
                 document.querySelector('.url-input').blur();
             }
         });
+
+        async function fetchWikiData(page) {
+            try {
+                const response = await fetch(`https://minecraft.wiki/api.php?action=parse&page=${page}&format=json&origin=*`);
+                const data = await response.json();
+                return data.parse.text['*']; // HTML-Inhalt zurückgeben
+            } catch (error) {
+                console.error('Fehler beim Abrufen der Daten:', error);
+                return '<p>Es gab ein Problem beim Laden der Daten.</p>';
+            }
+        }
     </script>
 </body>
 </html>
