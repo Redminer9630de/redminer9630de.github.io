@@ -9,7 +9,7 @@ insert_final_newline = true
 trim_trailing_whitespace = true
 
 # Tab- und Einrückungsstil
-indent_style = tab
+indent_style = space
 indent_size = 4
 
 # Markdown-Dateien (kein Leerzeichen am Ende)
@@ -21,7 +21,7 @@ trim_trailing_whitespace = false
 indent_style = space
 indent_size = 4
 
-# HTML, CSS und JavaScript-Dateien
+# HTML, CSS, Json und JavaScript-Dateien
 [*.html, *.css, *.js, *.json]
-indent_style = tab
+indent_style = space
 indent_size = 4
