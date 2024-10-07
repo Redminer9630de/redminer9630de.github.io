@@ -1,0 +1,27 @@
+# EditorConfig hilft dabei, einen einheitlichen Coding-Stil beizubehalten
+root = true
+
+# Alle Dateien
+[*]
+charset = utf-8
+end_of_line = lf
+insert_final_newline = true
+trim_trailing_whitespace = true
+
+# Tab- und Einrückungsstil
+indent_style = tab
+indent_size = 4
+
+# Markdown-Dateien (kein Leerzeichen am Ende)
+[*.md]
+trim_trailing_whitespace = false
+
+# YAML-Dateien
+[*.yml, *.yaml]
+indent_style = space
+indent_size = 4
+
+# HTML, CSS und JavaScript-Dateien
+[*.html, *.css, *.js, *.json]
+indent_style = tab
+indent_size = 4
