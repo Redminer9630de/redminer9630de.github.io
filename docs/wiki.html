@@ -245,19 +245,29 @@
             margin-bottom: 10px;
             text-decoration: bold;
         }
-            
+        
         .history-forward, .history-back {
             display: block;
-            left: 50px;
-            width: 10px;
-            height: 10px;
+            position: relative;
+            width: 20px;
+            height: 20px;
             background-color: #282c34;
             color: blue;
-            mouse: pointer;
+            cursor: pointer; /* Korrigiert von 'mouse' auf 'cursor' */
+            text-align: center;
+            line-height: 20px;
+            border: none;
         }
+
         .history-forward:hover, .history-back:hover {
             color: orange;
         }
+
+        .history-forward:disabled, .history-back:disabled {
+            cursor: not-allowed; /* Deaktivierter Zustand */
+            color: grey; /* Deaktivierte Farbe */
+        }
+
     </style>
 </head>
 <body onload="showHomePage()">   
