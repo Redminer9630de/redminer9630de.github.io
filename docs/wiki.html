@@ -713,6 +713,42 @@
         }
 
         document.getElementById('urlInput').addEventListener('input', updateHistoryButtons);
+        
+// Lokale Version der Website
+let version = "0.9.6";
+let vtype = "Alpha";
+
+// URL zu deinem GitHub-Repository (raw Link zur index.html oder einer JS-Datei, die die Version enthält)
+const githubURL = 'https://raw.githubusercontent.com/Redminer9630GitHub/Redminer9630.de/main/mc/index.html'; 
+
+// Funktion, um die Datei von GitHub zu laden und die Version zu prüfen
+function checkForUpdates() {
+    fetch(githubURL)
+        .then(response => response.text())
+        .then(data => {
+            // Prüfen, ob im HTML die neue Version enthalten ist
+            const githubVersionMatch = data.match(/let version = "(.*?)";/);
+            const githubVtypeMatch = data.match(/let vtype = "(.*?)";/);
+            
+            if (githubVersionMatch && githubVtypeMatch) {
+                const githubVersion = githubVersionMatch[1];
+                const githubVtype = githubVtypeMatch[1];
+                
+                if (githubVersion !== version || githubVtype !== vtype) {
+                    // Wenn die Version unterschiedlich ist, dann Bestätigungsdialog anzeigen
+                    if (confirm(`Neue Version verfügbar (${githubVtype} ${githubVersion}). Seite neu laden?`)) {
+                        location.reload(); // Seite neu laden, wenn der Nutzer "OK" drückt
+                    }
+                }
+            }
+        })
+        .catch(error => {
+            console.error('Fehler beim Abrufen der GitHub-Daten:', error);
+        });
+}
+
+        // Überprüfe regelmäßig auf Updates (alle 5 Minuten)
+        setInterval(checkForUpdates, 60000); // 300000ms = 5 Minuten
     </script>
 </body>
 </html>
