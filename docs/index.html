@@ -387,16 +387,6 @@ footer {
             { keyword: "Github", url: "https://github.com/RedminerGitHub/Redminer9630.de/wiki", text: "GitHub Wiki-Seite", group: "githubwiki" }
         ];
 
-        // Extrahiere URL-Parameter
-        const urlParams = new URLSearchParams(window.location.search);
-        const searchQuery = urlParams.get('searchQuery');
-        const menuOut = urlParams.get('menuOut');
-
-        // Menü automatisch öffnen, wenn &menuOut in der URL vorhanden ist
-        if (menuOut) {
-            document.getElementById('navMenu').classList.add('active');
-        }
-
         // Referenz zur Suchleiste und Vorschlagsliste
         const searchInput = document.getElementById('searchInput');
         const suggestionList = document.createElement('ul');
@@ -441,21 +431,6 @@ footer {
             }
         }
 
-        // Event-Listener für das Hamburger-Menü
-		document.getElementById('hamburger').addEventListener('click', function(event) {
-		    event.stopPropagation(); // Verhindert, dass das Click-Event weitergegeben wird
- 		    var navMenu = document.getElementById('navMenu');
- 		    navMenu.classList.toggle('active');
-        });
-
-        // Event-Listener für das gesamte Body-Element
-        document.body.addEventListener('click', function() {
-            var navMenu = document.getElementById('navMenu');
-            if (navMenu.classList.contains('active')) {
-                navMenu.classList.remove('active'); // Schließt das Menü
-            }
-        });
-
         // Mehr Informationen anzeigen
         document.getElementById('moreInfoBtn').addEventListener('click', function() {
             var moreInfo = document.getElementById('moreInfo');
@@ -476,6 +451,31 @@ footer {
             6: "generator/recipe_generator.html",
             7: "tools.html"
         };
+        
+        // Extrahiere URL-Parameter
+        const urlParams = new URLSearchParams(window.location.search);
+        const searchQuery = urlParams.get('searchQuery');
+        const menuOut = urlParams.get('menuOut');
+
+        // Menü automatisch öffnen, wenn &menuOut in der URL vorhanden ist
+        if (menuOut) {
+            document.getElementById('navMenu').classList.add('active');
+        }
+        
+        // Event-Listener für das Hamburger-Menü
+		document.getElementById('hamburger').addEventListener('click', function(event) {
+		    event.stopPropagation(); // Verhindert, dass das Click-Event weitergegeben wird
+ 		    var navMenu = document.getElementById('navMenu');
+ 		    navMenu.classList.toggle('active');
+        });
+
+        // Event-Listener für das gesamte Body-Element
+        document.body.addEventListener('click', function() {
+            var navMenu = document.getElementById('navMenu');
+            if (navMenu.classList.contains('active')) {
+                navMenu.classList.remove('active'); // Schließt das Menü
+            }
+        });
     </script>
 </body>
 </html>
