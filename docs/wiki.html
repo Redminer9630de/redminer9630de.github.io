@@ -584,8 +584,10 @@
             const input = document.getElementById('urlInput').value;
 
             if (input.startsWith("redminer9630.de/wiki/")) {
-                const page = input.split('/').pop(); 
-        
+   		    	urlHistory = urlHistory.slice(0, historyIndex + 1); // Schneide zukünftige Einträge ab
+   		    	urlHistory.push(input);
+   		    	historyIndex++;
+
                 switch (page.toLowerCase()) {
                     case 'home':
                         showHomePage();
@@ -648,12 +650,20 @@
         });
         
         function goBack() {
-            history.back();
-        }
+		    if (historyIndex > 0) {
+		        historyIndex--;
+    		    document.getElementById('urlInput').value = urlHistory[historyIndex];
+     		    navigateToPage();
+  		    }
+		}
 
-        function goForward() {
-            history.forward();
-        }
+		function goForward() {
+  			if (historyIndex < urlHistory.length - 1) {
+   		    	historyIndex++;
+     		    document.getElementById('urlInput').value = urlHistory[historyIndex];
+        		navigateToPage();
+    		}
+		}
     </script>
 </body>
 </html>
