@@ -314,6 +314,11 @@ footer {
 .suggestions li:hover {
     background-color: #f0f0f0; /* Hellgraue Hintergrundfarbe bei Hover */
 }
+
+.link-link {
+    color: blue;
+    text-direction: underlined;
+}
     </style>
 </head>
 <body>
@@ -337,26 +342,23 @@ footer {
             <div class="search-container">
                 <input type="text" class="searchbar" id="searchInput" placeholder="Suche..."></input>
             </div>
-            <li>Links</li>
-            <ul>
-                <li>
-                    <a href="https://m.youtube.com/channel/UCdpkm8rpRnIi88zWSuubbOQ?sub_confirmation=1">
-                        <img src="images/youtube.png" alt="YouTube" style="width: 20px; height: 20px; vertical-align: middle; margin-right: 5px;">
-                        YouTube
-                    </a>
-                </li>
-                <li>
-                    <a href="https://m.twitch.tv/redminer9630">
-                        <img src="images/twitch.png" alt="Twitch" style="width: 20px; height: 20px; vertical-align: middle; margin-right: 5px;">
-                        Twitch
-                    </a>
-                </li>
-                <li><a href="wiki">MCJE Wiki(Alpha)</a></li>
-                <li><a href="downloads">Downloads(Alpha)</a></li>
-                <li><a href="events/event">Event/ Umfragen(Beta)</a></li>
-                <li><a href="generator/recipe_generator">Command Generatoren(Beta)</a></li>
-                <li><a href="calculator">Tools</a></li>
-            </ul> 
+            <li>
+                <a href="https://m.youtube.com/channel/UCdpkm8rpRnIi88zWSuubbOQ?sub_confirmation=1">
+                    <img src="images/youtube.png" alt="YouTube" style="width: 20px; height: 20px; vertical-align: middle; margin-right: 5px;">
+                    YouTube
+                </a>
+            </li>
+            <li>
+                <a href="https://m.twitch.tv/redminer9630">
+                    <img src="images/twitch.png" alt="Twitch" style="width: 20px; height: 20px; vertical-align: middle; margin-right: 5px;">
+                    Twitch
+                </a>
+            </li>                
+            <li><a href="wiki">MCJE Wiki(Nicht ausgefüllt, <span class="link-link">Mehr Infos</span>)</a></li>
+            <li><a href="downloads">Downloads(Alpha)</a></li>
+            <li><a href="events/event">Event/ Umfragen(Beta, öffnen auf eigenes Risiko)</a></li>
+            <li><a href="generator/recipe_generator">Command Generatoren (Indef)</a></li>
+            <li><a href="calculator">Calculator</a></li> 
         </div>
     </nav>
 
