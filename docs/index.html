@@ -217,7 +217,7 @@ button {
     border: none;
     cursor: pointer;
     font-family: 'MinecraftFont';
-    z-index: 1000;
+    z-index: 999;
 }
 
 button:hover {
@@ -364,7 +364,7 @@ footer {
         <section id="about">
             <h2>Ueber Redminer9630</h2>
             <p>Ich bin ein neuer Minecraft-YouTuber und Streamer, ich habe meinen Kanal vor Kurzem gestartet. Mein Kanal ist noch im Aufbau, und bisher wurden keine Videos veroeffentlicht. Trotzdem werde ich schon in naher Zukunft spannende Inhalte erstellen, und es lohnt sich von Anfang an dabei zu sein.</p>
-            <button id="moreInfoBtn">Mehr ueber mich erfahren</button>
+            <button id="moreInfoBtn" class="">Mehr ueber mich erfahren</button>
             <p id="moreInfo" style="display: none;">Obwohl der Kanal noch keine Videos enthaelt, plane ich, in naher Zukunft viele weitere Minecraft-Inhalte zu veroeffentlichen. Jetzt ist der perfekte Zeitpunkt, um Teil der Community zu werden und die Entwicklung des Kanals mitzuerleben.</p>
         </section>
     </main>
@@ -376,16 +376,16 @@ footer {
     <script>
         // Definition der Keywords und URLs
         const keywords = [
-            { keyword: "MCJE", url: "learnhour/lernstunde.html", text: "Minecraft Java Edition Wiki", group: "mcjewiki" },
-            { keyword: "MCJE Wiki", url: "learnhour/lernstunde.html", text: "Minecraft Java Edition Wiki", group: "mcjewiki" },
-            { keyword: "Minecraft Java Edition", url: "learnhour/lernstunde.html", text: "Minecraft Java Edition Wiki", group: "mcjewiki" },
-            { keyword: "Downloads", url: "downloads/packs.html", text: "Download-Seite", group: "downloads" },
-            { keyword: "Event", url: "events/event.html", text: "Event- und Umfragenseite", group: "events" },
-            { keyword: "Command Generator", url: "generator/recipe_generator.html", text: "Command Generatoren", group: "generator" },
-            { keyword: "Tools", url: "tools.html", text: "Alltaegliche Tools", group: "tools" },
-            { keyword: "Wiki", url: "https://github.com/RedminerGitHub/Redminer9630.de/wiki", text: "GitHub Wiki-Seite", group: "githubwiki" },
-            { keyword: "Github Wiki", url: "https://github.com/RedminerGitHub/Redminer9630.de/wiki", text: "GitHub Wiki-Seite", group: "githubwiki" },
-            { keyword: "Github", url: "https://github.com/RedminerGitHub/Redminer9630.de/wiki", text: "GitHub Wiki-Seite", group: "githubwiki" }
+            { keyword: "MCJE", url: "wiki", text: "Minecraft Java Edition Wiki", group: "mcjewiki" },
+            { keyword: "MCJE Wiki", url: "wiki", text: "Minecraft Java Edition Wiki", group: "mcjewiki" },
+            { keyword: "Minecraft Java Edition", url: "wiki", text: "Minecraft Java Edition Wiki", group: "mcjewiki" },
+            { keyword: "Downloads", url: "downloads", text: "Download-Seite", group: "downloads" },
+            { keyword: "Event", url: "events/event", text: "Event- und Umfragenseite", group: "events" },
+            { keyword: "Command Generator", url: "generator/recipe_generator", text: "Command Generatoren", group: "generator" },
+            { keyword: "Tools", url: "calculator", text: "Alltaegliche Tools", group: "tools" },
+            { keyword: "Wiki", url: "https://github.com/Redminer9630de/mc/wiki", text: "GitHub Wiki-Seite", group: "githubwiki" },
+            { keyword: "Github Wiki", url: "https://github.com/Redminer9630de/mc/wiki", text: "GitHub Wiki-Seite", group: "githubwiki" },
+            { keyword: "Github", url: "https://github.com/Redminer9630de/mc/wiki", text: "GitHub Wiki-Seite", group: "githubwiki" }
         ];
 
         // Referenz zur Suchleiste und Vorschlagsliste
