@@ -3,22 +3,35 @@
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>Recipe Generator</title>
+    <title>Redminer9630.de</title>
     <style>
         @font-face {
             font-family: 'MinecraftFont';
-            src: url('https://redminer9630github.github.io/Redminer9630.de/minecraft_font.ttf') format('truetype');
+            src: url('path/to/minecraft_font.ttf') format('truetype');
+        }
+
+        /* Allgemeine Stile */
+        body {
+            margin: 0;
+            padding: 0;
+            font-family: Arial, sans-serif;
+            display: flex;
+            flex-direction: column;
+            min-height: 100vh;
+            background-color: #ecf0f1;
         }
 
         header {
             background-color: #2c3e50;
             color: white;
-            padding: 10px;
+            padding: 10px 20px;
             text-align: center;
-            margin: 0;
             box-shadow: 0 2px 4px rgba(0, 0, 0, 0.1);
             font-family: 'MinecraftFont', sans-serif;
             position: relative;
+            display: flex;
+            align-items: center;
+            justify-content: space-between;
         }
 
         .header-link {
@@ -28,23 +41,80 @@
             background-color: #f44336;
             padding: 10px 20px;
             border-radius: 8px;
-            position: absolute;
-            top: 20px;
-            right: 20px;
+            transition: background-color 0.3s;
         }
 
         .header-link:hover {
             background-color: #e53935;
         }
 
-        body {
-            margin: 0;
-            padding: 0;
-            font-family: Arial, sans-serif;
-            display: flex;
+        /* Hamburger Menü */
+        .menu {
+            display: none;
             flex-direction: column;
-            min-height: 100vh;
-            background-color: #ecf0f1;
+            cursor: pointer;
+        }
+
+        .menu div {
+            width: 25px;
+            height: 3px;
+            background-color: white;
+            margin: 4px 0;
+            transition: 0.4s;
+        }
+
+        /* Navigation */
+        nav {
+            display: flex;
+            align-items: center;
+        }
+
+        nav ul {
+            list-style: none;
+            padding: 0;
+            margin: 0;
+            display: flex;
+        }
+
+        nav ul li {
+            margin-left: 20px;
+        }
+
+        nav ul li a {
+            color: white;
+            text-decoration: none;
+            font-size: 16px;
+            transition: color 0.3s;
+        }
+
+        nav ul li a:hover {
+            color: #f44336;
+        }
+
+        /* Responsive Menü */
+        @media (max-width: 768px) {
+            .menu {
+                display: flex;
+            }
+
+            nav ul {
+                flex-direction: column;
+                position: absolute;
+                top: 60px;
+                left: -100%;
+                width: 100%;
+                background-color: #2c3e50;
+                transition: left 0.3s;
+            }
+
+            nav ul.active {
+                left: 0;
+            }
+
+            nav ul li {
+                margin: 15px 0;
+                text-align: center;
+            }
         }
 
         main {
@@ -133,7 +203,22 @@
             display: none;
         }
 
-        /* Einfache visuelle Verbesserung */
+        /* Crafting Shaped 3x3 Grid */
+        .crafting-grid {
+            display: grid;
+            grid-template-columns: repeat(3, 1fr);
+            grid-gap: 10px;
+            max-width: 300px;
+            margin: 0 auto;
+        }
+
+        /* Effekte und Summon Generator Stile */
+        .effect-generator, .summon-generator, .tellraw-generator {
+            display: none;
+            flex-direction: column;
+            align-items: center;
+        }
+
         .input-highlight {
             background-color: #ecf0f1;
             border: 2px solid #3498db;
@@ -148,73 +233,169 @@
 </head>
 <body>
     <header>
+        <h1>Advanced Minecraft Generator</h1>
         <a href="https://redminer9630github.github.io/Redminer9630.de/" class="header-link">Zurück ></a>
-        <h1>Advanced Recipe Generator(Beta)</h1>
+        <div class="menu" onclick="toggleMenu()">
+            <div></div>
+            <div></div>
+            <div></div>
+        </div>
+        <nav>
+            <ul id="navLinks">
+                <li><a href="#" onclick="showGenerator('recipe')">Recipe Generator</a></li>
+                <li><a href="#" onclick="showGenerator('tellraw')">Tellraw/Titel Generator</a></li>
+                <li><a href="#" onclick="showGenerator('effect')">Effekt Generator</a></li>
+                <li><a href="#" onclick="showGenerator('summon')">Summon Generator</a></li>
+            </ul>
+        </nav>
     </header>
 
     <main>
-        <form id="recipeForm">
-            <label for="recipeType">Wähle Rezepttyp:</label>
-            <select id="recipeType" class="input-highlight" onchange="updateInputFields()">
-                <option value="crafting_shaped">Crafting Shaped</option>
-                <option value="crafting_shapeless">Crafting Shapeless</option>
-                <option value="furnace">Furnace</option>
-                <option value="blast_furnace">Blast Furnace</option>
-                <option value="smoker">Smoker</option>
-                <option value="campfire">Campfire</option>
-                <option value="smithing">Smithing</option>
-                <option value="stonecutting">Stonecutting</option>
-            </select>
+        <!-- Recipe Generator -->
+        <div id="recipeGenerator" class="generator">
+            <form id="recipeForm">
+                <label for="recipeType">Wähle Rezepttyp:</label>
+                <select id="recipeType" class="input-highlight" onchange="updateInputFields()">
+                    <option value="crafting_shaped">Crafting Shaped</option>
+                    <option value="crafting_shapeless">Crafting Shapeless</option>
+                    <option value="furnace">Furnace</option>
+                    <option value="blast_furnace">Blast Furnace</option>
+                    <option value="smoker">Smoker</option>
+                    <option value="campfire">Campfire</option>
+                    <option value="smithing">Smithing</option>
+                    <option value="stonecutting">Stonecutting</option>
+                </select>
 
-            <label for="exactPlacement" id="exactPlacementLabel">
-                <input type="checkbox" id="exactPlacement"> Genau platziert
-            </label>
+                <label for="exactPlacement" id="exactPlacementLabel">
+                    <input type="checkbox" id="exactPlacement"> Genau platziert
+                </label>
 
-            <div id="inputFields">
-                <!-- Crafting Shaped -->
-                <div id="craftingShapedFields" class="recipe-fields">
-                    <input type="text" class="slot-input input-highlight" id="slot1" placeholder="Slot 1">
-                    <input type="text" class="slot-input input-highlight" id="slot2" placeholder="Slot 2">
-                    <input type="text" class="slot-input input-highlight" id="slot3" placeholder="Slot 3">
-                    <input type="text" class="slot-input input-highlight" id="slot4" placeholder="Slot 4">
-                    <input type="text" class="slot-input input-highlight" id="slot5" placeholder="Slot 5">
-                    <input type="text" class="slot-input input-highlight" id="slot6" placeholder="Slot 6">
-                    <input type="text" class="slot-input input-highlight" id="slot7" placeholder="Slot 7">
-                    <input type="text" class="slot-input input-highlight" id="slot8" placeholder="Slot 8">
-                    <input type="text" class="slot-input input-highlight" id="slot9" placeholder="Slot 9">
-                </div>
+                <div id="inputFields">
+                    <!-- Crafting Shaped 3x3 Grid -->
+                    <div id="craftingShapedFields" class="recipe-fields crafting-grid">
+                        <input type="text" class="slot-input input-highlight" id="slot1" placeholder="Slot 1" maxlength="1">
+                        <input type="text" class="slot-input input-highlight" id="slot2" placeholder="Slot 2" maxlength="1">
+                        <input type="
 
-                <!-- Crafting Shapeless -->
-                <div id="craftingShapelessFields" class="recipe-fields">
-                    <input type="text" class="slot-input input-highlight" id="slot1" placeholder="Ingredient 1">
-                    <input type="text" class="slot-input input-highlight" id="slot2" placeholder="Ingredient 2">
-                    <input type="text" class="slot-input input-highlight" id="slot3" placeholder="Ingredient 3">
-                    <input type="text" class="slot-input input-highlight" id="slot4" placeholder="Ingredient 4">
-                    <input type="text" class="slot-input input-highlight" id="slot5" placeholder="Ingredient 5">
-                    <input type="text" class="slot-input input-highlight" id="slot6" placeholder="Ingredient 6">
-                    <input type="text" class="slot-input input-highlight" id="slot7" placeholder="Ingredient 7">
-                    <input type="text" class="slot-input input-highlight" id="slot8" placeholder="Ingredient 8">
-                    <input type="text" class="slot-input input-highlight" id="slot9" placeholder="Ingredient 9">
-                </div>
+text" class="slot-input input-highlight" id="slot3" placeholder="Slot 3" maxlength="1">
+                        <input type="text" class="slot-input input-highlight" id="slot4" placeholder="Slot 4" maxlength="1">
+                        <input type="text" class="slot-input input-highlight" id="slot5" placeholder="Slot 5" maxlength="1">
+                        <input type="text" class="slot-input input-highlight" id="slot6" placeholder="Slot 6" maxlength="1">
+                        <input type="text" class="slot-input input-highlight" id="slot7" placeholder="Slot 7" maxlength="1">
+                        <input type="text" class="slot-input input-highlight" id="slot8" placeholder="Slot 8" maxlength="1">
+                        <input type="text" class="slot-input input-highlight" id="slot9" placeholder="Slot 9" maxlength="1">
+                    </div>
 
-                <!-- Furnace, Blast Furnace, Smoker, Campfire, Smithing, Stonecutting -->
-                <div id="specialFields" class="recipe-fields">
-                    <input type="text" class="slot-input input-highlight" id="ingredient" placeholder="Ingredient Item">
-                </div>
+                    <!-- Crafting Shapeless -->
+                    <div id="craftingShapelessFields" class="recipe-fields">
+                        <input type="text" class="slot-input input-highlight" id="shapeless_slot1" placeholder="Ingredient 1" maxlength="1">
+                        <input type="text" class="slot-input input-highlight" id="shapeless_slot2" placeholder="Ingredient 2" maxlength="1">
+                        <input type="text" class="slot-input input-highlight" id="shapeless_slot3" placeholder="Ingredient 3" maxlength="1">
+                        <input type="text" class="slot-input input-highlight" id="shapeless_slot4" placeholder="Ingredient 4" maxlength="1">
+                        <input type="text" class="slot-input input-highlight" id="shapeless_slot5" placeholder="Ingredient 5" maxlength="1">
+                        <input type="text" class="slot-input input-highlight" id="shapeless_slot6" placeholder="Ingredient 6" maxlength="1">
+                        <input type="text" class="slot-input input-highlight" id="shapeless_slot7" placeholder="Ingredient 7" maxlength="1">
+                        <input type="text" class="slot-input input-highlight" id="shapeless_slot8" placeholder="Ingredient 8" maxlength="1">
+                        <input type="text" class="slot-input input-highlight" id="shapeless_slot9" placeholder="Ingredient 9" maxlength="1">
+                    </div>
 
-                <!-- Smithing Fields (up to 3 ingredients) -->
-                <div id="smithingFields" class="recipe-fields">
-                    <input type="text" class="slot-input input-highlight" id="baseItem" placeholder="Base Item (z.B. minecraft:iron_pickaxe)">
-                    <input type="text" class="slot-input input-highlight" id="additionItem" placeholder="Addition Item (z.B. minecraft:netherite_ingot)">
-                    <input type="text" class="slot-input input-highlight" id="templateItem" placeholder="Template Item (optional)">
-                </div>
-            </div> 
+                    <!-- Special Fields for Furnace, Blast Furnace, Smoker, Campfire, Stonecutting -->
+                    <div id="specialFields" class="recipe-fields">
+                        <input type="text" class="slot-input input-highlight" id="ingredient" placeholder="Ingredient Item" maxlength="1">
+                    </div>
 
-            <input type="text" class="result-input input-highlight" id="result" placeholder="Result Item (z.B. minecraft:netherite_pickaxe)">
-            <button type="button" onclick="generateRecipe()">Rezept generieren</button>
-        </form>
+                    <!-- Smithing Fields (up to 3 ingredients) -->
+                    <div id="smithingFields" class="recipe-fields">
+                        <input type="text" class="slot-input input-highlight" id="baseItem" placeholder="Base Item (z.B. minecraft:iron_pickaxe)" maxlength="1">
+                        <input type="text" class="slot-input input-highlight" id="additionItem" placeholder="Addition Item (z.B. minecraft:netherite_ingot)" maxlength="1">
+                        <input type="text" class="slot-input input-highlight" id="templateItem" placeholder="Template Item (optional)" maxlength="1">
+                    </div>
+                </div> 
 
-        <div id="jsonOutput"></div>
+                <input type="text" class="result-input input-highlight" id="result" placeholder="Result Item (z.B. minecraft:netherite_pickaxe)">
+                <button type="button" onclick="generateRecipe()">Rezept generieren</button>
+            </form>
+
+            <div id="jsonOutput"></div>
+        </div>
+
+        <!-- Tellraw/Titel Generator -->
+        <div id="tellrawGenerator" class="generator">
+            <form id="tellrawForm">
+                <label for="tellrawText">Text:</label>
+                <input type="text" id="tellrawText" class="input-highlight" placeholder="Gib den Text ein">
+
+                <button type="button" onclick="generateTellraw()">Tellraw generieren</button>
+            </form>
+
+            <div id="tellrawOutput"></div>
+        </div>
+
+        <!-- Effekt Generator -->
+        <div id="effectGenerator" class="generator effect-generator">
+            <form id="effectForm">
+                <label for="effectType">Effekt:</label>
+                <select id="effectType" class="input-highlight">
+                    <option value="speed">Speed</option>
+                    <option value="slowness">Slowness</option>
+                    <option value="haste">Haste</option>
+                    <option value="mining_fatigue">Mining Fatigue</option>
+                    <option value="strength">Strength</option>
+                    <option value="instant_health">Instant Health</option>
+                    <option value="instant_damage">Instant Damage</option>
+                    <option value="jump_boost">Jump Boost</option>
+                    <option value="nausea">Nausea</option>
+                    <option value="regeneration">Regeneration</option>
+                    <option value="resistance">Resistance</option>
+                    <option value="fire_resistance">Fire Resistance</option>
+                    <option value="water_breathing">Water Breathing</option>
+                    <option value="invisibility">Invisibility</option>
+                    <option value="blindness">Blindness</option>
+                    <option value="night_vision">Night Vision</option>
+                    <option value="hunger">Hunger</option>
+                    <option value="weakness">Weakness</option>
+                    <option value="poison">Poison</option>
+                    <option value="wither">Wither</option>
+                    <option value="health_boost">Health Boost</option>
+                    <option value="absorption">Absorption</option>
+                    <option value="saturation">Saturation</option>
+                </select>
+
+                <label for="effectDuration">Dauer (Ticks):</label>
+                <input type="number" id="effectDuration" class="input-highlight" placeholder="Dauer in Ticks">
+
+                <label for="effectStrength">Stärke:</label>
+                <input type="number" id="effectStrength" class="input-highlight" placeholder="Stärke">
+
+                <button type="button" onclick="generateEffect()">Effekt generieren</button>
+            </form>
+
+            <div id="effectOutput"></div>
+        </div>
+
+        <!-- Summon Generator -->
+        <div id="summonGenerator" class="generator summon-generator">
+            <form id="summonForm">
+                <label for="summonMob">Mob auswählen:</label>
+                <select id="summonMob" class="input-highlight">
+                    <option value="minecraft:zombie">Zombie</option>
+                    <option value="minecraft:skeleton">Skeleton</option>
+                    <option value="minecraft:creeper">Creeper</option>
+                    <option value="minecraft:spider">Spider</option>
+                    <option value="minecraft:ender_dragon">Ender Dragon</option>
+                    <option value="minecraft:wither">Wither</option>
+                    <option value="minecraft:ghast">Ghast</option>
+                    <!-- Weitere Mobs hinzufügen nach Bedarf -->
+                </select>
+
+                <label for="summonCustomName">Benutzerdefinierter Name:</label>
+                <input type="text" id="summonCustomName" class="input-highlight" placeholder="Optional">
+
+                <button type="button" onclick="generateSummon()">Summon generieren</button>
+            </form>
+
+            <div id="summonOutput"></div>
+        </div>
     </main>
 
     <footer>
@@ -222,28 +403,64 @@
     </footer>
 
     <script>
+        // Hamburger Menü Toggle
+        function toggleMenu() {
+            const navLinks = document.getElementById('navLinks');
+            navLinks.classList.toggle('active');
+        }
+
+        // Generator Switcher
+        function showGenerator(generator) {
+            const generators = document.querySelectorAll('.generator');
+            generators.forEach(gen => gen.style.display = 'none');
+
+            if (generator === 'recipe') {
+                document.getElementById('recipeGenerator').style.display = 'block';
+            } else if (generator === 'tellraw') {
+                document.getElementById('tellrawGenerator').style.display = 'block';
+            } else if (generator === 'effect') {
+                document.getElementById('effectGenerator').style.display = 'flex';
+            } else if (generator === 'summon') {
+                document.getElementById('summonGenerator').style.display = 'flex';
+            }
+
+            // Schließen des Menüs auf mobilen Geräten
+            const navLinks = document.getElementById('navLinks');
+            navLinks.classList.remove('active');
+        }
+
+        // Update Input Fields basierend auf Rezepttyp
         function updateInputFields() {
             const recipeType = document.getElementById('recipeType').value;
-            const inputFields = document.getElementById('inputFields');
+            const craftingShapedFields = document.getElementById('craftingShapedFields');
+            const craftingShapelessFields = document.getElementById('craftingShapelessFields');
+            const specialFields = document.getElementById('specialFields');
+            const smithingFields = document.getElementById('smithingFields');
             const exactPlacementLabel = document.getElementById('exactPlacementLabel');
 
-            document.querySelectorAll('.recipe-fields').forEach(field => field.style.display = 'none');
+            // Standard-Felder ausblenden
+            craftingShapedFields.style.display = 'none';
+            craftingShapelessFields.style.display = 'none';
+            specialFields.style.display = 'none';
+            smithingFields.style.display = 'none';
             exactPlacementLabel.style.display = 'none';
 
+            // Eingabefelder entsprechend dem Rezepttyp anzeigen
             if (recipeType === 'crafting_shaped') {
-                document.getElementById('craftingShapedFields').style.display = 'grid';
+                craftingShapedFields.style.display = 'grid';
                 exactPlacementLabel.style.display = 'block';
             } else if (recipeType === 'crafting_shapeless') {
-                document.getElementById('craftingShapelessFields').style.display = 'grid';
+                craftingShapelessFields.style.display = 'grid';
             } else if (recipeType === 'smithing') {
-                document.getElementById('smithingFields').style.display = 'grid';
+                smithingFields.style.display = 'grid';
             } else {
-                document.getElementById('specialFields').style.display = 'block';
+                specialFields.style.display = 'block';
             }
 
             adjustFooterPosition();
         }
 
+        // Anpassung der Fußzeile
         function adjustFooterPosition() {
             const footer = document.querySelector('footer');
             const main = document.querySelector('main');
@@ -259,6 +476,7 @@
             }
         }
 
+        // Recipe Generator Logik
         function generateRecipe() {
             const recipeType = document.getElementById('recipeType').value;
             const exactPlacement = document.getElementById('exactPlacement').checked;
@@ -267,12 +485,12 @@
 
             if (recipeType === 'crafting_shaped' || recipeType === 'crafting_shapeless') {
                 const slots = [];
-                for (let i = 1; i <= 9; i++) {
-                    const symbol = document.getElementById(`slot${i}`).value.trim();
-                    slots.push(symbol ? symbol : " ");
-                }
-
                 if (recipeType === 'crafting_shaped') {
+                    for (let i = 1; i <= 9; i++) {
+                        const symbol = document.getElementById(`slot${i}`).value.trim();
+                        slots.push(symbol ? symbol : " ");
+                    }
+
                     let pattern = [
                         slots.slice(0, 3).join(''),
                         slots.slice(3, 6).join(''),
@@ -280,7 +498,7 @@
                     ];
 
                     if (exactPlacement) {
-                        pattern = pattern.map(row => row.replace(/\s+$/, ''));
+                        pattern = pattern.map(row => row.replace(/\s+$/, '')); // Trim trailing spaces
                     }
 
                     const key = {};
@@ -300,7 +518,12 @@
                             count: 1
                         }
                     };
-                } else {
+                } else if (recipeType === 'crafting_shapeless') {
+                    for (let i = 1; i <= 9; i++) {
+                        const symbol = document.getElementById(`shapeless_slot${i}`).value.trim();
+                        slots.push(symbol ? symbol : " ");
+                    }
+
                     const ingredients = slots.filter(symbol => symbol.trim()).map(symbol => symbol.includes(":") ? symbol : `minecraft:${symbol}`);
 
                     jsonOutput = {
@@ -345,10 +568,55 @@
             adjustFooterPosition();
         }
 
+        // Tellraw Generator Logik
+        function generateTellraw() {
+            const text = document.getElementById('tellrawText').value.trim();
+            if (text === "") {
+                alert("Bitte gib einen Text ein.");
+                return;
+            }
+
+            const command = `/tellraw @a {"text":"${text}"}`;
+            document.getElementById('tellrawOutput').textContent = command;
+            adjustFooterPosition();
+        }
+
+        // Effekt Generator Logik
+        function generateEffect() {
+            const effectType = document.getElementById('effectType').value;
+            const duration = parseInt(document.getElementById('effectDuration').value);
+            const strength = parseInt(document.getElementById('effectStrength').value);
+
+            if (isNaN(duration) || isNaN(strength)) {
+                alert("Bitte gib gültige Werte für Dauer und Stärke ein.");
+                return;
+            }
+
+            const command = `/effect give @p ${effectType} ${duration} ${strength}`;
+            document.getElementById('effectOutput').textContent = command;
+            adjustFooterPosition();
+        }
+
+        // Summon Generator Logik
+        function generateSummon() {
+            const mob = document.getElementById('summonMob').value;
+            const customName = document.getElementById('summonCustomName').value.trim();
+
+            let command = `/summon ${mob} ~ ~ ~`;
+            if (customName !== "") {
+                command += ` {CustomName:"${customName}"}`;
+            }
+
+            document.getElementById('summonOutput').textContent = command;
+            adjustFooterPosition();
+        }
+
+        // Initial Setup
         window.addEventListener('resize', adjustFooterPosition);
         document.addEventListener('DOMContentLoaded', () => {
             updateInputFields();
             adjustFooterPosition();
+            showGenerator('recipe'); // Standardmäßig den Recipe Generator anzeigen
         });
     </script>
 </body>
