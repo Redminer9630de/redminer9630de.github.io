@@ -234,12 +234,6 @@
 <body>
     <header>
         <h1>Advanced Minecraft Generator(Indef)</h1>
-        <a href="https://redminer9630github.github.io/Redminer9630.de/" class="header-link">Zurück ></a>
-        <div class="menu" onclick="toggleMenu()">
-            <div></div>
-            <div></div>
-            <div></div>
-        </div>
         <nav>
             <ul id="navLinks">
                 <li><a href="#" onclick="showGenerator('recipe')">Recipe Generator</a></li>
@@ -248,6 +242,12 @@
                 <li><a href="#" onclick="showGenerator('summon')">Summon Generator</a></li>
             </ul>
         </nav>
+        <a href="https://redminer9630de.github.io/mc/" class="header-link">Zurueck ></a>
+        <div class="menu" onclick="toggleMenu()">
+            <div></div>
+            <div></div>
+            <div></div>
+        </div>
     </header>
 
     <main>
@@ -275,9 +275,7 @@
                     <div id="craftingShapedFields" class="recipe-fields crafting-grid">
                         <input type="text" class="slot-input input-highlight" id="slot1" placeholder="Slot 1" maxlength="1">
                         <input type="text" class="slot-input input-highlight" id="slot2" placeholder="Slot 2" maxlength="1">
-                        <input type="
-
-text" class="slot-input input-highlight" id="slot3" placeholder="Slot 3" maxlength="1">
+                        <input type="text" class="slot-input input-highlight" id="slot3" placeholder="Slot 3" maxlength="1">
                         <input type="text" class="slot-input input-highlight" id="slot4" placeholder="Slot 4" maxlength="1">
                         <input type="text" class="slot-input input-highlight" id="slot5" placeholder="Slot 5" maxlength="1">
                         <input type="text" class="slot-input input-highlight" id="slot6" placeholder="Slot 6" maxlength="1">
@@ -312,7 +310,7 @@ text" class="slot-input input-highlight" id="slot3" placeholder="Slot 3" maxleng
                     </div>
                 </div> 
 
-                <input type="text" class="result-input input-highlight" id="result" placeholder="Result Item (z.B. minecraft:netherite_pickaxe)">
+                <input type="text" class="result-input input-highlight" id="result" placeholder="Result Item">
                 <button type="button" onclick="generateRecipe()">Rezept generieren</button>
             </form>
 
@@ -618,6 +616,10 @@ text" class="slot-input input-highlight" id="slot3" placeholder="Slot 3" maxleng
             adjustFooterPosition();
             showGenerator('recipe'); // Standardmäßig den Recipe Generator anzeigen
         });
+        
+        window.onload = function() {
+            document.getElementById('recipe-generator').style.display = 'block';
+        };
     </script>
 </body>
 </html>
