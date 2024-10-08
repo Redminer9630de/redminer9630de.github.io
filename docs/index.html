@@ -181,7 +181,7 @@ nav a:active {
     color: #e74c3c;
 }
 
-@media (max-width: 2020px) {
+@media (max-width: 4096px) {
     .hamburger {
         display: flex;
     }
@@ -438,21 +438,21 @@ footer {
         });
 
         // URL-Parameter 'openlink' behandeln
+        const urlParams = new URLSearchParams(window.location.search);
         const openLink = urlParams.get('openlink');
 
         // Links basierend auf dem 'openlink'-Parameter
         const links = {
             1: "https://m.youtube.com/channel/UCdpkm8rpRnIi88zWSuubbOQ?sub_confirmation=1",
             2: "https://m.twitch.tv/redminer9630",
-            3: "learnhour/lernstunde.html",
-            4: "downloads/packs.html",
-            5: "events/event.html",
-            6: "generator/recipe_generator.html",
-            7: "tools.html"
+            3: "wiki",
+            4: "downloads",
+            5: "events/event",
+            6: "generator/recipe_generator",
+            7: "tools"
         };
         
         // Extrahiere URL-Parameter
-        const urlParams = new URLSearchParams(window.location.search);
         const searchQuery = urlParams.get('searchQuery');
         const menuOut = urlParams.get('menuOut');
 
