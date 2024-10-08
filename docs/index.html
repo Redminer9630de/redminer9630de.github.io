@@ -7,7 +7,8 @@
     <style>
     @font-face {
         font-family: 'MinecraftFont';
-        src: url('https://redminer9630de.github.io/mc/minecraft_font.ttf') format('truetype');
+        src: url('https://redminer9630de.github.io/mc/minecraft_font.ttf') format('truetype'),
+             url('https://redminer9630de.github.io/mc/minecraft_font.woff') format('woff')
         font-weight: normal;
         font-style: normal;
     }
@@ -393,12 +394,6 @@ footer {
         suggestionList.classList.add('suggestions');
         document.querySelector('.search-container').appendChild(suggestionList);
 
-        // Falls Suchanfrage aus URL vorhanden ist
-        if (searchQuery) {
-            searchInput.value = searchQuery;
-            handleSearch(searchQuery);
-        }
-
         // Suchfunktion
         searchInput.addEventListener('input', function() {
             handleSearch(this.value.toLowerCase());
@@ -455,6 +450,11 @@ footer {
         // Extrahiere URL-Parameter
         const searchQuery = urlParams.get('searchQuery');
         const menuOut = urlParams.get('menuOut');
+        
+        if (searchQuery) {
+            searchInput.value = searchQuery;
+            handleSearch(searchQuery);
+        }
 
         // Menü automatisch öffnen, wenn &menuOut in der URL vorhanden ist
         if (menuOut) {
