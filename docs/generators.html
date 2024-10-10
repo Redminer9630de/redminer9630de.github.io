@@ -315,7 +315,7 @@
                 </div> 
 
                 <input type="text" class="result-input input-highlight" id="result" placeholder="Result Item">
-                <button type="button" onclick="generateRecipe()">Rezept generieren</button>
+                <button type="button" onclick="generateRecipe()">Datei generieren</button>
             </form>
 
             <div id="jsonOutput"></div>
@@ -327,7 +327,7 @@
                 <label for="tellrawText">Text:</label>
                 <input type="text" id="tellrawText" class="input-highlight" placeholder="Gib den Text ein">
 
-                <button type="button" onclick="generateTellraw()">Tellraw generieren</button>
+                <button type="button" onclick="generateTellraw()">Command Generieren generieren</button>
             </form>
 
             <div id="tellrawOutput"></div>
@@ -369,7 +369,7 @@
                 <label for="effectStrength">Stärke:</label>
                 <input type="number" id="effectStrength" class="input-highlight" placeholder="Stärke">
 
-                <button type="button" onclick="generateEffect()">Effekt generieren</button>
+                <button type="button" onclick="generateEffect()">Command Generieren generieren</button>
             </form>
 
             <div id="effectOutput"></div>
@@ -378,7 +378,7 @@
         <!-- Summon Generator -->
         <div id="summonGenerator" class="generator summon-generator">
             <form id="summonForm">
-                <label for="summonMob">Mob auswählen:</label>
+                <label for="summonMob">Entity auswählen:</label>
                 <select id="summonMob" class="input-highlight">
                     <option value="minecraft:zombie">Zombie</option>
                     <option value="minecraft:skeleton">Skeleton</option>
@@ -389,11 +389,18 @@
                     <option value="minecraft:ghast">Ghast</option>
                     <!-- Weitere Mobs hinzufügen nach Bedarf -->
                 </select>
+                
+                <label for="summon_coords">Summon Coords</label>
+                <select id="summon_coords" class="input-highlight" placeholder="~ ~ ~">
+
 
                 <label for="summonCustomName">Benutzerdefinierter Name:</label>
-                <input type="text" id="summonCustomName" class="input-highlight" placeholder="Optional">
+                <input type="text" id="summonCustomName" class="input-highlight" placeholder="Unset">
+                
+                <label for=""></label>
+                <input type="text" id="" class="input-highlight" placeholder="Unset">
 
-                <button type="button" onclick="generateSummon()">Summon generieren</button>
+                <button type="button" onclick="generateSummon()">Command Generieren generieren</button>
             </form>
 
             <div id="summonOutput"></div>
