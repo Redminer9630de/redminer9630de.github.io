@@ -317,6 +317,88 @@ footer {
 .suggestions li:hover {
     background-color: #f0f0f0; /* Hellgraue Hintergrundfarbe bei Hover */
 }
+/* Standard-Design bleibt wie es ist */
+
+/* Layout für Smartphones im Hochformat */
+@media (max-width: 768px) and (orientation: portrait) {
+    header {
+        flex-direction: column;
+        align-items: center;
+        justify-content: center;
+    }
+
+    .logo-container {
+        display: flex;
+        flex-direction: column;
+        align-items: center;
+    }
+
+    .logo {
+        width: 180px; /* Reduziere die Logogröße */
+    }
+
+    .logo-text {
+        margin-top: 10px; /* Text direkt unter dem Logo */
+    }
+
+    /* Hamburger Menü nimmt den gesamten Bildschirm ein */
+    .hamburger {
+        width: 100%;
+        height: 100%;
+        background-color: rgba(0, 0, 0, 0.8); /* Dunkler Hintergrund */
+        justify-content: center;
+        align-items: center;
+        position: fixed;
+        z-index: 999;
+    }
+
+    .hamburger div {
+        width: 40px; /* Anpassung für kleinere Bildschirme */
+        height: 5px;
+    }
+
+    nav {
+        width: 100vw;
+        height: 100vh;
+        padding-top: 20vh; /* Zentriere den Inhalt im Menü */
+        background-color: rgba(0, 0, 0, 0.9); /* Volle Breite und Höhe */
+    }
+
+    footer {
+        padding: 20px; /* Erhöhe den Footer */
+        font-size: 14px;
+    }
+}
+
+/* Layout für Smartphones im Querformat */
+@media (max-width: 768px) and (orientation: landscape) {
+    header {
+        flex-direction: row;
+        justify-content: space-between;
+        padding: 10px;
+    }
+
+    .logo {
+        width: 150px; /* Kleinere Logo-Größe */
+    }
+
+    .logo-text {
+        font-size: 1rem; /* Kleinere Schriftgröße */
+    }
+
+    nav {
+        width: 50vw;
+        height: 100vh;
+    }
+
+    main {
+        padding: 15px;
+    }
+
+    footer {
+        padding: 15px;
+    }
+}
     </style>
 </head>
 <body>
