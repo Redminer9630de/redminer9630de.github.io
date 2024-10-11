@@ -147,7 +147,7 @@
             <button onclick="appendToDisplay('/')" class="op-btn">/</button>
             <button onclick="appendToDisplay('0')">0</button>
             <button onclick="appendToDisplay('.')">.</button>
-            <button onclick="clear()" class="op-btn">C</button>
+            <button onclick="clearDisplay()" class="op-btn">C</button>
             <button onclick="calc()" class="equal">=</button>   
         </div>
     </div>
@@ -158,7 +158,7 @@
             display.value += input;
         }
 
-        function clear() {
+        function clearDisplay() {
             display.value = "";
         }
 
