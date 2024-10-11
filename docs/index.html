@@ -533,17 +533,16 @@ footer {
             3: "wiki",
             4: "downloads",
             5: "calculator"
-  //          6: "events/event",
-  //          7: "generators"
+            6: "generators"
         };
         
         // Extrahiere URL-Parameter
-        const searchQuery = urlParams.get('searchQuery');
+        const searchQuery = urlParams.get('search');
         const menuOut = urlParams.get('menuOut');
         
-        if (searchQuery) {
-            searchInput.value = searchQuery;
-            handleSearch(searchQuery);
+        if (search) {
+            searchInput.value = search;
+            handleSearch(search);
         }
 
         // Menü automatisch öffnen, wenn &menuOut in der URL vorhanden ist
@@ -557,14 +556,6 @@ footer {
  		    var navMenu = document.getElementById('navMenu');
  		    navMenu.classList.toggle('active');
         });
-
-/*        // Event-Listener für das gesamte Body-Element
-        document.body.addEventListener('click', function() {
-            var navMenu = document.getElementById('navMenu');
-            if (navMenu.classList.contains('active')) {
-                navMenu.classList.remove('active'); // Schließt das Menü
-            }
-        });*/
     </script>
 </body>
 </html>
