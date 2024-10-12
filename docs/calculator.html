@@ -259,8 +259,8 @@
             <input type="number" id="coordX" placeholder="X-Koordinate">
             <input type="number" id="coordZ" placeholder="Z-Koordinate">
             <select id="dimension">
-                <option value="overworld">Overworld</option>
-                <option value="nether">Nether</option>
+                <option value="overworld">zu Overworld</option>
+                <option value="nether">zu Nether</option>
             </select>
             <button onclick="calculatePortalCoords()">Berechnen</button>
         </div>
@@ -335,7 +335,7 @@
             }
 
             document.getElementById('portalResult').value =
-                `X: ${resultX}, Z: ${resultZ}`;
+                `X: ${resultX} Z: ${resultZ}`;
         }
 
         function calculateItems() {
