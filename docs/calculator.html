@@ -69,6 +69,7 @@
             border: none;
             border-radius: 8px;
             font-size: 18px;
+            font-family: 'MinecraftFont', sans-serif;
         }
 
         #keys {
@@ -165,14 +166,14 @@
     <a href="https://redminer9630de.github.io/mc/" class="header-link">Zurueck ></a>
     <div class="info-button" onclick="openInfoPage()"></div>
     <!-- Modus-Selector -->
-    <select id="modeSelector" onchange="changeMode()" style="margin-bottom: 20px; padding: 10px; border-radius: 8px; border: none; font-size: 16px;">
+    <h1>Taschenrechner - Redminer9630</h1>
+    
+    <select id="modeSelector" onchange="changeMode()" class="button" style="margin-bottom: 20px; padding: 10px; border-radius: 8px; border: none; font-size: 16px;">
         <option value="standard">Standard</option>
         <option value="nether">Nether Portal</option>
         <option value="item">Item Material Listen Multiplikator</option>
     </select>
     
-    <h1>Taschenrechner - Redminer9630</h1>
-
     <!-- Standard Taschenrechner -->
     <div id="calculator" class="mode">
         <input id="display" readonly>
@@ -200,20 +201,21 @@
     <!-- Nether-Portal-Koordinaten-Modus -->
     <div id="netherMode" class="mode" style="display: none;">
         <h2>Nether Portal Koordinaten</h2>
-        <input type="number" id="coordX" placeholder="X-Koordinate" style="padding: 8px; margin-bottom: 10px; width: 30%; border: 1px solid #555; border-radius: 4px; background-color: #444; color: white;">
-        <input type="number" id="coordZ" placeholder="Z-Koordinate" style="padding: 8px; margin-bottom: 10px; width: 30%; border: 1px solid #555; border-radius: 4px; background-color: #444; color: white;">
-        <select id="dimension" style="padding: 8px; margin-bottom: 10px; width: 30%; border: 1px solid #555; border-radius: 4px; background-color: #444; color: white;">
+        <input type="number" id="coordX" placeholder="X-Koordinate" style="font-family: 'MinecraftFont', sans-serif; height: 20px; padding: 8px; margin-bottom: 10px; width: 15%; border: 1px solid #555; border-radius: 4px; background-color: #444; color: white;">
+        <input type="number" id="coordZ" placeholder="Z-Koordinate" style="font-family: 'MinecraftFont', sans-serif; height: 20px; padding: 8px; margin-bottom: 10px; width: 15%; border: 1px solid #555; border-radius: 4px; background-color: #444; color: white;">
+        <select id="dimension" style="font-family: 'MinecraftFont', sans-serif; padding: 8px; margin-bottom: 10px; width: 10%; height: 20px; border: 1px solid #555; border-radius: 4px; background-color: #444; color: white;">
             <option value="overworld">Overworld</option>
             <option value="nether">Nether</option>
         </select>
         <button onclick="calculatePortalCoords()">Berechnen</button>
-        <input id="portalResult" readonly style="padding: 8px; margin-bottom: 10px; width: 100%; border: 1px solid #555; border-radius: 4px; background-color: #444; color: white;"></input>
+        <input id="portalResult" readonly style="font-family: 'MinecraftFont', sans-serif; padding: 8px; margin-bottom: 10px; width: 100%; border: 1px solid #555; border-radius: 4px; background-color: #444; color: white;"></input>
     </div>
 
     <!-- Item-Multiplikator-Modus -->
     <div id="itemMode" class="mode" style="display: none;">
         <h2>Item Materialliste</h2>
-        <input type="number" id="multiplier" placeholder="Item Multiplikator" style="padding: 8px; margin-bottom: 10px; width: 100%; border: 1px solid #555; border-radius: 4px; background-color: #444; color: white;">
+        <input type="number" id="multiplier" placeholder="Item Multiplikator" style="font-family: 'MinecraftFont', sans-serif; padding: 8px; margin-bottom: 10px; width: 15%; border: 1px solid #555; border-radius: 4px; background-color: #444; color: white;">
+        <button onclick="calculateItems()">Berechnen</button>
         <div id="itemList">
             <!-- Dynamische Item-Reihen werden hier eingefügt -->
             <div class="item-row" id="calculatedList">
@@ -222,7 +224,6 @@
                 <button class="remove-btn" onclick="removeItemRow(this)">-</button>
             </div>
         </div>
-        <button onclick="calculateItems()">Berechnen</button>
     </div>
 
     <script>
