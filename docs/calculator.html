@@ -11,7 +11,8 @@
     <style>
         @font-face {
             font-family: 'MinecraftFont';
-            src: url('https://redminer9630github.github.io/Redminer9630.de/minecraft_font.ttf') format('truetype');
+            src: url('https://redminer9630de.github.io/minecraft_font.ttf') format('truetype'),#
+                 url('https://redminer9630de.github.io/minecraft_font.woff') format('woff');
         }
 
         body {
@@ -58,7 +59,7 @@
             background-image: url('downloads/info_hover.png');
         }
 
-        button {
+        button, .button {
             font-weight: bold;
             display: inline-block;
             background-color: hsl(122, 40%, 45%);
@@ -89,11 +90,11 @@
             text-align: left;
         }
 
-        button:hover {
+        button:hover, .button:hover {
             background-color: hsl(122, 40%, 55%);
         }
 
-        button:active {
+        button:active, .button:active {
             background-color: hsl(122, 40%, 65%);
         }
 
@@ -261,7 +262,7 @@
             </select>
             <button onclick="calculatePortalCoords()">Berechnen</button>
         </div>
-        <input id="portalResult" readonly placeholder="Berechnete Koordinaten">
+        <input id="portalResult" readonly placeholder="Berechnete Koordinaten" class="input">
     </div>
 
     <!-- Item-Multiplikator-Modus -->
@@ -332,7 +333,7 @@
             }
 
             document.getElementById('portalResult').value =
-                `Berechnete Koordinaten: X: ${resultX}, Z: ${resultZ}`;
+                `X: ${resultX}, Z: ${resultZ}`;
         }
 
         function calculateItems() {
