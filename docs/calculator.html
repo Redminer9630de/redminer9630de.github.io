@@ -120,7 +120,44 @@
         }
 
         .equal:active {
-            background-color: hsl(206, 90%, 75%)
+            background-color: hsl(206, 90%, 75%);
+        }
+
+        /* Styles für die Item-Multiplikator-Sektion */
+        .item-row {
+            display: flex;
+            gap: 10px;
+            margin-bottom: 10px;
+        }
+
+        .item-row input {
+            padding: 8px;
+            border: 1px solid #555;
+            border-radius: 4px;
+            flex: 1;
+            background-color: #444;
+            color: white;
+        }
+
+        .item-row input::placeholder {
+            color: #ccc;
+        }
+
+        .calculated-list {
+            margin-top: 10px;
+        }
+        
+        .remove-btn {
+            background-color: #f44336;
+            color: white;
+            border: none;
+            border-radius: 4px;
+            cursor: pointer;
+            padding: 8px;
+        }
+
+        .remove-btn:hover {
+            background-color: #e53935;
         }
     </style>
 </head>
@@ -128,8 +165,16 @@
     <a href="https://redminer9630de.github.io/mc/" class="header-link">Zurueck ></a>
     <div class="info-button" onclick="openInfoPage()"></div>
     <h1>Taschenrechner - Redminer9630</h1>
+    
+    <!-- Modus-Selector -->
+    <select id="modeSelector" onchange="changeMode()" style="margin-bottom: 20px; padding: 10px; border-radius: 8px; border: none; font-size: 16px;">
+        <option value="standard">Standard</option>
+        <option value="nether">Nether-Portal</option>
+        <option value="item">Item-Multiplikator</option>
+    </select>
 
-    <div id="calculator">
+    <!-- Standard Taschenrechner -->
+    <div id="calculator" class="mode">
         <input id="display" readonly>
         <div id="keys">
             <button onclick="appendToDisplay('+')" class="op-btn">+</button>        
@@ -151,6 +196,38 @@
             <button onclick="calc()" class="equal">=</button>   
         </div>
     </div>
+
+    <!-- Nether-Portal-Koordinaten-Modus -->
+    <div id="netherMode" class="mode" style="display: none;">
+        <h2>Nether-Portal-Koordinaten</h2>
+        <input type="number" id="coordX" placeholder="X-Koordinate" style="padding: 8px; margin-bottom: 10px; width: 100%; border: 1px solid #555; border-radius: 4px; background-color: #444; color: white;">
+        <input type="number" id="coordZ" placeholder="Z-Koordinate" style="padding: 8px; margin-bottom: 10px; width: 100%; border: 1px solid #555; border-radius: 4px; background-color: #444; color: white;">
+        <select id="dimension" style="padding: 8px; margin-bottom: 10px; width: 100%; border: 1px solid #555; border-radius: 4px; background-color: #444; color: white;">
+            <option value="overworld">Overworld</option>
+            <option value="nether">Nether</option>
+        </select>
+        <button onclick="calculatePortalCoords()">Berechnen</button>
+        <p id="portalResult"></p>
+    </div>
+
+    <!-- Item-Multiplikator-Modus -->
+    <div id="itemMode" class="mode" style="display: none;">
+        <h2>Item-Materialliste</h2>
+        <input type="number" id="multiplier" placeholder="Multiplikator" style="padding: 8px; margin-bottom: 10px; width: 100%; border: 1px solid #555; border-radius: 4px; background-color: #444; color: white;">
+        <div id="itemList">
+            <!-- Dynamische Item-Reihen werden hier eingefügt -->
+            <div class="item-row">
+                <input type="text" class="item-name" placeholder="Item">
+                <input type="number" class="item-quantity" placeholder="Anzahl">
+                <button class="remove-btn" onclick="removeItemRow(this)">-</button>
+            </div>
+        </div>
+        <button onclick="calculateItems()">Berechnen</button>
+        <div class="calculated-list" id="calculatedList">
+            <!-- Ergebnisse werden hier angezeigt -->
+        </div>
+    </div>
+
     <script>
         const display = document.getElementById('display');
 
@@ -163,12 +240,110 @@
         }
 
         function calc() {
-            display.value = eval(display.value);
+            try {
+                display.value = eval(display.value);
+            } catch {
+                display.value = "Fehler";
+            }
+        }
+
+        function openInfoPage() {
+            window.location.href = "https://github.com/redminer9630de/redminer9630de.github.io/wiki/Taschenrechner";
+        }
+
+        function changeMode() {
+            const mode = document.getElementById('modeSelector').value;
+            document.querySelectorAll('.mode').forEach(div => div.style.display = 'none');
+            if (mode === 'standard') {
+                document.getElementById('calculator').style.display = 'block';
+            } else if (mode === 'nether') {
+                document.getElementById('netherMode').style.display = 'block';
+            } else if (mode === 'item') {
+                document.getElementById('itemMode').style.display = 'block';
+            }
+        }
+
+        function calculatePortalCoords() {
+            const x = parseFloat(document.getElementById('coordX').value);
+            const z = parseFloat(document.getElementById('coordZ').value);
+            const dimension = document.getElementById('dimension').value;
+            let resultX, resultZ;
+
+            if (dimension === 'overworld') {
+                resultX = x / 8;
+                resultZ = z / 8;
+            } else {
+                resultX = x * 8;
+                resultZ = z * 8;
+            }
+
+            document.getElementById('portalResult').textContent =
+                `Berechnete Koordinaten: X: ${resultX}, Z: ${resultZ}`;
+        }
+
+        function calculateItems() {
+            const multiplier = parseFloat(document.getElementById('multiplier').value);
+            if (isNaN(multiplier) || multiplier <= 0) {
+                alert("Bitte geben Sie einen gültigen Multiplikator ein.");
+                return;
+            }
+
+            const items = document.querySelectorAll('.item-row');
+            const calculatedList = document.getElementById('calculatedList');
+            calculatedList.innerHTML = ""; // Vorherige Ergebnisse löschen
+
+            let allEmpty = true;
+
+            items.forEach(item => {
+                const name = item.querySelector('.item-name').value.trim();
+                const quantity = parseFloat(item.querySelector('.item-quantity').value);
+
+                if (name !== "" && !isNaN(quantity) && quantity > 0) {
+                    allEmpty = false;
+                    const resultQuantity = quantity * multiplier;
+                    const resultDiv = document.createElement('div');
+                    resultDiv.textContent = `${name} ${quantity} > ${name} ${resultQuantity}`;
+                    calculatedList.appendChild(resultDiv);
+                }
+            });
+
+            if (allEmpty) {
+                calculatedList.textContent = "Keine Items zum Berechnen eingegeben.";
+            }
+        }
+
+        // Funktion zum dynamischen Hinzufügen von neuen Item-Reihen
+        function addItemRowIfNeeded() {
+            const itemRows = document.querySelectorAll('.item-row');
+            const lastRow = itemRows[itemRows.length - 1];
+            const nameInput = lastRow.querySelector('.item-name');
+            const quantityInput = lastRow.querySelector('.item-quantity');
+
+            if (nameInput.value.trim() !== "" && quantityInput.value.trim() !== "") {
+                // Neue Reihe hinzufügen
+                const newRow = document.createElement('div');
+                newRow.classList.add('item-row');
+                newRow.innerHTML = `
+                    <input type="text" class="item-name" placeholder="Item">
+                    <input type="number" class="item-quantity" placeholder="Anzahl">
+                `;
+                document.getElementById('itemList').appendChild(newRow);
+
+                // Füge Event-Listener zu den neuen Eingabefeldern hinzu
+                newRow.querySelector('.item-name').addEventListener('input', addItemRowIfNeeded);
+                newRow.querySelector('.item-quantity').addEventListener('input', addItemRowIfNeeded);
+            }
         }
         
-        function openInfoPage() {
-            window.location.href = "https://github.com/redminer9630de/redminer9630de.github.io/wiki";
+        function removeItemRow(button) {
+            const row = button.parentElement;
+            row.remove();
         }
+
+        // Initialer Event-Listener für die erste Reihe
+        document.querySelector('.item-row .item-name').addEventListener('input', addItemRowIfNeeded);
+        document.querySelector('.item-row .item-quantity').addEventListener('input', addItemRowIfNeeded);
     </script>
 </body>
 </html>
+
