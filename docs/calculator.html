@@ -129,6 +129,7 @@
             display: flex;
             gap: 10px;
             margin-bottom: 10px;
+            align-items: center;
         }
 
         .item-row input {
@@ -138,6 +139,7 @@
             flex: 1;
             background-color: #444;
             color: white;
+            height: 40px;
         }
 
         .item-row input::placeholder {
@@ -155,15 +157,64 @@
             border-radius: 4px;
             cursor: pointer;
             padding: 8px;
+            height: 40px;
         }
 
         .remove-btn:hover {
             background-color: #e53935;
         }
+
+        /* Styles für den Nether-Portal Modus */
+        .nether-row {
+            display: flex;
+            gap: 10px;
+            margin-bottom: 10px;
+            align-items: center;
+        }
+
+        .nether-row input,
+        .nether-row select,
+        .nether-row button {
+            padding: 8px;
+            border: 1px solid #555;
+            border-radius: 4px;
+            background-color: #444;
+            color: white;
+            height: 40px;
+            font-family: 'MinecraftFont', sans-serif;
+        }
+
+        .nether-row button {
+            background-color: hsl(206, 90%, 55%);
+            cursor: pointer;
+        }
+
+        .nether-row button:hover {
+            background-color: hsl(206, 90%, 65%);
+        }
+
+        .nether-row button:active {
+            background-color: hsl(206, 90%, 75%);
+        }
+
+        /* Allgemeine Anpassungen für Inputs und Buttons in Modusen */
+        #netherMode input,
+        #netherMode select,
+        #netherMode button,
+        #itemMode input,
+        #itemMode button {
+            font-size: 16px;
+        }
+
+        /* Anpassung der calculateItems Funktion */
+        .item-row input.output {
+            background-color: #333;
+            cursor: default;
+        }
     </style>
 </head>
 <body>
-    <a href="https://redminer9630de.github.io/mc/" class="header-link">Zurueck ></a>
+    <a href="https://redminer9630de.github.io/mc/" class="header-link">Zurück ></a>
     <div class="info-button" onclick="openInfoPage()"></div>
     <!-- Modus-Selector -->
     <h1>Taschenrechner - Redminer9630</h1>
@@ -201,26 +252,31 @@
     <!-- Nether-Portal-Koordinaten-Modus -->
     <div id="netherMode" class="mode" style="display: none;">
         <h2>Nether Portal Koordinaten</h2>
-        <input type="number" id="coordX" placeholder="X-Koordinate" style="font-family: 'MinecraftFont', sans-serif; height: 20px; padding: 8px; margin-bottom: 10px; width: 15%; border: 1px solid #555; border-radius: 4px; background-color: #444; color: white;">
-        <input type="number" id="coordZ" placeholder="Z-Koordinate" style="font-family: 'MinecraftFont', sans-serif; height: 20px; padding: 8px; margin-bottom: 10px; width: 15%; border: 1px solid #555; border-radius: 4px; background-color: #444; color: white;">
-        <select id="dimension" style="font-family: 'MinecraftFont', sans-serif; padding: 8px; margin-bottom: 10px; width: 10%; height: 20px; border: 1px solid #555; border-radius: 4px; background-color: #444; color: white;">
-            <option value="overworld">Overworld</option>
-            <option value="nether">Nether</option>
-        </select>
-        <button onclick="calculatePortalCoords()">Berechnen</button>
-        <input id="portalResult" readonly style="font-family: 'MinecraftFont', sans-serif; padding: 8px; margin-bottom: 10px; width: 100%; border: 1px solid #555; border-radius: 4px; background-color: #444; color: white;"></input>
+        <div class="nether-row">
+            <input type="number" id="coordX" placeholder="X-Koordinate">
+            <input type="number" id="coordZ" placeholder="Z-Koordinate">
+            <select id="dimension">
+                <option value="overworld">Overworld</option>
+                <option value="nether">Nether</option>
+            </select>
+            <button onclick="calculatePortalCoords()">Berechnen</button>
+        </div>
+        <input id="portalResult" readonly placeholder="Berechnete Koordinaten">
     </div>
 
     <!-- Item-Multiplikator-Modus -->
     <div id="itemMode" class="mode" style="display: none;">
         <h2>Item Materialliste</h2>
-        <input type="number" id="multiplier" placeholder="Item Multiplikator" style="font-family: 'MinecraftFont', sans-serif; padding: 8px; margin-bottom: 10px; width: 15%; border: 1px solid #555; border-radius: 4px; background-color: #444; color: white;">
-        <button onclick="calculateItems()">Berechnen</button>
+        <div style="display: flex; align-items: center; gap: 10px; margin-bottom: 10px;">
+            <input type="number" id="multiplier" placeholder="Multiplikator">
+            <button onclick="calculateItems()">Berechnen</button>
+        </div>
         <div id="itemList">
             <!-- Dynamische Item-Reihen werden hier eingefügt -->
-            <div class="item-row" id="calculatedList">
-                <input type="text" class="item-name" placeholder="Item">
-                <input type="number" class="item-quantity" placeholder="Anzahl">
+            <div class="item-row">
+                <input type="text" class="item-name" placeholder="Item" oninput="addItemRowIfNeeded()">
+                <input type="number" class="item-quantity" placeholder="Anzahl" oninput="addItemRowIfNeeded()">
+                <input type="number" class="item-result" placeholder="Ergebnis" readonly class="output">
                 <button class="remove-btn" onclick="removeItemRow(this)">-</button>
             </div>
         </div>
@@ -275,7 +331,7 @@
                 resultZ = z * 8;
             }
 
-            document.getElementById('portalResult').textContent =
+            document.getElementById('portalResult').value =
                 `Berechnete Koordinaten: X: ${resultX}, Z: ${resultZ}`;
         }
 
@@ -287,26 +343,24 @@
             }
 
             const items = document.querySelectorAll('.item-row');
-            const calculatedList = document.getElementById('calculatedList');
-            calculatedList.innerHTML = ""; // Vorherige Ergebnisse löschen
-
             let allEmpty = true;
 
             items.forEach(item => {
                 const name = item.querySelector('.item-name').value.trim();
                 const quantity = parseFloat(item.querySelector('.item-quantity').value);
+                const resultInput = item.querySelector('.item-result');
 
                 if (name !== "" && !isNaN(quantity) && quantity > 0) {
                     allEmpty = false;
                     const resultQuantity = quantity * multiplier;
-                    const resultDiv = document.createElement('div');
-                    resultDiv.textContent = `${name} ${quantity} > ${name} ${resultQuantity}`;
-                    calculatedList.appendChild(resultDiv);
+                    resultInput.value = resultQuantity;
+                } else {
+                    resultInput.value = "";
                 }
             });
 
             if (allEmpty) {
-                calculatedList.textContent = "Keine Items zum Berechnen eingegeben.";
+                alert("Keine Items zum Berechnen eingegeben.");
             }
         }
 
@@ -322,14 +376,12 @@
                 const newRow = document.createElement('div');
                 newRow.classList.add('item-row');
                 newRow.innerHTML = `
-                    <input type="text" class="item-name" placeholder="Item">
-                    <input type="number" class="item-quantity" placeholder="Anzahl">
+                    <input type="text" class="item-name" placeholder="Item" oninput="addItemRowIfNeeded()">
+                    <input type="number" class="item-quantity" placeholder="Anzahl" oninput="addItemRowIfNeeded()">
+                    <input type="number" class="item-result" placeholder="Ergebnis" readonly class="output">
+                    <button class="remove-btn" onclick="removeItemRow(this)">-</button>
                 `;
                 document.getElementById('itemList').appendChild(newRow);
-
-                // Füge Event-Listener zu den neuen Eingabefeldern hinzu
-                newRow.querySelector('.item-name').addEventListener('input', addItemRowIfNeeded);
-                newRow.querySelector('.item-quantity').addEventListener('input', addItemRowIfNeeded);
             }
         }
         
@@ -344,4 +396,3 @@
     </script>
 </body>
 </html>
-
