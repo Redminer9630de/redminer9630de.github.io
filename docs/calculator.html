@@ -164,14 +164,14 @@
 <body>
     <a href="https://redminer9630de.github.io/mc/" class="header-link">Zurueck ></a>
     <div class="info-button" onclick="openInfoPage()"></div>
-    <h1>Taschenrechner - Redminer9630</h1>
-    
     <!-- Modus-Selector -->
     <select id="modeSelector" onchange="changeMode()" style="margin-bottom: 20px; padding: 10px; border-radius: 8px; border: none; font-size: 16px;">
         <option value="standard">Standard</option>
-        <option value="nether">Nether-Portal</option>
-        <option value="item">Item-Multiplikator</option>
+        <option value="nether">Nether Portal</option>
+        <option value="item">Item Material Listen Multiplikator</option>
     </select>
+    
+    <h1>Taschenrechner - Redminer9630</h1>
 
     <!-- Standard Taschenrechner -->
     <div id="calculator" class="mode">
@@ -199,33 +199,30 @@
 
     <!-- Nether-Portal-Koordinaten-Modus -->
     <div id="netherMode" class="mode" style="display: none;">
-        <h2>Nether-Portal-Koordinaten</h2>
-        <input type="number" id="coordX" placeholder="X-Koordinate" style="padding: 8px; margin-bottom: 10px; width: 100%; border: 1px solid #555; border-radius: 4px; background-color: #444; color: white;">
-        <input type="number" id="coordZ" placeholder="Z-Koordinate" style="padding: 8px; margin-bottom: 10px; width: 100%; border: 1px solid #555; border-radius: 4px; background-color: #444; color: white;">
-        <select id="dimension" style="padding: 8px; margin-bottom: 10px; width: 100%; border: 1px solid #555; border-radius: 4px; background-color: #444; color: white;">
+        <h2>Nether Portal Koordinaten</h2>
+        <input type="number" id="coordX" placeholder="X-Koordinate" style="padding: 8px; margin-bottom: 10px; width: 30%; border: 1px solid #555; border-radius: 4px; background-color: #444; color: white;">
+        <input type="number" id="coordZ" placeholder="Z-Koordinate" style="padding: 8px; margin-bottom: 10px; width: 30%; border: 1px solid #555; border-radius: 4px; background-color: #444; color: white;">
+        <select id="dimension" style="padding: 8px; margin-bottom: 10px; width: 30%; border: 1px solid #555; border-radius: 4px; background-color: #444; color: white;">
             <option value="overworld">Overworld</option>
             <option value="nether">Nether</option>
         </select>
         <button onclick="calculatePortalCoords()">Berechnen</button>
-        <p id="portalResult"></p>
+        <input id="portalResult" readonly style="padding: 8px; margin-bottom: 10px; width: 100%; border: 1px solid #555; border-radius: 4px; background-color: #444; color: white;"></input>
     </div>
 
     <!-- Item-Multiplikator-Modus -->
     <div id="itemMode" class="mode" style="display: none;">
-        <h2>Item-Materialliste</h2>
-        <input type="number" id="multiplier" placeholder="Multiplikator" style="padding: 8px; margin-bottom: 10px; width: 100%; border: 1px solid #555; border-radius: 4px; background-color: #444; color: white;">
+        <h2>Item Materialliste</h2>
+        <input type="number" id="multiplier" placeholder="Item Multiplikator" style="padding: 8px; margin-bottom: 10px; width: 100%; border: 1px solid #555; border-radius: 4px; background-color: #444; color: white;">
         <div id="itemList">
             <!-- Dynamische Item-Reihen werden hier eingefügt -->
-            <div class="item-row">
+            <div class="item-row" id="calculatedList">
                 <input type="text" class="item-name" placeholder="Item">
                 <input type="number" class="item-quantity" placeholder="Anzahl">
                 <button class="remove-btn" onclick="removeItemRow(this)">-</button>
             </div>
         </div>
         <button onclick="calculateItems()">Berechnen</button>
-        <div class="calculated-list" id="calculatedList">
-            <!-- Ergebnisse werden hier angezeigt -->
-        </div>
     </div>
 
     <script>
@@ -284,7 +281,7 @@
         function calculateItems() {
             const multiplier = parseFloat(document.getElementById('multiplier').value);
             if (isNaN(multiplier) || multiplier <= 0) {
-                alert("Bitte geben Sie einen gültigen Multiplikator ein.");
+                alert("Gib einen gültigen Multiplikator ein.");
                 return;
             }
 
