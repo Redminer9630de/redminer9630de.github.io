@@ -157,8 +157,10 @@
             border: none;
             border-radius: 4px;
             cursor: pointer;
-            padding: 8px;
-            height: 40px;
+            padding: 10px; /* Erhöht die Höhe */
+            height: 40px;  /* Gleiche Höhe wie die anderen Eingabefelder */
+            width: 50px;   /* Breitere Schaltfläche */
+            font-size: 18px; /* Erhöht die Schriftgröße für bessere Lesbarkeit */
         }
 
         .remove-btn:hover {
@@ -216,7 +218,7 @@
 </head>
 <body>
     <a href="https://redminer9630de.github.io/mc/" class="header-link">Zurueck ></a>
-    <div class="info-button" onclick="openInfoPage()"></div>
+    <div class="info-button" onclick="openInfoPage()" style="cursor: help;"></div>
     <!-- Modus-Selector -->
     <h1>Taschenrechner - Redminer9630</h1>
     
@@ -372,8 +374,14 @@
             const nameInput = lastRow.querySelector('.item-name');
             const quantityInput = lastRow.querySelector('.item-quantity');
 
-            if (nameInput.value.trim() !== "" && quantityInput.value.trim() !== "") {
-                // Neue Reihe hinzufügen
+            // Überprüfen, ob das letzte Eingabefeld leer ist oder nicht
+            if (nameInput.value.trim() === "" && quantityInput.value.trim() === "") {
+                // Verhindern, dass neue Zeilen hinzugefügt werden, wenn das letzte Eingabefeld leer ist
+                return;
+            }
+
+            // Neue Reihe hinzufügen, wenn die Eingaben nicht leer sind    
+            if (nameInput.value.trim() !== "" || quantityInput.value.trim() !== "") {
                 const newRow = document.createElement('div');
                 newRow.classList.add('item-row');
                 newRow.innerHTML = `
@@ -385,6 +393,7 @@
                 document.getElementById('itemList').appendChild(newRow);
             }
         }
+
         
         function removeItemRow(button) {
             const row = button.parentElement;
