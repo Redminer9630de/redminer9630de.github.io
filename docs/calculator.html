@@ -356,7 +356,7 @@
                 if (name !== "" && !isNaN(quantity) && quantity > 0) {
                     allEmpty = false;
                     const resultQuantity = quantity * multiplier;
-                    resultInput.value = resultQuantity;
+                    resultInput.value = "${name}${resultQuantity}";
                 } else {
                     resultInput.value = "";
                 }
