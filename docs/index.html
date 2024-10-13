@@ -527,7 +527,6 @@ footer {
         const urlParams = new URLSearchParams(window.location.search);
         const openLink = urlParams.get('openlink');
 
-        // Links basierend auf dem 'openlink'-Parameter
         const links = {
             1: "https://m.youtube.com/channel/UCdpkm8rpRnIi88zWSuubbOQ?sub_confirmation=1",
             2: "https://m.twitch.tv/redminer9630",
@@ -537,7 +536,6 @@ footer {
             6: "generators"
         };
         
-        // Extrahiere URL-Parameter
         const search = urlParams.get('search');
         const menuOut = urlParams.get('menuOut');
         
@@ -546,12 +544,10 @@ footer {
             handleSearch(search);
         }
 
-        // Menü automatisch öffnen, wenn &menuOut in der URL vorhanden ist
         if (menuOut) {
             document.getElementById('navMenu').classList.add('active');
         }
         
-        // Event-Listener für das Hamburger-Menü
 		document.getElementById('hamburger').addEventListener('click', function(event) {
 		    event.stopPropagation(); // Verhindert, dass das Click-Event weitergegeben wird
  		    var navMenu = document.getElementById('navMenu');
