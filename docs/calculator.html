@@ -385,7 +385,7 @@
                 if (name !== "" && !isNaN(quantity) && quantity > 0) {
                     allEmpty = false;
                     const resultQuantity = quantity * multiplier;
-                    resultInput.value = "${resultQuantity}";
+                    resultInput.value = ${resultQuantity};
                 } else {
                     resultInput.value = "";
                 }
@@ -395,37 +395,49 @@
                 alert("Keine Items eingegeben.");
             }
         }
+        
+        function ensureAtLeastOneEmptyRow() {
+            const itemRows = document.querySelectorAll('.item-row');
+            const allEmpty = Array.from(itemRows).every(row => {
+                const name = row.querySelector('.item-name').value.trim();
+                const quantity = row.querySelector('.item-quantity').value.trim();
+                return name === "" && quantity === "";
+            });
 
-        // Funktion zum dynamischen Hinzufügen von neuen Item-Reihen
+            if (allEmpty) {
+                addItemRow();
+            }    
+        }
+
+        function addItemRow() {
+            const newRow = document.createElement('div');
+            newRow.classList.add('item-row');
+            newRow.innerHTML = `
+                <input type="text" class="item-name" placeholder="Item" oninput="addItemRowIfNeeded()">
+                <input type="number" class="item-quantity" placeholder="Anzahl" oninput="addItemRowIfNeeded()">
+                <input type="number" class="item-result" placeholder="Ergebnis" readonly class="output">
+                <button class="remove-btn" onclick="removeItemRow(this)">-</button>
+            `;
+            document.getElementById('itemList').appendChild(newRow);
+    
+            // Füge Event-Listener hinzu
+            newRow.querySelector('.item-name').addEventListener('input', addItemRowIfNeeded);
+            newRow.querySelector('.item-quantity').addEventListener('input', addItemRowIfNeeded);
+        }
+
         function addItemRowIfNeeded() {
             const itemRows = document.querySelectorAll('.item-row');
             const lastRow = itemRows[itemRows.length - 1];
             const nameInput = lastRow.querySelector('.item-name');
             const quantityInput = lastRow.querySelector('.item-quantity');
 
-            // Überprüfen, ob das letzte Eingabefeld leer ist oder nicht
-            if (nameInput.value.trim() === "" && quantityInput.value.trim() === "") {
-                // Verhindern, dass neue Zeilen hinzugefügt werden, wenn das letzte Eingabefeld leer ist
-                return;
+            // Überprüfen, ob das letzte Eingabefeld ausgefüllt ist    
+            if (nameInput.value.trim() !== "" || quantityInput.value.trim() !== "") {
+                addItemRow();
             }
 
-            // Neue Reihe hinzufügen, wenn die Eingaben nicht leer sind    
-            if (nameInput.value.trim() !== "" || quantityInput.value.trim() !== "") {
-                const newRow = document.createElement('div');
-                newRow.classList.add('item-row');
-                newRow.innerHTML = `
-                    <input type="text" class="item-name" placeholder="Item" oninput="addItemRowIfNeeded()">
-                    <input type="number" class="item-quantity" placeholder="Anzahl" oninput="addItemRowIfNeeded()">
-                    <input type="number" class="item-result" placeholder="Ergebnis" readonly class="output">
-                    <button class="remove-btn" onclick="removeItemRow(this)">-</button>
-                `;
-                document.getElementById('itemList').appendChild(newRow);
-            }
-        }
-        
-        function removeItemRow(button) {
-            const row = button.parentElement;
-            row.remove();
+            // Sicherstellen, dass immer mindestens eine leere Reihe vorhanden ist
+            ensureAtLeastOneEmptyRow();
         }
         
         const urlParams = new URLSearchParams(window.location.search);
@@ -444,6 +456,9 @@
         // Initialer Event-Listener für die erste Reihe
         document.querySelector('.item-row .item-name').addEventListener('input', addItemRowIfNeeded);
         document.querySelector('.item-row .item-quantity').addEventListener('input', addItemRowIfNeeded);
+
+        // Überwache das Leeren der Eingabefelder
+        document.getElementById('itemList').addEventListener('input', ensureAtLeastOneEmptyRow);
     </script>
 </body>
 </html>
