@@ -220,18 +220,38 @@
             .body {
                 background-color: white;   
             }
-            .h1, .h2 {
+            
+            .h1 {
                 color: black;
             }
-            #display, .display {
+
+            .h2 {
+                color: black;
+            }
+            
+            #display {
                 background-color: white;
                 color: black;
+            }
+            
+            .display {
+                background-color: white;
+                color: black;
+            }
+         
+            .item-row input {
+                background-color: #444;
+                color: white;
+            }
+
+            .item-row input::placeholder {
+                color: #ccc;
             }
         }
     </style>
 </head>
 <body>
-    <a href="https://redminer9630de.github.io/mc/" class="header-link">Zurueck ></a>
+    <a href="https://redminer9630de.github.io/" class="header-link">Zurueck ></a>
     <div class="info-button" onclick="openInfoPage()" style="cursor: help;"></div>
     <h1>Taschenrechner - Redminer9630</h1>
     
@@ -267,9 +287,9 @@
     <div id="netherMode" class="mode" style="display: none;">
         <h2>Nether Portal Koordinaten</h2>
         <div class="nether-row">
-            <input type="number" id="coordX" placeholder="X-Koordinate">
-            <input type="number" id="coordZ" placeholder="Z-Koordinate">
-            <select id="dimension">
+            <input type="number" id="coordX" placeholder="X-Koordinate" class="display">
+            <input type="number" id="coordZ" placeholder="Z-Koordinate" class="display">
+            <select id="dimension" class="display">
                 <option value="overworld">zu Overworld</option>
                 <option value="nether">zu Nether</option>
             </select>
