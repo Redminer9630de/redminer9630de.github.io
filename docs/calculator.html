@@ -11,7 +11,7 @@
     <style>
         @font-face {
             font-family: 'MinecraftFont';
-            src: url('https://redminer9630de.github.io/minecraft_font.ttf') format('truetype'),#
+            src: url('https://redminer9630de.github.io/minecraft_font.ttf') format('truetype'),
                  url('https://redminer9630de.github.io/minecraft_font.woff') format('woff');
         }
 
@@ -88,6 +88,7 @@
             margin-bottom: 10px;
             color: white;
             text-align: left;
+            font-family: 'MinecraftFont', sans-serif;
         }
 
         button:hover, .button:hover {
@@ -264,14 +265,14 @@
             </select>
             <button onclick="calculatePortalCoords()">Berechnen</button>
         </div>
-        <input id="portalResult" readonly placeholder="Berechnete Koordinaten" class="input">
+        <input id="portalResult" readonly placeholder="Berechnete Koordinaten" class="display">
     </div>
 
     <!-- Item-Multiplikator-Modus -->
     <div id="itemMode" class="mode" style="display: none;">
         <h2>Item Materialliste</h2>
         <div style="display: flex; align-items: center; gap: 10px; margin-bottom: 10px;">
-            <input type="number" id="multiplier" placeholder="Multiplikator">
+            <input type="number" id="multiplier" placeholder="Multiplikator" class="display">
             <button onclick="calculateItems()">Berechnen</button>
         </div>
         <div id="itemList">
@@ -356,14 +357,14 @@
                 if (name !== "" && !isNaN(quantity) && quantity > 0) {
                     allEmpty = false;
                     const resultQuantity = quantity * multiplier;
-                    resultInput.value = "${name}${resultQuantity}";
+                    resultInput.value = "${resultQuantity}";
                 } else {
                     resultInput.value = "";
                 }
             });
 
             if (allEmpty) {
-                alert("Keine Items zum Berechnen eingegeben.");
+                alert("Keine Items eingegeben.");
             }
         }
 
