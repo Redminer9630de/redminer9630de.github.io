@@ -204,7 +204,6 @@
             background-color: hsl(206, 90%, 75%);
         }
 
-        /* Allgemeine Anpassungen für Inputs und Buttons in Modusen */
         #netherMode input,
         #netherMode select,
         #netherMode button,
@@ -235,13 +234,6 @@
                 border: 1px solid #ccc;
             }
 
-            /* Anpassungen für Buttons */
-            button, .button {
-                background-color: hsl(122, 40%, 65%);
-                color: white;
-            }
-
-            /* Anpassungen für Item-Multiplikator-Sektion */
             .item-row input {
                 background-color: #f9f9f9;
                 color: #000;
@@ -258,7 +250,6 @@
                 border: 1px solid #ccc;
             }
 
-            /* Anpassung der Item-Multiplikator-Ergebnisfelder */
             .item-row input.output {
                 background-color: #e0e0e0;
                 color: #000;
@@ -272,9 +263,9 @@
     <h1>Taschenrechner - Redminer9630</h1>
     
     <select id="modeSelector" onchange="changeMode()" class="button" style="margin-bottom: 20px; padding: 10px; border-radius: 8px; border: none; font-size: 16px;">
-        <option value="standard">Standard</option>
-        <option value="nether">Nether Portal</option>
-        <option value="item">Item Listen Multiplikator</option>
+        <option onclick="changeMode()" value="standard">Standard</option>
+        <option onclick="changeMode()" value="nether">Nether Portal</option>
+        <option onclick="changeMode()" value="item">Item Listen</option>
     </select>
     
     <div id="calculator" class="mode">
@@ -295,7 +286,7 @@
             <button onclick="appendToDisplay('/')" class="op-btn">/</button>
             <button onclick="appendToDisplay('0')">0</button>
             <button onclick="appendToDisplay('.')">.</button>
-            <button onclick="clearDisplay()" class="op-btn">C</button>
+            <button onclick="display.value = '';" class="op-btn">C</button>
             <button onclick="calc()" class="equal">=</button>   
         </div>
     </div>
@@ -337,10 +328,6 @@
             display.value += input;
         }
 
-        function clearDisplay() {
-            display.value = "";
-        }
-
         function calc() {
             try {
                 display.value = eval(display.value);
@@ -350,7 +337,7 @@
         }
 
         function openInfoPage() {
-            window.location.href = "https://github.com/redminer9630de/redminer9630de.github.io/wiki/Taschenrechner";
+            window.location.href = "https://github.com/Redminer9630de/redminer9630de.github.io/wiki/Taschenrechner";
         }
 
         function changeMode() {
@@ -460,12 +447,12 @@
         const mode = urlParams.get('mode');
 
         if (mode === "nether") {
-            document.getElementById('modeSelector').value = "nether";
+            modeSelector.value = "nether";
             changeMode();
         }
 
         if (mode === "item") {
-            document.getElementById('modeSelector').value = "item";
+            modeSelector.value = "item";
             changeMode();
         }
 
