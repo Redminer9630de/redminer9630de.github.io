@@ -162,6 +162,9 @@
             height: 40px;  /* Gleiche Höhe wie die anderen Eingabefelder */
             width: 50px;   /* Breitere Schaltfläche */
             font-size: 18px; /* Erhöht die Schriftgröße für bessere Lesbarkeit */
+            display: flex;
+            align-items: center;
+            justify-content: center;
         }
 
         .remove-btn:hover {
@@ -217,35 +220,48 @@
         }
         
         @media (prefers-color-scheme: light) {
-            .body {
+            body {
                 background-color: white;   
-            }
-            
-            .h1 {
                 color: black;
+            }
+    
+            h1, h2 {
+                color: black;
+            }    
+    
+            #display, .display {
+                background-color: #f0f0f0;
+                color: #000;
+                border: 1px solid #ccc;
             }
 
-            .h2 {
-                color: black;
-            }
-            
-            #display {
-                background-color: white;
-                color: black;
-            }
-            
-            .display {
-                background-color: white;
-                color: black;
-            }
-         
-            .item-row input {
-                background-color: #444;
+            /* Anpassungen für Buttons */
+            button, .button {
+                background-color: hsl(122, 40%, 65%);
                 color: white;
             }
 
+            /* Anpassungen für Item-Multiplikator-Sektion */
+            .item-row input {
+                background-color: #f9f9f9;
+                color: #000;
+                border: 1px solid #ccc;    
+            }
+
             .item-row input::placeholder {
-                color: #ccc;
+                color: #666;
+            }
+
+            .nether-row input, .nether-row select, .nether-row button {
+                background-color: #f0f0f0;
+                color: #000;
+                border: 1px solid #ccc;
+            }
+
+            /* Anpassung der Item-Multiplikator-Ergebnisfelder */
+            .item-row input.output {
+                background-color: #e0e0e0;
+                color: #000;
             }
         }
     </style>
