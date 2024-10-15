@@ -407,7 +407,6 @@
                 document.getElementById('itemList').appendChild(newRow);
             }
         }
-
         
         function removeItemRow(button) {
             const row = button.parentElement;
@@ -417,12 +416,14 @@
         const urlParams = new URLSearchParams(window.location.search);
         const mode = urlParams.get('mode');
 
-        if (mode === nether) {
-            modeSelector.value = nether;
+        if (mode === "nether") {
+            document.getElementById('modeSelector').value = "nether";
+            changeMode();
         }
 
-        if (mode === item) {
-            modeSelector.value = item;
+        if (mode === "item") {
+            document.getElementById('modeSelector').value = "item";
+            changeMode();
         }
 
         // Initialer Event-Listener für die erste Reihe
