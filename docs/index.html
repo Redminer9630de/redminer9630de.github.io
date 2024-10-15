@@ -441,12 +441,12 @@ footer {
                         Github
                     </a>
                 </li>
- <!--               <li><a href="wiki">MCJE Wiki(Nicht ausgefuellt)</a></li> -->
+                <li><a class="hiddenItem" href="wiki">MCJE Wiki(Nicht ausgefuellt)</a></li>
                 <li><a href="downloads">Downloads</a></li>
                 <li><a href="generators">Command Generatoren</a></li>
                 <li><a href="calculator">Taschenrechner</a></li>
                 <li><a href="streams">Live-Stream</a></li>
-<!--                <li><a href="tutorials>Minecraft Tutorials</a></li> -->
+                <li><a class="hiddenItem" href="tutorials>Minecraft Tutorials</a></li>
             </ul>
         </div>
     </nav>
@@ -467,11 +467,11 @@ footer {
     <script>
         // Definition der Keywords und URLs
         const keywords = [
-//            { keyword: "MCJE", url: "wiki", text: "Minecraft Java Edition Wiki", group: "mcjewiki" },
-//            { keyword: "MCJE Wiki", url: "wiki", text: "Minecraft Java Edition Wiki", group: "mcjewiki" },
-//            { keyword: "Minecraft Java Edition", url: "wiki", text: "Minecraft Java Edition Wiki", group: "mcjewiki" },
+            { class: "hiddenItem", keyword: "MCJE", url: "wiki", text: "Minecraft Java Edition Wiki", group: "mcjewiki" },            
+            { class: "hiddenItem", keyword: "MCJE Wiki", url: "wiki", text: "Minecraft Java Edition Wiki", group: "mcjewiki" },
+            { class: "hiddenItem", keyword: "Minecraft Java Edition", url: "wiki", text: "Minecraft Java Edition Wiki", group: "mcjewiki" },
             { keyword: "Downloads", url: "downloads", text: "Download-Seite", group: "downloads" },
-//            { keyword: "Event", url: "events/event", text: "Event- und Umfragenseite", group: "events" },
+            { class: "hiddenItem", keyword: "Event", url: "events/event", text: "Event- und Umfragenseite", group: "events" },
             { keyword: "Command Generator", url: "generator/recipe_generator", text: "Command Generatoren", group: "generator" },
             { keyword: "Taschenrechner", url: "calculator", text: "Taschenrechner", group: "tools" },
             { keyword: "Calculator", url: "calculator", text: "Taschenrechner", group: "tools" },
@@ -549,6 +549,16 @@ footer {
         if (menuOut) {
             document.getElementById('navMenu').classList.add('active');
         }
+        
+        const showHidden = urlParams.get('showHidden');
+
+        document.querySelectorAll('.hiddenItem').forEach(item => {
+            if (showHidden) {
+                item.style.visibility = 'visible';
+            } else {
+                item.style.visibility = 'hidden';
+            }
+        });
         
 		document.getElementById('hamburger').addEventListener('click', function(event) {
 		    event.stopPropagation(); // Verhindert, dass das Click-Event weitergegeben wird
