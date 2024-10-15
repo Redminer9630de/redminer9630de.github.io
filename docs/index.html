@@ -358,11 +358,14 @@ footer {
         background-color: rgba(0, 0, 0, 0.9); /* Volle Breite und Höhe */
     }
 
+    .hiddenItem {
+        visibility: hidden;
+    }
+
     footer {
         padding: 20px; /* Erhöhe den Footer */
         font-size: 14px;
     }
-}
 
 /* Layout für Smartphones im Querformat */
 @media (max-width: 768px) and (orientation: landscape) {
@@ -455,7 +458,7 @@ footer {
         <section id="about">
             <h2>Ueber Redminer9630</h2>
             <p>Ich bin ein neuer Minecraft-YouTuber und Streamer, ich habe meinen Kanal vor Kurzem gestartet. Mein Kanal ist noch im Aufbau, und bisher wurden keine Videos veroeffentlicht. Trotzdem werde ich schon in naher Zukunft spannende Inhalte erstellen, und es lohnt sich von Anfang an dabei zu sein.</p>
-            <button id="moreInfoBtn" class="">Mehr ueber mich erfahren</button>
+            <button id="moreInfoBtn" class="moreInfo">Mehr ueber mich erfahren</button>
             <p id="moreInfo" style="display: none;">Obwohl der Kanal noch keine Videos enthaelt, plane ich, in naher Zukunft viele weitere Minecraft-Inhalte zu veroeffentlichen. Jetzt ist der perfekte Zeitpunkt, um Teil der Community zu werden und die Entwicklung des Kanals mitzuerleben.</p>
         </section>
     </main>
