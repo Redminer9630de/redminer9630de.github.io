@@ -217,13 +217,13 @@
         }
         
         @media (prefers-color-scheme: light) {
-            body {
+            .body {
                 background-color: white;   
             }
-            h1 {
+            .h1 {
                 color: black;
             }
-            display {
+            #display, .display {
                 background-color: white;
                 color: black;
             }
@@ -233,16 +233,14 @@
 <body>
     <a href="https://redminer9630de.github.io/mc/" class="header-link">Zurueck ></a>
     <div class="info-button" onclick="openInfoPage()" style="cursor: help;"></div>
-    <!-- Modus-Selector -->
     <h1>Taschenrechner - Redminer9630</h1>
     
     <select id="modeSelector" onchange="changeMode()" class="button" style="margin-bottom: 20px; padding: 10px; border-radius: 8px; border: none; font-size: 16px;">
         <option value="standard">Standard</option>
         <option value="nether">Nether Portal</option>
-        <option value="item">Item Material Listen Multiplikator</option>
+        <option value="item">Item Listen Multiplikator</option>
     </select>
     
-    <!-- Standard Taschenrechner -->
     <div id="calculator" class="mode">
         <input id="display" readonly>
         <div id="keys">
@@ -266,7 +264,6 @@
         </div>
     </div>
 
-    <!-- Nether-Portal-Koordinaten-Modus -->
     <div id="netherMode" class="mode" style="display: none;">
         <h2>Nether Portal Koordinaten</h2>
         <div class="nether-row">
@@ -278,10 +275,9 @@
             </select>
             <button onclick="calculatePortalCoords()">Berechnen</button>
         </div>
-        <input id="portalResult" readonly placeholder="Berechnete Koordinaten" class="display">
+        <input id="portalResult" readonly placeholder="Koordinaten" class="display">
     </div>
 
-    <!-- Item-Multiplikator-Modus -->
     <div id="itemMode" class="mode" style="display: none;">
         <h2>Item Materialliste</h2>
         <div style="display: flex; align-items: center; gap: 10px; margin-bottom: 10px;">
@@ -289,7 +285,6 @@
             <button onclick="calculateItems()">Berechnen</button>
         </div>
         <div id="itemList">
-            <!-- Dynamische Item-Reihen werden hier eingefügt -->
             <div class="item-row">
                 <input type="text" class="item-name" placeholder="Item" oninput="addItemRowIfNeeded()">
                 <input type="number" class="item-quantity" placeholder="Anzahl" oninput="addItemRowIfNeeded()">
