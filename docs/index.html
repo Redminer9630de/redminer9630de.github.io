@@ -444,12 +444,12 @@ footer {
                         Github
                     </a>
                 </li>
-                <li><a class="hiddenItem" href="wiki">MCJE Wiki(Nicht ausgefuellt)</a></li>
+                <li class="hiddenItem"><a href="wiki">MCJE Wiki(Nicht ausgefuellt)</a></li>
                 <li><a href="downloads">Downloads</a></li>
                 <li><a href="generators">Command Generatoren</a></li>
                 <li><a href="calculator">Taschenrechner</a></li>
                 <li><a href="streams">Live-Stream</a></li>
-                <li><a class="hiddenItem" href="tutorials">Minecraft Tutorials(Nicht ausgefuellt)</a></li>
+                <li class="hiddenItem"><a href="tutorials">Minecraft Tutorials(Nicht ausgefuellt)</a></li>
             </ul>
         </div>
     </nav>
@@ -557,9 +557,9 @@ footer {
 
         document.querySelectorAll('.hiddenItem').forEach(item => {
             if (showHidden) {
-                item.style.visibility = 'visible';
+                item.style.display = 'list-item';
             } else {
-                item.style.visibility = 'hidden';
+                item.style.display = 'none';
             }
         });
         
