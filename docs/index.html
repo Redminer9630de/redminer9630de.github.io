@@ -358,15 +358,16 @@ footer {
         background-color: rgba(0, 0, 0, 0.9); /* Volle Breite und Höhe */
     }
 
-    .hiddenItem {
-        visibility: hidden;
-        color: gray;
-    }
-
     footer {
         padding: 20px; /* Erhöhe den Footer */
         font-size: 14px;
     }
+}
+        
+.hiddenItem {
+    visibility: hidden;
+    color: gray;
+}
 
 /* Layout für Smartphones im Querformat */
 @media (max-width: 768px) and (orientation: landscape) {
@@ -397,6 +398,32 @@ footer {
         padding: 15px;
     }
 }
+        
+.search-container {
+    position: fixed; /* Fixiere das Element oben rechts */
+    top: 10px; /* Abstand von oben */
+    right: 10px; /* Abstand von rechts */
+    display: flex; /* Flexbox für die Ausrichtung */
+    align-items: center; /* Vertikale Ausrichtung */
+}
+
+.search-placeholder {
+    width: 30px; /* Größe des Platzhalterbildes */
+    height: 30px; /* Größe des Platzhalterbildes */
+}
+
+#search-input {
+    border: none; /* Kein Standardrahmen */
+    padding-left: 10px; /* Padding links, damit der Text nicht direkt am Rand ist */
+}
+
+.search-active {
+    display: none; /* Verstecke das aktive Bild zunächst */
+    width: 30px; /* Größe des aktiven Suchbildes */
+    height: 30px; /* Größe des aktiven Suchbildes */
+    position: absolute; /* Positionierung, um über die Input-Leiste zu legen */
+    right: 10px; /* Abstand von rechts */
+}
     </style>
 </head>
 <body>
@@ -418,7 +445,9 @@ footer {
     <nav id="navMenu">
         <div class="menu-section">
             <div class="search-container">
-                <input type="text" class="searchbar" id="searchInput" placeholder="Suche...">
+                <img src="images/searchinputhold.png" class="search-placeholder" />
+                <input type="text" id="search-input" oninput="toggleSearchImage()" placeholder=" " />
+                <img src="images/searchinput.png" class="search-active" style="display: none;" />
             </div>
             <ul>
                 <li>
