@@ -542,21 +542,21 @@ footer {
         };
         
         const search = urlParams.get('search');
-        const menuOut = urlParams.get('menuOut');
+        const menu = urlParams.get('menu');
         
         if (search) {
             searchInput.value = search;
             handleSearch(search);
         }
 
-        if (menuOut) {
+        if (menu === 'out') {
             document.getElementById('navMenu').classList.add('active');
         }
         
         const showHidden = urlParams.get('showHidden');
 
         document.querySelectorAll('.hiddenItem').forEach(item => {
-            if (showHidden) {
+            if (showHidden === 'true') {
                 item.style.display = 'list-item';
             } else {
                 item.style.display = 'none';
