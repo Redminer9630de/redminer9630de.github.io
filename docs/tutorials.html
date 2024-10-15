@@ -44,7 +44,9 @@
             background-color: #f44336;
             padding: 10px 20px;
             border-radius: 8px;
-            transition: background-color 0.3s;
+            position: absolute;
+            top: 20px;
+            right: 20px;
         }
 
         .header-link:hover {
@@ -61,16 +63,8 @@
     </style>
 </head>
 <body>
-    <h1>Tutorials und Anleitungen</h1>
     <a class="header-link" href="https://redminer9630de.github.io">Zurueck ></a>
-
-    <div class="video-container">
-        <h3>Datapack/Resourcepack erstellen - Schritt fuer Schritt</h3>
-        <video controls>
-            <source src="https://redminer9630de.github.io/videos/packcreation-tutorial.mp4" type="video/mp4">
-            Dein Browser unterstuetzt das Video-Element nicht.
-        </video>
-    </div>
+    <h1>Tutorials und Anleitungen</h1>
 
     <div class="video-container">
         <h3>Datapacks/Resourcepacks anwenden</h3>
@@ -80,5 +74,34 @@
         </video>
     </div>
 
+    <div class="video-container">
+        <h3>Datapack/Resourcepack erstellen - Schritt fuer Schritt</h3>
+        <video id="packcreation" controls>
+            <source src="https://redminer9630de.github.io/videos/packcreation-tutorial.mp4" type="video/mp4">
+            Dein Browser unterstuetzt das Video-Element nicht.
+        </video>
+        <button id="sourcedownloadButton" style="display: none;" onclick="window.location.href='templatedownload.html?id=source';">Resourcepack Template</button>
+        <button id="datadownloadButton" style="display: none;" onclick="window.location.href='templatedownload.html?id=data';">Datapack Template</button>
+    </div>
+    <script>
+        document.getElementById('packcreation').addEventListener('play', function() {
+            this.addEventListener('timeupdate', function() {
+                // Überprüfe, ob das Video eine bestimmte Zeit erreicht hat (z.B. 0:10 für 10 Sekunden)
+                if (this.currentTime >= 10) { // Ändere die Zeit entsprechend
+                    document.getElementById('datadownloadButton').style.display = 'block';
+                }
+            });
+        });
+        
+        document.getElementById('packcreation').addEventListener('play', function() {
+            this.addEventListener('timeupdate', function() {
+                // Überprüfe, ob das Video eine bestimmte Zeit erreicht hat (z.B. 0:10 für 10 Sekunden)
+                if (this.currentTime >= 20) { // Ändere die Zeit entsprechend
+                    document.getElementById('datadownloadbutton').style.display = 'none';
+                    document.getElementById('sourcedownloadButton').style.display = 'block';
+                }
+            });
+        });
+    </script>
 </body>
 </html>
