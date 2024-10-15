@@ -413,6 +413,17 @@
             const row = button.parentElement;
             row.remove();
         }
+        
+        const urlParams = new URLSearchParams(window.location.search);
+        const mode = urlParams.get('mode');
+
+        if (mode === nether) {
+            modeSelector.value = nether;
+        }
+
+        if (mode === item) {
+            modeSelector.value = item;
+        }
 
         // Initialer Event-Listener für die erste Reihe
         document.querySelector('.item-row .item-name').addEventListener('input', addItemRowIfNeeded);
