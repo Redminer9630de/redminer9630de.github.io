@@ -111,6 +111,7 @@
 }
 
 .hamburger {
+    opacity: 0;
     display: flex;
     flex-direction: column;
     cursor: pointer;
@@ -186,6 +187,20 @@ nav a:hover,
 nav a:active {
     background-color: #34495e;
     color: #e74c3c;
+}
+
+@media (max-width: 4096px) {
+    .hamburger {
+        display: flex;
+    }
+
+    nav {
+        visibility: hidden;
+    }
+
+    nav.active {
+        visibility: visible;
+    }
 }
 
 main {
@@ -343,16 +358,14 @@ footer {
         background-color: rgba(0, 0, 0, 0.9); /* Volle Breite und Höhe */
     }
 
+    .hiddenItem {
+        visibility: hidden;
+    }
+
     footer {
         padding: 20px; /* Erhöhe den Footer */
         font-size: 14px;
     }
-}
-        
-.hiddenItem {
-    display: none;
-    color: gray;
-}
 
 /* Layout für Smartphones im Querformat */
 @media (max-width: 768px) and (orientation: landscape) {
@@ -383,19 +396,6 @@ footer {
         padding: 15px;
     }
 }
-        
-.search-container {
-    position: fixed; /* Fixiere das Element oben rechts */
-    top: 10px; /* Abstand von oben */
-    right: 10px; /* Abstand von rechts */
-    display: flex; /* Flexbox für die Ausrichtung */
-    align-items: center; /* Vertikale Ausrichtung */
-}
-
-#search-input {
-    border: none; /* Kein Standardrahmen */
-    padding-left: 10px; /* Padding links, damit der Text nicht direkt am Rand ist */
-}
     </style>
 </head>
 <body>
@@ -417,7 +417,7 @@ footer {
     <nav id="navMenu">
         <div class="menu-section">
             <div class="search-container">
-                <input type="text" id="search-input" placeholder="Suche..." />
+                <input type="text" class="searchbar" id="searchInput" placeholder="Suche...">
             </div>
             <ul>
                 <li>
@@ -469,6 +469,7 @@ footer {
     </footer>
     
     <script>
+        // Definition der Keywords und URLs
         const keywords = [
             { class: "hiddenItem", keyword: "MCJE", url: "wiki", text: "Minecraft Java Edition Wiki", group: "mcjewiki" },            
             { class: "hiddenItem", keyword: "MCJE Wiki", url: "wiki", text: "Minecraft Java Edition Wiki", group: "mcjewiki" },
@@ -481,9 +482,9 @@ footer {
             { keyword: "Wiki", url: "https://github.com/Redminer9630de/redminer9630de.github.io/wiki", text: "GitHub Wiki-Seite", group: "githubwiki" },
             { keyword: "Github Wiki", url: "https://github.com/Redminer9630de/redminer9630de.github.io/wiki", text: "GitHub Wiki-Seite", group: "githubwiki" },
             { keyword: "Discord", url: "https://discord.gg/", text: "Discord", group: "discord" },
-            { keyword: "Github", url: "https://github.com/Redminer9630de/redminer9630de.github.io/wiki", text: "GitHub Wiki-Seite", group: "githubwiki" },
-            { keyword: "Minigame", url: "minigame", text: "Halloween Minigame", group: "minigame" },            
-            { keyword: "Halloween", url: "minigame", text: "Halloween Minigame", group: "minigame" }
+            { keyword: "Github", url: "https://github.com/Redminer9630de/mc/wiki", text: "GitHub Wiki-Seite", group: "githubwiki" },
+            { keyword: "Minigame", url: "minigame", text: "Halloween Minigame", group: "minigame"},
+            { keyword: "Halloween", url: "minigame", text: "Halloween Minigame", group: "minigame"}
         ];
 
         // Referenz zur Suchleiste und Vorschlagsliste
@@ -540,7 +541,8 @@ footer {
             3: "wiki",
             4: "downloads",
             5: "calculator",
-            6: "generators"
+            6: "generators",
+            7: "minigame"
         };
         
         const search = urlParams.get('search');
