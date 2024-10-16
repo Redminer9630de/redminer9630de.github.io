@@ -430,9 +430,7 @@ footer {
     <nav id="navMenu">
         <div class="menu-section">
             <div class="search-container">
-                <img src="images/searchinputhold.png" class="search-placeholder" />
-                <input type="text" id="search-input" oninput="toggleSearchImage()" placeholder=" " />
-                <img src="images/searchinput.png" class="search-active" style="display: none;" />
+                <input type="text" id="search-input" oninput="toggleSearchImage()" placeholder="Suche..." />
             </div>
             <ul>
                 <li>
@@ -484,7 +482,6 @@ footer {
     </footer>
     
     <script>
-        // Definition der Keywords und URLs
         const keywords = [
             { class: "hiddenItem", keyword: "MCJE", url: "wiki", text: "Minecraft Java Edition Wiki", group: "mcjewiki" },            
             { class: "hiddenItem", keyword: "MCJE Wiki", url: "wiki", text: "Minecraft Java Edition Wiki", group: "mcjewiki" },
@@ -497,7 +494,9 @@ footer {
             { keyword: "Wiki", url: "https://github.com/Redminer9630de/redminer9630de.github.io/wiki", text: "GitHub Wiki-Seite", group: "githubwiki" },
             { keyword: "Github Wiki", url: "https://github.com/Redminer9630de/redminer9630de.github.io/wiki", text: "GitHub Wiki-Seite", group: "githubwiki" },
             { keyword: "Discord", url: "https://discord.gg/", text: "Discord", group: "discord" },
-            { keyword: "Github", url: "https://github.com/Redminer9630de/mc/wiki", text: "GitHub Wiki-Seite", group: "githubwiki" }
+            { keyword: "Github", url: "https://github.com/Redminer9630de/redminer9630de.github.io/wiki", text: "GitHub Wiki-Seite", group: "githubwiki" },
+            { keyword: "Minigame", url: "minigame", text: "Halloween Minigame", group: "minigame" },            
+            { keyword: "Halloween", url: "minigame", text: "Halloween Minigame", group: "minigame" }
         ];
 
         // Referenz zur Suchleiste und Vorschlagsliste
