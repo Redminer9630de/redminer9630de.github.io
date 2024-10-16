@@ -392,22 +392,9 @@ footer {
     align-items: center; /* Vertikale Ausrichtung */
 }
 
-.search-placeholder {
-    width: 30px; /* Größe des Platzhalterbildes */
-    height: 30px; /* Größe des Platzhalterbildes */
-}
-
 #search-input {
     border: none; /* Kein Standardrahmen */
     padding-left: 10px; /* Padding links, damit der Text nicht direkt am Rand ist */
-}
-
-.search-active {
-    display: none; /* Verstecke das aktive Bild zunächst */
-    width: 30px; /* Größe des aktiven Suchbildes */
-    height: 30px; /* Größe des aktiven Suchbildes */
-    position: absolute; /* Positionierung, um über die Input-Leiste zu legen */
-    right: 10px; /* Abstand von rechts */
 }
     </style>
 </head>
@@ -430,7 +417,7 @@ footer {
     <nav id="navMenu">
         <div class="menu-section">
             <div class="search-container">
-                <input type="text" id="search-input" oninput="toggleSearchImage()" placeholder="Suche..." />
+                <input type="text" id="search-input" placeholder="Suche..." />
             </div>
             <ul>
                 <li>
