@@ -111,7 +111,6 @@
 }
 
 .hamburger {
-    opacity: 0;
     display: flex;
     flex-direction: column;
     cursor: pointer;
@@ -187,20 +186,6 @@ nav a:hover,
 nav a:active {
     background-color: #34495e;
     color: #e74c3c;
-}
-
-@media (max-width: 4096px) {
-    .hamburger {
-        display: flex;
-    }
-
-    nav {
-        visibility: hidden;
-    }
-
-    nav.active {
-        visibility: visible;
-    }
 }
 
 main {
@@ -365,7 +350,7 @@ footer {
 }
         
 .hiddenItem {
-    visibility: hidden;
+    display: none;
     color: gray;
 }
 
@@ -474,6 +459,7 @@ footer {
                         Github
                     </a>
                 </li>
+                <li><a href="minigame">Halloween Minigame</a></li>
                 <li class="hiddenItem"><a href="wiki">MCJE Wiki(Nicht ausgefuellt)</a></li>
                 <li><a href="downloads">Downloads</a></li>
                 <li><a href="generators">Command Generatoren</a></li>
