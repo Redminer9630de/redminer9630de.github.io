@@ -45,8 +45,10 @@
             border-radius: 5px;
             margin-top: 10px;
         }
-
-        canvas {
+        
+        #gameCanvas {
+            width: 80vw; /* 80% der Breite des Viewports */
+            height: 80vh; /* 80% der Höhe des Viewports */
             border: 2px solid var(--canvas-border-color, #f8b400);
             background-color: var(--canvas-bg-color, #333);
         }
@@ -55,15 +57,26 @@
 <body>
     <header>
         <a href="redminer9630de.github.io">Zurueck</a>
-        <h1>Pumpkin Catch</h1>
+        <h1>Kuerbis Fangen</h1>
     </header>
 
     <canvas id="gameCanvas" width="80vw" height="80vh"></canvas>
     <button class="button" onclick="startGame()">Spiel starten</button>
 
-    <script>
+    <script>        
         const canvas = document.getElementById('gameCanvas');
         const ctx = canvas.getContext('2d');
+
+        const pumpkinImage = new Image();
+        const basketImage = new Image();
+        pumpkinImage.src = 'images/pumpkin.png'; // Pfad zur Kürbis-Bilddatei
+        basketImage.src = 'images/korb.png'; // Pfad zur Korb-Bilddatei
+
+        // Setze die tatsächliche Pixelgröße des Canvas entsprechend der CSS-Größe
+        function resizeCanvas() {
+            canvas.width = canvas.clientWidth;
+            canvas.height = canvas.clientHeight;
+        }
 
         let pumpkinX = Math.random() * (canvas.width - 30);
         let pumpkinY = 0;
@@ -78,15 +91,11 @@
         let gameInterval;
 
         function drawPumpkin() {
-            ctx.fillStyle = 'orange';
-            ctx.beginPath();
-            ctx.arc(pumpkinX, pumpkinY, 15, 0, Math.PI * 2);
-            ctx.fill();
+            ctx.drawImage(pumpkinImage, pumpkinX, pumpkinY, 30, 30); // Kürbis zeichnen
         }
 
         function drawBasket() {
-            ctx.fillStyle = 'brown';
-            ctx.fillRect(basketX, canvas.height - basketHeight, basketWidth, basketHeight);
+            ctx.drawImage(basketImage, basketX, canvas.height - basketHeight, basketWidth, basketHeight); // Korb zeichnen
         }
 
         function updateGame() {
@@ -96,7 +105,6 @@
 
             pumpkinY += pumpkinSpeed;
 
-            // Prüfen, ob der Kürbis den Korb erreicht
             if (
                 pumpkinY >= canvas.height - basketHeight &&
                 pumpkinX >= basketX &&
@@ -105,16 +113,14 @@
                 score++;
                 pumpkinY = 0;
                 pumpkinX = Math.random() * (canvas.width - 30);
-                pumpkinSpeed += 0.5; // Geschwindigkeit erhöhen
+                pumpkinSpeed += 0.5; 
             }
 
-            // Prüfen, ob der Kürbis den Boden erreicht hat
             if (pumpkinY > canvas.height) {
                 clearInterval(gameInterval);
                 alert('Spiel vorbei! Dein Punktestand: ' + score);
             }
 
-            // Punktestand anzeigen
             ctx.fillStyle = 'white';
             ctx.font = '20px Minecraft';
             ctx.fillText('Punkte: ' + score, 10, 30);
@@ -135,6 +141,18 @@
             gameInterval = setInterval(updateGame, 20);
             document.addEventListener('keydown', moveBasket);
         }
+
+        // Größe des Canvas beim Laden und bei Fensteränderungen anpassen
+        window.addEventListener('resize', resizeCanvas);
+        window.onload = () => {
+            resizeCanvas();
+            // Startet das Spiel, wenn die Bilder geladen sind
+            pumpkinImage.onload = () => {
+                basketImage.onload = () => {
+                    startGame(); // Startet das Spiel erst, wenn beide Bilder geladen sind
+                };
+            };
+        };
     </script>
 </body>
 </html>
