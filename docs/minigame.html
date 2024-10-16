@@ -1,0 +1,139 @@
+<!DOCTYPE html>
+<html lang="de">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Pumpkin Catch</title>
+    <style>
+        @font-face {
+            font-family: 'Minecraft';
+            src: url('https://redminer9630de.github.io/minecraft_font.ttf') format('truetype'),
+                 url('https://redminer9630de.github.io/minecraft_font.woff') format('woff');
+        }
+
+        body {
+            font-family: 'Minecraft', sans-serif;
+            background-color: var(--bg-color, #000);
+            color: var(--text-color, #fff);
+            margin: 0;
+            padding: 0;
+            display: flex;
+            flex-direction: column;
+            align-items: center;
+            justify-content: center;
+            height: 100vh;
+        }
+      
+        header a {
+            color: white;
+            font-size: 16px;
+            text-decoration: none;
+            background-color: #f44336;
+            padding: 10px 20px;
+            border-radius: 8px;
+            transition: background-color 0.3s;
+        }
+
+        .button {
+            background-color: var(--button-bg-color, #f8b400);
+            color: var(--button-text-color, #fff);
+            border: none;
+            padding: 10px 20px;
+            font-size: 1.2rem;
+            cursor: pointer;
+            border-radius: 5px;
+            margin-top: 10px;
+        }
+
+        canvas {
+            border: 2px solid var(--canvas-border-color, #f8b400);
+            background-color: var(--canvas-bg-color, #333);
+        }
+    </style>
+</head>
+<body>
+    <header>
+        <h1>Pumpkin Catch</h1>
+        <a href="redminer9630de.github.io">Zurueck</a>
+    </header>
+
+    <canvas id="gameCanvas" width="600" height="400"></canvas>
+    <button class="button" onclick="startGame()">Spiel starten</button>
+
+    <script>
+        const canvas = document.getElementById('gameCanvas');
+        const ctx = canvas.getContext('2d');
+
+        let pumpkinX = Math.random() * (canvas.width - 30);
+        let pumpkinY = 0;
+        let pumpkinSpeed = 2;
+
+        let basketX = canvas.width / 2 - 30;
+        const basketWidth = 60;
+        const basketHeight = 20;
+        const basketSpeed = 20;
+
+        let score = 0;
+        let gameInterval;
+
+        function drawPumpkin() {
+            ctx.fillStyle = 'orange';
+            ctx.beginPath();
+            ctx.arc(pumpkinX, pumpkinY, 15, 0, Math.PI * 2);
+            ctx.fill();
+        }
+
+        function drawBasket() {
+            ctx.fillStyle = 'brown';
+            ctx.fillRect(basketX, canvas.height - basketHeight, basketWidth, basketHeight);
+        }
+
+        function updateGame() {
+            ctx.clearRect(0, 0, canvas.width, canvas.height);
+            drawPumpkin();
+            drawBasket();
+
+            pumpkinY += pumpkinSpeed;
+
+            // Prüfen, ob der Kürbis den Korb erreicht
+            if (
+                pumpkinY >= canvas.height - basketHeight &&
+                pumpkinX >= basketX &&
+                pumpkinX <= basketX + basketWidth
+            ) {
+                score++;
+                pumpkinY = 0;
+                pumpkinX = Math.random() * (canvas.width - 30);
+                pumpkinSpeed += 0.5; // Geschwindigkeit erhöhen
+            }
+
+            // Prüfen, ob der Kürbis den Boden erreicht hat
+            if (pumpkinY > canvas.height) {
+                clearInterval(gameInterval);
+                alert('Spiel vorbei! Dein Punktestand: ' + score);
+            }
+
+            // Punktestand anzeigen
+            ctx.fillStyle = 'white';
+            ctx.font = '20px Minecraft';
+            ctx.fillText('Punkte: ' + score, 10, 30);
+        }
+
+        function moveBasket(event) {
+            if (event.key === 'ArrowLeft' && basketX > 0) {
+                basketX -= basketSpeed;
+            } else if (event.key === 'ArrowRight' && basketX < canvas.width - basketWidth) {
+                basketX += basketSpeed;
+            }
+        }
+
+        function startGame() {
+            score = 0;
+            pumpkinY = 0;
+            pumpkinSpeed = 2;
+            gameInterval = setInterval(updateGame, 20);
+            document.addEventListener('keydown', moveBasket);
+        }
+    </script>
+</body>
+</html>
