@@ -126,17 +126,31 @@
         .state-active {
             background-color: green;
             color: white;
-
+            padding: 10px;
+            text-decoration: none;
+            border-radius: 5px;
+            font-size: 10px;
+            cursor: pointer;
         }
 
         .state-edit {
             background-color: blue;            
             color: white;
+            padding: 10px;
+            text-decoration: none;
+            border-radius: 5px;
+            font-size: 10px;
+            cursor: pointer;
         }
 
         .state-buged {
             background-color: orange;
             color: white;
+            padding: 10px;
+            text-decoration: none;
+            border-radius: 5px;
+            font-size: 10px;
+            cursor: pointer;
         }
     </style>
 </head>
@@ -151,8 +165,7 @@
                 <th onclick="sortTable(1)">Titel</th>
                 <th onclick="sortTable(2)">Beschreibung</th>
                 <th onclick="sortTable(3)">Typ</th>
-                <th onclick="sortTable(4)">Status<th>
-                <th onclick="sortTable(5)">Datei</th>
+                <th onclick="sortTable(4)">Datei</th>
             </tr>
         </thead>
         <tbody>
@@ -161,24 +174,21 @@
                 <td>Craft Attack Maps</td>
                 <td>Craft Attack Maps(Nicht von Mir)</td>
                 <td>Map</td>
-                <td class="state-active">Aktiv</td>
-                <td><a href="https://craftattack.one" class="download-button" download="https://craftattack.one">https://craftattack.one</a></td>
+                <td><a href="https://craftattack.one" class="state-active" download="https://craftattack.one">https://craftattack.one</a></td>
             </tr>
             <tr>
                 <td>1.21</td>
                 <td>MC is Bones</td>
                 <td>Veraendert End Game Items zur Knochen Textur und hat support für ein paar Mods. Extrahiere diese Datei um sie richtig zu benutzten</td>
                 <td>Resourcepack/Datapack</td>
-                <td class="state-edit">In Bearbeitung<td>
-                <td><a href="files/mc_is_bonesDP-RP.zip" class="download-button" download="mc_is_bonesDP-RP.zip">mc_is_bonesDP-RP.zip</a></td>
+                <td><a href="files/mc_is_bonesDP-RP.zip" class="state-edit" download="mc_is_bonesDP-RP.zip">mc_is_bonesDP-RP.zip</a></td>
             </tr>
             <tr>
                 <td>1.21</td>
                 <td>Higher Enchantments</td>
                 <td>Veraendert die hoechste Stufe von den meisten Verzauberungen</td>
                 <td>Datapack</td>
-                <td class="state-buged">Verbugt</td>
-                <td><a href="files/higher_enchantments.zip" class="download-button" download="higher_enchantments.zip">higher_enchantments.zip</a></td>
+                <td><a href="files/higher_enchantments.zip" class="state-buged" download="higher_enchantments.zip">higher_enchantments.zip</a></td>
             </tr>
         </tbody>
     </table>
