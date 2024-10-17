@@ -71,7 +71,7 @@
         const pumpkinImage = new Image();
         const basketImage = new Image();
         pumpkinImage.src = 'images/pumpkin.png'; // Pfad zur Kürbis-Bilddatei
-        basketImage.src = 'images/korb.png'; // Pfad zur Korb-Bilddatei
+        basketImage.src = 'images/bowl.png'; // Pfad zur Korb-Bilddatei
 
         // Setze die tatsächliche Pixelgröße des Canvas entsprechend der CSS-Größe
         function resizeCanvas() {
@@ -143,16 +143,9 @@
             document.addEventListener('keydown', moveBasket);
         }
 
-        // Größe des Canvas beim Laden und bei Fensteränderungen anpassen
         window.addEventListener('resize', resizeCanvas);
         window.onload = () => {
             resizeCanvas();
-            // Startet das Spiel, wenn die Bilder geladen sind
-            pumpkinImage.onload = () => {
-                basketImage.onload = () => {
-                    startGame(); // Startet das Spiel erst, wenn beide Bilder geladen sind
-                };
-            };
         };
     </script>
 </body>
