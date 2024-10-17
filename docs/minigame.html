@@ -36,13 +36,12 @@
         }
 
         header a {
-            color: white;
-            font-size: 16px;
+            color: var(--header-link-color, #f8b400);
             text-decoration: none;
-            background-color: #f44336;
             padding: 10px 20px;
-            border-radius: 8px;
-            transition: background-color 0.3s;
+            background-color: var(--button-bg-color, #444);
+            border-radius: 5px;
+            font-family: 'Minecraft', sans-serif;
         }
 
         .button {
@@ -54,11 +53,12 @@
             cursor: pointer;
             border-radius: 5px;
             margin-top: 10px;
+            font-family: 'Minecraft', sans-serif;
         }
 
         #gameCanvas {
             width: 80vw;
-            height: 65vh;
+            height: 80vh;
             border: 2px solid var(--canvas-border-color, #f8b400);
             background-color: var(--canvas-bg-color, #333);
         }
@@ -66,7 +66,7 @@
 </head>
 <body>
     <header>
-        <a href="https://redminer9630de.github.io">Zurueck ></a>
+        <a href="index.html">Zurueck</a>
     </header>
 
     <h1>Pumpkin Catch</h1>
@@ -96,7 +96,9 @@
         let gameInterval;
         let score = 0;
         let isGameRunning = false;
+        const maxPumpkins = 3;
         let lives = 3;
+        const lifeStatus = [true, true, true]; // true = heart, false = dead
 
         function resizeCanvas() {
             canvas.width = canvas.clientWidth;
@@ -104,11 +106,13 @@
         }
 
         function addPumpkin() {
-            pumpkins.push({
-                x: Math.random() * (canvas.width - 30),
-                y: 0,
-                speed: 2 + Math.random() * 3
-            });
+            if (pumpkins.length < maxPumpkins) {
+                pumpkins.push({
+                    x: Math.random() * (canvas.width - 30),
+                    y: 0,
+                    speed: 2 + Math.random() * 3
+                });
+            }
         }
 
         function drawPumpkin(pumpkin) {
@@ -121,15 +125,9 @@
 
         function drawLives() {
             for (let i = 0; i < lives; i++) {
-                ctx.drawImage(heartImage, 10 + i * 40, 40, 30, 30);
+                const img = lifeStatus[i] ? heartImage : deadImage;
+                ctx.drawImage(img, 10 + i * 40, 40, 30, 30);
             }
-        }
-
-        function drawGameOver() {
-            ctx.drawImage(deadImage, canvas.width / 2 - 50, canvas.height / 2 - 50, 100, 100);
-            ctx.fillStyle = 'white';
-            ctx.font = '20px Minecraft';
-            ctx.fillText('Spiel vorbei! Dein Punktestand: ' + score, canvas.width / 2 - 100, canvas.height / 2 + 70);
         }
 
         function updateGame() {
@@ -153,11 +151,14 @@
                 if (pumpkin.y > canvas.height - 10) {
                     pumpkins.splice(index, 1);
                     addPumpkin();
-                    lives--;
-                    if (lives <= 0) {
+                    if (lives > 0) {
+                        lifeStatus[lives - 1] = false; // Setze das entsprechende Leben auf "tot"
+                        lives--;
+                    }
+                    if (lives === 0) {
                         clearInterval(gameInterval);
                         isGameRunning = false;
-                        drawGameOver();
+                        alert('Spiel vorbei! Dein Punktestand: ' + score);
                         return;
                     }
                 }
@@ -201,8 +202,9 @@
         function startGame() {
             score = 0;
             lives = 3;
+            lifeStatus.fill(true); // Setzt alle Leben auf "herz" zurück
             pumpkins.length = 0;
-            addPumpkin();
+            addPumpkin();  // Füge den ersten Kürbis hinzu
             isGameRunning = true;
             gameInterval = setInterval(updateGame, 20);
             document.addEventListener('keydown', handleKeyDown);
