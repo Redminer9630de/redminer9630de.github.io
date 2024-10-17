@@ -35,13 +35,14 @@
             box-sizing: border-box;
         }
 
-        header a {
-            color: var(--header-link-color, #f8b400);
+        header a {           
+            color: white;
+            font-size: 16px;
             text-decoration: none;
+            background-color: #f44336;
             padding: 10px 20px;
-            background-color: var(--button-bg-color, #444);
-            border-radius: 5px;
-            font-family: 'Minecraft', sans-serif;
+            border-radius: 8px;
+            transition: background-color 0.3s;
         }
 
         .button {
@@ -58,7 +59,7 @@
 
         #gameCanvas {
             width: 80vw;
-            height: 80vh;
+            height: 65vh;
             border: 2px solid var(--canvas-border-color, #f8b400);
             background-color: var(--canvas-bg-color, #333);
         }
