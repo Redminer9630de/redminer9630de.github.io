@@ -288,7 +288,7 @@ footer {
     font-size: 16px;
     outline: none;
     transition: border-color 0.3s ease;
-    margin-left: 50px;
+    margin-left: 25px;
 }
 
 .searchbar:focus {
@@ -306,9 +306,8 @@ footer {
     overflow-y: auto;
     box-shadow: 0px 4px 6px rgba(0, 0, 0, 0.1);
     margin-top: 5px;
-    margin-left: auto;
-    z-index: 19; /* Damit die Vorschläge vor anderen Elementen stehen */
-    justify-content: flex-end;
+    margin-left: 25px;
+    z-index: 19;
 }
 
 .suggestions li {
@@ -321,9 +320,7 @@ footer {
 .suggestions li:hover {
     background-color: #f0f0f0; /* Hellgraue Hintergrundfarbe bei Hover */
 }
-/* Standard-Design bleibt wie es ist */
-
-/* Layout für Smartphones im Hochformat */
+        
 @media (max-width: 768px) and (orientation: portrait) {
     header {
         flex-direction: column;
