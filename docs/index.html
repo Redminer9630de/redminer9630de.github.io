@@ -576,23 +576,21 @@ footer {
         // Funktion, die den Live-Stream-Status überprüft
         function checkLiveStreamStatus() {
             // Hier ersetzt du die URL mit deiner API, die den Status zurückgibt
-            fetch('DEINE_API_URL')
+            fetch('https://api.twitch.tv/helix/streams?user_login=Redminer9630')
                 .then(response => response.json())
                 .then(data => {
-                    // Beispiel: Überprüfen, ob der Stream läuft (abhängig von deiner API-Struktur)
                     if (data.isLive) { // `isLive` sollte durch den tatsächlichen Schlüssel ersetzt werden
-                        document.getElementById('liveStreamLink').style.display = 'list-item'; // Link anzeigen
+                        document.getElementById('liveStreamLink').style.display = 'list-item';
                     } else {
-                        document.getElementById('liveStreamLink').style.display = 'none'; // Link ausblenden
+                        document.getElementById('liveStreamLink').style.display = 'none';
                     }
                 })
                 .catch(error => {
                     console.error('Fehler beim Überprüfen des Live-Streams:', error);
-                    document.getElementById('liveStreamLink').style.display = 'none'; // Im Fehlerfall ausblenden
+                    document.getElementById('liveStreamLink').style.display = 'none';
                 });
         }
 
-        // Überprüfen des Live-Stream-Status beim Laden der Seite
         window.onload = checkLiveStreamStatus;
 
         
