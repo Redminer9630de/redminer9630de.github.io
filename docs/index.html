@@ -432,6 +432,12 @@ footer {
                         Twitch Stream
                     </a>
                 </li>
+                <li id="twitch" style="display: none;">
+                    <a href="https://twitch.tv/Redminer9630">
+                        <img src="images/twitch.png" alt="Twitch" style="width: 20px; height: 20px; vertical-align: middle; margin-right: 5px;">
+                        Twitch
+                    </a>
+                </li>
                 <li>
                     <a href="https://discord.gg/uRNX47tYrX">
                         <img src="images/discord.png" alt="Discord" style="width: 20px; height: 15px; vertical-align: middle; margin-right: 5px;">
@@ -578,10 +584,12 @@ footer {
             fetch('https://api.twitch.tv/helix/streams?user_login=Redminer9630')
                 .then(response => response.json())
                 .then(data => {
-                    if (data.isLive) { // `isLive` sollte durch den tatsächlichen Schlüssel ersetzt werden
+                    if (data.isLive) {
                         document.getElementById('liveStreamLink').style.display = 'list-item';
+                        document.getElementById('twitch').style.display = 'none';
                     } else {
-                        document.getElementById('liveStreamLink').style.display = 'none';
+                        document.getElementById('liveStreamLink').style.display = 'none';                     
+                        document.getElementById('twitch').style.display = 'list-item';
                     }
                 })
                 .catch(error => {
