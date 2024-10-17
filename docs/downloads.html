@@ -152,11 +152,21 @@
             font-size: 10px;
             cursor: pointer;
         }
+        
+        .state-error {
+            background-color: red;
+            color: white;
+            padding: 10px;
+            text-decoration: none;
+            border-radius: 5px;
+            font-size: 10px;
+            cursor: pointer;
+        }
     </style>
 </head>
 <body>
     <a href="https://redminer9630de.github.io/" tabindex="1" class="header-link">Zurueck ></a>
-    <div class="info-button" onclick="window.location.href='https://github.com/Redminer9630de/redminer9630de.github.io/wiki/'"></div>
+    <div class="info-button" onclick="window.location.href='https://github.com/Redminer9630de/redminer9630de.github.io/wiki/Downloads'"></div>
     <h1>Downloads - Redminer9630</h1>
     <table id="downloadTable">
         <thead>
@@ -194,10 +204,6 @@
     </table>
 
     <script>
-        function openInfoPage() {
-            window.location.href = "https://github.com/Redminer9630de/wiki/";
-        }
-
         function sortTable(columnIndex) {
             const table = document.getElementById("downloadTable");
             const tbody = table.querySelector("tbody");
