@@ -3,7 +3,7 @@
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>Kuerbis Fangen</title>
+    <title>Pumpkin Catch</title>
     <style>
         @font-face {
             font-family: 'Minecraft';
@@ -23,7 +23,18 @@
             justify-content: center;
             height: 100vh;
         }
-      
+
+        header {
+            width: 100%;
+            display: flex;
+            justify-content: flex-end;
+            padding: 10px;
+            position: absolute;
+            top: 0;
+            right: 0;
+            box-sizing: border-box;
+        }
+
         header a {
             color: white;
             font-size: 16px;
@@ -32,11 +43,9 @@
             padding: 10px 20px;
             border-radius: 8px;
             transition: background-color 0.3s;
-            text-align: right;
         }
 
         .button {
-            font-family: 'Minecraft', sans-serif;
             background-color: var(--button-bg-color, #f8b400);
             color: var(--button-text-color, #fff);
             border: none;
@@ -46,10 +55,10 @@
             border-radius: 5px;
             margin-top: 10px;
         }
-        
+
         #gameCanvas {
-            width: 80vw; /* 80% der Breite des Viewports */
-            height: 65vh; /* 80% der Höhe des Viewports */
+            width: 80vw;
+            height: 80vh;
             border: 2px solid var(--canvas-border-color, #f8b400);
             background-color: var(--canvas-bg-color, #333);
         }
@@ -57,69 +66,113 @@
 </head>
 <body>
     <header>
-        <a href="https://redminer9630de.github.io/">Zurueck ></a>
+        <a href="https://redminer9630de.github.io">Zurueck ></a>
     </header>
 
-    <h1>Kuerbis Fangen</h1>
+    <h1>Pumpkin Catch</h1>
     <canvas id="gameCanvas"></canvas>
     <button class="button" onclick="startGame()">Spiel starten</button>
 
-    <script>        
+    <script>
         const canvas = document.getElementById('gameCanvas');
         const ctx = canvas.getContext('2d');
 
         const pumpkinImage = new Image();
         const basketImage = new Image();
-        pumpkinImage.src = 'images/pumpkin.png'; // Pfad zur Kürbis-Bilddatei
-        basketImage.src = 'images/bowl.png'; // Pfad zur Korb-Bilddatei
+        const heartImage = new Image();
+        const deadImage = new Image();
+        pumpkinImage.src = 'images/pumpkin.png';
+        basketImage.src = 'images/bowl.png';
+        heartImage.src = 'images/heart.png';
+        deadImage.src = 'images/dead.png';
 
-        // Setze die tatsächliche Pixelgröße des Canvas entsprechend der CSS-Größe
+        const pumpkins = [];
+        const basketWidth = 60;
+        const basketHeight = 30;
+        let basketX = canvas.width / 2 - basketWidth / 2;
+        const basketSpeed = 5;
+        let basketMovingLeft = false;
+        let basketMovingRight = false;
+        let gameInterval;
+        let score = 0;
+        let isGameRunning = false;
+        let lives = 3;
+
         function resizeCanvas() {
             canvas.width = canvas.clientWidth;
             canvas.height = canvas.clientHeight;
         }
 
-        let pumpkinX = Math.random() * (canvas.width - 30);
-        let pumpkinY = 0;
-        let pumpkinSpeed = 2;
+        function addPumpkin() {
+            pumpkins.push({
+                x: Math.random() * (canvas.width - 30),
+                y: 0,
+                speed: 2 + Math.random() * 3
+            });
+        }
 
-        let basketX = canvas.width / 2 - 30;
-        const basketWidth = 60;
-        const basketHeight = 20;
-        const basketSpeed = 20;
-
-        let score = 0;
-        let gameInterval;
-
-        function drawPumpkin() {
-            ctx.drawImage(pumpkinImage, pumpkinX, pumpkinY, 30, 30); // Kürbis zeichnen
+        function drawPumpkin(pumpkin) {
+            ctx.drawImage(pumpkinImage, pumpkin.x, pumpkin.y, 30, 30);
         }
 
         function drawBasket() {
-            ctx.drawImage(basketImage, basketX, canvas.height - basketHeight, basketWidth, basketHeight); // Korb zeichnen
+            ctx.drawImage(basketImage, basketX, canvas.height - basketHeight - 10, basketWidth, basketHeight);
+        }
+
+        function drawLives() {
+            for (let i = 0; i < lives; i++) {
+                ctx.drawImage(heartImage, 10 + i * 40, 40, 30, 30);
+            }
+        }
+
+        function drawGameOver() {
+            ctx.drawImage(deadImage, canvas.width / 2 - 50, canvas.height / 2 - 50, 100, 100);
+            ctx.fillStyle = 'white';
+            ctx.font = '20px Minecraft';
+            ctx.fillText('Spiel vorbei! Dein Punktestand: ' + score, canvas.width / 2 - 100, canvas.height / 2 + 70);
         }
 
         function updateGame() {
             ctx.clearRect(0, 0, canvas.width, canvas.height);
-            drawPumpkin();
+
+            pumpkins.forEach((pumpkin, index) => {
+                pumpkin.y += pumpkin.speed;
+
+                // Überprüfen, ob ein Kürbis gefangen wurde
+                if (
+                    pumpkin.y >= canvas.height - basketHeight - 10 &&
+                    pumpkin.x >= basketX &&
+                    pumpkin.x <= basketX + basketWidth
+                ) {
+                    score++;
+                    pumpkins.splice(index, 1);
+                    addPumpkin();
+                }
+
+                // Überprüfen, ob ein Kürbis den Boden erreicht
+                if (pumpkin.y > canvas.height - 10) {
+                    pumpkins.splice(index, 1);
+                    addPumpkin();
+                    lives--;
+                    if (lives <= 0) {
+                        clearInterval(gameInterval);
+                        isGameRunning = false;
+                        drawGameOver();
+                        return;
+                    }
+                }
+
+                drawPumpkin(pumpkin);
+            });
+
             drawBasket();
+            drawLives();
 
-            pumpkinY += pumpkinSpeed;
-
-            if (
-                pumpkinY >= canvas.height - basketHeight &&
-                pumpkinX >= basketX &&
-                pumpkinX <= basketX + basketWidth
-            ) {
-                score++;
-                pumpkinY = 0;
-                pumpkinX = Math.random() * (canvas.width - 30);
-                pumpkinSpeed += 0.5; 
+            if (basketMovingLeft && basketX > 0) {
+                basketX -= basketSpeed;
             }
-
-            if (pumpkinY > canvas.height) {
-                clearInterval(gameInterval);
-                alert('Spiel vorbei! Dein Punktestand: ' + score);
+            if (basketMovingRight && basketX < canvas.width - basketWidth) {
+                basketX += basketSpeed;
             }
 
             ctx.fillStyle = 'white';
@@ -127,25 +180,47 @@
             ctx.fillText('Punkte: ' + score, 10, 30);
         }
 
-        function moveBasket(event) {
-            if (event.key === 'ArrowLeft' && basketX > 0) {
-                basketX -= basketSpeed;
-            } else if (event.key === 'ArrowRight' && basketX < canvas.width - basketWidth) {
-                basketX += basketSpeed;
+        function handleKeyDown(event) {
+            if (event.key === 'ArrowLeft') {
+                basketMovingLeft = true;
+            } else if (event.key === 'ArrowRight') {
+                basketMovingRight = true;
+            } else if (event.key === ' ' && !isGameRunning) {
+                startGame();
+            }
+        }
+
+        function handleKeyUp(event) {
+            if (event.key === 'ArrowLeft') {
+                basketMovingLeft = false;
+            } else if (event.key === 'ArrowRight') {
+                basketMovingRight = false;
             }
         }
 
         function startGame() {
             score = 0;
-            pumpkinY = 0;
-            pumpkinSpeed = 2;
+            lives = 3;
+            pumpkins.length = 0;
+            addPumpkin();
+            isGameRunning = true;
             gameInterval = setInterval(updateGame, 20);
-            document.addEventListener('keydown', moveBasket);
+            document.addEventListener('keydown', handleKeyDown);
+            document.addEventListener('keyup', handleKeyUp);
         }
 
         window.addEventListener('resize', resizeCanvas);
         window.onload = () => {
             resizeCanvas();
+            pumpkinImage.onload = () => {
+                basketImage.onload = () => {
+                    heartImage.onload = () => {
+                        deadImage.onload = () => {
+                            startGame();
+                        };
+                    };
+                };
+            };
         };
     </script>
 </body>
