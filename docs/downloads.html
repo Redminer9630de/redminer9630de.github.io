@@ -122,10 +122,22 @@
         .download-button:hover {
             background-color: var(--button-hover-color);
         }
+
+        .state-active {
+            color: green;
+        }
+
+        .state-edit {
+            color: blue;
+        }
+
+        .state-buged {
+            color: orange;
+        }
     </style>
 </head>
 <body>
-    <a href="https://redminer9630de.github.io/mc/" tabindex="1" class="header-link">Zurueck ></a>
+    <a href="https://redminer9630de.github.io/" tabindex="1" class="header-link">Zurueck ></a>
     <div class="info-button" onclick="openInfoPage()"></div>
     <h1>Downloads - Redminer9630</h1>
 
@@ -136,15 +148,25 @@
                 <th onclick="sortTable(1)">Titel</th>
                 <th onclick="sortTable(2)">Beschreibung</th>
                 <th onclick="sortTable(3)">Typ</th>
-                <th onclick="sortTable(4)">Datei</th>
+                <th onclick="sortTable(4)">Status<th>
+                <th onclick="sortTable(5)">Datei</th>
             </tr>
         </thead>
         <tbody>
+            <tr>
+                <td>-</td>
+                <td>Craft Attack Maps</td>
+                <td>Craft Attack Maps(Nicht von Mir)</td>
+                <td>Map</td>
+                <td class="state-acitve">Aktiv</td>
+                <td><a href="https://craftattack.one" class="download-button">https://craftattack.one</a></td>
+            </tr>
             <tr>
                 <td>1.21</td>
                 <td>MC is Bones</td>
                 <td>Veraendert End Game Items zur Knochen Textur und hat support für ein paar Mods. Extrahiere diese Datei um sie richtig zu benutzten</td>
                 <td>Resourcepack/Datapack</td>
+                <td class="state-edit">In Bearbeitung<td>
                 <td><a href="files/mc_is_bonesDP-RP.zip" class="download-button" download="mc_is_bonesDP-RP.zip">mc_is_bonesDP-RP.zip</a></td>
             </tr>
             <tr>
@@ -152,6 +174,7 @@
                 <td>Higher Enchantments</td>
                 <td>Veraendert die hoechste Stufe von den meisten Verzauberungen</td>
                 <td>Datapack</td>
+                <td class="state-buged">Verbugt</td>
                 <td><a href="files/higher_enchantments.zip" class="download-button" download="higher_enchantments.zip">higher_enchantments.zip</a></td>
             </tr>
         </tbody>
@@ -159,7 +182,7 @@
 
     <script>
         function openInfoPage() {
-            window.location.href = "https://github.com/Redminer9630de/mc/wiki/";
+            window.location.href = "https://github.com/Redminer9630de/wiki/";
         }
 
         function sortTable(columnIndex) {
