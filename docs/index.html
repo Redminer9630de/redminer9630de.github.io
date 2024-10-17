@@ -455,7 +455,7 @@ footer {
                 <li><a href="downloads">Downloads</a></li>
                 <li><a href="generators">Command Generatoren</a></li>
                 <li><a href="calculator">Taschenrechner</a></li>
-                <li><a href="streams">Live-Stream</a></li>
+                <li id="liveStreamLink" style="display: none;"><a href="streams">Live-Stream</a></li>
                 <li class="hiddenItem"><a href="tutorials">Minecraft Tutorials(Nicht ausgefuellt)</a></li>
             </ul>
         </div>
@@ -572,6 +572,29 @@ footer {
                 item.style.display = 'none';
             }
         });
+
+        // Funktion, die den Live-Stream-Status überprüft
+        function checkLiveStreamStatus() {
+            // Hier ersetzt du die URL mit deiner API, die den Status zurückgibt
+            fetch('DEINE_API_URL')
+                .then(response => response.json())
+                .then(data => {
+                    // Beispiel: Überprüfen, ob der Stream läuft (abhängig von deiner API-Struktur)
+                    if (data.isLive) { // `isLive` sollte durch den tatsächlichen Schlüssel ersetzt werden
+                        document.getElementById('liveStreamLink').style.display = 'list-item'; // Link anzeigen
+                    } else {
+                        document.getElementById('liveStreamLink').style.display = 'none'; // Link ausblenden
+                    }
+                })
+                .catch(error => {
+                    console.error('Fehler beim Überprüfen des Live-Streams:', error);
+                    document.getElementById('liveStreamLink').style.display = 'none'; // Im Fehlerfall ausblenden
+                });
+        }
+
+        // Überprüfen des Live-Stream-Status beim Laden der Seite
+        window.onload = checkLiveStreamStatus;
+
         
 		document.getElementById('hamburger').addEventListener('click', function(event) {
 		    event.stopPropagation(); // Verhindert, dass das Click-Event weitergegeben wird
