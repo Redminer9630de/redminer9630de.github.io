@@ -289,6 +289,7 @@ footer {
     outline: none;
     transition: border-color 0.3s ease;
     margin-right: auto;
+    justify-content: flex-end;
 }
 
 .searchbar:focus {
@@ -297,16 +298,17 @@ footer {
 
 .suggestions {
     position: absolute;
-    width: calc(100% - 20px); /* Passt sich der Suchleiste an */
-    max-width: 300px;
+    width: 200px; /* Passt sich der Suchleiste an */
+    max-width: 250px;
     background-color: white;
     border: 1px solid #ccc;
     border-radius: 8px;
-    max-height: 1600px; /* Maximale Höhe der Vorschlagsliste */
+    max-height: 85%; /* Maximale Höhe der Vorschlagsliste */
     overflow-y: auto;
     box-shadow: 0px 4px 6px rgba(0, 0, 0, 0.1);
     margin-top: 5px;
     z-index: 19; /* Damit die Vorschläge vor anderen Elementen stehen */
+    justify-content: flex-end;
 }
 
 .suggestions li {
