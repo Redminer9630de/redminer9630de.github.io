@@ -3,7 +3,7 @@
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>Pumpkin Catch</title>
+    <title>Kürbis fangen</title>
     <style>
         @font-face {
             font-family: 'Minecraft';
@@ -27,26 +27,23 @@
         header {
             width: 100%;
             display: flex;
-            justify-content: flex-end;
+            justify-content: space-between;
             padding: 10px;
             position: absolute;
             top: 0;
-            right: 0;
             box-sizing: border-box;
         }
 
-        header a {           
-            color: white;
-            font-size: 16px;
+        header a {
+            color: var(--header-link-color, #f8b400);
             text-decoration: none;
-            background-color: #f44336;
             padding: 10px 20px;
-            border-radius: 8px;
-            transition: background-color 0.3s;
+            background-color: var(--button-bg-color, #444);
+            border-radius: 5px;
         }
 
         .button {
-            background-color: var(--button-bg-color, #f8b400);
+            background-color: var(--button-bg-color, #32CD32);
             color: var(--button-text-color, #fff);
             border: none;
             padding: 10px 20px;
@@ -54,25 +51,57 @@
             cursor: pointer;
             border-radius: 5px;
             margin-top: 10px;
-            font-family: 'Minecraft', sans-serif;
         }
 
         #gameCanvas {
             width: 80vw;
-            height: 65vh;
+            height: 80vh;
             border: 2px solid var(--canvas-border-color, #f8b400);
             background-color: var(--canvas-bg-color, #333);
+        }
+
+        .blurred-text {
+            filter: blur(2px);
+        }
+
+        #leaderboard {
+            background-color: #333;
+            color: #fff;
+            padding: 10px;
+            border-radius: 5px;
+            max-height: 200px;
+            overflow-y: auto;
+            display: none;
+            position: absolute;
+            top: 100px;
+            left: 50%;
+            transform: translateX(-50%);
+            width: 300px;
+        }
+
+        #leaderboard ul {
+            list-style: none;
+            padding: 0;
+        }
+
+        #playerName {
+            color: #32CD32;
         }
     </style>
 </head>
 <body>
     <header>
-        <a href="https://redminer9630de.github.io/">Zurueck</a>
+        <a href="index.html">Zurück</a>
+        <span id="playerName">Spielername</span>
+        <button class="button" onclick="showLeaderboard()">Bestenliste</button>
     </header>
 
-    <h1>Pumpkin Catch</h1>
+    <h1>Kuerbis fangen</h1>
     <canvas id="gameCanvas"></canvas>
-    <button class="button" onclick="startGame()">Spiel starten</button>
+    <div id="leaderboard">
+        <h2>Top 20 Spieler</h2>
+        <ul id="leaderboardList"></ul>
+    </div>
 
     <script>
         const canvas = document.getElementById('gameCanvas');
@@ -82,10 +111,10 @@
         const basketImage = new Image();
         const heartImage = new Image();
         const deadImage = new Image();
-        pumpkinImage.src = 'images/pumpkin.png';
-        basketImage.src = 'images/bowl.png';
-        heartImage.src = 'images/heart.png';
-        deadImage.src = 'images/dead.png';
+        pumpkinImage.src = 'pumpkin.png';
+        basketImage.src = 'korb.png';
+        heartImage.src = 'heart.png';
+        deadImage.src = 'dead.png';
 
         const pumpkins = [];
         const basketWidth = 60;
@@ -100,6 +129,10 @@
         const maxPumpkins = 3;
         let lives = 3;
         const lifeStatus = [true, true, true]; // true = heart, false = dead
+        let playerName = localStorage.getItem('playerName') || 'Spielername';
+        const leaderboard = JSON.parse(localStorage.getItem('leaderboard')) || [];
+
+        document.getElementById('playerName').textContent = playerName;
 
         function resizeCanvas() {
             canvas.width = canvas.clientWidth;
@@ -159,6 +192,7 @@
                     if (lives === 0) {
                         clearInterval(gameInterval);
                         isGameRunning = false;
+                        saveScore();
                         alert('Spiel vorbei! Dein Punktestand: ' + score);
                         return;
                     }
@@ -200,6 +234,25 @@
             }
         }
 
+        function saveScore() {
+            const newEntry = { name: playerName, score };
+            leaderboard.push(newEntry);
+            leaderboard.sort((a, b) => b.score - a.score);
+            if (leaderboard.length > 20) leaderboard.length = 20;
+            localStorage.setItem('leaderboard', JSON.stringify(leaderboard));
+        }
+
+        function showLeaderboard() {
+            const leaderboardList = document.getElementById('leaderboardList');
+            leaderboardList.innerHTML = '';
+            leaderboard.forEach((entry, index) => {
+                const li = document.createElement('li');
+                li.textContent = `${index + 1}. ${entry.name} - ${entry.score}`;
+                leaderboardList.appendChild(li);
+            });
+            document.getElementById('leaderboard').style.display = 'block';
+        }
+
         function startGame() {
             score = 0;
             lives = 3;
@@ -212,19 +265,8 @@
             document.addEventListener('keyup', handleKeyUp);
         }
 
+        window.addEventListener('load', resizeCanvas);
         window.addEventListener('resize', resizeCanvas);
-        window.onload = () => {
-            resizeCanvas();
-            pumpkinImage.onload = () => {
-                basketImage.onload = () => {
-                    heartImage.onload = () => {
-                        deadImage.onload = () => {
-                            startGame();
-                        };
-                    };
-                };
-            };
-        };
     </script>
 </body>
 </html>
