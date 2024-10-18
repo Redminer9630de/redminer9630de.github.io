@@ -91,9 +91,9 @@
 </head>
 <body>
     <header>
-        <a href="index.html">Zurück</a>
-        <span id="playerName">Spielername</span>
         <button class="button" onclick="showLeaderboard()">Bestenliste</button>
+        <span id="playerName" placeholder="Spielername"></span>
+        <a href="index.html">Zurueck ></a>
     </header>
 
     <h1>Kuerbis fangen</h1>
@@ -193,7 +193,9 @@
                         clearInterval(gameInterval);
                         isGameRunning = false;
                         saveScore();
-                        alert('Spiel vorbei! Dein Punktestand: ' + score);
+                        alert('Verloren! Dein Punktestand: ' + score);        
+                        const playerScore = score;
+                        sendPlayerToDiscord(playerName, playerScore);
                         return;
                     }
                 }
@@ -263,6 +265,31 @@
             gameInterval = setInterval(updateGame, 20);
             document.addEventListener('keydown', handleKeyDown);
             document.addEventListener('keyup', handleKeyUp);
+        }
+
+        function sendPlayerToDiscord(playerName, score) {
+            const webhookUrl = "DEIN_WEBHOOK_URL_ADMIN_HIER";
+            const message = {
+                    content: `🎮 **Neuer Spieler-Score:**\n👤 Spieler: ${playerName}\n🏅 Punkte: ${score}`;
+            };
+
+            fetch(webhookUrl, {
+                method: "POST",
+                headers: {
+                    "Content-Type": "application/json"
+                },
+                body: JSON.stringify(message)
+                })
+            .then(response => {
+                if (response.ok) {
+                    console.log("Spielerdaten erfolgreich an Discord gesendet.");
+                } else {
+                    console.error("Fehler beim Senden der Spielerdaten:", response.statusText);
+                }
+            })
+            .catch(error => {
+                console.error("Fetch-Fehler:", error);
+            });
         }
 
         window.addEventListener('load', resizeCanvas);
