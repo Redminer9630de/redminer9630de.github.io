@@ -3,7 +3,7 @@
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>Taschenrechner</title>
+    <title>Tools</title>
     <link rel="icon" href="images/favicon.ico" type="image/x-icon">
     <link rel="icon" href="images/android-chrome-192x192.png" sizes="192x192" type="image/png">
     <link rel="apple-touch-icon" href="images/apple-touch-icon.png" type="image/png">
@@ -261,10 +261,10 @@
 <body>
     <a href="https://redminer9630de.github.io/" class="header-link">Zurueck ></a>
     <div class="info-button" onclick="openInfoPage()"></div>
-    <h1>Taschenrechner - Redminer9630</h1>
+    <h1>Tools - Redminer9630</h1>
     
     <select id="modeSelector" onchange="changeMode()" class="button" style="margin-bottom: 20px; padding: 10px; border-radius: 8px; border: none; font-size: 16px;">
-        <option onclick="changeMode()" value="standard">Standard</option>
+        <option onclick="changeMode()" value="standard">Taschenrechner</option>
         <option onclick="changeMode()" value="nether">Nether Portal</option>
         <option onclick="changeMode()" value="item">Item Listen</option>
     </select>
@@ -442,19 +442,6 @@
 
             // Sicherstellen, dass immer mindestens eine leere Reihe vorhanden ist
             ensureAtLeastOneEmptyRow();
-        }
-        
-        const urlParams = new URLSearchParams(window.location.search);
-        const mode = urlParams.get('mode');
-
-        if (mode === "nether") {
-            modeSelector.value = "nether";
-            changeMode();
-        }
-
-        if (mode === "item") {
-            modeSelector.value = "item";
-            changeMode();
         }
 
         // Initialer Event-Listener für die erste Reihe
