@@ -7,4 +7,6 @@ Disallow: /minecraft_font.ttf
 Disallow: /minecraft_font.woff
 Disallow: /playertest.html
 Disallow: /sitemaps.xml
+Disallow: /robots.txt
+Disallow: /textures/
 Sitemap: https://redminer9630de.github.io/sitemaps.xml
