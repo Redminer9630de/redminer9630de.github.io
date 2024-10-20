@@ -636,6 +636,9 @@
         }
 
         function navigateToPage(pageName) {
+            const url = new URL(window.location.href);
+            url.searchParams.set('id', pageName);
+            window.history.pushState({}, '', url);
             const content = document.getElementById('content');
 
             if (wikiPages[pageName]) {
