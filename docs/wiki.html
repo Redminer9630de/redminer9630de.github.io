@@ -767,6 +767,54 @@
             alertBox.innerHTML = `<h2>${title}</h2><p>${message}</p><button onclick="this.parentElement.remove()">OK</button>`;
             document.body.appendChild(alertBox);
         }
+        
+        customElements.define('wikigui', class extends HTMLElement {
+            constructor() {
+                super();
+                const type = this.getAttribute('type');
+                if (type === 'crafting') {
+                    this.loadCraftingImage();
+                    this.loadCraftingData();
+                }
+            }
+
+            async loadCraftingImage() {
+                const img = document.createElement('img');
+                img.src = 'learnhour/wiki/img/crafting.png';
+                img.alt = 'Crafting Recipe';
+                this.appendChild(img);
+            }
+
+            async loadCraftingData() {
+                const response = await fetch('learnhour/wiki/img/crafting.json');
+                const data = await response.json();
+
+                console.log(data); // Zum Überprüfen der geladenen Daten
+                this.renderCraftingGrid(data);
+            }
+
+            renderCraftingGrid(data) {
+                // Hier den Code zum Rendern des Crafting-Gitters basierend auf den geladenen Daten hinzufügen
+                // Zum Beispiel:
+                const grid = document.createElement('div');
+                grid.className = 'crafting-grid';
+                const rows = [data.row1, data.row2, data.row3];
+
+                rows.forEach(row => {
+                    const rowDiv = document.createElement('div');
+                    rowDiv.className = 'grid-row';
+                    row.forEach(item => {
+                        const itemDiv = document.createElement('div');
+                        itemDiv.className = 'grid-item';
+                        itemDiv.style.backgroundImage = `url(textures/items/${item.name}.png)`;
+                        rowDiv.appendChild(itemDiv);
+                    });
+                    grid.appendChild(rowDiv);
+                });
+
+                this.appendChild(grid);
+            }
+        });
     </script>
 </body>
 </html>
