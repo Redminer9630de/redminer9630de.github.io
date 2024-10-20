@@ -295,6 +295,7 @@
             color: white;
             border: none;
             cursor: pointer;
+            font-family: 'MinecraftFont', sans-serif;
         }
     </style>
 </head>
@@ -633,26 +634,24 @@
             rows.forEach(row => tbody.appendChild(row));
         }
 
-        function navigateToPage() {
-            const input = document.getElementById('urlInput').value;
+        function navigateToPage(pageName) {
+            const content = document.getElementById('content');
 
-            if (input.startsWith("redminer9630.de/wiki/")) {
-   		    	urlHistory = urlHistory.slice(0, historyIndex + 1); // Schneide zukünftige Einträge ab
-   		    	urlHistory.push(input);
-   		    	historyIndex++;
-
-                switch (page.toLowerCase()) {
+            if (wikiPages[pageName]) {
+                loadWikiContent(wikiPages[pageName]);
+            } else {
+                switch (pageName) {
                     case 'home':
                         showHomePage();
                         break;
                     case 'commands':
-                        showCommands();
+                        showCommands();        
                         break;
                     case 'trading':
                         showTrading();
                         break;
                     case 'brewing':
-                        showBrewing();
+                        showBrewing();    
                         break;
                     case 'enchanting':
                         showEnchanting();
@@ -688,13 +687,12 @@
                         showArchaeology();
                         break;
                     default:
-                        alert('Seite nicht gefunden.');
+                        showHomePage();
+                        break;
                 }
-            } else {
-                alert('Seite nicht gefunden, ');
             }
         }
-
+        
         document.querySelector('.url-input').addEventListener('keypress', function(event) {
             if (event.key === 'Enter') {
                 navigateToPage();
@@ -741,24 +739,20 @@
             }
         }
 
-        function navigateToPage(pageName) {
-            const content = document.getElementById('content');
-
-            try {
-                if (typeof wikiPages[pageName] !== 'undefined') {
-                    content.innerHTML = wikiPages[pageName];
-                } else {
-                    throw new Error("Wiki-Seite nicht gefunden.");
-                }
-            } catch (e) {
-                const fakeUrlPage = new URL(window.location.href).searchParams.get('page');
-
-                if (fakeUrlPage && typeof wikiPages[fakeUrlPage] !== 'undefined') {
-                    content.innerHTML = wikiPages[fakeUrlPage];
-                } else {
-                    customAlert(`Die Seite "${pageName}" konnte nicht gefunden werden.`, "Fehler");
-                }
-            }
+        function loadWikiContent(filePath) {
+            fetch(filePath)
+                .then(response => {
+                    if (!response.ok) {
+                        throw new Error('Seite konnte nicht geladen werden');
+                    }
+                    return response.text();
+                })
+                .then(data => {
+                    document.getElementById('content').innerHTML = data;
+                })
+                .catch(error => {
+                    customAlert('Fehler beim Laden der Wiki-Seite: ' + error.message, 'Fehler');
+                });
         }
 
         function customAlert(message, title) {
