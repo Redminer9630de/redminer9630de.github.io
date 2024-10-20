@@ -238,7 +238,8 @@
 
         .url-label {
             margin-top: 4px;
-
+        }
+        
         .url-input {
             font-family: 'MinecraftFont', sans-serif;
             font-size: 12px;
@@ -265,14 +266,35 @@
             border: none !important;
             border-radius: 0px;
         }
-
         .history-forward:active, .history-back:active {
             color: orange !important;
         }
-
         .history-forward:disabled, .history-back:disabled {
             cursor: not-allowed !important; /* Deaktivierter Zustand */
             color: grey !important; /* Deaktivierte Farbe */
+        }
+                    
+        .custom-alert {
+            position: fixed;
+            top: 30%;
+            left: 50%;
+            transform: translate(-50%, -50%);
+            background-color: white;
+            border: 1px solid black;
+            padding: 20px;
+            z-index: 1000;
+            box-shadow: 0 4px 8px rgba(0, 0, 0, 0.2);
+        }
+        .custom-alert h2 {
+            margin: 0 0 10px;
+            font-size: 18px;
+        }
+        .custom-alert button {
+            padding: 5px 10px;
+            background-color: black;
+            color: white;
+            border: none;
+            cursor: pointer;
         }
     </style>
 </head>
@@ -719,43 +741,32 @@
             }
         }
 
-        document.getElementById('urlInput').addEventListener('input', updateHistoryButtons);
-        
-// Lokale Version der Website
-let version = "0.9.6";
-let vtype = "Alpha";
+        function navigateToPage(pageName) {
+            const content = document.getElementById('content');
 
-// URL zu deinem GitHub-Repository (raw Link zur index.html oder einer JS-Datei, die die Version enthält)
-const githubURL = 'https://raw.githubusercontent.com/Redminer9630GitHub/Redminer9630.de/main/mc/index.html'; 
+            try {
+                if (typeof wikiPages[pageName] !== 'undefined') {
+                    content.innerHTML = wikiPages[pageName];
+                } else {
+                    throw new Error("Wiki-Seite nicht gefunden.");
+                }
+            } catch (e) {
+                const fakeUrlPage = new URL(window.location.href).searchParams.get('page');
 
-// Funktion, um die Datei von GitHub zu laden und die Version zu prüfen
-function checkForUpdates() {
-    fetch(githubURL)
-        .then(response => response.text())
-        .then(data => {
-            // Prüfen, ob im HTML die neue Version enthalten ist
-            const githubVersionMatch = data.match(/let version = "(.*?)";/);
-            const githubVtypeMatch = data.match(/let vtype = "(.*?)";/);
-            
-            if (githubVersionMatch && githubVtypeMatch) {
-                const githubVersion = githubVersionMatch[1];
-                const githubVtype = githubVtypeMatch[1];
-                
-                if (githubVersion !== version || githubVtype !== vtype) {
-                    // Wenn die Version unterschiedlich ist, dann Bestätigungsdialog anzeigen
-                    if (confirm(`Neue Version verfügbar (${githubVtype} ${githubVersion}). Seite neu laden?`)) {
-                        location.reload(); // Seite neu laden, wenn der Nutzer "OK" drückt
-                    }
+                if (fakeUrlPage && typeof wikiPages[fakeUrlPage] !== 'undefined') {
+                    content.innerHTML = wikiPages[fakeUrlPage];
+                } else {
+                    customAlert(`Die Seite "${pageName}" konnte nicht gefunden werden.`, "Fehler");
                 }
             }
-        })
-        .catch(error => {
-            console.error('Fehler beim Abrufen der GitHub-Daten:', error);
-        });
-}
+        }
 
-        // Überprüfe regelmäßig auf Updates (alle 5 Minuten)
-        setInterval(checkForUpdates, 60000); // 300000ms = 5 Minuten
+        function customAlert(message, title) {
+            const alertBox = document.createElement('div');
+            alertBox.classList.add('custom-alert');
+            alertBox.innerHTML = `<h2>${title}</h2><p>${message}</p><button onclick="this.parentElement.remove()">OK</button>`;
+            document.body.appendChild(alertBox);
+        }
     </script>
 </body>
 </html>
