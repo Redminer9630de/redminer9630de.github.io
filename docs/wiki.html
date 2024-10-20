@@ -636,64 +636,66 @@
         }
 
         function navigateToPage(pageName) {
-            const url = new URL(window.location.href);
-            url.searchParams.set('id', pageName);
-            window.history.pushState({}, '', url);
             const content = document.getElementById('content');
 
+            switch (pageName) {
+                case 'home':
+                    showHomePage();
+                    break;
+                case 'commands':
+                    showCommands();        
+                    break;
+                case 'trading':
+                    showTrading();
+                    break;
+                case 'brewing':
+                    showBrewing();    
+                    break;
+                case 'enchanting':
+                    showEnchanting();
+                    break;
+                case 'mobs':
+                    showMobs();
+                    break;
+                case 'blocks':
+                    showBlocks();
+                    break;
+                case 'items':
+                    showItems();
+                    break;
+                case 'biomes':
+                    showBiomes();
+                    break;
+                case 'effects':
+                    showEffects();
+                    break;
+                case 'crafting':
+                    showCrafting();
+                    break;
+                case 'smelting':
+                    showSmelting();
+                    break;
+                case 'structures':
+                    showStructures();
+                    break;
+                case 'redstone':
+                    showRedstone();
+                    break;
+                case 'archaeology':
+                    showArchaeology();
+                    break;
+                default:                        
+                    showHomePage();
+                    break;
+            }
+            
             if (wikiPages[pageName]) {
                 loadWikiContent(wikiPages[pageName]);
+                const url = new URL(window.location.href);
+                url.searchParams.set('id', pageName);
+                window.history.pushState({}, '', url);
             } else {
-                switch (pageName) {
-                    case 'home':
-                        showHomePage();
-                        break;
-                    case 'commands':
-                        showCommands();        
-                        break;
-                    case 'trading':
-                        showTrading();
-                        break;
-                    case 'brewing':
-                        showBrewing();    
-                        break;
-                    case 'enchanting':
-                        showEnchanting();
-                        break;
-                    case 'mobs':
-                        showMobs();
-                        break;
-                    case 'blocks':
-                        showBlocks();
-                        break;
-                    case 'items':
-                        showItems();
-                        break;
-                    case 'biomes':
-                        showBiomes();
-                        break;
-                    case 'effects':
-                        showEffects();
-                        break;
-                    case 'crafting':
-                        showCrafting();
-                        break;
-                    case 'smelting':
-                        showSmelting();
-                        break;
-                    case 'structures':
-                        showStructures();
-                        break;
-                    case 'redstone':
-                        showRedstone();
-                        break;
-                    case 'archaeology':
-                        showArchaeology();
-                        break;
-                    default:
-                        showHomePage();
-                        break;
-                }
+                customAlert(`Die Seite "${pageName}" konnte nicht gefunden werden.`, "Fehler");
             }
         }
         
