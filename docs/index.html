@@ -614,6 +614,12 @@ footer {
  		    var navMenu = document.getElementById('navMenu');
  		    navMenu.classList.toggle('active');
         });
+
+        const baseUrl = window.location.origin + window.location.pathname;
+
+        const newUrl = `${baseUrl}?${params.toString()}`;
+        
+        history.pushState({page: ""}, "", newUrl);
     </script>
 </body>
 </html>
