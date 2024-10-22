@@ -515,7 +515,6 @@ footer {
 
         const suggestionListFeedback = false;
 
-        // Suchfunktion
         searchInput.addEventListener('input', function() {
             handleSearch(this.value.toLowerCase());
         });
@@ -543,14 +542,16 @@ footer {
 
             // Falls keine Eingabe vorhanden ist, Vorschlagsliste ausblenden
             if (searchValue === "") {
-                suggestionList.innerHTML = "Nicht gefunden? Gebe Feedback";
+                suggestionList.innerHTML = "";
+            } else if (searchValue === "") {
+                suggestionList.innerHTML = "Nicht Gefunden? Gebe Feedback!";
                 const suggestionListFeedback = true;
             } else {
                 const suggestionListFeedback = false;
             }
         }
         
-        document.getElementById("myDiv").onclick = function() {
+        document.getElementById("suggestionList").onclick = function() {
             if ( suggestionListFeedback === true ) {
                 window.location.href = "https://redminer9630de.github.io/feedback";
             }
