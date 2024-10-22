@@ -504,7 +504,7 @@ footer {
             { keyword: "Wiki", url: "https://github.com/Redminer9630de/redminer9630de.github.io/wiki", text: "GitHub Wiki-Seite", group: "githubwiki" },
             { keyword: "Github Wiki", url: "https://github.com/Redminer9630de/redminer9630de.github.io/wiki", text: "GitHub Wiki-Seite", group: "githubwiki" },
             { keyword: "Discord", url: "https://discord.gg/", text: "Discord", group: "discord" },
-            { class: "feedback-suggest", keyword: "", url: "feedback/", text: "Nicht Gefunden? Gebe Feedback!", group: "feedback" },
+            { keyword: "Feedback", url: "feedback/", text: "Feedback", group: "feedback" },
             { keyword: "Github", url: "https://github.com/Redminer9630de/mc/wiki", text: "GitHub Wiki-Seite", group: "githubwiki" }
         ];
 
@@ -513,8 +513,6 @@ footer {
         const suggestionList = document.createElement('ul');
         suggestionList.classList.add('suggestions');
         document.querySelector('.search-container').appendChild(suggestionList);
-
-        const suggestionListFeedback = false;
 
         searchInput.addEventListener('input', function() {
             handleSearch(this.value.toLowerCase());
@@ -542,20 +540,10 @@ footer {
             });
 
             if (searchValue === "") {
-                suggestionList.innerHTML = "Nicht Gefunden? Gebe Feedback!";
-                const suggestionListFeedback = true;
-            } else {
-                const suggestionListFeedback = false;
+                suggestionList.innerHTML = "";
             }
         }
-        
-        document.getElementById("suggestionList").onclick = function() {
-            if ( suggestionListFeedback === true ) {
-                window.location.href = "https://redminer9630de.github.io/feedback";
-            }
-            
-        };
-
+  
         // Mehr Informationen anzeigen
         document.getElementById('moreInfoBtn').addEventListener('click', function() {
             var moreInfo = document.getElementById('moreInfo');
