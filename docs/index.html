@@ -514,20 +514,18 @@ footer {
         const suggestionList = document.createElement('ul');
         suggestionList.classList.add('suggestions');
         document.querySelector('.search-container').appendChild(suggestionList);
+        const searchLoad = "";
 
         searchInput.addEventListener('input', function() {
             handleSearch(this.value.toLowerCase());
         });
 
-        // Verhindern von doppelten Links durch Suchgruppen
         function handleSearch(searchValue) {
             suggestionList.innerHTML = ""; // Leere die Vorschlagsliste
             const groupsShown = new Set(); // Set zum Verhindern von Duplikaten
 
-            // Filtere die Keywords basierend auf der Eingabe
             const filteredKeywords = keywords.filter(keyword => keyword.keyword.toLowerCase().includes(searchValue));
 
-            // Maximal 15 Vorschläge anzeigen und Duplikate vermeiden
             filteredKeywords.slice(0, 15).forEach(keyword => {
                 if (!groupsShown.has(keyword.group)) {
                     const listItem = document.createElement('li');
@@ -542,16 +540,15 @@ footer {
 
             if (searchValue === "") {
                 suggestionList.innerHTML = "";
+                const searchLoad = suggestionList.innerHTML; 
             }
         }
   
-        // Mehr Informationen anzeigen
         document.getElementById('moreInfoBtn').addEventListener('click', function() {
             var moreInfo = document.getElementById('moreInfo');
             moreInfo.style.display = moreInfo.style.display === 'none' ? 'block' : 'none';
         });
 
-        // URL-Parameter 'openlink' behandeln
         const urlParams = new URLSearchParams(window.location.search);
         const openLink = urlParams.get('openlink');
 
@@ -562,7 +559,8 @@ footer {
             4: "downloads",
             5: "calculator",
             6: "generators",
-            7: "minigame"
+            7: "tutorials",
+            8: "feedback"
         };
         
         const search = urlParams.get('search');
@@ -615,6 +613,11 @@ footer {
  		    navMenu.classList.toggle('active');
         });
 
+        const menuurlparam = document.getElementById('hamburger').get('active');
+        const urlparams = {
+            menu: menuurlparam,
+            search: searchInput,
+        }
         const baseUrl = window.location.origin + window.location.pathname;
 
         const newUrl = `${baseUrl}?${params.toString()}`;
