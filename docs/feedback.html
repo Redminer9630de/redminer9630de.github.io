@@ -5,8 +5,12 @@
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <title>Feedback</title>
     <style>
+        @font-face {
+            font-family: 'Minecraft';
+            src: url('minecraft_font.woff'), format('.woff'),
+                 url('minecraft_font.ttf'), format('truetype');
         body {
-            font-family: Arial, sans-serif;
+            font-family: 'Minecraft', sans-serif;
             background-color: #f0f0f0;
             margin: 0;
             padding: 20px;
@@ -63,6 +67,17 @@
             background-color: #45a049;
         }
 
+        
+        .header-link {
+            font-size: 16px;
+            text-decoration: none;
+            padding: 10px 20px;
+            border-radius: 8px;
+            position: absolute;
+            top: 20px;
+            right: 20px;
+        }
+
         .note {
             font-size: 0.9em;
             color: #555;
@@ -71,8 +86,10 @@
     </style>
 </head>
 <body>
+    
     <div class="container">
         <h1>Feedback geben</h1>
+        <a href="https://redminer9630de.github.io/" tabindex="1" class="header-link">Zurueck ></a>
         <form id="feedbackForm">
             <label for="email">E-Mail (wird nicht weitergegeben, nur für Kontakt):</label>
             <input type="email" id="email" name="email" placeholder="Deine E-Mail-Adresse" required>
