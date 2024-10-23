@@ -461,6 +461,7 @@
 
         window.onload = function() {
             const tool = getURLParameter('tool');
+            const hideURL = getURLParameter('hideURL');
             if (tool) {
                 if (tool === 'nether') {
                     document.getElementById('modeSelector').value = 'nether';
@@ -470,6 +471,10 @@
                     document.getElementById('modeSelector').value = 'standard';
                 }
                 changeMode(); // Modus ändern
+            }
+
+            if (hideURL === 1) {
+                history.replaceState("https://redminer9630de.github,/tools");
             }
         };
         
