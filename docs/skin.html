@@ -1,0 +1,69 @@
+<!DOCTYPE html>
+<html lang="de">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Minecraft Skins</title>
+    <style>
+        @font-face {
+            font-family: 'MinecraftFont';
+            src: url('https://redminer9630de.github.io/minecraft_font.ttf') format('truetype'),
+                 url('https://redminer9630de.github.io/minecraft_font.woff') format('woff');
+        }
+        
+        body {
+            font-family: 'MinecraftFont', sans-serif;
+            text-align: center;
+            padding: 20px;
+            transition: background-color 0.3s, color 0.3s;
+        }
+
+        h1 {
+            font-size: 36px;
+            margin-bottom: 20px;
+        }
+
+        .skin-container {
+            display: inline-block;
+            margin: 10px;
+            text-align: center;
+        }
+
+        .skin-image {
+            width: 150px;
+            height: 300px;
+            background-color: #f0f0f0;
+            border-radius: 10px;
+        }
+
+        .skin-title {
+            margin-top: 10px;
+            font-size: 18px;
+        }
+    </style>
+</head>
+<body>
+    <h1>Minecraft Skins</h1>
+    
+    <div class="skin-container">
+        <div class="skin-image" style="background-image: url('skin1.png');"></div>
+        <p class="skin-title">Skin 1</p>
+        <button onclick="downloadSkin('skin1.png')">Download</button>
+    </div>
+
+    <div class="skin-container">
+        <div class="skin-image" style="background-image: url('skin2.png');"></div>
+        <p class="skin-title">Skin 2</p>
+        <button onclick="downloadSkin('skin2.png')">Download</button>
+    </div>
+
+    <script>
+        function downloadSkin(skinFile) {
+            const link = document.createElement('a');
+            link.href = skinFile;
+            link.download = skinFile;
+            link.click();
+        }
+    </script>
+</body>
+</html>
