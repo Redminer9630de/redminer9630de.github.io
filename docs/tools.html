@@ -455,7 +455,24 @@
         document.querySelector('.item-row .item-name').addEventListener('input', addItemRowIfNeeded);
         document.querySelector('.item-row .item-quantity').addEventListener('input', addItemRowIfNeeded);
 
-        // Überwache das Leeren der Eingabefelder
+        function getURLParameter(name) {
+            return new URLSearchParams(window.location.search).get(name);
+        }
+
+        window.onload = function() {
+            const tool = getURLParameter('tool');
+            if (tool) {
+                if (tool === 'nether') {
+                    document.getElementById('modeSelector').value = 'nether';
+                } else if (tool === 'item') {
+                    document.getElementById('modeSelector').value = 'item';
+                } else {
+                    document.getElementById('modeSelector').value = 'standard';
+                }
+                changeMode(); // Modus ändern
+            }
+        };
+        
         document.getElementById('itemList').addEventListener('input', ensureAtLeastOneEmptyRow);
     </script>
 </body>
