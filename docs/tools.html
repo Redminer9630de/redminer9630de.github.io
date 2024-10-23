@@ -429,6 +429,13 @@
             newRow.querySelector('.item-quantity').addEventListener('input', addItemRowIfNeeded);
         }
 
+        function removeItemRow(button) {
+            const row = button.parentElement;
+            const itemList = document.getElementById('itemList');
+            itemList.removeChild(row);
+            ensureAtLeastOneEmptyRow();
+        }
+
         function addItemRowIfNeeded() {
             const itemRows = document.querySelectorAll('.item-row');
             const lastRow = itemRows[itemRows.length - 1];
