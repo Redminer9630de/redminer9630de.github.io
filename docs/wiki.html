@@ -815,6 +815,144 @@
                 this.appendChild(grid);
             }
         });
+        
+        customElements.define('wikigui', class extends HTMLElement {
+            constructor() {
+                super();
+                const type = this.getAttribute('type');
+                if (type === 'smelting') {
+                    this.loadSmeltingImage();
+                    this.loadSmeltingData();
+                }
+            }
+
+            async loadSmeltingImage() {
+                const img = document.createElement('img');
+                img.src = 'learnhour/wiki/img/smelting.png';
+                img.alt = 'Smelting Recipe';
+                this.appendChild(img);
+            }
+
+            async loadSmeltingData() {
+                const response = await fetch('learnhour/wiki/img/smelting.json');
+                const data = await response.json();
+
+                console.log(data); // Zum Überprüfen der geladenen Daten
+                this.renderSmeltingGrid(data);
+            }
+
+            renderSmeltingGrid(data) {
+                const grid = document.createElement('div');
+                grid.className = 'smelting-grid';
+                const rows = [data.row1, data.row2];
+
+                rows.forEach(row => {
+                    const rowDiv = document.createElement('div');
+                    rowDiv.className = 'grid-row';
+                    row.forEach(item => {
+                        const itemDiv = document.createElement('div');
+                        itemDiv.className = 'grid-item';
+                        itemDiv.style.backgroundImage = `url(textures/items/${item.name}.png)`;
+                        rowDiv.appendChild(itemDiv);
+                    });
+                    grid.appendChild(rowDiv);
+                });
+
+                this.appendChild(grid);
+            }
+        });
+        
+        customElements.define('wikigui', class extends HTMLElement {
+            constructor() {
+                super();
+                const type = this.getAttribute('type');
+                if (type === 'smoking') {
+                    this.loadSmokingImage();
+                    this.loadSmokingData();
+                }
+            }
+
+            async loadSmokingImage() {
+                const img = document.createElement('img');
+                img.src = 'learnhour/wiki/img/smoking.png';
+                img.alt = 'Smoking Recipe';
+                this.appendChild(img);
+            }
+
+            async loadSmokingData() {
+                const response = await fetch('learnhour/wiki/img/smoking.json');
+                const data = await response.json();
+
+                console.log(data); // Zum Überprüfen der geladenen Daten
+                this.renderSmokingGrid(data);
+            }
+
+            renderSmokingGrid(data) {
+                const grid = document.createElement('div');
+                grid.className = 'smoking-grid';
+                const rows = [data.row1, data.row2];
+
+                rows.forEach(row => {
+                    const rowDiv = document.createElement('div');
+                    rowDiv.className = 'grid-row';
+                    row.forEach(item => {
+                        const itemDiv = document.createElement('div');
+                        itemDiv.className = 'grid-item';
+                        itemDiv.style.backgroundImage = `url(textures/items/${item.name}.png)`;
+                        rowDiv.appendChild(itemDiv);
+                    });
+                    grid.appendChild(rowDiv);
+                });
+
+                this.appendChild(grid);
+            }
+        });
+        
+        customElements.define('wikigui', class extends HTMLElement {
+            constructor() {
+                super();
+                const type = this.getAttribute('type');
+                if (type === 'blasting') {
+                    this.loadBlastingImage();
+                    this.loadBlastingData();
+                }
+            }
+
+            async loadBlastingImage() {
+                const img = document.createElement('img');
+                img.src = 'learnhour/wiki/img/blasting.png';
+                img.alt = 'Blasting Recipe';
+                this.appendChild(img);
+            }
+
+            async loadBlastingData() {
+                const response = await fetch('learnhour/wiki/img/blasting.json');
+                const data = await response.json();
+
+                console.log(data); // Zum Überprüfen der geladenen Daten
+                this.renderBlastingGrid(data);
+            }
+
+            renderBlastingGrid(data) {
+                const grid = document.createElement('div');
+                grid.className = 'crafting-grid';
+                const rows = [data.row1, data.row2];
+
+                rows.forEach(row => {
+                    const rowDiv = document.createElement('div');
+                    rowDiv.className = 'grid-row';
+                    row.forEach(item => {
+                        const itemDiv = document.createElement('div');
+                        itemDiv.className = 'grid-item';
+                        itemDiv.style.backgroundImage = `url(textures/items/${item.name}.png)`;
+                        rowDiv.appendChild(itemDiv);
+                    });
+                    grid.appendChild(rowDiv);
+                });
+
+                this.appendChild(grid);
+            }
+        });
     </script>
 </body>
 </html>
