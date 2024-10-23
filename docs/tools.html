@@ -264,9 +264,9 @@
     <h1>Tools - Redminer9630</h1>
     
     <select id="modeSelector" onchange="changeMode()" class="button" style="margin-bottom: 20px; padding: 10px; border-radius: 8px; border: none; font-size: 16px;">
-        <option onclick="changeMode()" value="standard">Taschenrechner</option>
-        <option onclick="changeMode()" value="nether">Nether Portal</option>
-        <option onclick="changeMode()" value="item">Item Listen</option>
+        <option value="standard">Taschenrechner</option>
+        <option value="nether">Nether Portal</option>
+        <option value="item">Item Listen</option>
     </select>
     
     <div id="calculator" class="mode">
@@ -389,7 +389,7 @@
                 if (name !== "" && !isNaN(quantity) && quantity > 0) {
                     allEmpty = false;
                     const resultQuantity = quantity * multiplier;
-                    resultInput.value = ${resultQuantity};
+                    resultInput.value = resultQuantity;
                 } else {
                     resultInput.value = "";
                 }
