@@ -22,6 +22,19 @@
             font-size: 36px;
             margin-bottom: 20px;
         }
+        
+        .header-link {
+            font-size: 16px;
+            text-decoration: none;
+            padding: 10px 20px;
+            border-radius: 8px;
+            position: absolute;
+            top: 20px;
+            right: 20px;
+            font-family: 'MinecraftFont', sans-serif;
+            background-color: #f44336;    
+            color: white;
+        }
 
         .skin-container {
             display: inline-block;
@@ -44,17 +57,13 @@
 </head>
 <body>
     <h1>Minecraft Skins</h1>
+
+    <a href="https://redminer9630de.github.io/" tabindex="1" class="header-link">Zurueck ></a>
     
     <div class="skin-container">
         <div class="skin-image" style="background-image: url('skin1.png');"></div>
         <p class="skin-title">Skin 1</p>
         <button onclick="downloadSkin('skin1.png')">Download</button>
-    </div>
-
-    <div class="skin-container">
-        <div class="skin-image" style="background-image: url('skin2.png');"></div>
-        <p class="skin-title">Skin 2</p>
-        <button onclick="downloadSkin('skin2.png')">Download</button>
     </div>
 
     <script>
