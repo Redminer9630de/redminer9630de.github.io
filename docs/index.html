@@ -512,10 +512,11 @@ footer {
             <button id="moreInfoBtn" class="moreInfo">Mehr ueber mich erfahren</button>
             <p id="moreInfo" style="display: none; z-index: 1090;">Obwohl der Kanal noch keine Videos enthaelt, plane ich, in naher Zukunft viele weitere Minecraft-Inhalte zu veroeffentlichen. Jetzt ist der perfekte Zeitpunkt, um Teil der Community zu werden und die Entwicklung des Kanals mitzuerleben.</p>
         </section>
+        
         <h1>Minecraft Server Status</h1>
     
         <div class="server-info">
-            <h2>Server IP: redminer9630.de</h2>
+            <h2>IP: redminer9630.de</h2>
             <p>Version: 1.21</p>
             <p>Spielerzahl: <span id="players">0/20</span></p>
             <p>Nicht erlaubte Mods: Journeymap, X-Ray, etc.</p>
@@ -623,6 +624,7 @@ footer {
                 server-info.style.display = 'flex';
             } else {
                 item.style.display = 'none';
+                server-info.style.display = 'none';
             }
         });
 
@@ -688,8 +690,3 @@ footer {
     </script>
 </body>
 </html> 
-    </style>
-</head>
-<body>
-    
-    <a href="https://redminer9630de.github.io/" tabindex="1" class="header-link">Zurueck ></a>
