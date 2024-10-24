@@ -403,36 +403,6 @@ footer {
         padding: 15px;
     }
 }
-    
-        .server-info {
-            margin: 20px;
-            padding: 20px;
-            background-color: #4CAF50;
-            color: white;
-            border-radius: 8px;
-        }
-
-        .server-info h2 {
-            font-size: 24px;
-            margin-bottom: 10px;
-        }
-
-        .server-info p {
-            font-size: 18px;
-        }
-
-        .status {
-            font-size: 18px;
-            margin: 10px;
-            padding: 10px;
-            color: white;
-            display: inline-block;
-            border-radius: 8px;
-        }
-
-        .online { color: #4CAF50; }
-        .offline { color: #f44336; }
-        .event { color: #FF9800; }
     </style>
 </head>
 <body>
@@ -511,15 +481,6 @@ footer {
             <button id="moreInfoBtn" class="moreInfo">Mehr ueber mich erfahren</button>
             <p id="moreInfo" style="display: none; z-index: 1090;">Obwohl der Kanal noch keine Videos enthaelt, plane ich, in naher Zukunft viele weitere Minecraft-Inhalte zu veroeffentlichen. Jetzt ist der perfekte Zeitpunkt, um Teil der Community zu werden und die Entwicklung des Kanals mitzuerleben.</p>
         </section>
-    
-        <div class="server-info">
-            <h1>Minecraft Server Status</h1>
-            <h2>IP: redminer9630.de</h2>
-            <p>Version: 1.21</p>
-            <p>Spielerzahl: <span id="players">0/20</span></p>
-            <p>Nicht erlaubte Mods: Journeymap, X-Ray, etc.</p>
-            <p>Status: <span id="status" class="status">Offline</span></p>
-        </div>
     </main>
 
     <footer>
@@ -664,27 +625,6 @@ footer {
         const newUrl = `${baseUrl}?${params.toString()}`;
         
         history.pushState({page: ""}, "", newUrl);
-    
-        function updateServerInfo() {
-            let isServerOnline = true; // Ersetze dies mit einem API-Aufruf für echte Serverdaten
-            let playerCount = 15; // Ersetze dies mit der Spieleranzahl von deinem Server
-
-            const statusElement = document.getElementById("status");
-            const playerElement = document.getElementById("players");
-
-            if (isServerOnline) {
-                statusElement.textContent = "Online";
-                statusElement.className = "status online";
-                playerElement.textContent = `${playerCount}/20`;
-            } else {
-                statusElement.textContent = "Offline";
-                statusElement.className = "status offline";
-                playerElement.textContent = "0/20";
-            }
-        }
-
-        // Aktualisiere Serverinfos alle 10 Sekunden
-        setInterval(updateServerInfo, 5000)
     </script>
 </body>
 </html> 
