@@ -9,6 +9,7 @@
     <link rel="apple-touch-icon" href="images/apple-touch-icon.png" type="image/png">
     <link rel="icon" href="images/favicon-32x32.png" sizes="32x32" type="image/png">
     <script src="learnhour/wiki/wiki_id.js" defer></script>
+    <script src="pending_wikis.js"></script>
     <style>
         @font-face {
             font-family: 'MinecraftFont';
@@ -953,6 +954,38 @@
                 this.appendChild(grid);
             }
         });
-    </script>
+    function navigateToPage(pageName) {
+        const content = document.getElementById('content');
+
+        switch (pageName) {
+            case 'home':
+                showHomePage();
+                break;
+            case 'commands':
+                showCommands();
+                break;
+            // Weitere Kategorien
+            default:
+                showHomePage();
+                break;
+        }
+
+        // Überprüfe, ob die Seite existiert oder in pending ist
+        if (wikiPages[pageName]) {
+            loadWikiContent(wikiPages[pageName]);
+            updateURLParameter(pageName);
+        } else if (pending.includes(pageName)) {
+            customAlert(`Die Seite "${pageName}" ist noch in Bearbeitung.`, "Hinweis");
+        } else {
+            customAlert(`Die Seite "${pageName}" konnte nicht gefunden werden.`, "Fehler");
+        }
+    }
+
+    function updateURLParameter(pageName) {
+        const url = new URL(window.location.href);
+        url.searchParams.set('id', pageName);
+        window.history.pushState({}, '', url);
+    }
+</script>
 </body>
 </html>
