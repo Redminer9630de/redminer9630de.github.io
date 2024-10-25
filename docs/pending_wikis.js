@@ -1,4 +1,4 @@
 const pending = [
-    'entity/armorstand'
+    'entity/armorstand',
     'item/armorstand'
-]
+];
