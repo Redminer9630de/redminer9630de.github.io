@@ -339,7 +339,19 @@
         function showHomePage() {
             document.getElementById('categories').style.display = 'block'; // Kategorien einblenden
             document.getElementById('urlInput').value = "redminer9630.de/wiki/home"; // URL aktualisieren
-            document.getElementById('content').innerHTML = 'Willkommen auf der Redminer9630.de Minecraft Wiki';
+            const content = document.getElementById('content');
+            content.innerHTML = `
+                <h1>Willkommen zur Wiki-Startseite</h1>
+                <p>Hier sind die noch in Bearbeitung befindlichen Wikiseiten:</p>
+                <ul id="pending-list"></ul>
+            `;
+
+            const pendingList = document.getElementById('pending-list');
+            pending.forEach(page => {
+                const listItem = document.createElement('li');
+                listItem.textContent = page;
+                pendingList.appendChild(listItem);
+            });
         }
 
         function showTrading() {
