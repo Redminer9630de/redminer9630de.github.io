@@ -337,8 +337,8 @@
         let historyIndex = -1;
 
         function showHomePage() {
-            document.getElementById('categories').style.display = 'block'; // Kategorien einblenden
-            document.getElementById('urlInput').value = "redminer9630.de/wiki/home"; // URL aktualisieren
+            document.getElementById('categories').style.display = 'block';
+            document.getElementById('urlInput').value = "redminer9630.de/wiki/home";
             const content = document.getElementById('content');
             content.innerHTML = `
                 <h1>Willkommen zur Wiki-Startseite</h1>
@@ -356,8 +356,8 @@
 
         function showTrading() {
             categoriesVisible = false;
-            document.getElementById('categories').style.display = 'none'; // Kategorien ausblenden
-            document.getElementById('urlInput').value = "redminer9630.de/wiki/trading"; // URL aktualisieren
+            document.getElementById('categories').style.display = 'none';
+            document.getElementById('urlInput').value = "redminer9630.de/wiki/trading";
             fetch('learnhour/wiki/trading.html')
                 .then(response => {
                     if (!response.ok) {
@@ -702,12 +702,7 @@
                     break;
             }
             
-            if (wikiPages[pageName]) {
-                loadWikiContent([pageName]);
-                const url = new URL(window.location.href);
-                url.searchParams.set('id', pageName);
-                window.history.pushState({}, '', url);
-            } else if (pending.includes(pageName)) {
+            if (pending.includes(pageName)) {
                 customAlert(`Die Seite "${pageName}" ist noch in Bearbeitung.`, "Hinweis");
             } else {
                 customAlert(`Die Seite "${pageName}" konnte nicht gefunden werden.`, "Fehler");
