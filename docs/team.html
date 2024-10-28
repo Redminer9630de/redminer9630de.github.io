@@ -105,6 +105,20 @@
         #teamTable img:hover {
             transform: scale(1.2); /* Bild vergrößern bei Hover */
         }
+
+        #teamTable button {
+            background: none; /* Entfernt den Hintergrund */
+            border: none; /* Entfernt den Rahmen */
+            padding: 0; /* Entfernt den Abstand */
+            opacity: 0; /* Macht den Button unsichtbar */
+            position: relative;
+        }
+
+        #teamTable button img {
+            opacity: 1; /* Bild bleibt sichtbar */
+            position: relative; /* Hebt das Bild über den unsichtbaren Button */
+            pointer-events: auto; /* Ermöglicht das Klicken auf das Bild */
+        }
     </style>
 </head>
 <body>
