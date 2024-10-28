@@ -162,6 +162,64 @@
             font-size: 10px;
             cursor: pointer;
         }
+
+        header {
+            background-color: #2c3e50;
+            color: white;
+            padding: 10px 20px;
+            text-align: center;
+            box-shadow: 0 2px 4px rgba(0, 0, 0, 0.1);
+            font-family: 'MinecraftFont', sans-serif;
+            position: relative;
+            display: flex;
+            align-items: center;
+            justify-content: space-between;
+        }
+
+        main {
+            padding: 20px;
+            text-align: center;
+            flex-grow: 1;
+        }
+
+        button {
+            background-color: #3498db;
+            color: white;
+            cursor: pointer;
+            margin: 10px;
+            padding: 12px;
+            font-size: 16px;
+            border-radius: 8px;
+            border: 1px solid #bdc3c7;
+            box-shadow: 0px 4px 8px rgba(0, 0, 0, 0.1);
+            position: absolut;
+            text-align: center;
+            transition: all 0.2s ease;
+        }
+
+        button:hover {
+            box-shadow: 0px 6px 12px rgba(0, 0, 0, 0.2);
+            background-color: #2980b9;
+        }
+
+        footer {
+            text-align: center;
+            padding: 10px;
+            background-color: #2c3e50;
+            color: white;
+            font-family: 'MinecraftFont', sans-serif;
+            position: relative;
+            bottom: 0;
+            width: 100%;
+            margin-top: auto;
+        }
+                
+        table {
+            width: 100%;
+            border-collapse: collapse;
+            margin-top: 20px;
+            border: 1px solid white;
+        }
     </style>
 </head>
 <body>
@@ -203,6 +261,43 @@
         </tbody>
     </table>
 
+    <header>
+        <h1>Minecraft Generatoren</h1>
+    </header>
+
+    <main>
+        <table>
+            <thead>
+                <tr>
+                    <th>Name</th>
+                    <th>Beschreibung</th>
+                    <th>Link</th>
+                </tr>
+            </thead>
+            <tbody>
+                <tr>
+                    <th>MCStacker</th>
+                    <th>Generator für die meisten Commands</th>
+                    <th><button><a href="https://mcstacker.net">mcstacker.net</a></button></th>
+                </tr>
+                <tr>
+                    <th>Minecraft Json</th>
+                    <th>Generator um Tellraw, Titel, Bücher, und Schilder mit Text zu generieren</th>
+                    <th><button><a href="https://minecraftjson.net">minecraftjson.net</a></button></th>
+                </tr>
+                <tr>
+                    <th>Vanilla Tweaks</th>
+                    <th>Kein richtiger Generator, Download Seite um Datapacks und Resourcepacks herunterzuladen</th>
+                    <th><button><a href="https://vanillatweaks.net">vanillatweaks.net</a></button></th>
+                </tr>
+                <tr>
+                    <th>Datapack Generator</th>
+                    <th>Datapack Generator</th>
+                    <th><button><a href="https://misode.github.io">misode.github.io</a></button></th>
+                </tr>
+            </tbody>
+        </table>
+    </main>
     <script>
         function sortTable(columnIndex) {
             const table = document.getElementById("downloadTable");
