@@ -3,8 +3,14 @@
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>Minecraft Server Status</title>
+    <title>MC Server - Team</title>
     <style>
+        @font-face {
+        font-family: 'MinecraftFont';
+        src: url('minecraft_font.ttf') format('truetype'),
+             url('minecraft_font.woff') format('woff');
+        }
+        
         body {
             font-family: 'MinecraftFont', sans-serif;
             text-align: center;
@@ -59,6 +65,43 @@
         .online { color: #4CAF50; }
         .offline { color: #f44336; }
         .event { color: #FF9800; }
+        
+        table {
+            width: 100%;
+            border-collapse: collapse;
+            margin-top: 20px;
+        }
+
+        th, td {
+            padding: 8px;
+            text-align: left;
+        }
+
+        #teamTable img {
+            width: 24px; /* Größe anpassen */
+            height: 24px;
+            border-radius: 4px; /* Runde Ecken */
+            box-shadow: 0px 2px 5px rgba(0, 0, 0, 0.3); /* Schatteneffekt */
+            transition: transform 0.3s; /* sanfte Skalierung bei Hover */
+        }
+
+        #teamTable img:hover {
+            transform: scale(1.2); /* Bild vergrößern bei Hover */
+        }
+
+        #teamTable button {
+            background: none; /* Entfernt den Hintergrund */
+            border: none; /* Entfernt den Rahmen */
+            padding: 0; /* Entfernt den Abstand */
+            opacity: 0; /* Macht den Button unsichtbar */
+            position: relative;
+        }
+
+        #teamTable button img {
+            opacity: 1; /* Bild bleibt sichtbar */
+            position: relative; /* Hebt das Bild über den unsichtbaren Button */
+            pointer-events: auto; /* Ermöglicht das Klicken auf das Bild */
+        }
     </style>
 </head>
 <body>
@@ -73,6 +116,26 @@
         <p>Nicht erlaubte Mods: Journeymap, X-Ray, etc.</p>
         <p>Status: <span id="status" class="status">Offline</span></p>
     </div>
+    
+    <h1>Team - Redminer9630</h1>
+    <table id="teamTable">
+        <thead>
+            <tr>
+                <th onclick="sortTable(0)">Offizeler Name</th>
+                <th onclick="sortTable(1)">Name</th>
+                <th onclick="sortTable(2)">Titel</th>
+                <th onclick="sortTable(3)">Links</th>
+            </tr>
+        </thead>
+        <tbody>
+            <tr>
+                <td>Redminer9630</td>
+                <td>Robert</td>
+                <td>Leiter, Gruender, Programmierer</td>
+                <td><button><a href="https://m.youtube.com/channel/UCdpkm8rpRnIi88zWSuubbOQ"><img src="images/youtube.png"></a></button><button><a href="twitch.tv/Redminer9630"><img src="images/twitch.png"></a></button></td>
+            </tr>
+        </tbody>
+    </table>
 
     <script>
         function updateServerInfo() {
@@ -95,6 +158,28 @@
 
         // Aktualisiere Serverinfos alle 10 Sekunden
         setInterval(updateServerInfo, 10000);
+        
+        function sortTable(columnIndex) {
+            const table = document.getElementById("teamTable");
+            const tbody = table.querySelector("tbody");
+            const rows = Array.from(tbody.rows);
+
+            const ascending = !table.dataset.sortDirection || table.dataset.sortDirection === 'descending';
+            table.dataset.sortDirection = ascending ? 'ascending' : 'descending';
+
+            rows.sort((a, b) => {
+                const aText = a.cells[columnIndex].textContent.trim();
+                const bText = b.cells[columnIndex].textContent.trim();
+
+                if (ascending) {
+                    return aText.localeCompare(bText);
+                } else {
+                    return bText.localeCompare(aText);
+                }
+            });
+
+            rows.forEach(row => tbody.appendChild(row));
+        }
     </script>
 </body>
 </html>
