@@ -89,20 +89,6 @@
         #teamTable img:hover {
             transform: scale(1.2); /* Bild vergrößern bei Hover */
         }
-
-        #teamTable button {
-            background: none; /* Entfernt den Hintergrund */
-            border: none; /* Entfernt den Rahmen */
-            padding: 0; /* Entfernt den Abstand */
-            opacity: 0; /* Macht den Button unsichtbar */
-            position: relative;
-        }
-
-        #teamTable button img {
-            opacity: 1; /* Bild bleibt sichtbar */
-            position: relative; /* Hebt das Bild über den unsichtbaren Button */
-            pointer-events: auto; /* Ermöglicht das Klicken auf das Bild */
-        }
     </style>
 </head>
 <body>
@@ -112,7 +98,7 @@
     
     <div class="server-info">
         <h2>Server IP: redminer9630.de</h2>
-        <p>Version: 1.21</p>
+        <p>Version: 1.21.3</p>
         <p>Spielerzahl: <span id="players">0/20</span></p>
         <p>Nicht erlaubte Mods: Journeymap, X-Ray, etc.</p>
         <p>Status: <span id="status" class="status">Offline</span></p>
@@ -157,8 +143,7 @@
             }
         }
 
-        // Aktualisiere Serverinfos alle 10 Sekunden
-        setInterval(updateServerInfo, 10000);
+        setInterval(updateServerInfo, 1000);
         
         function sortTable(columnIndex) {
             const table = document.getElementById("teamTable");
