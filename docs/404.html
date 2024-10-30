@@ -7,15 +7,16 @@ permalink: /404.html
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>404 - Seite nicht gefunden</title>
+    <title>Seite nicht gefunden</title>
     <style>
         @font-face {
             font-family: Minecraft, sans-serif;
             src: url('https://redminer9630de.github.io/minecraft_font.woff') format('woff'),
                  url('https://redminer9630de.github.io/minecraft_font.ttf') format('truetype');
         }
+        
         body {
-            font-family: Arial, sans-serif;
+            font-family: Minecart, sans-serif;
             text-align: center;
             margin: 0;
             padding-bottom: 50px; /* Platz für den Footer schaffen */
@@ -27,6 +28,7 @@ permalink: /404.html
             margin-top: 50px; /* Abstand oben für den Inhalt */
         }
         p {
+            font-family: 'Minecraft', sans-serif;
             font-size: 1.2em;
             color: #666;
         }
@@ -55,10 +57,27 @@ permalink: /404.html
     <p>
         <a href='https://redminer9630de.github.io/';>
             Zurueck zur Startseite
+            <h1>Du wirst in <span id="countdown">10</span> Sekunden zur Startseite geleitet.</h1>
         </a>
     </p>
     <footer>
         © 2024 Offizieller Kanal von Redminer9630 - Alle Rechte vorbehalten.
     </footer>
+
+    <script>
+        let timeLeft = 10;
+        const countdownElement = document.getElementById('countdown');
+
+        const countdownInterval = setInterval(() => {
+            timeLeft--;
+            countdownElement.textContent = timeLeft;
+
+            if (timeLeft <= 0) {
+                clearInterval(countdownInterval);
+                window.location.href = 'https://redminer9630de.github.io';
+            }
+        }, 1000);
+    </script>
+
 </body>
 </html>
