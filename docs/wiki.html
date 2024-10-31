@@ -732,45 +732,6 @@
             }
         });
         
-        function updateHistoryButtons() {
-            const backButton = document.getElementById('backButton');
-            const forwardButton = document.getElementById('forwardButton');
-
-            if (historyIndex > 0) {
-                backButton.style.cursor = 'pointer';
-                backButton.disabled = false;
-            } else {
-                backButton.style.cursor = 'not-allowed';
-                backButton.disabled = true;
-            }
-
-            if (historyIndex < urlHistory.length - 1) {
-                forwardButton.style.cursor = 'pointer';
-                forwardButton.disabled = false;
-            } else {
-                forwardButton.style.cursor = 'not-allowed';
-                forwardButton.disabled = true;
-            }
-        }
-
-        function goBack() {
-            if (historyIndex > 0) {
-                historyIndex--;
-                document.getElementById('urlInput').value = urlHistory[historyIndex];
-                navigateToPage();
-                updateHistoryButtons();    
-            }
-        }
-
-        function goForward() {
-            if (historyIndex < urlHistory.length - 1) {
-                historyIndex++;
-                document.getElementById('urlInput').value = urlHistory[historyIndex];
-                navigateToPage();
-                updateHistoryButtons();
-            }
-        }
-
         function loadWikiContent(filePath) {
             fetch(filePath)
                 .then(response => {
