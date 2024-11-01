@@ -15,19 +15,25 @@
                  url('https://redminer9630de.github.io/minecraft_font.woff') format('woff');
         }
 
-        h1 {font-family: 'Minecraft', sans-serif;}
+        h1 {
+            font-family: 'Minecraft', sans-serif;
+            text-align: center;
+            margin-top: 20px;
+        }
         
         body {
-                font-family: 'Minecraft', sans-serif;
-                background-color: #f4f4f9;
-                display: flex;
-                justify-content: center;
-                align-items: center;
-                height: 100vh;
-                margin: 0;
+            font-family: 'Minecraft', sans-serif;
+            background-color: #f4f4f9;
+            display: flex;
+            justify-content: center;
+            align-items: center;
+            height: 100vh;
+            margin: 0;
+            flex-direction: column;
         }
 
         .header-link {
+            font-family: 'Minecraft', sans-serif;
             font-size: 16px;
             text-decoration: none;
             padding: 10px 20px;
@@ -35,93 +41,96 @@
             position: absolute;
             top: 20px;
             right: 20px;
-            font-family: 'MinecraftFont', sans-serif;
             background-color: #f44336;    
             color: white;
         }
 
         .chat-container {  
-                font-family: Arial, sans-serif;
-                width: 100%;
-                max-width: 100%;
-                height: 90%;
-                background-color: #fff;
-                box-shadow: 0 4px 10px rgba(0, 0, 0, 0.2);
-                border-radius: 8px;
-                display: flex;
-                flex-direction: column;
-                overflow: hidden;
+            font-family: Arial, sans-serif;
+            width: 100%;
+            max-width: 600px;
+            height: 90%;
+            background-color: #f9f9f9;
+            box-shadow: 0 4px 10px rgba(0, 0, 0, 0.2);
+            border-radius: 8px;
+            display: flex;
+            flex-direction: column;
+            overflow: hidden;
+            border: 1px solid #ccc;
         }
 
         .chat-messages {
-                font-family: Arial, sans-serif;
-                padding: 20px;
-                height: 400px;
-                overflow-y: auto;
-                border-bottom: 1px solid #ddd;
+            font-family: Arial, sans-serif;
+            padding: 20px;
+            flex: 1;
+            background-color: #ffffff;
+            overflow-y: auto;
+            border-bottom: 1px solid #ddd;
         }
 
         .message {
-                font-family: Arial, sans-serif;
-                margin: 10px 0;
-                padding: 12px 15px;
-                border-radius: 8px;
-                max-width: 80%;
-                word-wrap: break-word;
-                font-size: 0.95rem;
+            font-family: Arial, sans-serif;
+            margin: 10px 0;
+            padding: 12px 15px;
+            border-radius: 8px;
+            max-width: 80%;
+            word-wrap: break-word;
+            font-size: 0.95rem;
         }
 
         .message.user {
-                background-color: #daf7e3;
-                align-self: flex-end;
+            background-color: #daf7e3;
+            align-self: flex-end;
         }
 
         .message.bot {
-                background-color: #ebeff5;
-                align-self: flex-start;
+            background-color: #ebeff5;
+            align-self: flex-start;
         }
 
         .chat-input-container {
-                font-family: Arial, sans-serif;
-                display: flex;
-                align-items: center;
-                padding: 10px;
-                background-color: #f9f9f9;
+            font-family: Arial, sans-serif;
+            display: flex;
+            align-items: center;
+            padding: 10px;
+            background-color: #f9f9f9;
+            width: 100%;
+            box-sizing: border-box;
         }
 
         .chat-input {
-                font-family: Arial, sans-serif;
-                flex: 1;
-                padding: 12px;
-                font-size: 1rem;
-                border: 1px solid #ccc;
-                border-radius: 6px;
-                outline: none;
+            font-family: Arial, sans-serif;
+            flex: 1;
+            padding: 12px;
+            font-size: 1rem;
+            border: 1px solid #ccc;
+            border-radius: 6px;
+            outline: none;
         }
 
         .chat-input:focus {
-                border-color: #6b8eda;
+            border-color: #6b8eda;
         }
 
         .send-button {
-                font-family: 'Minecraft', sans-serif;
-                background-color: #6b8eda;
-                color: #fff;
-                padding: 10px 16px;
-                margin-left: 10px;
-                font-size: 1rem;
-                border: none;
-                border-radius: 6px;
-                cursor: pointer;
-                transition: background-color 0.3s;
+            font-family: 'Minecraft', sans-serif;
+            background-color: #6b8eda;
+            color: #fff;
+            padding: 10px 16px;
+            margin-left: 10px;
+            font-size: 1rem;
+            border: none;
+            border-radius: 6px;
+            cursor: pointer;
+            transition: background-color 0.3s;
         }
 
         .send-button:hover {
-                background-color: #5a75c8;
+            background-color: #5a75c8;
         }
 
         .send-button:active {
-                background-color: #4c62b1;
+            background-color: #4c62b1;
         }
     </style>
 </head>
