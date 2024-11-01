@@ -11,24 +11,35 @@
     <form id="chatgpt-form">
         <h3>Programmiersprache: </h3>
         <select id="language" onchange="updatePlaceholder()">
-            <option value="HTML">HTML</option>
-            <option value="CSS">CSS</option>
-            <option value="Javascript">Javascript</option>
             <option value="Python">Python</option>
+            <option value="JavaScript">JavaScript</option>
             <option value="Java">Java</option>
+            <option value="C#">C#</option>
+            <option value="C++">C++</option>
+            <option value="PHP">PHP</option>
+            <option value="TypeScript">TypeScript</option>
+            <option value="Ruby">Ruby</option>
+            <option value="Swift">Swift</option>
+            <option value="Kotlin">Kotlin</option>
+            <option value="Go">Go</option>
+            <option value="Rust">Rust</option>
         </select>
+
         <input type="text" id="area" placeholder="Ein HTML Bereich">
         <button type="submit">Frage Senden</button>
     </form>
     <div id="chatgpt-response"></div>
 
     <script>
+        const language = "HTML";
+        const areaInput = "";
         function updatePlaceholder() {
             const language = document.getElementById("language").value;
             const areaInput = document.getElementById("area");
             areaInput.placeholder = `Ein ${language} Bereich`;
         }
-
+        
+        const userInput = language, ": ", areaInput;
         async function sendToChatGPT(userInput) {
             const apiUrl = "https://api.openai.com/v1/chat/completions";
             
@@ -39,7 +50,7 @@
                     "Authorization": `Bearer YOUR_API_KEY` // Ersetze mit deinem API-Schlüssel
                 },
                 body: JSON.stringify({
-                    model: "gpt-3.5-turbo", // Beispielmodell, passe an deine API-Version an
+                    model: "gpt-4.o", // Beispielmodell, passe an deine API-Version an
                     messages: [{ role: "user", content: userInput }]
                 })
             });
