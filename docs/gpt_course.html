@@ -5,41 +5,107 @@
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <title>Coding Lernkurs</title>
     <style>
+
+body {
+    font-family: Arial, sans-serif;
+    background-color: #f4f4f9;
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    height: 100vh;
+    margin: 0;
+}
+
+.chat-container {
+    width: 90%;
+    max-width: 600px;
+    background-color: #fff;
+    box-shadow: 0 4px 10px rgba(0, 0, 0, 0.2);
+    border-radius: 8px;
+    display: flex;
+    flex-direction: column;
+    overflow: hidden;
+}
+
+.chat-messages {
+    padding: 20px;
+    height: 400px;
+    overflow-y: auto;
+    border-bottom: 1px solid #ddd;
+}
+
+.message {
+    margin: 10px 0;
+    padding: 12px 15px;
+    border-radius: 8px;
+    max-width: 80%;
+    word-wrap: break-word;
+    font-size: 0.95rem;
+}
+
+.message.user {
+    background-color: #daf7e3;
+    align-self: flex-end;
+}
+
+.message.bot {
+    background-color: #ebeff5;
+    align-self: flex-start;
+}
+
+/* Eingabebereich */
+.chat-input-container {
+    display: flex;
+    align-items: center;
+    padding: 10px;
+    background-color: #f9f9f9;
+}
+
+.chat-input {
+    flex: 1;
+    padding: 12px;
+    font-size: 1rem;
+    border: 1px solid #ccc;
+    border-radius: 6px;
+    outline: none;
+}
+
+.chat-input:focus {
+    border-color: #6b8eda;
+}
+
+.send-button {
+    background-color: #6b8eda;
+    color: #fff;
+    padding: 10px 16px;
+    margin-left: 10px;
+    font-size: 1rem;
+    border: none;
+    border-radius: 6px;
+    cursor: pointer;
+    transition: background-color 0.3s;
+}
+
+.send-button:hover {
+    background-color: #5a75c8;
+}
+
+.send-button:active {
+    background-color: #4c62b1;
+}
     </style>
 </head>
 <body>
-    <form id="chatgpt-form">
-        <h3>Programmiersprache: </h3>
-        <select id="language" onchange="updatePlaceholder()">
-            <option value="Python">Python</option>
-            <option value="JavaScript">JavaScript</option>
-            <option value="Java">Java</option>
-            <option value="C#">C#</option>
-            <option value="C++">C++</option>
-            <option value="PHP">PHP</option>
-            <option value="TypeScript">TypeScript</option>
-            <option value="Ruby">Ruby</option>
-            <option value="Swift">Swift</option>
-            <option value="Kotlin">Kotlin</option>
-            <option value="Go">Go</option>
-            <option value="Rust">Rust</option>
-        </select>
-
-        <input type="text" id="area" placeholder="Ein HTML Bereich">
-        <button type="submit">Frage Senden</button>
-    </form>
-    <div id="chatgpt-response"></div>
+    <div class="chatgpt-response">
+        <div class="chat-messages" id="chat-messages"></div>
+        <div class="chat-input-container">
+            <input type="text" class="chat-input" id="chat-input" placeholder="Schreibe eine Nachricht...">
+            <button class="send-button">Senden</button>
+        </div>
+    </div>
 
     <script>
-        const language = "HTML";
-        const areaInput = "";
-        function updatePlaceholder() {
-            const language = document.getElementById("language").value;
-            const areaInput = document.getElementById("area");
-            areaInput.placeholder = `Ein ${language} Bereich`;
-        }
-        
-        const userInput = language, ": ", areaInput;
+        const userInput = chat-input;
         async function sendToChatGPT(userInput) {
             const apiUrl = "https://api.openai.com/v1/chat/completions";
             
