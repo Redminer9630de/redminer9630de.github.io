@@ -256,6 +256,19 @@
                 color: #000;
             }
         }
+
+        @keyframes moveNumber {
+          0% { transform: translateY(-50px); opacity: 0; }
+          100% { transform: translateY(0); opacity: 1; }
+        }
+
+        .output-number {
+          animation: moveNumber 0.4s ease;
+        }
+
+        .output-number.fast {
+          animation: moveNumber 0.2s ease;
+        }
     </style>
 </head>
 <body>
@@ -470,13 +483,31 @@
                 } else {
                     document.getElementById('modeSelector').value = 'standard';
                 }
-                changeMode(); // Modus ändern
+                changeMode();
             }
 
             if (hideURL === '1') {
                 history.replaceState("https://redminer9630de.github.io/tools");
             }
         };
+
+        const calculatorOutput = document.querySelector('.output');
+        let lastInputTime = Date.now();
+
+        function animateNumber(input) {
+            const newNumber = document.createElement('div');
+            newNumber.textContent = input;
+            newNumber.classList.add('output-number');
+  
+            const currentTime = Date.now();
+            if (currentTime - lastInputTime < 100) {
+                newNumber.classList.add('fast');
+            }
+            lastInputTime = currentTime;
+
+            calculatorOutput.appendChild(newNumber);
+            setTimeout(() => newNumber.remove(), 400);
+        }
         
         document.getElementById('itemList').addEventListener('input', ensureAtLeastOneEmptyRow);
     </script>
