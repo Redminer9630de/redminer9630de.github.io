@@ -347,9 +347,6 @@
     </div>
         
     <div id="content">
-        <h1>Willkommen zur Wiki Startseite</h1>
-        <p>Hier sind die noch in Bearbeitung befindlichen Wikiseiten:</p>
-        <ul id="pending-list"></ul>
     </div>
     
     <script onload="showHomePage()">
@@ -681,6 +678,31 @@
                 showHomePage()
             }
         }
+
+        window.addEventListener('load', () => {
+            const urlPath = window.location.pathname;
+            const wikiPathMatch = urlPath.match(/\/wiki\/(.+)/);
+
+            if (wikiPathMatch) {
+                const pagePath = wikiPathMatch[1]; // z.B. "blocks/grass_block"
+                loadWikiContent(`learnhour/wiki/${pagePath}.html`);
+            } else {
+                showHomePage(); // Falls kein spezieller Wiki-Pfad vorhanden ist
+            }
+        });
+
+        function loadWikiContent(filePath) {
+            fetch(filePath)
+                .then(response => {
+                    if (!response.ok) throw new Error('Seite konnte nicht geladen werden');
+                    return response.text();
+                })
+                .then(data => document.getElementById('content').innerHTML = data)
+                .catch(error => {
+                    customAlert('Fehler beim Laden der Wiki-Seite: ' + error.message, 'Fehler')
+                    showHomePage()
+                    });
+        }
         
         document.querySelector('.url-input').addEventListener('keypress', function(event) {
             if (event.key === 'Enter') {
@@ -688,23 +710,7 @@
                 document.querySelector('.url-input').blur();
             }
         });
-        
-        function loadWikiContent(filePath) {
-            fetch(filePath)
-                .then(response => {
-                    if (!response.ok) {
-                        throw new Error('Seite konnte nicht geladen werden');
-                    }
-                    return response.text();
-                })
-                .then(data => {
-                    document.getElementById('content').innerHTML = data;
-                })
-                .catch(error => {
-                    customAlert('Fehler beim Laden der Wiki-Seite: ' + error.message, 'Fehler');
-                });
-        }
-
+            
         function customAlert(message, title) {
             const alertBox = document.createElement('div');
             alertBox.classList.add('custom-alert');
