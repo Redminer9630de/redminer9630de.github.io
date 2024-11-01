@@ -140,7 +140,7 @@
         <div class="chat-messages" id="chat-messages"></div>
         <div class="chat-input-container">
             <input type="text" class="chat-input" id="chat-input" placeholder="Schreibe eine Nachricht...">
-            <button class="send-button">Senden</button>
+            <button class="send-button" onclick="senToChatGPT(chat-input)">Senden</button>
         </div>
     </div>
 
@@ -148,6 +148,7 @@
         const api_key = ${{ secrets.gpt_course_api_key }}
         const userInput = chat-input;
         async function sendToChatGPT(userInput) {
+            document.getElementById('chat-input').innerHTML = "";
             const apiUrl = "https://api.openai.com/v1/chat/completions";
             
             const response = await fetch(apiUrl, {
@@ -176,18 +177,6 @@
             const responseElement = document.getElementById("chatgpt-response");
             responseElement.textContent = response;
         }
-
-        document.getElementById("chatgpt-form").addEventListener("submit", function(event) {
-            event.preventDefault(); // Verhindert das Neuladen der Seite
-            
-            const language = document.getElementById("language").value;
-            const area = document.getElementById("area").value;
-            const userInput = `${language}: Der ${area} Bereich`; // Beispieltext anpassen
-
-            sendToChatGPT(userInput);
-        });
-
-        updatePlaceholder();
     </script>
 </body>
 </html>
