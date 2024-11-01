@@ -1,0 +1,75 @@
+<!DOCTYPE html>
+<html lang="de">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Coding Lernkurs</title>
+    <style>
+    </style>
+</head>
+<body>
+    <form id="chatgpt-form">
+        <h3>Programmiersprache: </h3>
+        <select id="language" onchange="updatePlaceholder()">
+            <option value="HTML">HTML</option>
+            <option value="CSS">CSS</option>
+            <option value="Javascript">Javascript</option>
+            <option value="Python">Python</option>
+            <option value="Java">Java</option>
+        </select>
+        <input type="text" id="area" placeholder="Ein HTML Bereich">
+        <button type="submit">Frage Senden</button>
+    </form>
+    <div id="chatgpt-response"></div>
+
+    <script>
+        function updatePlaceholder() {
+            const language = document.getElementById("language").value;
+            const areaInput = document.getElementById("area");
+            areaInput.placeholder = `Ein ${language} Bereich`;
+        }
+
+        async function sendToChatGPT(userInput) {
+            const apiUrl = "https://api.openai.com/v1/chat/completions";
+            
+            const response = await fetch(apiUrl, {
+                method: "POST",
+                headers: {
+                    "Content-Type": "application/json",
+                    "Authorization": `Bearer YOUR_API_KEY` // Ersetze mit deinem API-Schlüssel
+                },
+                body: JSON.stringify({
+                    model: "gpt-3.5-turbo", // Beispielmodell, passe an deine API-Version an
+                    messages: [{ role: "user", content: userInput }]
+                })
+            });
+
+            const data = await response.json();
+            
+            if (response.ok && data.choices && data.choices.length > 0) {
+                const chatResponse = data.choices[0].message.content;
+                displayResponse(chatResponse);
+            } else {
+                displayResponse("Fehler beim Abrufen der Antwort.");
+            }
+        }
+
+        function displayResponse(response) {
+            const responseElement = document.getElementById("chatgpt-response");
+            responseElement.textContent = response;
+        }
+
+        document.getElementById("chatgpt-form").addEventListener("submit", function(event) {
+            event.preventDefault(); // Verhindert das Neuladen der Seite
+            
+            const language = document.getElementById("language").value;
+            const area = document.getElementById("area").value;
+            const userInput = `${language}: Der ${area} Bereich`; // Beispieltext anpassen
+
+            sendToChatGPT(userInput);
+        });
+
+        updatePlaceholder();
+    </script>
+</body>
+</html>
