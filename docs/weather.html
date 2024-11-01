@@ -1,0 +1,79 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>weather</title>
+</head>
+    <style>
+        *{
+            margin: 0;
+            padding: 0;
+            border: 0;
+            outline: 0;
+            box-sizing: border-box;
+        }
+        body{
+            height: 100vh;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            background: #06283d;
+        }
+
+        container{
+            position: relative;
+            width: 400px;
+            height: 105px;
+            background: #fff;
+            pading: 28px 32px;
+            overflow: hidden;
+            border-radius: 18px;
+            font-family: 'Roboto', sans-serif;
+            transition: 0.6s ease-out;
+        }
+        .search-box{
+            width: 100%;
+        }
+    </style>
+<body>
+    <div class="container">
+        <div class="search-box">
+            <i class="fa-solid" fa-location-dot></i>
+            <input type="text" placeholder="Enter your location">
+            <button class="fa-solid fa-magnifying-glass"></button>
+        </div>
+
+        <div class="not-found">
+            <h3>Nicht Gefunden</h3>
+        </div>
+
+        <div class="weather">
+            <img src="">
+            <p class="temperature"></p>
+            <p class="description"></p>
+        </div>
+
+        <div class="weather-details">
+            <div class="humidity">
+                <i class="fa-solid fa-water"></i>
+                <div class="text">
+                    <span></span>
+                    <p>Humidity</p>
+                </div>
+            </div>
+            <div class="wind">
+                <i class="fa-solid fa-wind"></i>
+                <div class="text">
+                    <span></span>
+                    <p>Wind Speed</p>
+                </div>
+            </div>
+        </div>
+
+    </div>
+
+    <script src="https://kit.fontawesome.com/7c8801c017.js"
+    crossorigin="anonymous"></script>
+</body>
+</html>
