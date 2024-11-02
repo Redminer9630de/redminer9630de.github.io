@@ -3,16 +3,17 @@
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>2D Mining Game</title>
+    <title>Mining Game</title>
     <style>
-        /* Canvas und Spielfläche */
+        body, html {
+            margin: 0;
+            overflow: hidden;
+            background-color: #000;
+        }
         canvas { 
-            background-color: lightblue;
             display: block; 
-            margin: auto;
-            border: 2px solid black;
-            width: 100%;
-            height: 100%;
+            background-color: lightblue;
+            outline: none;
         }
     </style>
 </head>
@@ -20,43 +21,61 @@
     <canvas id="gameCanvas"></canvas>
 
     <script>
-        // Spiellogik Variablen
+        // Spiellogik Variablen und Canvas-Anpassung
         const canvas = document.getElementById("gameCanvas");
         const ctx = canvas.getContext("2d");
 
-        const TILE_SIZE = 40;
-        const WIDTH = 100;  // Breite der Welt
-        const HEIGHT = 100; // Höhe der Welt
+        canvas.width = window.innerWidth;
+        canvas.height = window.innerHeight;
 
-        // Blocktypen und Härten
+        const TILE_SIZE = 40;
+        const WORLD_WIDTH = 100;
+        const WORLD_HEIGHT = 100;
+
+        // Texturen und Bilder
+        const textures = {
+            shop: "images/game/shop.png",
+            grass: "images/game/grass.png",
+            dirt: "images/game/dirt.png",
+            stone: "images/game/stone.png",
+            hard_stone: "images/game/hard_stone.png",
+            miner_idle: "images/game/miner_idle.png",
+            miner_mining: "images/game/miner_mining.png",
+            gem: "images/game/gem.png",
+            shovel: "images/game/shovel.png",
+            pickaxe: "images/game/pickaxe.png",
+            drill: "images/game/drill.png",
+            laser_drill: "images/game/laser_drill.png"
+        };
+
         const BLOCK_TYPES = {
             AIR: { id: 0, texture: null, hardness: 0 },
-            GRASS: { id: 1, texture: "images/game/grass.png", hardness: 5 },
-            DIRT: { id: 2, texture: "images/game/dirt.png", hardness: 6 },
-            STONE: { id: 3, texture: "images/game/stone.png", hardness: 20 },
-            HARD_STONE: { id: 4, texture: "images/game/hard_stone.png", hardness: 50 },
+            GRASS: { id: 1, texture: textures.grass, hardness: 5 },
+            DIRT: { id: 2, texture: textures.dirt, hardness: 6 },
+            STONE: { id: 3, texture: textures.stone, hardness: 20 },
+            HARD_STONE: { id: 4, texture: textures.hard_stone, hardness: 50 },
         };
 
         const TOOL_TYPES = {
-            SHOVEL: { name: "Schaufel", speed: 1, cost: 0, texture: "images/game/shovel.png" },
-            PICKAXE: { name: "Spitzhacke", speed: 4, cost: 10, texture: "images/game/pickaxe.png" },
-            DRILL: { name: "Bohrer", speed: 9, cost: 20, texture: "images/game/drill.png" },
-            LASER_DRILL: { name: "Laser-Bohrer", speed: 15, cost: 50, texture: "images/game/laser_drill.png" },
+            SHOVEL: { name: "Schaufel", speed: 1, cost: 0, texture: textures.shovel },
+            PICKAXE: { name: "Spitzhacke", speed: 2, cost: 10, texture: textures.pickaxe },
+            DRILL: { name: "Bohrer", speed: 3, cost: 20, texture: textures.drill },
+            LASER_DRILL: { name: "Laser-Bohrer", speed: 5, cost: 50, texture: textures.laser_drill },
         };
 
-        // Anfangswerkzeug und Shop-Status
-        let currentTool = TOOL_TYPES.SHOVEL;
-        let gems = 0;
-
-        // Weltgeneration und Blockabbau
+        // Welt und Spieler
         const world = [];
-        for (let y = 0; y < HEIGHT; y++) {
-            const row = [];
-            for (let x = 0; x < WIDTH; x++) {
-                const blockType = generateRandomBlock();
-                row.push({ type: blockType, hardness: BLOCK_TYPES[blockType].hardness });
+        let player = { x: 0, y: 0, vx: 0, vy: 0, gravity: 0.5, onGround: false, tool: TOOL_TYPES.SHOVEL, gems: 0 };
+
+        function initializeWorld() {
+            for (let y = 0; y < WORLD_HEIGHT; y++) {
+                const row = [];
+                for (let x = 0; x < WORLD_WIDTH; x++) {
+                    const blockType = generateRandomBlock();
+                    row.push({ type: blockType, hardness: BLOCK_TYPES[blockType].hardness });
+                }
+                world.push(row);
             }
-            world.push(row);
         }
 
         function generateRandomBlock() {
@@ -67,56 +86,79 @@
             return BLOCK_TYPES.HARD_STONE.id;
         }
 
-        // Zeichnen der Welt
+        // Zeichnen der Welt und des Spielers
         function drawWorld() {
-            for (let y = 0; y < HEIGHT; y++) {
-                for (let x = 0; x < WIDTH; x++) {
+            ctx.clearRect(0, 0, canvas.width, canvas.height);
+            for (let y = 0; y < WORLD_HEIGHT; y++) {
+                for (let x = 0; x < WORLD_WIDTH; x++) {
                     const block = world[y][x];
                     if (block.type !== BLOCK_TYPES.AIR.id) {
                         const texture = new Image();
                         texture.src = BLOCK_TYPES[block.type].texture;
-                        texture.onload = () => ctx.drawImage(texture, x * TILE_SIZE, y * TILE_SIZE, TILE_SIZE, TILE_SIZE);
-                        ctx.fillText(block.hardness, x * TILE_SIZE + 10, y * TILE_SIZE + 25); // Härteanzeige
+                        ctx.drawImage(texture, x * TILE_SIZE, y * TILE_SIZE, TILE_SIZE, TILE_SIZE);
+                        if (block.hardness < BLOCK_TYPES[block.type].hardness) {
+                            ctx.fillStyle = "white";
+                            ctx.fillText(block.hardness, x * TILE_SIZE + 10, y * TILE_SIZE + 25);
+                        }
                     }
                 }
             }
+            const minerTexture = new Image();
+            minerTexture.src = player.onGround ? textures.miner_idle : textures.miner_mining;
+            ctx.drawImage(minerTexture, player.x, player.y, TILE_SIZE, TILE_SIZE);
         }
 
-        // Blockabbau
-        function mineBlock(x, y) {
-            const block = world[y][x];
-            if (block.type === BLOCK_TYPES.AIR.id) return;
-            block.hardness -= currentTool.speed;
-            if (block.hardness <= 0) {
-                block.type = BLOCK_TYPES.AIR.id;
-                block.hardness = 0;
-                if (Math.random() < 0.05) gems += 1;  // 5% Chance, Gems zu droppen
+        // Gravitation und Bewegung
+        function applyGravity() {
+            player.vy += player.gravity;
+            player.y += player.vy;
+            if (player.y >= canvas.height - TILE_SIZE) {
+                player.y = canvas.height - TILE_SIZE;
+                player.vy = 0;
+                player.onGround = true;
+            } else {
+                player.onGround = false;
             }
         }
 
-        // Werkzeug-Upgrades im Shop
-        function upgradeTool() {
-            if (currentTool === TOOL_TYPES.SHOVEL && gems >= TOOL_TYPES.PICKAXE.cost) {
-                currentTool = TOOL_TYPES.PICKAXE;
-                gems -= TOOL_TYPES.PICKAXE.cost;
-            } else if (currentTool === TOOL_TYPES.PICKAXE && gems >= TOOL_TYPES.DRILL.cost) {
-                currentTool = TOOL_TYPES.DRILL;
-                gems -= TOOL_TYPES.DRILL.cost;
-            } else if (currentTool === TOOL_TYPES.DRILL && gems >= TOOL_TYPES.LASER_DRILL.cost) {
-                currentTool = TOOL_TYPES.LASER_DRILL;
-                gems -= TOOL_TYPES.LASER_DRILL.cost;
-            }
-        }
-
-        // Steuerung und Logik
-        canvas.addEventListener("click", (event) => {
-            const x = Math.floor(event.offsetX / TILE_SIZE);
-            const y = Math.floor(event.offsetY / TILE_SIZE);
-            mineBlock(x, y);
-            drawWorld();
+        // Steuerung und Bewegung
+        document.addEventListener("keydown", (e) => {
+            if (e.key === "ArrowRight" || e.key === "d") player.vx = 2;
+            if (e.key === "ArrowLeft" || e.key === "a") player.vx = -2;
+            if ((e.key === "ArrowUp" || e.key === "w") && player.onGround) player.vy = -10;
         });
 
-        drawWorld();
+        document.addEventListener("keyup", (e) => {
+            if (e.key === "ArrowRight" || e.key === "ArrowLeft" || e.key === "d" || e.key === "a") player.vx = 0;
+        });
+
+        function movePlayer() {
+            player.x += player.vx;
+            player.x = Math.max(0, Math.min(player.x, canvas.width - TILE_SIZE));
+        }
+
+        // Fortschritt speichern
+        function saveGame() {
+            const gameState = {
+                world: world,
+                player: player
+            };
+            localStorage.setItem("miningGameSave", JSON.stringify(gameState));
+        }
+
+        setInterval(saveGame, 30000);
+
+        // Hauptspiel-Schleife
+        function gameLoop() {
+            applyGravity();
+            movePlayer();
+            drawWorld();
+            requestAnimationFrame(gameLoop);
+        }
+
+        initializeWorld();
+        gameLoop();
+
     </script>
 </body>
 </html>
