@@ -1,0 +1,122 @@
+<!DOCTYPE html>
+<html lang="de">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>2D Mining Game</title>
+    <style>
+        /* Canvas und Spielfläche */
+        canvas { 
+            background-color: lightblue;
+            display: block; 
+            margin: auto;
+            border: 2px solid black;
+            width: 100%;
+            height: 100%;
+        }
+    </style>
+</head>
+<body>
+    <canvas id="gameCanvas"></canvas>
+
+    <script>
+        // Spiellogik Variablen
+        const canvas = document.getElementById("gameCanvas");
+        const ctx = canvas.getContext("2d");
+
+        const TILE_SIZE = 40;
+        const WIDTH = 100;  // Breite der Welt
+        const HEIGHT = 100; // Höhe der Welt
+
+        // Blocktypen und Härten
+        const BLOCK_TYPES = {
+            AIR: { id: 0, texture: null, hardness: 0 },
+            GRASS: { id: 1, texture: "images/game/grass.png", hardness: 5 },
+            DIRT: { id: 2, texture: "images/game/dirt.png", hardness: 6 },
+            STONE: { id: 3, texture: "images/game/stone.png", hardness: 20 },
+            HARD_STONE: { id: 4, texture: "images/game/hard_stone.png", hardness: 50 },
+        };
+
+        const TOOL_TYPES = {
+            SHOVEL: { name: "Schaufel", speed: 1, cost: 0, texture: "images/game/shovel.png" },
+            PICKAXE: { name: "Spitzhacke", speed: 4, cost: 10, texture: "images/game/pickaxe.png" },
+            DRILL: { name: "Bohrer", speed: 9, cost: 20, texture: "images/game/drill.png" },
+            LASER_DRILL: { name: "Laser-Bohrer", speed: 15, cost: 50, texture: "images/game/laser_drill.png" },
+        };
+
+        // Anfangswerkzeug und Shop-Status
+        let currentTool = TOOL_TYPES.SHOVEL;
+        let gems = 0;
+
+        // Weltgeneration und Blockabbau
+        const world = [];
+        for (let y = 0; y < HEIGHT; y++) {
+            const row = [];
+            for (let x = 0; x < WIDTH; x++) {
+                const blockType = generateRandomBlock();
+                row.push({ type: blockType, hardness: BLOCK_TYPES[blockType].hardness });
+            }
+            world.push(row);
+        }
+
+        function generateRandomBlock() {
+            const rand = Math.random();
+            if (rand < 0.1) return BLOCK_TYPES.GRASS.id;
+            if (rand < 0.3) return BLOCK_TYPES.DIRT.id;
+            if (rand < 0.6) return BLOCK_TYPES.STONE.id;
+            return BLOCK_TYPES.HARD_STONE.id;
+        }
+
+        // Zeichnen der Welt
+        function drawWorld() {
+            for (let y = 0; y < HEIGHT; y++) {
+                for (let x = 0; x < WIDTH; x++) {
+                    const block = world[y][x];
+                    if (block.type !== BLOCK_TYPES.AIR.id) {
+                        const texture = new Image();
+                        texture.src = BLOCK_TYPES[block.type].texture;
+                        texture.onload = () => ctx.drawImage(texture, x * TILE_SIZE, y * TILE_SIZE, TILE_SIZE, TILE_SIZE);
+                        ctx.fillText(block.hardness, x * TILE_SIZE + 10, y * TILE_SIZE + 25); // Härteanzeige
+                    }
+                }
+            }
+        }
+
+        // Blockabbau
+        function mineBlock(x, y) {
+            const block = world[y][x];
+            if (block.type === BLOCK_TYPES.AIR.id) return;
+            block.hardness -= currentTool.speed;
+            if (block.hardness <= 0) {
+                block.type = BLOCK_TYPES.AIR.id;
+                block.hardness = 0;
+                if (Math.random() < 0.05) gems += 1;  // 5% Chance, Gems zu droppen
+            }
+        }
+
+        // Werkzeug-Upgrades im Shop
+        function upgradeTool() {
+            if (currentTool === TOOL_TYPES.SHOVEL && gems >= TOOL_TYPES.PICKAXE.cost) {
+                currentTool = TOOL_TYPES.PICKAXE;
+                gems -= TOOL_TYPES.PICKAXE.cost;
+            } else if (currentTool === TOOL_TYPES.PICKAXE && gems >= TOOL_TYPES.DRILL.cost) {
+                currentTool = TOOL_TYPES.DRILL;
+                gems -= TOOL_TYPES.DRILL.cost;
+            } else if (currentTool === TOOL_TYPES.DRILL && gems >= TOOL_TYPES.LASER_DRILL.cost) {
+                currentTool = TOOL_TYPES.LASER_DRILL;
+                gems -= TOOL_TYPES.LASER_DRILL.cost;
+            }
+        }
+
+        // Steuerung und Logik
+        canvas.addEventListener("click", (event) => {
+            const x = Math.floor(event.offsetX / TILE_SIZE);
+            const y = Math.floor(event.offsetY / TILE_SIZE);
+            mineBlock(x, y);
+            drawWorld();
+        });
+
+        drawWorld();
+    </script>
+</body>
+</html>
