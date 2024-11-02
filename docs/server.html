@@ -90,6 +90,15 @@
         #teamTable img:hover {
             transform: scale(1.2); /* Bild vergrößern bei Hover */
         }
+        
+        @keyframes colorTransition {
+            0% { color: #ff9800; }
+            100% { color: #4caf50; }
+        }
+
+        .server-status {
+            animation: colorTransition 0.5s ease;
+        }
     </style>
 </head>
 <body>
@@ -166,6 +175,13 @@
             });
 
             rows.forEach(row => tbody.appendChild(row));
+        }
+
+        function updateServerStatus(newStatus) {
+            const statusElement = document.querySelector('.server-status');
+            statusElement.textContent = newStatus;
+            statusElement.classList.add('color-transition');
+            setTimeout(() => statusElement.classList.remove('color-transition'), 500);
         }
     </script>
 </body>
