@@ -318,6 +318,16 @@
         .clean-button img {
             display: block;
         }
+            
+        @keyframes squeeze {
+            0% { transform: scale(1); }
+            50% { transform: scale(0.9); }
+            100% { transform: scale(1); }
+        }
+
+        .button-category {
+            animation: squeeze 0.4s ease;
+        }
     </style>
 </head>
 <body onload="showHomePage()">
@@ -913,6 +923,15 @@
                     localStorage.setItem(itemName, objectURL); // optional
                     return objectURL;
                });
+        }
+
+        function toggleInfo(infoElement) {
+            infoElement.classList.toggle('open');
+            if (infoElement.classList.contains('open')) {
+                infoElement.style.maxHeight = infoElement.scrollHeight + 'px';
+            } else {
+                infoElement.style.maxHeight = 0;
+            } 
         }
 </script>
 </body>
