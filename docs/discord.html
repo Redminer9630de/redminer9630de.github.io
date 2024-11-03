@@ -1,0 +1,109 @@
+<!DOCTYPE html>
+<html lang="de">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Discord - Redminer9630</title>
+    <style>
+        @font-face {
+            font-family: 'MinecraftFont';
+            src: url('minecraft_font.ttf') format('truetype'),
+                 url('minecraft_font.woff') format('woff');
+        }
+        
+        body {
+            font-family: 'MinecraftFont', sans-serif;
+            text-align: center;
+            padding: 20px;
+            transition: background-color 0.3s, color 0.3s;
+        }
+
+        h1 {
+            font-size: 36px;
+            margin-bottom: 20px;
+        }
+
+        /* Header-Links */
+        .header-link {
+            font-size: 16px;
+            text-decoration: none;
+            padding: 10px 20px;
+            border-radius: 8px;
+            font-family: 'MinecraftFont', sans-serif;
+            background-color: #f44336;
+            color: white;
+            position: absolute;
+            top: 20px;
+            right: 20px;
+        }
+
+        /* Discord-Beitreten-Button */
+        .discord-button {
+            font-size: 16px;
+            text-decoration: none;
+            padding: 10px 20px;
+            border-radius: 8px;
+            background-color: #7289da; /* Discord-Blau */
+            color: white;
+            position: absolute;
+            top: 20px;
+            left: 20px;
+            font-family: 'MinecraftFont', sans-serif;
+        }
+
+        /* Channel Navigation */
+        .channel-bar {
+            display: flex;
+            justify-content: center;
+            gap: 15px;
+            background-color: #2c2f33;
+            padding: 10px;
+            border-radius: 8px;
+            margin-bottom: 20px;
+        }
+
+        .channel-bar a {
+            color: white;
+            text-decoration: none;
+            padding: 8px 15px;
+            border-radius: 4px;
+            background-color: #7289da;
+            font-family: 'MinecraftFont', sans-serif;
+            transition: background-color 0.3s;
+        }
+
+        .channel-bar a:hover {
+            background-color: #5a6ebc;
+        }
+
+        /* Widget-Bereich */
+        .discord-widget {
+            border: none;
+            width: 100%;
+            height: 500px; /* Höhe anpassen, falls nötig */
+            border-radius: 8px;
+        }
+    </style>
+</head>
+<body>
+    <h1>Discord - Redminer9630</h1>
+
+    <!-- Zurück-Link -->
+    <a href="https://redminer9630de.github.io/" class="header-link">Zurück ></a>
+
+    <!-- Discord Beitreten-Button -->
+    <a href="https://discord.gg/uRNX47tYrX" class="discord-button">Discord beitreten</a>
+
+    <!-- Channel Navigation -->
+    <div class="channel-bar">
+        <a href="https://e.widgetbot.io/channels/YOUR_SERVER_ID/CHANNEL_ID_1" target="discord-widget">#general</a>
+        <a href="https://e.widgetbot.io/channels/YOUR_SERVER_ID/CHANNEL_ID_2" target="discord-widget">#support</a>
+        <a href="https://e.widgetbot.io/channels/YOUR_SERVER_ID/CHANNEL_ID_3" target="discord-widget">#announcements</a>
+    </div>
+
+    <!-- Discord Widget mit WidgetBot -->
+    <iframe id="discord-widget" class="discord-widget" src="https://e.widgetbot.io/channels/YOUR_SERVER_ID/CHANNEL_ID_1" allowtransparency="true"></iframe>
+
+    <script src="https://cdn.jsdelivr.net/npm/@widgetbot/html-embed"></script>
+</body>
+</html>
