@@ -1,5 +1,4 @@
 const pending = [
-    'block/grass_block',
     'block/cobblestone',
     'block/oak_planks',
     'block/bedrock',
