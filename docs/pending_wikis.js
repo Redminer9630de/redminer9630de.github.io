@@ -1,5 +1,6 @@
 const pending = [
-    'block/cobblestone',
+    '<wikigui>',
+    'block/cobblestone-crafting',
     'block/oak_planks',
     'block/bedrock',
     'block/water',
