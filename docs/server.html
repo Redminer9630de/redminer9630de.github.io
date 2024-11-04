@@ -142,15 +142,15 @@
             const statusElement = document.getElementById("status");
             const playerElement = document.getElementById("players");
 
-            if (isServerOnline) {
-                statusElement.textContent = "Online";
-                statusElement.className = "status online";
-                playerElement.textContent = `${playerCount}/20`;
-            } else {
-                statusElement.textContent = "Offline";
-                statusElement.className = "status offline";
-                playerElement.textContent = "0/20";
-            }
+            //if (isServerOnline) {
+            //    statusElement.textContent = "Online";
+            //    statusElement.className = "status online";
+            //    playerElement.textContent = `${playerCount}/20`;
+            //} else {
+            //    statusElement.textContent = "Offline";
+            //    statusElement.className = "status offline";
+            //    playerElement.textContent = "0/20";
+            //}
         }
 
         setInterval(updateServerInfo, 1000);
