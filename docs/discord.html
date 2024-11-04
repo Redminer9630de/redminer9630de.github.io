@@ -4,7 +4,12 @@
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <title>Discord - Redminer9630</title>
-    <style>
+    <style>        
+        @font-face {
+            font-family: 'Minecraft';
+            src: url('minecraft_font.woff'), format('.woff'),
+                 url('minecraft_font.ttf'), format('truetype');
+        }
         body {
             font-family: Arial, sans-serif;
             background-color: #36393f;
@@ -14,13 +19,15 @@
         }
 
         .tabs {
+            font-family: 'Minecraft', sans-serif;
             display: flex;
             justify-content: center;
             gap: 10px;
             margin-bottom: 20px;
         }
 
-        .tab {
+        .tab {            
+            font-family: 'Minecraft', sans-serif;
             cursor: pointer;
             padding: 10px 20px;
             background-color: #7289da;
