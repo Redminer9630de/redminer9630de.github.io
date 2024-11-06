@@ -10,7 +10,6 @@
             src: url('https://redminer9630de.github.io/minecraft_font.woff') format('woff'),
                  url('https://redminer9630de.github.io/minecraft_font.ttf') format('truetype');
         }
-        
         body {
             font-family: Minecart, sans-serif;
             text-align: center;
@@ -34,9 +33,7 @@
             color: #1a73e8;
             text-decoration: none;
         }
-        a:hover {
-            text-decoration: underline;
-        }
+        a:hover { text-decoration: underline; }
         footer {
             font-family: Minecart, sans-serif;
             background-color: #2c3e50;
@@ -54,8 +51,7 @@
                 color: #f5f5f5;
             }
             header, footer{ background-color: #1c2a34; }
-            h1{ color: #27ae60; }
-            p{ color: #ffffff; }
+            p, h1{ color: #ffffff; }
             button{ background-color: #27ae60; }
             button:hover { background-color: #2ecc71; }
         }
@@ -64,14 +60,11 @@
 <body>
     <h1>404 - Seite nicht gefunden</h1>
     <p>Die von dir gesuchte Seite konnte nicht gefunden werden.</p>
-    
     <p><a href='https://redminer9630de.github.io/';>Zurueck zur Startseite</a></p>
-    
     <p>Du wirst in <span id="countdown">5</span> Sekunden zur Startseite geleitet.</p>
     <footer>
         © 2024 Offizieller Kanal von Redminer9630 - Alle Rechte vorbehalten.
     </footer>
-
     <script>
         let timeLeft = 5;
         const countdownElement = document.getElementById('countdown');
