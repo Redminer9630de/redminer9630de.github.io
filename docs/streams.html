@@ -9,8 +9,7 @@
             font-family: Minecraft;
             src: url('minecraft_font.woff') format('woff'),
                  url('minecraft_font.ttf') format('truetype');
-        }
-        
+        }       
         body {
             font-family: 'Minecraft', sans-serif;
             background-color: #f0f0f0;
@@ -18,18 +17,15 @@
             margin: 0;
             padding: 20px;
         }
-
         h1 {
             text-align: center;
             color: #444;
         }
-
         .video-container {
             display: flex;
             justify-content: center;
             margin-bottom: 40px;
         }
-
         .header-link {
             color: white;
             font-size: 16px;
@@ -42,14 +38,20 @@
             right: 20px;
             cursor: pointer;
         }
-
         .header-link:hover {
             background-color: #e53935;
+        }
+        @media (prefers-color-scheme: dark) {
+            body{ 
+                color: #fff;
+                background-color: #000;
+            }
+            h1{color: #fff;} 
         }
     </style>
 </head>
 <body>
-    <h1>Live-Stream von Redminer9630</h1>
+    <h1>Live Stream</h1>
 
     <div class="video-container">
         <iframe
