@@ -2,61 +2,80 @@
 <html lang="de">
 <head>
     <meta charset="UTF-8">
-    <title>Interaktive Mindmap mit Verbindungen</title>
+    <title>Interaktive Mindmap</title>
     <style>
         .mindmap {
             position: relative;
-            display: flex;
-            flex-direction: column;
-            align-items: center;
-            margin-top: 50px;
-        }
-        .node {
-            padding: 10px 20px;
-            border: 1px solid #333;
+            width: 600px;
+            height: 600px;
+            margin: 0 auto;
+            border: 1px solid #ddd;
             border-radius: 8px;
-            margin: 10px;
-            background-color: #FFD700;
-            cursor: pointer;
-            transition: transform 0.3s;
-            position: relative;
-            z-index: 1; /* Sicherstellen, dass Knoten über SVG liegen */
+            overflow: hidden;
         }
-        .node:hover {
-            transform: scale(1.1);
+        .main-node {
+            position: absolute;
+            top: 50%;
+            left: 50%;
+            transform: translate(-50%, -50%);
+            padding: 15px;
+            background-color: #FFD700;
+            border-radius: 8px;
+            border: 1px solid #333;
+            cursor: pointer;
+            z-index: 1;
         }
         .sub-node {
+            position: absolute;
+            padding: 10px;
             background-color: #ADD8E6;
+            border-radius: 8px;
+            border: 1px solid #333;
+            cursor: pointer;
+            z-index: 1;
         }
+        /* Positionierung der Unterthemen */
+        .sub-node:nth-child(2) { top: 10%; left: 50%; transform: translateX(-50%); }
+        .sub-node:nth-child(3) { top: 50%; left: 10%; transform: translateY(-50%); }
+        .sub-node:nth-child(4) { bottom: 10%; left: 50%; transform: translateX(-50%); }
+        .sub-node:nth-child(5) { top: 50%; right: 10%; transform: translateY(-50%); }
+        
+        /* SVG Verbindungen */
         .connections {
             position: absolute;
-            top: 0;
-            left: 0;
             width: 100%;
             height: 100%;
-            z-index: 0; /* SVG im Hintergrund halten */
+            pointer-events: none; /* Keine Interaktion mit SVG */
+            z-index: 0;
+        }
+        line {
+            stroke: #333;
+            stroke-width: 2;
         }
     </style>
 </head>
 <body>
+
 <div class="mindmap">
     <svg class="connections">
-        <line x1="150" y1="30" x2="200" y2="100" style="stroke:rgb(99,99,99);stroke-width:2" />
-        <line x1="150" y1="30" x2="100" y2="100" style="stroke:rgb(99,99,99);stroke-width:2" />
+        <line x1="300" y1="300" x2="300" y2="60" /> <!-- Hauptthema zu Unterthema oben -->
+        <line x1="300" y1="300" x2="60" y2="300" /> <!-- Hauptthema zu Unterthema links -->
+        <line x1="300" y1="300" x2="300" y2="540" /> <!-- Hauptthema zu Unterthema unten -->
+        <line x1="300" y1="300" x2="540" y2="300" /> <!-- Hauptthema zu Unterthema rechts -->
     </svg>
-
-    <div class="node main-node" onclick="expandNode(this)">Hauptthema</div>
-    <div class="node sub-node" onclick="expandNode(this)">Unterthema 1</div>
-    <div class="node sub-node" onclick="expandNode(this)">Unterthema 2</div>
+    <div class="main-node">Developing</div>
+    <div class="sub-node" onclick="expandNode(this)">Website</div>
+    <div class="sub-node" onclick="expandNode(this)">Driving Game</div>
 </div>
 <script>
     function expandNode(node) {
         const newNode = document.createElement("div");
-        newNode.className = "node sub-node";
+        newNode.className = "sub-node";
         newNode.textContent = "Neues Thema";
         newNode.onclick = () => expandNode(newNode);
         document.querySelector(".mindmap").appendChild(newNode);
     }
 </script>
+
 </body>
 </html>
