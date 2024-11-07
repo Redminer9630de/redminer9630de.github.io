@@ -34,13 +34,10 @@
             cursor: pointer;
             z-index: 1;
         }
-        /* Positionierung der Unterthemen */
         .sub-node:nth-child(2) { top: 10%; left: 50%; transform: translateX(-50%); }
         .sub-node:nth-child(3) { top: 50%; left: 10%; transform: translateY(-50%); }
         .sub-node:nth-child(4) { bottom: 10%; left: 50%; transform: translateX(-50%); }
         .sub-node:nth-child(5) { top: 50%; right: 10%; transform: translateY(-50%); }
-        
-        /* SVG Verbindungen */
         .connections {
             position: absolute;
             width: 100%;
@@ -66,6 +63,8 @@
     <div class="main-node">Developing</div>
     <div class="sub-node" onclick="expandNode(this)">Website</div>
     <div class="sub-node" onclick="expandNode(this)">Driving Game</div>
+    <div class="sub-node" onclick="expandNode(this)">g</div>
+    <div class="sub-node" onclick="expandNode(this)">g</div>
 </div>
 <script>
 </script>
