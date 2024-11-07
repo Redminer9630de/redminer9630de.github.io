@@ -68,13 +68,6 @@
     <div class="sub-node" onclick="expandNode(this)">Driving Game</div>
 </div>
 <script>
-    function expandNode(node) {
-        const newNode = document.createElement("div");
-        newNode.className = "sub-node";
-        newNode.textContent = "Neues Thema";
-        newNode.onclick = () => expandNode(newNode);
-        document.querySelector(".mindmap").appendChild(newNode);
-    }
 </script>
 
 </body>
