@@ -1,0 +1,42 @@
+<!DOCTYPE html>
+<html lang="de">
+<head>
+    <meta charset="UTF-8">
+    <title>Interaktive Mindmap</title>
+    <style>
+        .mindmap {
+            display: flex;
+            flex-direction: column;
+            align-items: center;
+            margin-top: 50px;
+        }
+        .node {
+            padding: 10px 20px;
+            border: 1px solid #333;
+            border-radius: 8px;
+            margin: 10px;
+            background-color: #FFD700;
+            cursor: pointer;
+            transition: transform 0.3s;
+        }
+        .node:hover { transform: scale(1.1); }
+        .sub-node { background-color: #ADD8E6; }
+    </style>
+</head>
+<body>
+<div class="mindmap">
+    <div class="node main-node" onclick="expandNode(this)">Developing</div>
+    <div class="node sub-node" onclick="expandNode(this)">Driving Game</div>
+    <div class="node sub-node" onclick="expandNode(this)">Website</div>
+</div>
+<script>
+    function expandNode(node) {
+        const newNode = document.createElement("div");
+        newNode.className = "node sub-node";
+        newNode.textContent = "Neues Thema";
+        newNode.onclick = () => expandNode(newNode);
+        document.querySelector(".mindmap").appendChild(newNode);
+    }
+</script>
+</body>
+</html>
