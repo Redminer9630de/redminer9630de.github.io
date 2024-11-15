@@ -43,7 +43,7 @@
     <h1>404 - Seite nicht gefunden</h1>
     <p>Die von dir gesuchte Seite konnte nicht gefunden werden.</p>
     <button class="back"><a href='https://redminer9630.ddns.net';>Zurueck zur Startseite</a></button>
-    <p>Du wirst in <span id="countdown">5</span> Sekunden zur Startseite geleitet.</p>
+    <p id="info">Du wirst in <span id="countdown">5</span> Sekunden zur Startseite geleitet</p>
     
     <footer>© 2024 Offizieller Kanal von Redminer9630 - Alle Rechte vorbehalten.</footer>
     <script>
@@ -51,7 +51,10 @@
         const timeStop = false;
         const urlParams = new URLSearchParams(window.location.search);
         const stop = urlParams.get('stop');
-        if (stop): { const timeStop = true; }
+        if (stop): { 
+            const timeStop = true;
+            document.getElementById('info').innerHTML('Du wirst nicht Automatisch Weitergeleitet')
+        }
         
         const countdownElement = document.getElementById('countdown');
         const countdownInterval = setInterval(() => {
