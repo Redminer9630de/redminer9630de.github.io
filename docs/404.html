@@ -7,8 +7,8 @@
     <style>
         @font-face {
             font-family: Minecraft, sans-serif;
-            src: url('https://redminer9630de.github.io/minecraft_font.woff') format('woff'),
-                 url('https://redminer9630de.github.io/minecraft_font.ttf') format('truetype');
+            src: url('minecraft_font.woff') format('woff'),
+                 url('minecraft_font.ttf') format('truetype');
         }
         body {
             font-family: Minecraft, sans-serif;
@@ -60,25 +60,21 @@
 <body>
     <h1>404 - Seite nicht gefunden</h1>
     <p>Die von dir gesuchte Seite konnte nicht gefunden werden.</p>
-    <p><a href='https://redminer9630de.github.io/';>Zurueck zur Startseite</a></p>
+    <p><a href='https://redminer9630.ddns.net';>Zurueck zur Startseite</a></p>
     <p>Du wirst in <span id="countdown">5</span> Sekunden zur Startseite geleitet.</p>
-    <footer>
-        © 2024 Offizieller Kanal von Redminer9630 - Alle Rechte vorbehalten.
-    </footer>
+    
+    <footer>© 2024 Offizieller Kanal von Redminer9630 - Alle Rechte vorbehalten.</footer>
     <script>
         let timeLeft = 5;
         const countdownElement = document.getElementById('countdown');
-
         const countdownInterval = setInterval(() => {
             timeLeft--;
             countdownElement.textContent = timeLeft;
-
             if (timeLeft <= 0) {
                 clearInterval(countdownInterval);
                 window.location.href = 'https://redminer9630de.github.io';
             }
         }, 1000);
     </script>
-
 </body>
 </html>
