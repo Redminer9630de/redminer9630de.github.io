@@ -23,12 +23,7 @@
             padding: 20px;
             transition: background-color 0.3s, color 0.3s;
         }
-
-        h1 {
-            font-size: 36px;    
-            margin-bottom: 20px;
-        }
-
+        h1 { font-size: 36px; margin-bottom: 20px; }
         .header-link {
             font-size: 16px;
             text-decoration: none;
@@ -38,8 +33,7 @@
             top: 20px;
             right: 20px;
         }
-
-        .shortcut-button, .info-button, .brewing-button {
+        .shortcut-button {
             font-family: 'MinecraftFont', sans-serif;
             display: inline-block;
             padding: 15px;
@@ -50,53 +44,17 @@
             font-size: 18px;
             transition: background-color 0.3s;
         }
-
-        /* Dark Theme (wenn das Gerät im Dark Mode ist) */
         @media (prefers-color-scheme: dark) {
-            body {
-                background-color: #282c34;
-                color: white;
-            }
-
-            .header-link {
-                background-color: #f44336;    
-                color: white;
-            }
-
-            .header-link:hover {
-                background-color: #e53935;
-            }
-
-            .shortcut-button, .info-button, .brewing-button {
-                font-family: 'MinecraftFont', sans-serif;
-                background-color: #4CAF50;
-                color: white;    
-            }
-
-            .shortcut-button:hover, .info-button:hover, .brewing-button:hover {
-                background-color: #45a049;
-                transform: scale(1.2);
-            }
-
-            .shortcut-button:active {
-                background-color: #5CAFA1;
-                transform: scale(0.8);
-            }
-
-            #content {
-                border: 1px solid #ddd;
-            }  
-
-            .url-bar {
-                background-color: #282c34 !important;
-            }
-            .url-input {
-                background-color: #3B4048;
-                color: white;
-            }
+            body { background-color: #282c34; color: white; }
+            .header-link { background-color: #f44336; color: white; }
+            .header-link:hover { background-color: #e53935; }
+            .shortcut-button { font-family: 'MinecraftFont', sans-serif; background-color: #4CAF50; color: white; }
+            .shortcut-button:hover, .info-button:hover, .brewing-button:hover { background-color: #45a049; transform: scale(1.2); }
+            .shortcut-button:active { background-color: #5CAFA1; transform: scale(0.8); }
+            #content { border: 1px solid #ddd; }  
+            .url-bar { background-color: #282c34 !important; }
+            .url-input { background-color: #3B4048; color: white; }
         }
-
-         /* Light Theme (wenn das Gerät im Light Mode ist) */
         @media (prefers-color-scheme: light) {
             body {
                 background-color: #f0f0f0;
@@ -107,71 +65,29 @@
                 background-color: #f44336;
                 color: white;
             }    
-
-            .header-link:hover {
-                background-color: #e53935;
-            }
-
+            .header-link:hover { background-color: #e53935; }
             .shortcut-button, .info-button, .brewing-button {
                 font-family: 'MinecraftFont', sans-serif;
                 background-color: #4CAF50;
                 color: white;
             }
-
             .shortcut-button:hover, .info-button:hover, .brewing-button:hover {
                 font-family: 'MinecraftFont', sans-serif;
                 background-color: #45a049;
             }
-
-            #content {
-                border: 1px solid #aaa;
-            }
-            
-            .url-bar {
-                background-color: #f0f0f0 !important;
-            }
-            .url-input {
-                background-color: #e0e0e0;
-                color: black;
-            }
+            #content { border: 1px solid #aaa; } 
+            .url-bar { background-color: #f0f0f0 !important; }
+            .url-input { background-color: #e0e0e0; color: black; }
         }
-        
-        .trading-one {
-            color: #616161;
-        }
-
-        .trading-two {
-            color: #d8af93;
-        }
-
-        .trading-three {
-            color: #fdff76;
-        }
-
-        .trading-four {
-            color: #41f384;
-        }
-
-        .trading-five {
-            color: #a4fdf0;
-        }
-        
-        .trading-emerald {
-            color: #41DC84;
-        }
-
-        .rarity-uncommon {
-            color: #ffff00;
-        }
-
-        .rarity-rare {
-            color: #54FBFB;
-        }
-
-        .rarity-epic {
-            color: #ff00ff;
-        }
-            
+        .trading-one { color: #616161; }
+        .trading-two { color: #d8af93; }
+        .trading-three { color: #fdff76; }
+        .trading-four { color: #41f384; }
+        .trading-five { color: #a4fdf0; }    
+        .trading-emerald { color: #41DC84; }
+        .rarity-uncommon { color: #ffff00; }
+        .rarity-rare { color: #54FBFB; }
+        .rarity-epic { color: #ff00ff; }       
         #content {
             margin-top: 20px;
             text-align: left;
@@ -195,19 +111,13 @@
             margin-top: 20px;
         }
 
-        table, th, td {
-            border: 1px solid white;
-        }
+        table, th, td { border: 1px solid white; }
 
         th, td {
             padding: 8px;
             text-align: left;
         }
-
-        th {
-            cursor: pointer;
-        }
-
+        th { cursor: pointer; }
         .info-content {
             margin-top: 15px;
             text-align: left;
