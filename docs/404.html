@@ -27,16 +27,13 @@
             left: 0;
         }
         @media (prefers-color-scheme: dark) {
-            body {
-                background-color: #1a1a1a;
-                color: #f5f5f5;
-            }
+            body{ background-color: #1a1a1a; color: #f5f5f5; }
             header, footer{ background-color: #1c2a34; }
             p, h1{ color: #ffffff; }
             button{ background-color: #27ae60; }
             button:hover { background-color: #2ecc71; }
         }
-        .back{ border: ; font-family: 'Minecraft', sans-serif; font-size: 1.2em; color: #666; }
+        .back{ font-family: 'Minecraft', sans-serif; font-size: 1.2em; color: #666; }
     </style>
 </head>
 <body>
@@ -51,11 +48,10 @@
         const timeStop = false;
         const urlParams = new URLSearchParams(window.location.search);
         const stop = urlParams.get('stop');
-        if (stop): { 
+        if (stop) { 
             const timeStop = true;
-            document.getElementById('info').innerHTML('Du wirst nicht Automatisch Weitergeleitet')
+            document.getElementById('info').innerHTML('Du wirst nicht Automatisch Weitergeleitet');
         }
-        
         const countdownElement = document.getElementById('countdown');
         const countdownInterval = setInterval(() => {
             timeLeft--;
