@@ -247,7 +247,7 @@
         <img src="images/wiki_title.png" alt="Minecraft Java Wiki" style="height: 65px;">
     </header>
 
-    <a href="https://redminer9630de.github.io/" tabindex="1" class="header-link">Zurueck ></a>
+    <a href="https://redminer9630.ddns.net" tabindex="1" class="header-link">Zurueck ></a>
     
     <div id="categories">
         <button class="shortcut-button" tabindex="5" onclick="showCommands()">Befehle</button>
@@ -284,7 +284,6 @@
                 <p>Hier sind die noch in Bearbeitung befindlichen Wikiseiten:</p>
                 <ul id="pending-list"></ul>
             `;
-
             const pendingList = document.getElementById('pending-list');
             pending.forEach(page => {
                 const listItem = document.createElement('li');
@@ -292,7 +291,7 @@
                 pendingList.appendChild(listItem);
             });
         }
-
+        showHomePage()
         function showTrading() {
             categoriesVisible = false;
             document.getElementById('categories').style.display = 'none';
@@ -604,10 +603,10 @@
             const wikiPathMatch = urlPath.match(/\/wiki\/(.+)/);
 
             if (wikiPathMatch) {
-                const pagePath = wikiPathMatch[1]; // z.B. "blocks/grass_block"
+                const pagePath = wikiPathMatch[1];
                 loadWikiContent(`learnhour/wiki/${pagePath}.html`);
             } else {
-                showHomePage(); // Falls kein spezieller Wiki-Pfad vorhanden ist
+                showHomePage();
             }
         });
 
