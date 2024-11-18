@@ -20,7 +20,6 @@
         font-style: normal;
     }
 
-    /* Standard-Styles (Light-Theme) */
     body {
         font-family: 'MinecraftFont', sans-serif;
         background-color: #eaeaea;
@@ -295,9 +294,7 @@ footer {
     cursor: pointer; 
 }
 
-.searchbar:focus {
-    border-color: #27ae60; /* Dunkleres Grün bei Fokus */
-}
+.searchbar:focus { border-color: #27ae60; }
 
 .suggestions {
     position: absolute;
@@ -322,9 +319,7 @@ footer {
     font-family: 'MinecraftFont', sans-serif;
 }
 
-.suggestions li:hover {
-    background-color: #fffff0; /* Hellgraue Hintergrundfarbe bei Hover */
-}
+.suggestions li:hover { background-color: #fffff0; }
         
 @media (max-width: 768px) and (orientation: portrait) {
     header {
@@ -339,9 +334,7 @@ footer {
         align-items: center;
     }
 
-    .logo {
-        width: 180px; /* Reduziere die Logogröße */
-    }
+    .logo { width: 180px; }
 
     .logo-text {
         margin-top: 10px; /* Text direkt unter dem Logo */
@@ -386,23 +379,15 @@ footer {
     .logo {
         width: 150px; /* Kleinere Logo-Größe */
     }
-
-    .logo-text {
-        font-size: 1rem; /* Kleinere Schriftgröße */
-    }
-
+    .logo-text { font-size: 1rem; }
     nav {
         width: 50vw;
         height: 100vh;
     }
-
     main {
         padding: 15px;
     }
-
-    footer {
-        padding: 15px;
-    }
+    footer { padding: 15px; }
 }
     </style>
 </head>
@@ -455,7 +440,6 @@ footer {
             </ul>
         </div>
     </nav>
-
     <main>
         <section id="about">
             <h2>Ueber Redminer9630</h2>
@@ -464,11 +448,7 @@ footer {
             <p id="moreInfo" style="display: none; z-index: 2090;">Obwohl der Kanal noch keine Videos enthaelt, plane ich, in naher Zukunft viele weitere Minecraft-Inhalte zu veroeffentlichen. Jetzt ist der perfekte Zeitpunkt, um Teil der Community zu werden und die Entwicklung des Kanals mitzuerleben.</p>
         </section>
     </main>
-
-    <footer>
-        <span>© 2024 Offizieller Kanal von Redminer9630 - Alle Rechte vorbehalten.</span>
-    </footer>
-    
+    <footer><span>© 2024 Offizieller Kanal von Redminer9630 - Alle Rechte vorbehalten.</span></footer>
     <script>
         const keywords = [
             { keyword: "Youtube", url: "youtube.com/channel/UCdpkm8rpRnIi88zWSuubbOQ?sub_confirmation=1", text: "Youtube", group: "youtube" },
@@ -501,13 +481,10 @@ footer {
         searchInput.addEventListener('input', function() {
             handleSearch(this.value.toLowerCase());
         });
-
         function handleSearch(searchValue) {
             suggestionList.innerHTML = ""; // Leere die Vorschlagsliste
             const groupsShown = new Set(); // Set zum Verhindern von Duplikaten
-
             const filteredKeywords = keywords.filter(keyword => keyword.keyword.toLowerCase().includes(searchValue));
-
             filteredKeywords.slice(0, 15).forEach(keyword => {
                 if (!groupsShown.has(keyword.group)) {
                     const listItem = document.createElement('li');
@@ -519,21 +496,17 @@ footer {
                     groupsShown.add(keyword.group); // Füge die Gruppe zur Set-Liste hinzu
                 }
             });
-
             if (searchValue === "") {
                 suggestionList.innerHTML = "";
                 const searchLoad = suggestionList.innerHTML; 
             }
         }
-  
         document.getElementById('moreInfoBtn').addEventListener('click', function() {
             var moreInfo = document.getElementById('moreInfo');
             moreInfo.style.display = moreInfo.style.display === 'none' ? 'block' : 'none';
         });
-
         const urlParams = new URLSearchParams(window.location.search);
         const openLink = urlParams.get('openlink');
-
         const links = {
             1: "https://m.youtube.com/channel/UCdpkm8rpRnIi88zWSuubbOQ?sub_confirmation=1",
             2: "https://m.twitch.tv/redminer9630",
@@ -544,32 +517,18 @@ footer {
             7: "tutorials",
             8: "feedback"
         };
-        
         const search = urlParams.get('search');
-        const menu = urlParams.get('menu');
-        
+        const menu = urlParams.get('menu');     
         if (search) {
             searchInput.value = search;
             handleSearch(search);
         }
-
-        if (menu === 'out') {
-            document.getElementById('navMenu').classList.add('active');
-        }
-        
+        if (menu === 'out') { document.getElementById('navMenu').classList.add('active'); }
         const hiddenItem = urlParams.get('hiddenItem');
-
         document.querySelectorAll('.hiddenItem').forEach(item => {
-            if (hiddenItem) {
-                item.style.display = 'list-item';
-            } else {
-                item.style.display = 'none';
-            }
+            if (hiddenItem) { item.style.display = 'list-item'; } else { item.style.display = 'none'; }
         });
-
-        // Funktion, die den Live-Stream-Status überprüft
         function checkLiveStreamStatus() {
-            // Hier ersetzt du die URL mit deiner API, die den Status zurückgibt
             fetch('https://api.twitch.tv/helix/streams?user_login=Redminer9630')
                 .then(response => response.json())
                 .then(data => {
@@ -586,24 +545,20 @@ footer {
                     document.getElementById('liveStreamLink').style.display = 'none';
                 });
         }
-
-        window.onload = checkLiveStreamStatus;
-        
+        window.onload = checkLiveStreamStatus; 
 		document.getElementById('hamburger').addEventListener('click', function(event) {
-		    event.stopPropagation(); // Verhindert, dass das Click-Event weitergegeben wird
+		    event.stopPropagation();
  		    var navMenu = document.getElementById('navMenu');
  		    navMenu.classList.toggle('active');
+            window.history.replaceState({}, '', '?menu=out');
         });
-
         const menuurlparam = document.getElementById('hamburger').get('active');
         const urlparams = {
             menu: menuurlparam,
             search: searchInput,
         }
         const baseUrl = window.location.origin + window.location.pathname;
-
-        const newUrl = `${baseUrl}?${params.toString()}`;
-        
+        const newUrl = `${baseUrl}?${params.toString()}`;    
         history.pushState({page: ""}, "", newUrl);
     </script>
 </body>
