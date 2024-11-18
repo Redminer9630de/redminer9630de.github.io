@@ -51,18 +51,11 @@
     <footer>© 2024 Offizieller Kanal von Redminer9630 - Alle Rechte vorbehalten.</footer>
     <script>
         let timeLeft = 5;
-        const timeStop = false;
-        const urlParams = new URLSearchParams(window.location.search);
-        const stop = urlParams.get('stop');
-        if (stop) { 
-            const timeStop = true;
-            document.getElementById('info').innerHTML('Du wirst nicht Automatisch Weitergeleitet');
-        }
         const countdownElement = document.getElementById('countdown');
         const countdownInterval = setInterval(() => {
             timeLeft--;
             countdownElement.textContent = timeLeft;
-            if (timeLeft <= 0 && timeStop = false) {
+            if (timeLeft <= 0) {
                 clearInterval(countdownInterval);
                 window.location.href = 'https://redminer9630.ddns.net';
             }
