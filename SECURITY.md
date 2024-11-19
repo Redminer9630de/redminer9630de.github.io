@@ -2,7 +2,7 @@
 
 ## Unterstützte Versionen
 
-In diesem Abschnitt können Sie angeben, welche Versionen Ihres Projekts derzeit mit Sicherheitsupdates unterstützt werden.
+Hier siehst du, welche Versionen deines Projekts derzeit mit Sicherheitsupdates unterstützt werden.
 
 | Version | Unterstützt         |
 | ------- | ------------------- |
@@ -13,6 +13,6 @@ In diesem Abschnitt können Sie angeben, welche Versionen Ihres Projekts derzeit
 
 ## Melden einer Sicherheitslücke
 
-In diesem Abschnitt können Sie erläutern, wie Sicherheitslücken gemeldet werden können.  
+In diesem Abschnitt erfährst du, wie du Sicherheitslücken melden kannst.  
 
-Geben Sie an, wohin sich Benutzer wenden sollen, wie oft sie mit Updates zu einer gemeldeten Sicherheitslücke rechnen können, und was sie erwarten können, wenn die Sicherheitslücke akzeptiert oder abgelehnt wird.
+Beschreibe, wohin du dich wenden kannst, wie oft du mit Updates zu einer gemeldeten Sicherheitslücke rechnen kannst und was passiert, wenn die Sicherheitslücke akzeptiert oder abgelehnt wird.
