@@ -3,33 +3,41 @@
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>GrindCraft Game</title>
+    <title>GrindCraft Clone</title>
     <style>
-        body{font-family: Arial, sans-serif; text-align: center; background-color: #f4f4f4; margin: 0; padding: 0;}
-        #game{margin: 20px auto; max-width: 400px; background: #fff; padding: 20px; box-shadow: 0 0 10px rgba(0,0,0,0.1); border-radius: 8px;}
-        button{background: #3498db; color: white; border: none; padding: 10px 20px; margin: 5px; border-radius: 5px; cursor: pointer;}
-        button:disabled{background: #95a5a6; cursor: not-allowed;}
+        * { margin: 0; padding: 0; box-sizing: border-box; }
+        body { font-family: Arial, sans-serif; background-color: #f4f4f4; overflow: hidden; height: 100vh; display: flex; justify-content: center; align-items: center; }
+        #game { position: relative; width: 100%; height: 100%; display: flex; justify-content: center; align-items: center; flex-direction: column; }
+        #resources { position: absolute; bottom: 10px; right: 10px; display: flex; gap: 10px; }
+        .resource { display: flex; align-items: center; gap: 5px; }
+        .resource img { width: 40px; height: 40px; }
+        button { background-color: #3498db; color: white; border: none; padding: 10px 20px; margin: 10px; border-radius: 5px; cursor: pointer; }
+        button:disabled { background-color: #95a5a6; cursor: not-allowed; }
+        .resource-amount { font-size: 18px; color: white; font-weight: bold; }
+        #actions{ display: flex; gap: 10px; }
+        #actions button{ background: #2ecc71; }
         h1, h2{color: #333;}
     </style>
 </head>
 <body>
     <div id="game">
-        <h1>GrindCraft</h1>
-        <div id="resources"></div>
+        <h1>GrindCraft Clone</h1>
         <div id="actions"></div>
+        <div id="resources"></div>
         <hr>
         <h2>Crafting</h2>
         <div id="crafting"></div>
     </div>
+
     <script>
         const Game = {
             resources: {}, // Ressourcen-Tracker
             tools: {}, // Werkzeuge
             recipes: {}, // Crafting-Rezepte
             init() {
-                this.addResource("wood", "Holz", "axe");
-                this.addResource("stone", "Stein", "pickaxe");
-                this.addResource("dirt", "Erde", "shovel");
+                this.addResource("wood", "Holz", "axe", "wood.png");
+                this.addResource("stone", "Stein", "pickaxe", "stone.png");
+                this.addResource("dirt", "Erde", "shovel", "dirt.png");
                 this.addTool("axe", "Axt", { wood: 2, stone: 1, dirt: 0.5 });
                 this.addTool("pickaxe", "Pickaxe", { wood: 1, stone: 2, dirt: 0.5 });
                 this.addTool("shovel", "Schaufel", { wood: 1, stone: 1, dirt: 2 });
@@ -38,8 +46,8 @@
                 this.renderActions();
                 this.renderCrafting();
             },
-            addResource(id, name, toolType) {
-                this.resources[id] = { name, toolType, amount: 0 };
+            addResource(id, name, toolType, texture) {
+                this.resources[id] = { name, toolType, amount: 0, texture };
             },
             addTool(id, name, multipliers) {
                 this.tools[id] = { name, multipliers };
@@ -52,9 +60,12 @@
                 const tool = this.tools[resource.toolType];
                 const multiplier = tool.multipliers[id] || 1;
                 const amount = Math.ceil(multiplier);
-                resource.amount += amount;
-                this.updateResources();
-                this.updateCrafting();
+                const delay = Math.random() * 2000 + 1000; // Verzögerung zwischen 1 und 3 Sekunden
+                setTimeout(() => {
+                    resource.amount += amount;
+                    this.updateResources();
+                    this.updateCrafting();
+                }, delay);
             },
             craftItem(id) {
                 const recipe = this.recipes[id];
@@ -74,10 +85,16 @@
                 const resourcesDiv = document.getElementById("resources");
                 resourcesDiv.innerHTML = "";
                 Object.entries(this.resources).forEach(([id, resource]) => {
-                    const p = document.createElement("p");
-                    p.id = `resource-${id}`;
-                    p.textContent = `${resource.name}: ${resource.amount}`;
-                    resourcesDiv.appendChild(p);
+                    const div = document.createElement("div");
+                    div.classList.add("resource");
+                    const img = document.createElement("img");
+                    img.src = resource.texture;
+                    div.appendChild(img);
+                    const amount = document.createElement("span");
+                    amount.classList.add("resource-amount");
+                    amount.textContent = resource.amount;
+                    div.appendChild(amount);
+                    resourcesDiv.appendChild(div);
                 });
             },
             renderActions() {
@@ -103,16 +120,15 @@
                     craftingDiv.appendChild(btn);
                     const p = document.createElement("p");
                     p.id = `crafted-${id}`;
-                  p.textContent = `${recipe.name}: ${recipe.crafted}`;
+                    p.textContent = `${recipe.name}: ${recipe.crafted}`;
                     craftingDiv.appendChild(p);
                 });
             },
             updateResources() {
                 Object.entries(this.resources).forEach(([id, resource]) => {
-                    const resourceElement = document.getElementById(
-                        `resource-${id}`
-                    );
-                    resourceElement.textContent = `${resource.name}: ${resource.amount}`;
+                    const resourceElement = document.querySelector(`#resource-${id}`);
+                    const amountElement = resourceElement.querySelector(".resource-amount");
+                    amountElement.textContent = resource.amount;
                 });
             },
             updateCrafting() {
