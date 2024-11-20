@@ -73,7 +73,7 @@ textarea{
         const textInput = document.getElementById("text-input");
         const preview = document.getElementById("preview");
         textInput.addEventListener("input", updateText);
-        function updateText() { preview.textContent = textInput.value || "Schreibe hier etwas..."; }
+        function updateText() { preview.textContent = textInput.value || ""; }
     </script>
 </body>
 </html>
