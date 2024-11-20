@@ -1,180 +1,138 @@
 <!DOCTYPE html>
-<html lang="de">
+<html lang="en">
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>2D Mining Game</title>
+    <title>GrindCraft Game</title>
     <style>
-        body, html {
-            margin: 0;
-            overflow: hidden;
-            background-color: #000;
-        }
-        canvas { 
-            display: block; 
-            background-color: lightblue;
-            outline: none;
-        }
+        body{font-family: Arial, sans-serif; text-align: center; background-color: #f4f4f4; margin: 0; padding: 0;}
+        #game{margin: 20px auto; max-width: 400px; background: #fff; padding: 20px; box-shadow: 0 0 10px rgba(0,0,0,0.1); border-radius: 8px;}
+        button{background: #3498db; color: white; border: none; padding: 10px 20px; margin: 5px; border-radius: 5px; cursor: pointer;}
+        button:disabled{background: #95a5a6; cursor: not-allowed;}
+        h1, h2{color: #333;}
     </style>
 </head>
 <body>
-    <canvas id="gameCanvas"></canvas>
-
+    <div id="game">
+        <h1>GrindCraft</h1>
+        <div id="resources"></div>
+        <div id="actions"></div>
+        <hr>
+        <h2>Crafting</h2>
+        <div id="crafting"></div>
+    </div>
     <script>
-        // Spiellogik Variablen und Canvas-Anpassung
-        const canvas = document.getElementById("gameCanvas");
-        const ctx = canvas.getContext("2d");
-
-        canvas.width = window.innerWidth;
-        canvas.height = window.innerHeight;
-
-        const TILE_SIZE = 40;
-        const WORLD_WIDTH = 100;
-        const WORLD_HEIGHT = 100;
-
-        // Texturen und Bilder asynchron laden
-        const textures = {};
-        const texturePaths = {
-            shop: "images/game/shop.png",
-            grass: "images/game/grass.png",
-            dirt: "images/game/dirt.png",
-            stone: "images/game/stone.png",
-            hard_stone: "images/game/hard_stone.png",
-            miner_idle: "images/game/miner_idle.png",
-            miner_mining: "images/game/miner_mining.png",
-            gem: "images/game/gem.png",
-            shovel: "images/game/shovel.png",
-            pickaxe: "images/game/pickaxe.png",
-            drill: "images/game/drill.png",
-            laser_drill: "images/game/laser_drill.png"
-        };
-
-        for (let key in texturePaths) {
-            const img = new Image();
-            img.src = texturePaths[key];
-            textures[key] = img;
-        }
-
-        const BLOCK_TYPES = {
-            AIR: { id: 0, texture: null, hardness: 0 },
-            GRASS: { id: 1, texture: "grass", hardness: 5 },
-            DIRT: { id: 2, texture: "dirt", hardness: 6 },
-            STONE: { id: 3, texture: "stone", hardness: 20 },
-            HARD_STONE: { id: 4, texture: "hard_stone", hardness: 50 },
-        };
-
-        const TOOL_TYPES = {
-            SHOVEL: { name: "Schaufel", speed: 1, cost: 0, texture: "shovel" },
-            PICKAXE: { name: "Spitzhacke", speed: 2, cost: 10, texture: "pickaxe" },
-            DRILL: { name: "Bohrer", speed: 3, cost: 20, texture: "drill" },
-            LASER_DRILL: { name: "Laser-Bohrer", speed: 5, cost: 50, texture: "laser_drill" },
-        };
-
-        // Welt und Spieler
-        const world = [];
-        let player = { x: 0, y: 0, vx: 0, vy: 0, gravity: 0.5, onGround: false, tool: TOOL_TYPES.SHOVEL, gems: 0 };
-
-        function initializeWorld() {
-            for (let y = 0; y < WORLD_HEIGHT; y++) {
-                const row = [];
-                for (let x = 0; x < WORLD_WIDTH; x++) {
-                    const blockType = generateRandomBlock();
-                    row.push({ type: blockType, hardness: BLOCK_TYPES[blockType].hardness });
+        const Game = {
+            resources: {}, // Ressourcen-Tracker
+            tools: {}, // Werkzeuge
+            recipes: {}, // Crafting-Rezepte
+            init() {
+                this.addResource("wood", "Holz", "axe");
+                this.addResource("stone", "Stein", "pickaxe");
+                this.addResource("dirt", "Erde", "shovel");
+                this.addTool("axe", "Axt", { wood: 2, stone: 1, dirt: 0.5 });
+                this.addTool("pickaxe", "Pickaxe", { wood: 1, stone: 2, dirt: 0.5 });
+                this.addTool("shovel", "Schaufel", { wood: 1, stone: 1, dirt: 2 });
+                this.addRecipe("pickaxe", "Spitzhacke", { wood: 10, stone: 5 });
+                this.renderResources();
+                this.renderActions();
+                this.renderCrafting();
+            },
+            addResource(id, name, toolType) {
+                this.resources[id] = { name, toolType, amount: 0 };
+            },
+            addTool(id, name, multipliers) {
+                this.tools[id] = { name, multipliers };
+            },
+            addRecipe(id, name, cost) {
+                this.recipes[id] = { name, cost, crafted: 0 };
+            },
+            gatherResource(id) {
+                const resource = this.resources[id];
+                const tool = this.tools[resource.toolType];
+                const multiplier = tool.multipliers[id] || 1;
+                const amount = Math.ceil(multiplier);
+                resource.amount += amount;
+                this.updateResources();
+                this.updateCrafting();
+            },
+            craftItem(id) {
+                const recipe = this.recipes[id];
+                const canCraft = Object.entries(recipe.cost).every(
+                    ([resId, amount]) => this.resources[resId].amount >= amount
+                );
+                if (canCraft) {
+                    Object.entries(recipe.cost).forEach(([resId, amount]) => {
+                        this.resources[resId].amount -= amount;
+                    });
+                    recipe.crafted++;
+                    this.updateResources();
+                    this.updateCrafting();
                 }
-                world.push(row);
-            }
-        }
-
-        function generateRandomBlock() {
-            const rand = Math.random();
-            if (rand < 0.1) return BLOCK_TYPES.GRASS.id;
-            if (rand < 0.3) return BLOCK_TYPES.DIRT.id;
-            if (rand < 0.6) return BLOCK_TYPES.STONE.id;
-            return BLOCK_TYPES.HARD_STONE.id;
-        }
-
-        // Kamerafunktion, um dem Spieler zu folgen
-        function getCameraPosition() {
-            return {
-                x: Math.min(Math.max(0, player.x - canvas.width / 2), WORLD_WIDTH * TILE_SIZE - canvas.width),
-                y: Math.min(Math.max(0, player.y - canvas.height / 2), WORLD_HEIGHT * TILE_SIZE - canvas.height)
-            };
-        }
-
-        // Zeichnen der Welt und des Spielers
-        function drawWorld() {
-            ctx.clearRect(0, 0, canvas.width, canvas.height);
-            const camera = getCameraPosition();
-
-            for (let y = 0; y < WORLD_HEIGHT; y++) {
-                for (let x = 0; x < WORLD_WIDTH; x++) {
-                    const block = world[y][x];
-                    if (block.type !== BLOCK_TYPES.AIR.id) {
-                        const texture = textures[BLOCK_TYPES[block.type].texture];
-                        if (texture) {
-                            ctx.drawImage(texture, x * TILE_SIZE - camera.x, y * TILE_SIZE - camera.y, TILE_SIZE, TILE_SIZE);
-                        }
-                        if (block.hardness < BLOCK_TYPES[block.type].hardness) {
-                            ctx.fillStyle = "white";
-                            ctx.fillText(block.hardness, x * TILE_SIZE + 10 - camera.x, y * TILE_SIZE + 25 - camera.y);
-                        }
-                    }
-                }
-            }
-            const minerTexture = textures[player.onGround ? "miner_idle" : "miner_mining"];
-            ctx.drawImage(minerTexture, player.x - camera.x, player.y - camera.y, TILE_SIZE, TILE_SIZE);
-        }
-
-        // Gravitation und Bewegung
-        function applyGravity() {
-            player.vy += player.gravity;
-            player.y += player.vy;
-            if (player.y >= canvas.height - TILE_SIZE) {
-                player.y = canvas.height - TILE_SIZE;
-                player.vy = 0;
-                player.onGround = true;
-            } else {
-                player.onGround = false;
-            }
-        }
-
-        // Steuerung und Bewegung
-        document.addEventListener("keydown", (e) => {
-            if (e.key === "ArrowRight" || e.key === "d") player.vx = 2;
-            if (e.key === "ArrowLeft" || e.key === "a") player.vx = -2;
-            if ((e.key === "ArrowUp" || e.key === "w") && player.onGround) player.vy = -10;
-        });
-
-        document.addEventListener("keyup", (e) => {
-            if (e.key === "ArrowRight" || e.key === "ArrowLeft" || e.key === "d" || e.key === "a") player.vx = 0;
-        });
-
-        function movePlayer() {
-            player.x += player.vx;
-            player.x = Math.max(0, Math.min(player.x, WORLD_WIDTH * TILE_SIZE - TILE_SIZE));
-        }
-
-        // Fortschritt speichern
-        function saveGame() {
-            const gameState = {
-                world: world,
-                player: player
-            };
-            localStorage.setItem("miningGameSave", JSON.stringify(gameState));
-        }
-
-        setInterval(saveGame, 30000);
-
-        // Hauptspiel-Schleife
-        function gameLoop() {
-            applyGravity();
-            movePlayer();
-            drawWorld();
-            requestAnimationFrame(gameLoop);
-        }
-
-        initializeWorld();
-        gameLoop();
+            },
+            renderResources() {
+                const resourcesDiv = document.getElementById("resources");
+                resourcesDiv.innerHTML = "";
+                Object.entries(this.resources).forEach(([id, resource]) => {
+                    const p = document.createElement("p");
+                    p.id = `resource-${id}`;
+                    p.textContent = `${resource.name}: ${resource.amount}`;
+                    resourcesDiv.appendChild(p);
+                });
+            },
+            renderActions() {
+                const actionsDiv = document.getElementById("actions");
+                actionsDiv.innerHTML = "";
+                Object.entries(this.resources).forEach(([id, resource]) => {
+                    const btn = document.createElement("button");
+                    btn.textContent = `${resource.name} sammeln`;
+                    btn.addEventListener("click", () => this.gatherResource(id));
+                    actionsDiv.appendChild(btn);
+                });
+            },
+            renderCrafting() {
+                const craftingDiv = document.getElementById("crafting");
+                craftingDiv.innerHTML = "";
+                Object.entries(this.recipes).forEach(([id, recipe]) => {
+                    const btn = document.createElement("button");
+                    btn.id = `craft-${id}`;
+                    btn.textContent = `Baue ${recipe.name} (${this.formatCost(
+                        recipe.cost
+                    )})`;
+                    btn.addEventListener("click", () => this.craftItem(id));
+                    craftingDiv.appendChild(btn);
+                    const p = document.createElement("p");
+                    p.id = `crafted-${id}`;
+                  p.textContent = `${recipe.name}: ${recipe.crafted}`;
+                    craftingDiv.appendChild(p);
+                });
+            },
+            updateResources() {
+                Object.entries(this.resources).forEach(([id, resource]) => {
+                    const resourceElement = document.getElementById(
+                        `resource-${id}`
+                    );
+                    resourceElement.textContent = `${resource.name}: ${resource.amount}`;
+                });
+            },
+            updateCrafting() {
+                Object.entries(this.recipes).forEach(([id, recipe]) => {
+                    const craftButton = document.getElementById(`craft-${id}`);
+                    const canCraft = Object.entries(recipe.cost).every(
+                        ([resId, amount]) => this.resources[resId].amount >= amount
+                    );
+                    craftButton.disabled = !canCraft;
+                    const craftedElement = document.getElementById(`crafted-${id}`);
+                    craftedElement.textContent = `${recipe.name}: ${recipe.crafted}`;
+                });
+            },
+            formatCost(cost) {
+                return Object.entries(cost)
+                    .map(([resId, amount]) => `${amount} ${this.resources[resId].name}`)
+                    .join(", ");
+            },
+        };
+        Game.init();
     </script>
 </body>
 </html>
