@@ -5,8 +5,6 @@ Willkommen auf dem offiziellen Repository für die Dateien von [redminer9630.ddn
 ## 📜 Inhalt
 
 - Website-Dateien
-- Tools und Widgets
-- Scripts und Styles
 
 ## 🚀 Mitwirken
 
