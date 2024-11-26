@@ -717,7 +717,7 @@
         
         let urlParams = new URLSearchParams(window.location.search);
         let urlw = urlParams.get('w');
-        const functionsurlwMap = {
+        const functionsMap = {
             "blocks": showBlocks,
             "trading": showTrading,
             "commands": showCommands,
@@ -734,8 +734,8 @@
             "archaeology": showArchaeology
         };
 
-        if (functionsMapurlw[urlw]) {
-            functionsMapurlw[urlw]();
+        if (functionsMap[urlw]) {
+            functionsMap[urlw]();
         }
 </script>
 </body>
