@@ -644,7 +644,7 @@
             document.body.appendChild(alertBox);
         }
         
-        customElements.define('wikigui', class extends HTMLElement {
+        customElements.define('wiki-gui', class extends HTMLElement {
             constructor() {
                 super();
                 const type = this.getAttribute('type');
@@ -662,16 +662,19 @@
             }
 
             async loadCraftingData() {
-                const response = await fetch('learnhour/wiki/img/crafting.json');
-                const data = await response.json();
+                try {
+                    const response = await fetch('learnhour/wiki/img/crafting.json');
+                    if (!response.ok) throw new Error('Fehler beim Laden der Crafting-Daten');
+                    const data = await response.json();
 
-                console.log(data); // Zum Überprüfen der geladenen Daten
-                this.renderCraftingGrid(data);
+                    console.log(data); // Geladene Daten in der Konsole anzeigen
+                    this.renderCraftingGrid(data);
+                } catch (error) {
+                    console.error('Fehler beim Laden der Daten:', error);
+                }
             }
 
             renderCraftingGrid(data) {
-                // Hier den Code zum Rendern des Crafting-Gitters basierend auf den geladenen Daten hinzufügen
-                // Zum Beispiel:
                 const grid = document.createElement('div');
                 grid.className = 'crafting-grid';
                 const rows = [data.row1, data.row2, data.row3];
