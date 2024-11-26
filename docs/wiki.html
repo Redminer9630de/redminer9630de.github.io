@@ -713,6 +713,29 @@
             } else {
                 infoElement.style.maxHeight = 0;
             } 
+        }     
+        
+        let urlParams = new URLSearchParams(window.location.search);
+        let urlw = urlParams.get('w');
+        const functionsurlwMap = {
+            "blocks": showBlocks,
+            "trading": showTrading,
+            "commands": showCommands,
+            "brewing": showBrewing,
+            "biomes": showBiomes,
+            "mobs": showMobs,
+            "items": showItems,
+            "redstone": showRedstone,
+            "structures": showStructures,
+            "enchanting": showEnchanting,
+            "smelting": showSmelting,
+            "crafting": showCrafting,
+            "effects": showEffects,
+            "archaeology": showArchaeology
+        };
+
+        if (functionsMapurlw[urlw]) {
+            functionsMapurlw[urlw]();
         }
 </script>
 </body>
