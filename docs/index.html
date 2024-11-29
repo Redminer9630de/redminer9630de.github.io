@@ -318,28 +318,12 @@ footer {
     cursor: pointer;
     font-family: 'MinecraftFont', sans-serif;
 }
-
-.suggestions li:hover { background-color: #fffff0; }
-        
+.suggestions li:hover { background-color: #fffff0; }       
 @media (max-width: 768px) and (orientation: portrait) {
-    header {
-        flex-direction: column;
-        align-items: center;
-        justify-content: center;
-    }
-
-    .logo-container {
-        display: flex;
-        flex-direction: column;
-        align-items: center;
-    }
-
+    header { flex-direction: column; align-items: center; justify-content: center; }
+    .logo-container { display: flex; flex-direction: column; align-items: center; }
     .logo { width: 180px; }
-
-    .logo-text {
-        margin-top: 10px; /* Text direkt unter dem Logo */
-    }
-
+    .logo-text { margin-top: 10px; }
     .hamburger {
         width: 100%;
         height: 100%;
@@ -348,47 +332,27 @@ footer {
         align-items: center;
         position: fixed;
     }
-
     nav {
         width: 100vw;
         height: 100vh;
         padding-top: 20vh; /* Zentriere den Inhalt im Menü */
         background-color: rgba(0, 0, 0, 0.9); /* Volle Breite und Höhe */
     }
-
     .hiddenItem {
         visibility: hidden;
         color: gray;
         background-color: gray;
     }
-
-    footer {
-        padding: 20px; /* Erhöhe den Footer */
-        font-size: 14px;
-    }
-
-/* Layout für Smartphones im Querformat */
-@media (max-width: 768px) and (orientation: landscape) {
-    header {
-        flex-direction: row;
-        justify-content: space-between;
-        padding: 10px;
-    }
-
-    .logo {
-        width: 150px; /* Kleinere Logo-Größe */
-    }
-    .logo-text { font-size: 1rem; }
-    nav {
-        width: 50vw;
-        height: 100vh;
-    }
-    main {
-        padding: 15px;
-    }
-    footer { padding: 15px; }
+    footer { padding: 20px; font-size: 14px; }
 }
-.moreInfoBtn{z-index: 2090;}
+@media (max-width: 768px) and (orientation: landscape) { 
+    header { flex-direction: row; justify-content: space-between; padding: 10px; } 
+    .logo { width: 150px; } 
+    .logo-text { font-size: 1rem; } 
+    nav { width: 50vw; height: 100vh; } 
+    main { padding: 15px; } 
+    footer { padding: 15px; } 
+}
     </style>
 </head>
 <body>
