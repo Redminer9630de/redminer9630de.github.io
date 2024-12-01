@@ -318,12 +318,29 @@ footer {
     cursor: pointer;
     font-family: 'MinecraftFont', sans-serif;
 }
-.suggestions li:hover { background-color: #fffff0; }       
+
+.suggestions li:hover { background-color: #fffff0; }
+        
 @media (max-width: 768px) and (orientation: portrait) {
-    header { flex-direction: column; align-items: center; justify-content: center; }
-    .logo-container { display: flex; flex-direction: column; align-items: center; }
+    header {
+        flex-direction: column;
+        align-items: center;
+        justify-content: center;
+    }
+
+    .logo-container {
+        display: flex;
+        flex-direction: column;
+        align-items: center;
+    }
+
     .logo { width: 180px; }
-    .logo-text { margin-top: 10px; }
+
+    .logo-text {
+        margin-top: 10px; /* Text direkt unter dem Logo */
+    }
+
+    /* Hamburger Menü nimmt den gesamten Bildschirm ein */
     .hamburger {
         width: 100%;
         height: 100%;
@@ -332,26 +349,45 @@ footer {
         align-items: center;
         position: fixed;
     }
+
     nav {
         width: 100vw;
         height: 100vh;
         padding-top: 20vh; /* Zentriere den Inhalt im Menü */
         background-color: rgba(0, 0, 0, 0.9); /* Volle Breite und Höhe */
     }
+
     .hiddenItem {
         visibility: hidden;
         color: gray;
         background-color: gray;
     }
-    footer { padding: 20px; font-size: 14px; }
-}
-@media (max-width: 768px) and (orientation: landscape) { 
-    header { flex-direction: row; justify-content: space-between; padding: 10px; } 
-    .logo { width: 150px; } 
-    .logo-text { font-size: 1rem; } 
-    nav { width: 50vw; height: 100vh; } 
-    main { padding: 15px; } 
-    footer { padding: 15px; } 
+
+    footer {
+        padding: 20px; /* Erhöhe den Footer */
+        font-size: 14px;
+    }
+
+/* Layout für Smartphones im Querformat */
+@media (max-width: 768px) and (orientation: landscape) {
+    header {
+        flex-direction: row;
+        justify-content: space-between;
+        padding: 10px;
+    }
+
+    .logo {
+        width: 150px; /* Kleinere Logo-Größe */
+    }
+    .logo-text { font-size: 1rem; }
+    nav {
+        width: 50vw;
+        height: 100vh;
+    }
+    main {
+        padding: 15px;
+    }
+    footer { padding: 15px; }
 }
     </style>
 </head>
@@ -409,7 +445,7 @@ footer {
         <section id="about">
             <h2>Ueber Redminer9630</h2>
             <p>Ich bin ein neuer Minecraft-YouTuber und Streamer, ich habe meinen Kanal vor Kurzem gestartet. Mein Kanal ist noch im Aufbau, und bisher wurden keine Videos veroeffentlicht. Trotzdem werde ich schon in naher Zukunft spannende Inhalte erstellen, und es lohnt sich von Anfang an dabei zu sein.</p>
-            <button id="moreInfoBtn" class="moreInfo">Mehr ueber mich erfahren</button>
+            <button id="moreInfoBtn" class="moreInfo" style="z-index: 2090;">Mehr ueber mich erfahren</button>
             <p id="moreInfo" style="display: none;">Obwohl der Kanal noch keine Videos enthaelt, plane ich, in naher Zukunft viele weitere Minecraft-Inhalte zu veroeffentlichen. Jetzt ist der perfekte Zeitpunkt, um Teil der Community zu werden und die Entwicklung des Kanals mitzuerleben.</p>
         </section>
     </main>
@@ -511,21 +547,17 @@ footer {
                 });
         }
         window.onload = checkLiveStreamStatus; 
+        document.getElementById('hamburger').addEventListener('click', function(event) {
+            event.stopPropagation();
+            var navMenu = document.getElementById('navMenu');
+            navMenu.classList.toggle('active');
+            if (navMenu.classList.contains('active')) { window.history.replaceState({}, '', '?menu=out'); } else { window.history.replaceState({}, '', window.location.pathname); }
+        });
         const menuurlparam = document.getElementById('hamburger').get('active');
         const urlparams = {
             menu: menuurlparam,
             search: searchInput,
         }
-        document.getElementById('hamburger').addEventListener('click', function(event) {
-            event.stopPropagation();
-            var navMenu = document.getElementById('navMenu');
-            navMenu.classList.toggle('active');
-            if (navMenu.classList.contains('active')) { 
-                if (hiddenitem) { window.history.replaceState({}, '', '?menu=out&hiddenitem=1')} else { window.history.replaceState({}, '', '?menu=out'); }
-            } else { 
-                if (hiddenitem) { window.history.replaceState({}, '', window.location.pathname + '?hiddenitem=1'); } else { window.history.replaceState({}, '', window.location.pathname)} 
-            }
-        });
         const baseUrl = window.location.origin + window.location.pathname;
         const newUrl = `${baseUrl}?${params.toString()}`;    
         history.pushState({page: ""}, "", newUrl);
