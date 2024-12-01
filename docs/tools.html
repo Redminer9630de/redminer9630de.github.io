@@ -14,20 +14,17 @@
             src: url('minecraft_font.woff') format('woff'),
                  url('minecraft_font.tff') format('truetype');
         }
-
         body {
             font-family: 'MinecraftFont', sans-serif;
             background-color: #282c34;
             color: white;
             padding: 20px;
         }
-
         h1 {
             font-size: 30px;
             margin-bottom: 20px;
             text-align: center;
         }
-
         .header-link {
             color: white;
             font-size: 16px;
@@ -39,11 +36,7 @@
             top: 20px;
             right: 20px;
         }
-
-        .header-link:hover {
-            background-color: #e53935;
-        }
-
+        .header-link:hover { background-color: #e53935; }
         .info-button {
             position: absolute;
             top: 20px;
@@ -54,12 +47,10 @@
             background-size: cover;
             cursor: pointer;
         }
-
         .info-button:hover {
             background-image: url('downloads/info_hover.png');
             cursor: help;
         }
-
         button, .button {
             font-weight: bold;
             display: inline-block;
@@ -73,7 +64,6 @@
             font-size: 18px;
             font-family: 'MinecraftFont', sans-serif;
         }
-
         #keys {
             display: grid;
             grid-template-columns: repeat(4, 1fr);
@@ -277,9 +267,14 @@
     <h1>Tools - Redminer9630</h1>
     
     <select id="modeSelector" onchange="changeMode()" class="button" style="margin-bottom: 20px; padding: 10px; border-radius: 8px; border: none; font-size: 16px;">
+        Misc
         <option value="standard">Taschenrechner</option>
+        Minecraft
         <option value="nether">Nether Portal</option>
         <option value="item">Item Listen</option>
+        Text
+        <option value="hex">Farben</option>
+        <option value="">MC Text Editor</option>
     </select>
     
     <div id="calculator" class="mode">
