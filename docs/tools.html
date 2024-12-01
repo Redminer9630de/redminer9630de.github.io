@@ -259,6 +259,13 @@
         .output-number.fast {
           animation: moveNumber 0.2s ease;
         }
+        #hex-generator {
+          text-align: center;
+          margin: 20px;
+        }
+        #color-preview {
+          margin: 10px auto;
+        }
     </style>
 </head>
 <body>
@@ -273,7 +280,7 @@
         <option value="nether">Nether Portal</option>
         <option value="item">Item Listen</option>
         Text
-        <option value="hex">Farben</option>
+        <option value="hex">Hex</option>
         <option value="mctext">MC Text Editor</option>
     </select>
     
@@ -328,6 +335,13 @@
                 <button class="remove-btn" onclick="removeItemRow(this)">-</button>
             </div>
         </div>
+    </div>
+    
+    <div id="hex-generator">
+        <h2>Hex Generator</h2>
+        <p>Hexcode: <span id="hex-code">#FFFFFF</span></p>
+        <button id="generate-hex">Generiere Hex-Farbcode</button>
+        <div id="color-preview" style="width: 100px; height: 100px; background-color: #FFFFFF; border: 1px solid #000;"></div>
     </div>
 
     <script>
@@ -505,6 +519,14 @@
             calculatorOutput.appendChild(newNumber);
             setTimeout(() => newNumber.remove(), 400);
         }
+
+        document.getElementById("generate-hex").addEventListener("click", function () {
+          const hexCode = "#" + Math.floor(Math.random() * 16777215).toString(16).padStart(6, '0');
+          const hexCodeElement = document.getElementById("hex-code");
+          hexCodeElement.textContent = hexCode;
+          const colorPreview = document.getElementById("color-preview");
+          colorPreview.style.backgroundColor = hexCode;
+        });
         
         document.getElementById('itemList').addEventListener('input', ensureAtLeastOneEmptyRow);
     </script>
