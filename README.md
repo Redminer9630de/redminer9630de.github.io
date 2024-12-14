@@ -1,4 +1,4 @@
-# Offizielle Dateien von redminer9630
+# Offizielle Dateien von redminer9630.ddns.net
 
 Willkommen auf dem offiziellen Repository für die Dateien von [redminer9630.ddns.net](https://redminer9630.ddns.net). Hier findest du alle wichtigen Dateien, die mit der Website und ihren verschiedenen Funktionen verbunden sind.
 
