@@ -15,7 +15,7 @@
 <body>
     <h1>Alle Changelog</h1><div id="changelog-container"></div>
     <script>     
-        fetch('changelogs.json')
+        fetch('changelogjson.json')
             .then(response => response.json())
             .then(data => {
                 const latest = data[0];
