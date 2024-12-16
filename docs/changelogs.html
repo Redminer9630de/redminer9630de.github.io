@@ -1,0 +1,32 @@
+<!DOCTYPE html>
+<html lang="de">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Changelogs</title>
+    <style>
+        body { font-family: Arial, sans-serif; margin: 20px; line-height: 1.4; }
+        #changelog-container { border: 1px solid #ddd; padding: 10px; margin-bottom: 10px; }
+        h2, p { margin: 0; }
+        button { background: #0078D7; color: #fff; border: 0; padding: 8px 12px; cursor: pointer; }
+        button:hover { background: #005bb5; }
+    </style>
+</head>
+<body>
+    <h1>Alle Changelog</h1><div id="changelog-container"></div>
+    <script>     
+        fetch('changelogs.json')
+            .then(response => response.json())
+            .then(data => {
+                const latest = data[0];
+                const changelogHTML = `
+                    <h2>Version ${latest.version}</h2>
+                    <p class="type">Typ: ${latest.type}</p>
+                    <p>Veröffentlicht am: ${latest.date}</p>
+                    <div>${latest.description}</div>
+                `;
+                document.getElementById('changelog-container').innerHTML = changelogHTML;
+            });
+    </script>
+</body>
+</html>
