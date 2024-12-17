@@ -465,12 +465,9 @@ footer {
             <p>Ich bin ein neuer Minecraft-YouTuber und Streamer, ich habe meinen Kanal vor Kurzem gestartet. Mein Kanal ist noch im Aufbau, und bisher wurden keine Videos veroeffentlicht. Trotzdem werde ich schon in naher Zukunft spannende Inhalte erstellen, und es lohnt sich von Anfang an dabei zu sein.</p>
             <button id="moreInfoBtn" class="moreInfo" style="z-index: 2090; !important">Mehr ueber mich erfahren</button>
             <p id="moreInfo" style="display: none;">Obwohl der Kanal noch keine Videos enthaelt, plane ich, in naher Zukunft viele weitere Minecraft-Inhalte zu veroeffentlichen. Jetzt ist der perfekte Zeitpunkt, um Teil der Community zu werden und die Entwicklung des Kanals mitzuerleben.</p>
-            <br><br><br><br><br><br><br><br>
-            <div id="changelog">
-                <h2>Letztes Update</h2>
-                <div id="latest-log"></div>
-                <a href="changelog" id="view-logs">Mehr Logs</a>
-            </div>
+            <br><br><br><br><br><br>
+            <h1>Letzte Aenderungen</h1>
+            <div id="changelog-container"></div>
         </section>
     </main>
     <footer><span>© 2024 Offizielle Website von Redminer9630 - Alle Rechte vorbehalten.</span></footer>
@@ -570,35 +567,21 @@ footer {
                     document.getElementById('liveStreamLink').style.display = 'none';
                 });
         }
-  
-        const changelogData = {
-          "logs": [
-            {
-              "date": "2024-12-10",
-              "title": "Changelogs eingefuehrt",
-              "description": "<p>Changelogs wurden eingefuehrt. Ab jetzt werden alle aenderungen gelogt.</p>"
-            }
-          ]
-        };
-
-    const showLatestLog = () => {
-      const changelogContainer = document.getElementById('latest-log');
-
-      if (changelogData.logs && changelogData.logs.length > 0) {
-        const latestLog = changelogData.logs[0];
-        const changelogHTML = `
-          <h3>${latestLog.title}</h3>
-          <p><strong>Datum:</strong> ${latestLog.date}</p>
-          ${latestLog.description}
-        `;
-        changelogContainer.innerHTML = changelogHTML;
-      } else {
-        changelogContainer.innerHTML = '<p>Keine Änderungen verfügbar.</p>';
-      }
-    };
-
+        
+    fetch('changelogs.json')
+        .then(response => response.json())
+        .then(data => {
+            const latest = data[0]; 
+            const changelogHTML = `
+                <h2>Version ${latest.version}</h2>
+                <p class="type">Typ: ${latest.type}</p>
+                <p>Veröffentlicht am: ${latest.date}</p>
+                <div>${latest.description}</div>
+            `;
+            document.getElementById('changelog-container').innerHTML = changelogHTML;
+        });
+        
     document.addEventListener('DOMContentLoaded', showLatestLog);
-    
         window.onload = checkLiveStreamStatus; 
         document.getElementById('hamburger').addEventListener('click', function(event) {
             event.stopPropagation();
@@ -606,10 +589,15 @@ footer {
             navMenu.classList.toggle('active');
             if (navMenu.classList.contains('active')) { window.history.replaceState({}, '', '?menu=out'); } else { window.history.replaceState({}, '', window.location.pathname); }
         });
+        document.getElementById('moreInfoBtn').addEventListener('click', function(event) {
+            event.stopPropagation();
+            var mibic = document.getElementById('moreInfo');
+            mibic.classList.toggle('active');
+        });
         const menuurlparam = document.getElementById('hamburger').get('active');
         const urlparams = {
             menu: menuurlparam,
-            search: searchInput,
+            search: searchInput
         }
         const baseUrl = window.location.origin + window.location.pathname;
         const newUrl = `${baseUrl}?${params.toString()}`;    
