@@ -16,17 +16,17 @@
     <h1>Alle Changelog</h1><div id="changelog-container"></div>
     <script>     
         fetch('changelogjson.json')
-            .then(response => response.json())
-            .then(data => {
-                const latest = data[0];
-                const changelogHTML = `
-                    <h2>Version ${latest.version}</h2>
-                    <p class="type">Typ: ${latest.type}</p>
-                    <p>Veröffentlicht am: ${latest.date}</p>
-                    <div>${latest.description}</div>
-                `;
-                document.getElementById('changelog-container').innerHTML = changelogHTML;
-            });
+        .then(response => response.json())
+        .then(data => {
+            const latest = data[0];
+            const changelogHTML = `
+                <h2>Version ${latest.version}</h2>
+                <p class="type">Typ: ${latest.type}</p>
+                <p>Veröffentlicht am: ${latest.date}</p>
+                <div>${latest.description}</div>
+            `;
+            document.getElementById('changelog-container').innerHTML = changelogHTML;
+        });
     </script>
 </body>
 </html>
