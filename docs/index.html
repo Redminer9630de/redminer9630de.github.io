@@ -567,19 +567,19 @@ footer {
                     document.getElementById('liveStreamLink').style.display = 'none';
                 });
         }
-        
-    fetch('changelogs.json')
-        .then(response => response.json())
-        .then(data => {
-            const latest = data[0]; 
-            const changelogHTML = `
-                <h2>Version ${latest.version}</h2>
-                <p class="type">Typ: ${latest.type}</p>
-                <p>Veröffentlicht am: ${latest.date}</p>
-                <div>${latest.description}</div>
-            `;
-            document.getElementById('changelog-container').innerHTML = changelogHTML;
-    });
+       
+            fetch('changelogs.json')
+            .then(response => response.json())
+            .then(data => {
+                const latest = data[0]; // Den neuesten Eintrag nehmen
+                const changelogHTML = `
+                    <h2>Version ${latest.version}</h2>
+                    <p class="type">Typ: ${latest.type}</p>
+                    <p>Veröffentlicht am: ${latest.date}</p>
+                    <div>${latest.description}</div>
+                `;
+                document.getElementById('changelog-container').innerHTML = changelogHTML;
+            });
         
     document.addEventListener('DOMContentLoaded', showLatestLog);
         window.onload = checkLiveStreamStatus; 
