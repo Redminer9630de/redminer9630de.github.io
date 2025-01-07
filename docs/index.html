@@ -407,6 +407,7 @@ footer {
       border-radius: 4px;
     }
     #view-more:hover { background-color: #0056b3; }
+    #online-time { font-size: 1.5em; color: #333; margin-top: 20px; }
     </style>
 </head>
 <body>
@@ -468,6 +469,7 @@ footer {
             <br><br><br><br><br><br>
             <h1>Letzte Aenderungen</h1>
             <div id="changelog-container"></div>
+            <div id="online-time">Berechne Online-Zeit...</div>
         </section>
     </main>
     <footer><span>© 2024 Offizielle Website von Redminer9630 - Alle Rechte vorbehalten.</span></footer>
@@ -602,6 +604,21 @@ footer {
         const baseUrl = window.location.origin + window.location.pathname;
         const newUrl = `${baseUrl}?${params.toString()}`;    
         history.pushState({page: ""}, "", newUrl);
+    const startDate = new Date("2024-09-28T00:00:00");
+    function calculateOnlineTime() {
+      const currentDate = new Date();
+      const diffInMs = currentDate - startDate;
+      const days = Math.floor(diffInMs / (1000 * 60 * 60 * 24));
+      const hours = Math.floor((diffInMs % (1000 * 60 * 60 * 24)) / (1000 * 60 * 60));
+      const minutes = Math.floor((diffInMs % (1000 * 60 * 60)) / (1000 * 60));
+      return `${days} Tage, ${hours} Stunden und ${minutes} Minuten`;
+    }
+    function updateOnlineTime() {
+      const onlineTimeDiv = document.getElementById("online-time");
+      onlineTimeDiv.textContent = `Die Website ist seit ${calculateOnlineTime()} online.`;
+    }
+    updateOnlineTime();
+    setInterval(updateOnlineTime, 60000); // Alle 60 Sekunden aktualisieren
     </script>
 </body>
 </html> 
