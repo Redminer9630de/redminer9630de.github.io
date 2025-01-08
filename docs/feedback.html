@@ -131,6 +131,10 @@
             <textarea id="feedback" name="feedback" placeholder="Gib hier dein Feedback ein" required></textarea>
             <button type="submit">Feedback senden</button>
             <p class="note">Vielen Dank fuer dein Feedback!</p>
+            <button class="g-recaptcha" 
+        data-sitekey="reCAPTCHA_site_key" 
+        data-callback='onSubmit' 
+        data-action='submit'>Submit</button>
         </form>
     </div>
     <script>
@@ -172,6 +176,8 @@
                 letter.classList.remove('closed');
             }, 1000);
         }
+        function onSubmit(token) { document.getElementById("demo-form").submit() }
     </script>
+    <script src="https://www.google.com/recaptcha/api.js"></script>
 </body>
 </html>
