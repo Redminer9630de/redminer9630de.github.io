@@ -1,1 +1,33 @@
-<html><body><script>location.href="https://www.icloud.com/shortcuts/7d53a35be1144eb49c76e47caa8d2b44";</script></body></html>
+<!DOCTYPE html>
+<html lang="de">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Weiterleitung</title>
+    <script>
+        document.addEventListener('DOMContentLoaded', () => {
+            // Hinzufügen: Array mit reinen URLs
+            const urls = [
+                "https://example.com/home",
+                "https://www.icloud.com/shortcuts/7d53a35be1144eb49c76e47caa8d2b44"
+            ];
+
+            const params = new URLSearchParams(window.location.search;
+            const index = parseInt(params.get('target'), 10); // Beispiel: ?target=1 für die zweite URL im Array
+            if (index >= 0 && index < urls.length) {
+                const link = urls[index];
+                window.location.href = link;
+            } else {
+                const fallbackLink = urls[urls.length - 1]; // Fallback-URL
+                document.querySelector("#fallback-link").href = fallbackLink;
+                document.querySelector("#fallback-link").textContent = fallbackLink;
+            }
+        });
+    </script>
+</head>
+<body>
+    <p>Weiterleitung läuft...</p>
+    <p>Falls du nicht weitergeleitet wirst, klicke auf diesen </p>
+    <a id="fallback-link" href="#">Link</a>
+</body>
+</html>
