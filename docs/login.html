@@ -80,20 +80,20 @@
     </style>
     <script src="https://www.gstatic.com/firebasejs/9.17.1/firebase-app.js"></script>
     <script src="https://www.gstatic.com/firebasejs/9.17.1/firebase-auth.js"></script>
+    <script src="https://www.gstatic.com/firebasejs/9.17.1/firebase-firestore.js"></script>
 </head>
 <body>
     <div class="container" id="container">
         <div class="forms">
-            <!-- Login Form -->
             <div id="loginForm" class="form">
                 <h1>Login</h1>
                 <br>
                 <label>Username or E-Mail</label>
-                <input type="text">
+                <input type="text" id="loginEmail">
                 <label>Password</label>
-                <input type="password">
+                <input type="password" id="loginPassword">
                 <br>
-                <input type="submit" id="login" placeholder="Login">
+                <button id="loginBtn" onclick="login()">Login</button>
                 <br>
                 <br>
                 <label>Login with</label>
@@ -105,20 +105,17 @@
                 <br>
                 <button class="toggle" onclick="toggleForms()">Don't have an Account?</button>
             </div>
-
-            <!-- Sign-Up Form -->
             <div id="signUpForm" class="form">
                 <h1>Sign Up</h1>
                 <br>
                 <label>Username</label>
-                <input type="text">
+                <input type="text" id="signUpUsername">
                 <label>E-Mail</label>
-                <input type="email">
+                <input type="email" id="signUpEmail">
                 <label>Password</label>
-                <input type="password">
+                <input type="password" id="signUpPassword">
                 <label>Confirm Password</label>
-                <input type="password">
-                <br>
+                <input type="password" id="signUpConfirmPassword">
                 <br>
                 <label>Sign Up with</label>
                 <br>
@@ -139,43 +136,53 @@
             projectId: "redminer9630web",
             storageBucket: "redminer9630web.firebasestorage.app",
             messagingSenderId: "796701483690",
-            appId: "1:796701483690:web:1262163b86375c6d8926d3",
+            appId: "1:796701483690:web:1262163b86375c6d8926d3"
         };
         const app = firebase.initializeApp(firebaseConfig);
         const auth = firebase.auth();
-        
+        const db = firebase.firestore();
         function login() {
-            const email = document.querySelector("#loginForm input[type='text']").value;
-            const password = document.querySelector("#loginForm input[type='password']").value;
-
+            const email = document.getElementById("loginEmail").value;
+            const password = document.getElementById("loginPassword").value;
             auth.signInWithEmailAndPassword(email, password)
                 .then(userCredential => {
-                    console.log("Logged in:", userCredential.user);
+                    const user = userCredential.user;
+                    console.log("Logged in:", user);
+                    window.href="https://redminer9630.ddns.net";
                 })
                 .catch(error => {
                     console.error("Error:", error.message);
                 });
         }
-
         function signUp() {
-            const email = document.querySelector("#signUpForm input[type='email']").value;
-            const password = document.querySelector("#signUpForm input[type='password']").value;
+            const email = document.getElementById("signUpEmail").value;
+            const password = document.getElementById("signUpPassword").value;
+            const confirmPassword = document.getElementById("signUpConfirmPassword").value;
 
+            if (password !== confirmPassword) {
+                alert("Passwords don't match!");
+                return;
+            }
             auth.createUserWithEmailAndPassword(email, password)
                 .then(userCredential => {
-                    console.log("Account created:", userCredential.user);
+                    const user = userCredential.user;
+                    console.log("Account created:", user;
+                    const settings = [
+                        "language": "en",
+                        "theme": "white"
+                    ];
+                    saveUserSettings(user.uid, settings);
+                    window.href="https://redminer9630.ddns.net";
                 })
                 .catch(error => {
                     console.error("Error:", error.message);
                 });
         }
-        const db = firebase.firestore();
         function saveUserSettings(uid, settings) {
             db.collection("users").doc(uid).set(settings)
                 .then(() => console.log("Settings saved!"))
                 .catch(error => console.error("Error saving settings:", error));
         }
-
         const container = document.getElementById('container');
         function toggleForms() { container.classList.toggle('sign-up-mode'); }
     </script>
