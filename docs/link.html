@@ -10,12 +10,12 @@
                 "https://www.icloud.com/shortcuts/7d53a35be1144eb49c76e47caa8d2b44"
             ];
             const params = new URLSearchParams(window.location.search);
-            const index = parseInt(params.get('l'), 10); // Beispiel: ?l=0
+            const index = parseInt(params.get('l'), 10);
             if (!isNaN(index) && index >= 0 && index < urls.length) {
                 const link = urls[index];
                 window.location.href = link;
             } else {
-                document.querySelector("#fallback-link").href = urls[0]; // Standard-Link
+                document.querySelector("#fallback-link").href = urls[0];
                 document.querySelector("#fallback-link").textContent = urls[0];
             }
         });
