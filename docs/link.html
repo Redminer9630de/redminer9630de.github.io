@@ -3,31 +3,23 @@
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>Weiterleitung</title>
+    <title>Weiterleitung läuft...</title>
     <script>
         document.addEventListener('DOMContentLoaded', () => {
-            // Hinzufügen: Array mit reinen URLs
             const urls = [
-                "https://example.com/home",
                 "https://www.icloud.com/shortcuts/7d53a35be1144eb49c76e47caa8d2b44"
             ];
-
             const params = new URLSearchParams(window.location.search);
-            const index = parseInt(params.get('target'), 10);
-            if (index >= 0 && index < urls.length) {
+            const index = parseInt(params.get('l'), 10); // Beispiel: ?l=0
+            if (!isNaN(index) && index >= 0 && index < urls.length) {
                 const link = urls[index];
                 window.location.href = link;
             } else {
-                const fallbackLink = urls[urls.length - 1]; // Fallback-URL
-                document.querySelector("#fallback-link").href = fallbackLink;
-                document.querySelector("#fallback-link").textContent = fallbackLink;
+                document.querySelector("#fallback-link").href = urls[0]; // Standard-Link
+                document.querySelector("#fallback-link").textContent = urls[0];
             }
         });
     </script>
 </head>
-<body>
-    <p>Weiterleitung läuft...</p>
-    <p>Falls du nicht weitergeleitet wirst, klicke auf diesen </p>
-    <a id="fallback-link" href="#">Link</a>
-</body>
+<body><p>Weiterleitung läuft...</p></body>
 </html>
