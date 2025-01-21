@@ -604,7 +604,7 @@ footer {
         const baseUrl = window.location.origin + window.location.pathname;
         const newUrl = `${baseUrl}?${params.toString()}`;    
         history.pushState({page: ""}, "", newUrl);
-    const startDate = new Date("2024-09-28T00:00:00");
+    const startDate = new Date("${{ variables.ontime }}");
     function calculateOnlineTime() {
       const currentDate = new Date();
       const diffInMs = currentDate - startDate;
