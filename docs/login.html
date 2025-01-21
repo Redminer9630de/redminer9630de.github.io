@@ -98,9 +98,9 @@
                 <br>
                 <label>Login with</label>
                 <br>
-                <button>Google</button>
+                <button id="googleLoginBtn" onclick="googleLogin()">Google</button>
                 <br>
-                <button>Github</button>
+                <button id="githubLoginBtn" onclick="githubLogin()">GitHub</button>
                 <br>
                 <br>
                 <button class="toggle" onclick="toggleForms()">Don't have an Account?</button>
@@ -119,9 +119,9 @@
                 <br>
                 <label>Sign Up with</label>
                 <br>
-                <button>Google</button>
+                <button id="googleSignUpBtn" onclick="googleSignUp()">Google</button>
                 <br>
-                <button>Github</button>
+                <button id="githubSignUpBtn" onclick="githubSignUp()">GitHub</button>
                 <br>
                 <br>
                 <button class="toggle" onclick="toggleForms()">You have an Account?</button>
@@ -141,19 +141,54 @@
         const app = firebase.initializeApp(firebaseConfig);
         const auth = firebase.auth();
         const db = firebase.firestore();
+
         function login() {
-            const email = document.getElementById("loginEmail").value;
-            const password = document.getElementById("loginPassword").value;
-            auth.signInWithEmailAndPassword(email, password)
-                .then(userCredential => {
-                    const user = userCredential.user;
-                    console.log("Logged in:", user);
-                    window.href="https://redminer9630.ddns.net";
-                })
-                .catch(error => {
-                    console.error("Error:", error.message);
-                });
+          const email = document.getElementById("loginEmail").value;
+          const password = document.getElementById("loginPassword").value;
+
+          document.getElementById("loginBtn").disabled = true;
+          document.getElementById("loginBtn").textContent = "Loading...";
+
+          auth.signInWithEmailAndPassword(email, password)
+            .then(userCredential => {
+              const user = userCredential.user;
+              console.log("Logged in:", user);
+              window.href = "https://redminer9630.ddns.net";
+            })
+            .catch(error => {
+              console.error("Error:", error.message);
+              alert("Login failed: " + error.message);
+            })
+            .finally(() => {
+              document.getElementById("loginBtn").disabled = false;
+              document.getElementById("loginBtn").textContent = "Login";
+            });
         }
+        
+        function googleLogin() {
+          const provider = new firebase.auth.GoogleAuthProvider();
+          auth.signInWithPopup(provider)
+            .then(result => {
+              const user = result.user;
+              console.log("Logged in with Google:", user);
+            })
+            .catch(error => {
+              console.error("Error logging in with Google:", error.message);
+            });
+        }
+
+        function githubLogin() {
+          const provider = new firebase.auth.GithubAuthProvider();
+          auth.signInWithPopup(provider)
+            .then(result => {    
+              const user = result.user;
+              console.log("Logged in with GitHub:", user);
+            })
+            .catch(error => {
+              console.error("Error logging in with GitHub:", error.message);
+            });
+        }
+        
         function signUp() {
             const email = document.getElementById("signUpEmail").value;
             const password = document.getElementById("signUpPassword").value;
@@ -171,13 +206,37 @@
                         "language": "en",
                         "theme": "white"
                     ];
-                    saveUserSettings(user.uid, settings);
                     window.href="https://redminer9630.ddns.net";
                 })
                 .catch(error => {
                     console.error("Error:", error.message);
                 });
         }
+
+        function googleSignUp() {
+          const provider = new firebase.auth.GoogleAuthProvider();
+          auth.signInWithPopup(provider)
+            .then(result => {
+              const user = result.user;
+              console.log("Signed up with Google:", user);
+            })
+            .catch(error => {
+              console.error("Error signing up with Google:", error.message);
+            });
+        }
+
+        function githubSignUp() {
+          const provider = new firebase.auth.GithubAuthProvider();
+          auth.signInWithPopup(provider)
+            .then(result => {
+              const user = result.user;
+              console.log("Signed up with GitHub:", user);
+            })
+            .catch(error => {
+              console.error("Error signing up with GitHub:", error.message);
+            });
+        }
+        
         function saveUserSettings(uid, settings) {
             db.collection("users").doc(uid).set(settings)
                 .then(() => console.log("Settings saved!"))
