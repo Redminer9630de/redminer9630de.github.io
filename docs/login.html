@@ -8,7 +8,7 @@
         @font-face {
             font-family: 'Minecraft';
             src: url('minecraft_font.woff') format('woff'),
-                 url('minecraft_font.tff') format('truetype')
+                 url('minecraft_font.ttf') format('truetype');
         }
         body {
             display: flex;
@@ -22,25 +22,18 @@
         }
         button { font-family: 'Minecraft', Arial, sans-serif; }
         .container {
-            position: relative;
             width: 400px;
-            height: 690px;
-            overflow: hidden;
             box-shadow: 0 4px 8px rgba(0, 0, 0, 0.1);
             border-radius: 10px;
             background: #ffffff;
-        }
-        .forms {
-            display: flex;
-            width: 200%;
-            height: 100%;
+            padding: 20px;
         }
         .form {
-            width: 50%;
-            padding: 20px;
-            display: flex;
+            display: none;
             flex-direction: column;
-            justify-content: center;
+        }
+        .form.active {
+            display: flex;
         }
         .form h1 {
             margin-bottom: 20px;
@@ -68,8 +61,6 @@
             cursor: pointer;
         }
         .form button:hover { background-color: #0056b3; }
-        #login { font-family: 'Minecraft'; background-color: #007bff; color: white; }
-        #login:hover { background-color: #0056b3; }
         .toggle {
             text-align: center;
             margin-top: 10px;
@@ -77,61 +68,47 @@
             color: #007bff;
         }
         .toggle:hover { text-decoration: underline; }
+        #error-message {
+            color: red;
+            display: none;
+        }
     </style>
     <script src="https://www.gstatic.com/firebasejs/9.17.1/firebase-app.js"></script>
     <script src="https://www.gstatic.com/firebasejs/9.17.1/firebase-auth.js"></script>
+    <script src="https://www.gstatic.com/firebasejs/9.17.1/firebase-firestore.js"></script>
 </head>
 <body>
-    <div class="container" id="container">
-        <div class="forms">
-            <!-- Login Form -->
-            <div id="loginForm" class="form">
-                <h1>Login</h1>
-                <br>
-                <label>Username or E-Mail</label>
-                <input type="text">
-                <label>Password</label>
-                <input type="password">
-                <br>
-                <input type="submit" id="login" placeholder="Login">
-                <br>
-                <br>
-                <label>Login with</label>
-                <br>
-                <button>Google</button>
-                <br>
-                <button>Github</button>
-                <br>
-                <br>
-                <button class="toggle" onclick="toggleForms()">Don't have an Account?</button>
-            </div>
+    <div class="container">
+        <!-- Error Message -->
+        <p id="error-message"></p>
 
-            <!-- Sign-Up Form -->
-            <div id="signUpForm" class="form">
-                <h1>Sign Up</h1>
-                <br>
-                <label>Username</label>
-                <input type="text">
-                <label>E-Mail</label>
-                <input type="email">
-                <label>Password</label>
-                <input type="password">
-                <label>Confirm Password</label>
-                <input type="password">
-                <br>
-                <br>
-                <label>Sign Up with</label>
-                <br>
-                <button>Google</button>
-                <br>
-                <button>Github</button>
-                <br>
-                <br>
-                <button class="toggle" onclick="toggleForms()">You have an Account?</button>
-            </div>
+        <!-- Login Form -->
+        <div id="loginForm" class="form active">
+            <h1>Login</h1>
+            <label>Username or E-Mail</label>
+            <input type="text" id="loginEmail">
+            <label>Password</label>
+            <input type="password" id="loginPassword">
+            <button onclick="login()">Login</button>
+            <div class="toggle" onclick="toggleForms()">Don't have an Account?</div>
+        </div>
+
+        <!-- Sign-Up Form -->
+        <div id="signUpForm" class="form">
+            <h1>Sign Up</h1>
+            <label>Username</label>
+            <input type="text" id="signUpUsername">
+            <label>E-Mail</label>
+            <input type="email" id="signUpEmail">
+            <label>Password</label>
+            <input type="password" id="signUpPassword">
+            <button onclick="signUp()">Sign Up</button>
+            <div class="toggle" onclick="toggleForms()">You have an Account?</div>
         </div>
     </div>
+
     <script>
+        // Firebase configuration
         const firebaseConfig = {
             apiKey: "AIzaSyCWzMK-zv449Y2N9TTqtIihybccXw3i-HI",
             authDomain: "redminer9630web.firebaseapp.com",
@@ -141,43 +118,64 @@
             messagingSenderId: "796701483690",
             appId: "1:796701483690:web:1262163b86375c6d8926d3",
         };
+
+        // Initialize Firebase
         const app = firebase.initializeApp(firebaseConfig);
         const auth = firebase.auth();
-        
+        const db = firebase.firestore();
+
+        // Toggle forms
+        function toggleForms() {
+            document.getElementById('loginForm').classList.toggle('active');
+            document.getElementById('signUpForm').classList.toggle('active');
+        }
+
+        // Display error message
+        function showError(message) {
+            const errorMessage = document.getElementById('error-message');
+            errorMessage.style.display = 'block';
+            errorMessage.textContent = message;
+        }
+
+        // Login function
         function login() {
-            const email = document.querySelector("#loginForm input[type='text']").value;
-            const password = document.querySelector("#loginForm input[type='password']").value;
+            const email = document.getElementById('loginEmail').value;
+            const password = document.getElementById('loginPassword').value;
 
             auth.signInWithEmailAndPassword(email, password)
                 .then(userCredential => {
-                    console.log("Logged in:", userCredential.user);
+                    console.log('Logged in:', userCredential.user);
+                    alert('Login successful!');
                 })
                 .catch(error => {
-                    console.error("Error:", error.message);
+                    console.error('Error:', error.message);
+                    showError(error.message);
                 });
         }
 
+        // Sign-Up function
         function signUp() {
-            const email = document.querySelector("#signUpForm input[type='email']").value;
-            const password = document.querySelector("#signUpForm input[type='password']").value;
+            const email = document.getElementById('signUpEmail').value;
+            const password = document.getElementById('signUpPassword').value;
 
             auth.createUserWithEmailAndPassword(email, password)
                 .then(userCredential => {
-                    console.log("Account created:", userCredential.user);
+                    console.log('Account created:', userCredential.user);
+
+                    // Save additional user data to Firestore
+                    const userId = userCredential.user.uid;
+                    const username = document.getElementById('signUpUsername').value;
+                    db.collection('users').doc(userId).set({ username: username, email: email })
+                        .then(() => console.log('User data saved to Firestore.'))
+                        .catch(error => console.error('Error saving data:', error));
+                    
+                    alert('Account created successfully!');
                 })
                 .catch(error => {
-                    console.error("Error:", error.message);
+                    console.error('Error:', error.message);
+                    showError(error.message);
                 });
         }
-        const db = firebase.firestore();
-        function saveUserSettings(uid, settings) {
-            db.collection("users").doc(uid).set(settings)
-                .then(() => console.log("Settings saved!"))
-                .catch(error => console.error("Error saving settings:", error));
-        }
-
-        const container = document.getElementById('container');
-        function toggleForms() { container.classList.toggle('sign-up-mode'); }
     </script>
 </body>
 </html>
