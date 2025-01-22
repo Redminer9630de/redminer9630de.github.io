@@ -83,7 +83,13 @@
             <h2>Preferences</h2>
             <div class="settings-item">
                 <label for="language">Language</label>
-                <input type="checkbox" id="language"><label>German</label>
+                <label id="labelGerman">
+                  <input type="radio" id="german" name="language" value="german" onclick="updateLanguageText()"> German
+                </label>
+            <br>
+            <label id="labelEnglish">
+              <input type="radio" id="english" name="language" value="english" onclick="updateLanguageText()"> English
+            </label>
             </div>
             <div class="settings-item">
                 <label for="theme">Theme</label>
@@ -92,5 +98,18 @@
         </div>
         <button class="save-button">Save Changes</button>
     </div>
+    <script>
+        function updateLanguageText() {
+          const germanSelected = document.getElementById("german").checked;
+          const englishSelected = doucument.getElementById("english").checked;
+          if (germanSelected) {
+            document.getElementById("labelGerman").textContent = "Deutsch";
+            document.getElementById("labelEnglish").textContent = "Englisch";
+          } else if (englishSelected) {
+            document.getElementById("labelGerman").textContent = "German";
+            document.getElementById("labelEnglish").textContent = "English";
+          }
+        }
+    </script>
 </body>
 </html>
