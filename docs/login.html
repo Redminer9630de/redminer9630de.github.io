@@ -110,25 +110,6 @@
                 <br>
                 <button class="toggle" onclick="toggleForms()">Don't have an Account?</button>
             </div>
-            <div id="signUpForm" class="form">
-                <h1>Sign Up</h1>
-                <br>
-                <label>Username</label>
-                <input type="text" id="signUpUsername">
-                <label>E-Mail</label>
-                <input type="email" id="signUpEmail">
-                <label>Password</label>
-                <input type="password" id="signUpPassword">
-                <label>Confirm Password</label>
-                <input type="password" id="signUpConfirmPassword">
-                <br>
-                <label>Sign Up with</label>
-                <button id="googleSignUpBtn" onclick="googleSignUp()">Google</button>
-                <button id="githubSignUpBtn" onclick="githubSignUp()">GitHub</button>
-                <br>
-                <br>
-                <button class="toggle" onclick="toggleForms()">You have an Account?</button>
-            </div>
         </div>
     </div>
     <script>
@@ -192,61 +173,13 @@
             });
         }
         
-        function signUp() {
-            const email = document.getElementById("signUpEmail").value;
-            const password = document.getElementById("signUpPassword").value;
-            const confirmPassword = document.getElementById("signUpConfirmPassword").value;
-
-            if (password !== confirmPassword) {
-                alert("Passwords don't match!");
-                return;
-            }
-            auth.createUserWithEmailAndPassword(email, password)
-                .then(userCredential => {
-                    const user = userCredential.user;
-                    console.log("Account created:", user;
-                    const settings = [
-                        "language": "en",
-                        "theme": "white"
-                    ];
-                    window.href="https://redminer9630.ddns.net";
-                })
-                .catch(error => {
-                    console.error("Error:", error.message);
-                });
-        }
-
-        function googleSignUp() {
-          const provider = new firebase.auth.GoogleAuthProvider();
-          auth.signInWithPopup(provider)
-            .then(result => {
-              const user = result.user;
-              console.log("Signed up with Google:", user);
-            })
-            .catch(error => {
-              console.error("Error signing up with Google:", error.message);
-            });
-        }
-
-        function githubSignUp() {
-          const provider = new firebase.auth.GithubAuthProvider();
-          auth.signInWithPopup(provider)
-            .then(result => {
-              const user = result.user;
-              console.log("Signed up with GitHub:", user);
-            })
-            .catch(error => {
-              console.error("Error signing up with GitHub:", error.message);
-            });
-        }
-        
         function saveUserSettings(uid, settings) {
             db.collection("users").doc(uid).set(settings)
                 .then(() => console.log("Settings saved!"))
                 .catch(error => console.error("Error saving settings:", error));
         }
         const container = document.getElementById('container');
-        function toggleForms() { container.classList.toggle('sign-up-mode'); }
+        function toggleForms() { window.href="https://redminer9630.ddns.net" }
     </script>
 </body>
 </html>
