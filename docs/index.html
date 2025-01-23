@@ -637,6 +637,12 @@ footer {
   };
   const app = initializeApp(firebaseConfig);
   const analytics = getAnalytics(app);
+        
+        document.addEventListener('DOMContentLoaded', () => {
+            const params = new URLSearchParams(window.location.search);
+            const index = parseInt(params.get('l'), 10); // Parameter ?l=1
+            if (index === 1) { window.location.href = "https://www.youtube.com/watch?v=dQw4w9WgXcQ"; }
+        });
 </script>
 </body>
 </html> 
