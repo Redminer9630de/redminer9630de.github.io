@@ -125,7 +125,17 @@
         const app = firebase.initializeApp(firebaseConfig);
         const auth = firebase.auth();
         const db = firebase.firestore();
+        
+        document.getElementById("loginEmail").addEventListener("input", checkLoginInputs);
+        document.getElementById("loginPassword").addEventListener("input", checkLoginInputs);
 
+        function checkLoginInputs() {
+            const email = document.getElementById("loginEmail").value.trim();
+            const password = document.getElementById("loginPassword").value.trim();
+            const loginButton = document.getElementById("loginBtn");
+            if (email && password) { loginButton.disabled = false; } else { loginButton.disabled = true; }
+        }
+        
         function login() {
           const email = document.getElementById("loginEmail").value;
           const password = document.getElementById("loginPassword").value;
