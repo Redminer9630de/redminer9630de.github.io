@@ -127,29 +127,62 @@
         const auth = firebase.auth();
         const db = firebase.firestore();
 
-        function signUp() {
-            const email = document.getElementById("signUpEmail").value;
-            const password = document.getElementById("signUpPassword").value;
-            const confirmPassword = document.getElementById("signUpConfirmPassword").value;
+async function signUp() {
+    const email = document.getElementById("signUpEmail").value.trim();
+    const username = document.getElementById("signUpUsername").value.trim();
+    const password = document.getElementById("signUpPassword").value.trim();
+    const confirmPassword = document.getElementById("signUpConfirmPassword").value.trim();
 
-            if (password !== confirmPassword) {
-                alert("Passwords don't match!");
-                return;
-            }
-            auth.createUserWithEmailAndPassword(email, password)
-                .then(userCredential => {
-                    const user = userCredential.user;
-                    console.log("Account created:", user;
-                    const settings = [
-                        "language": "en",
-                        "theme": "white"
-                    ];
-                    window.href="https://redminer9630.ddns.net";
+    if (password !== confirmPassword) {
+        alert("Passwords don't match!");
+        return;
+    }
+
+    // Überprüfe, ob Benutzername oder E-Mail bereits existieren
+    const isEmailTaken = await checkIfExists("email", email);
+    const isUsernameTaken = await checkIfExists("username", username);
+
+    if (isEmailTaken) {
+        alert("This email is already in use!");
+        return;
+    }
+
+    if (isUsernameTaken) {
+        alert("This username is already in use!");
+        return;
+    }
+
+    // Wenn keine Duplikate gefunden, registriere Benutzer
+    auth.createUserWithEmailAndPassword(email, password)
+        .then(userCredential => {
+            const user = userCredential.user;
+            const userId = user.uid;
+
+            // Benutzerinformationen in Firestore speichern
+            const userData = {
+                email: email,
+                username: username,
+                password: password, // In der Realität solltest du Passwörter nicht in Firestore speichern
+                language: true,
+                theme: true,
+                priority: 0
+            };
+
+            db.collection("users").doc(userId).set(userData)
+                .then(() => {
+                    console.log("User data saved!");
+                    alert("Sign-up successful!");
+                    window.location.href = "https://redminer9630.ddns.net";
                 })
                 .catch(error => {
-                    console.error("Error:", error.message);
+                    console.error("Error saving user data:", error);
                 });
-        }
+        })
+        .catch(error => {
+            console.error("Sign-up error:", error.message);
+            alert("Sign-up failed: " + error.message);
+        });
+}
 
         function googleSignUp() {
           const provider = new firebase.auth.GoogleAuthProvider();
