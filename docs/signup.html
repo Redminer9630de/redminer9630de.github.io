@@ -126,7 +126,13 @@
         const app = firebase.initializeApp(firebaseConfig);
         const auth = firebase.auth();
         const db = firebase.firestore();
-
+        
+async function checkIfExists(field, value) {
+    const querySnapshot = await db.collection("users")
+        .where(field, "==", value)
+        .get();
+    return !querySnapshot.empty;
+}
 async function signUp() {
     const email = document.getElementById("signUpEmail").value.trim();
     const username = document.getElementById("signUpUsername").value.trim();
