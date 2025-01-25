@@ -472,8 +472,8 @@ footer {
             <li><a href="feedback?from=index">Feedback</a></li>
         </ul>
     </div>
-    <div class="menu-bottom-left"><img src="images/light-dark-mode.png" alt="Light/Dark Mode" class="light-dark-icon"></div>
-    <div class="menu-bottom-right"><img src="images/account.png" alt="Account" class="account-icon"></div>
+    <div class="menu-bottom-left"><img src="images/light-dark-mode.png" alt="Light/Dark Mode" class="light-dark-icon" onclick='toggleTheme()'></div>
+    <div class="menu-bottom-right"><img src="images/account.png" alt="Account" class="account-icon" onclick='window.location.href="https://redminer9630.ddns.net/settings";'></div>
 </nav>
     <main>
         <section id="about">
@@ -618,21 +618,47 @@ footer {
         const baseUrl = window.location.origin + window.location.pathname;
         const newUrl = `${baseUrl}?${params.toString()}`;    
         history.pushState({page: ""}, "", newUrl);
-    const startDate = new Date("${{ variables.ontime }}");
-    function calculateOnlineTime() {
-      const currentDate = new Date();
-      const diffInMs = currentDate - startDate;
-      const days = Math.floor(diffInMs / (1000 * 60 * 60 * 24));
-      const hours = Math.floor((diffInMs % (1000 * 60 * 60 * 24)) / (1000 * 60 * 60));
-      const minutes = Math.floor((diffInMs % (1000 * 60 * 60)) / (1000 * 60));
-      return `${days} Tage, ${hours} Stunden und ${minutes} Minuten`;
+async function toggleTheme() {
+    const currentTheme = document.body.classList.contains("dark-mode") ? "dark" : "light";
+    if (currentTheme === "dark") {
+        document.body.classList.remove("dark-mode");
+        document.body.classList.add("light-mode");
+    } else {
+        document.body.classList.remove("light-mode");
+        document.body.classList.add("dark-mode");
     }
-    function updateOnlineTime() {
-      const onlineTimeDiv = document.getElementById("online-time");
-      onlineTimeDiv.textContent = `Die Website ist seit ${calculateOnlineTime()} online.`;
+    const newTheme = currentTheme === "dark" ? true : false;
+    try {
+        const user = auth.currentUser;
+        if (!user) {
+            console.log("Theme konnte nicht gespeichert werden")
+            return;
+        }
+        const userId = user.uid;
+        await database.ref(`root/users/${userId}/theme`).set(newTheme);
+        console.log(`Theme erfolgreich auf Firebase gespeichert: ${newTheme}`);
+    } catch (error) {
+        console.error("Fehler beim Speichern des Themes:", error);
     }
-    updateOnlineTime();
-    setInterval(updateOnlineTime, 5000); // Alle 60 Sekunden aktualisieren
+}
+auth.onAuthStateChanged(async (user) => {
+    if (user) {
+        try {
+            const userId = user.uid;
+            const snapshot = await database.ref(`root/users/${userId}/theme`).get();
+            const savedTheme = snapshot.val();
+            if (savedTheme) {
+                document.body.classList.add("light-mode");
+                document.body.classList.remove("dark-mode");
+            } else {
+                document.body.classList.add("dark-mode");
+                document.body.classList.remove("light-mode");
+            }
+        } catch (error) {
+            console.error("Fehler beim Laden des Themes:", error);
+        }
+    }
+});
     </script>
     <script type="module">
   import { initializeApp } from "https://www.gstatic.com/firebasejs/11.1.0/firebase-app.js";
