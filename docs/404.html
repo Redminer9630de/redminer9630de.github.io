@@ -39,25 +39,25 @@
             border-radius: 8px;
             padding: 10px 20px;
             top: 20px;
+            transition: transform 0.3s ease;
         }
+        .back:hover { transform: scale(1.2); }
     </style>
 </head>
 <body>
     <h1>404 - Seite nicht gefunden</h1>
-    <p>Die von dir gesuchte Seite konnte nicht gefunden werden.</p>
+    <p>Die von dir gesuchte Seite konnte nicht gefunden werden. <a href="https://redminer9630.ddns.net/more?link=404">Mehr dradrüber</a></p>
     <button class="back"><a href='https://redminer9630.ddns.net';>Zurueck zur Startseite</a></button>
     <p id="info">Du wirst in <span id="countdown">5</span> Sekunden zur Startseite geleitet</p>
-    
     <footer>© 2024 Offizieller Kanal von Redminer9630 - Alle Rechte vorbehalten.</footer>
     <script>
         let timeLeft = 5;
         const countdownElement = document.getElementById('countdown');
         const countdownInterval = setInterval(() => {
-            timeLeft--;
-            countdownElement.textContent = timeLeft;
+            timeLeft--; countdownElement.textContent = timeLeft;
             if (timeLeft <= 0) {
                 clearInterval(countdownInterval);
-                window.location.href = 'https://redminer9630.ddns.net';
+                window.location.href = 'https://redminer9630.ddns.net'; 
             }
         }, 1000);
     </script>
