@@ -236,7 +236,7 @@ footer {
     text-align: center;
     padding: 10px 0;
     width: 100%;
-    position: fixed;
+    height: 120px;
     bottom: 0;
     left: 0;
     z-index: 998;
@@ -413,7 +413,7 @@ footer {
     z-index: 2;
 }
 .menu-bottom-left { left: 20px; }
-.menu-bottom-right { right: 20px; width: 20px; height: 20px; }
+.menu-bottom-right { right: 20px; width: 20px; height: 20px; bottom: 20px; }
 .light-dark-icon, .account-icon {
     width: 30px; /* Größe des Icons */
     height: 30px;
@@ -548,7 +548,11 @@ input:checked + .slider:before {
             <div id="changelog-container"></div>
         </section>
     </main>
-    <footer><span>© 2024 Offizielle Website von Redminer9630 - Alle Rechte vorbehalten.</span></footer>
+    <footer>
+        <span style="text-align: left; color: black;">Impressum</span><br>
+        <span>Erstellt von Redminer9630.<a href="https://redminer9630.ddns.net/impressum">Mehr Info</a></span>
+        <span>© 2024 Offizielle Website von Redminer9630 - Alle Rechte vorbehalten.</span>
+    </footer>
     <script>
         const keywords = [
             { keyword: "Youtube", url: "youtube.com/channel/UCdpkm8rpRnIi88zWSuubbOQ?sub_confirmation=1", text: "Youtube", group: "youtube" },
