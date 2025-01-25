@@ -421,6 +421,63 @@ footer {
     transition: transform 0.2s ease;
 }
 .light-dark-icon:hover, .account-icon:hover { transform: scale(1.2); }
+    /* Container für den Toggle */
+.theme-toggle-container {
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    margin: 10px;
+}
+
+/* Grundstruktur des Toggles */
+.theme-switch {
+    position: relative;
+    display: inline-block;
+    width: 50px;
+    height: 28px;
+}
+
+.theme-switch input {
+    opacity: 0;
+    width: 0;
+    height: 0;
+}
+
+/* Schieberegler */
+.slider {
+    position: absolute;
+    cursor: pointer;
+    top: 0;
+    left: 0;
+    right: 0;
+    bottom: 0;
+    background-color: #ccc;
+    transition: 0.4s;
+    border-radius: 28px;
+}
+
+/* Schieberegler bei aktiviertem Zustand */
+.slider:before {
+    position: absolute;
+    content: "";
+    height: 20px;
+    width: 20px;
+    left: 4px;
+    bottom: 4px;
+    background-color: white;
+    transition: 0.4s;
+    border-radius: 50%;
+}
+
+/* Aktivierter Zustand */
+input:checked + .slider {
+    background-color: #2ecc71;
+}
+
+input:checked + .slider:before {
+    transform: translateX(22px);
+}
+
     </style>
 </head>
 <body>
@@ -472,7 +529,12 @@ footer {
             <li><a href="feedback?from=index">Feedback</a></li>
         </ul>
     </div>
-    <div class="menu-bottom-left"><img src="images/light-dark-mode.png" alt="Light/Dark Mode" class="light-dark-icon" onclick='toggleTheme()'></div>
+    <div class="theme-toggle-container">
+        <label class="theme-switch">
+            <input type="checkbox" id="theme-toggle" onchange="toggleTheme()">
+            <span class="slider"></span>
+        </label>
+    </div>
     <div class="menu-bottom-right"><img src="images/account.png" alt="Account" class="account-icon" onclick='window.location.href="https://redminer9630.ddns.net/settings";'></div>
 </nav>
     <main>
@@ -619,40 +681,43 @@ footer {
         const newUrl = `${baseUrl}?${params.toString()}`;    
         history.pushState({page: ""}, "", newUrl);
 async function toggleTheme() {
-    const currentTheme = document.body.classList.contains("dark-mode") ? "dark" : "light";
-    if (currentTheme === "dark") {
-        document.body.classList.remove("dark-mode");
+    const toggle = document.getElementById("theme-toggle");
+    const isLightMode = toggle.checked; // True für Light Mode, False für Dark Mode
+    if (isLightMode) {
         document.body.classList.add("light-mode");
+        document.body.classList.remove("dark-mode");
     } else {
-        document.body.classList.remove("light-mode");
         document.body.classList.add("dark-mode");
+        document.body.classList.remove("light-mode");
     }
-    const newTheme = currentTheme === "dark" ? true : false;
     try {
-        const user = auth.currentUser;
+        const user = firebase.auth().currentUser;
         if (!user) {
-            console.log("Theme konnte nicht gespeichert werden")
+            alert("Bitte melde dich an, um deine Einstellungen zu speichern.");
             return;
         }
         const userId = user.uid;
-        await database.ref(`root/users/${userId}/theme`).set(newTheme);
-        console.log(`Theme erfolgreich auf Firebase gespeichert: ${newTheme}`);
+        await firebase.database().ref(`root/users/${userId}/theme`).set(isLightMode);
+        console.log(`Theme erfolgreich gespeichert: ${isLightMode ? "Light Mode" : "Dark Mode"}`);
     } catch (error) {
         console.error("Fehler beim Speichern des Themes:", error);
     }
 }
-auth.onAuthStateChanged(async (user) => {
+firebase.auth().onAuthStateChanged(async (user) => {
     if (user) {
         try {
             const userId = user.uid;
-            const snapshot = await database.ref(`root/users/${userId}/theme`).get();
-            const savedTheme = snapshot.val();
-            if (savedTheme) {
+            const snapshot = await firebase.database().ref(`root/users/${userId}/theme`).get();
+            const isLightMode = snapshot.val();
+            const toggle = document.getElementById("theme-toggle");
+            if (isLightMode) {
                 document.body.classList.add("light-mode");
                 document.body.classList.remove("dark-mode");
+                toggle.checked = true;
             } else {
                 document.body.classList.add("dark-mode");
                 document.body.classList.remove("light-mode");
+                toggle.checked = false;
             }
         } catch (error) {
             console.error("Fehler beim Laden des Themes:", error);
