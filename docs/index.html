@@ -109,99 +109,6 @@
     margin-right: 12px;
 }
 
-.hamburger {
-    opacity: 0;
-    display: flex;
-    flex-direction: column;
-    position: fixed; /* Position fixed to keep it on top */
-    top: 0;
-    right: 0; /* Align to the right edge */
-    width: 100vw;
-    height: 100vh;
-    z-index: 1001; /* Ensure it's above other elements */
-    padding: 0px;
-}
-
-.hamburger div {
-    width: 45px;
-    height: 3px;
-    background-color: white;
-    margin: 5px 0;
-    z-index: 900;
-}
-
-nav {
-    display: flex;
-    flex-direction: column;
-    background-color: #2C3E64;
-    position: fixed;
-    top: 0;
-    right: 0;
-    width: 250px;
-    height: 100%;
-    z-index: 850; /* Ensure it's below the hamburger */
-    transition: max-height 0.3s ease-out, visibility 0.3s ease-out;
-    overflow: hidden;
-    padding-top: 40px;
-    max-height: 0;
-}
-
-nav.active {
-    max-height: 100%;
-    visibility: visible;
-}
-
-nav .menu-section {
-    margin: 0;
-    padding: 0;
-    list-style: none;
-}
-
-nav .menu-section > li {
-    padding: 16px;
-    font-weight: bold;
-    color: #FF4399; /* Kategorie-Farbe */
-}
-
-nav .menu-section ul {
-    padding-left: 15px;
-    margin: 0;
-    max-height: 90%;
-    list-style: none;
-}
-
-nav .menu-section ul li {
-    padding: 5px 0;
-}
-
-nav a {
-    color: white;
-    text-decoration: none;
-    display: block;
-    padding: 10px;
-    transition: background-color 0.3s, color 0.3s;
-}
-
-nav a:hover,
-nav a:active {
-    background-color: #34495e;
-    color: #e74c3c;
-}
-
-@media (max-width: 4096px) {
-    .hamburger {
-        display: flex;
-    }
-
-    nav {
-        visibility: hidden;
-    }
-
-    nav.active {
-        visibility: visible;
-    }
-}
-
 main {
     flex: 1;
     padding: 20px;
@@ -252,16 +159,6 @@ footer {
 
     header, footer {
         background-color: #1c2a34;
-    }
-
-    nav a {
-        color: #f5f5f5;
-    }
-
-    nav a:hover,
-    nav a:active {
-        background-color: #2a3e50;
-        color: #e74c3c;
     }
 
     h2 {
@@ -341,23 +238,6 @@ footer {
         margin-top: 10px; /* Text direkt unter dem Logo */
     }
 
-    /* Hamburger Menü nimmt den gesamten Bildschirm ein */
-    .hamburger {
-        width: 100%;
-        height: 100%;
-        background-color: rgba(0, 0, 0, 0.8); /* Dunkler Hintergrund */
-        justify-content: center;
-        align-items: center;
-        position: fixed;
-    }
-
-    nav {
-        width: 100vw;
-        height: 100vh;
-        padding-top: 20vh; /* Zentriere den Inhalt im Menü */
-        background-color: rgba(0, 0, 0, 0.9); /* Volle Breite und Höhe */
-    }
-
     .hiddenItem {
         visibility: hidden;
         color: gray;
@@ -381,10 +261,6 @@ footer {
         width: 150px; /* Kleinere Logo-Größe */
     }
     .logo-text { font-size: 1rem; }
-    nav {
-        width: 50vw;
-        height: 100vh;
-    }
     main {
         padding: 15px;
     }
@@ -456,8 +332,6 @@ footer {
     transition: 0.4s;
     border-radius: 28px;
 }
-
-/* Schieberegler bei aktiviertem Zustand */
 .slider:before {
     position: absolute;
     content: "";
@@ -469,16 +343,8 @@ footer {
     transition: 0.4s;
     border-radius: 50%;
 }
-
-/* Aktivierter Zustand */
-input:checked + .slider {
-    background-color: #2ecc71;
-}
-
-input:checked + .slider:before {
-    transform: translateX(22px);
-}
-
+input:checked + .slider { background-color: #2ecc71; }
+input:checked + .slider:before { transform: translateX(22px); }
     </style>
 </head>
 <body>
@@ -491,45 +357,21 @@ input:checked + .slider:before {
                 <span class="logo-text">Redminer9630.de</span>
             </div>
         </h1>
-        <div class="hamburger" id="hamburger">
-            <div></div>
-            <div></div>
-            <div></div>
-        </div>
     </header>
-<nav id="navMenu">
-    <div class="menu-section">
-        <div class="search-container">
-            <input type="text" class="searchbar" id="searchInput" placeholder="Suche...">
-        </div>
-        <ul>
-            <li>
-                <a href="https://m.youtube.com/channel/UCdpkm8rpRnIi88zWSuubbOQ?sub_confirmation=1"><img src="images/youtube.png" alt="YouTube" style="width: 20px; height: 20px; margin-right: 5px;">Youtube</a>
-            </li>
-            <li>
-                <a href="https://twitch.tv/Redminer9630" id="twitch" style="display: list-item;"><img src="images/twitch.png" alt="Twitch" style="width: 20px; height: 20px; margin-right: 5px;">Twitch</a>
-            </li>
-            <li>
-                <a href="streams?from=index" id="liveStreamLink" style="display: none;"><img src="images/twitch.png" alt="Twitch" style="width: 20px; height: 20px; margin-right: 5px;">Twitch Live Stream</a>
-            </li>
-            <li>
-                <a href="https://discord.com/invite/uRNX47tYrX"><img src="images/discord.png" alt="Discord" style="width: 20px; height: 15px; margin-right: 5px;">Discord</a>
-            </li>
-            <li>
-                <a href="https://chatgpt.com/share/67110a56-5680-800e-8ca1-d17b15a3a3fa"><img src="images/chatgpt.png" alt="ChatGPT" style="width: 20px; height: 20px; margin-right: 5px;">Coden Lernen</a>
-            </li>
-            <li>
-                <a href="https://github.com/redminer9630de/redminer9630de.github.io/wiki"><img src="images/github.png" alt="Github" style="width: 20px; height: 20px; margin-right: 5px;">Github</a>
-            </li>
-            <li class="hiddenItem"><a href="wiki?from=index">MCJE Wiki</a></li>
-            <li><a href="downloads?from=index">Downloads</a></li>
-            <li><a href="generators?from=index">Command Generatoren</a></li>
-            <li><a href="tools?from=index">Tools</a></li>
-            <li class="hiddenItem"><a href="tutorials?from=index">Minecraft Tutorials</a></li>
-            <li><a href="server?from=index">MC Server - Team</a></li>
-            <li><a href="feedback?from=index">Feedback</a></li>
-        </ul>
-    </div>
+        <div class="search-container"><input type="text" class="searchbar" id="searchInput" placeholder="Suche..."></div>
+            <a href="https://m.youtube.com/channel/UCdpkm8rpRnIi88zWSuubbOQ"><img src="images/youtube.png" alt="YouTube" style="width: 20px; height: 20px; margin-right: 5px;">Youtube</a>
+            <a href="https://twitch.tv/Redminer9630" id="twitch" style="display: list-item;"><img src="images/twitch.png" alt="Twitch" style="width: 20px; height: 20px; margin-right: 5px;">Twitch</a>
+            <a href="streams?from=index" id="liveStreamLink" style="display: none;"><img src="images/twitch.png" alt="Twitch" style="width: 20px; height: 20px; margin-right: 5px;">Twitch Live Stream</a>
+            <a href="https://discord.com/invite/uRNX47tYrX"><img src="images/discord.png" alt="Discord" style="width: 20px; height: 15px; margin-right: 5px;">Discord</a>
+            <a href="https://chatgpt.com/share/67110a56-5680-800e-8ca1-d17b15a3a3fa"><img src="images/chatgpt.png" alt="ChatGPT" style="width: 20px; height: 20px; margin-right: 5px;">Coden Lernen</a>
+            <a href="https://github.com/redminer9630de/redminer9630de.github.io/wiki"><img src="images/github.png" alt="Github" style="width: 20px; height: 20px; margin-right: 5px;">Github</a>
+            <a class="hiddenItem href="wiki?from=index">MCJE Wiki</a>
+            <a href="downloads?from=index">Downloads</a>
+            <a href="generators?from=index">Command Generatoren</a>
+            <a href="tools?from=index">Tools</a>
+            <a class="hiddenItem href="tutorials?from=index">Minecraft Tutorials</a>
+            <a href="server?from=index">MC Server - Team</a>
+            <a href="feedback?from=index">Feedback</a>
     <div class="theme-toggle-container">
         <label class="theme-switch">
             <input type="checkbox" id="theme-toggle" onchange="toggleTheme()">
@@ -537,7 +379,6 @@ input:checked + .slider:before {
         </label>
     </div>
     <div class="menu-bottom-right"><img src="images/account.png" alt="Account" class="account-icon" onclick='window.location.href="https://redminer9630.ddns.net/settings";'></div>
-</nav>
     <main>
         <section id="about">
             <h2>Ueber Redminer9630</h2>
