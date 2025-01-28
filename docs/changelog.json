@@ -1,6 +1,6 @@
 [
 #Possible Version-logs:
-# "version": "[Bug-Fix/Major-Update/Minor-Update]: {year}w{week_number[range: 1-53]}[a/b/c/d/e/f/g]"
+# "version": "[Bug-Fix/Major-Update/Minor-Update]: {year}w{week_number}a"
 # "date": "{date}"
 # "title": "{title}"
 # "description": "{description}"
