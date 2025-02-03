@@ -9,14 +9,34 @@
     <script src="https://www.gstatic.com/firebasejs/10.7.1/firebase-firestore.js"></script>
     <script src="https://cdnjs.cloudflare.com/ajax/libs/crypto-js/4.1.1/crypto-js.min.js"></script>
     <style>
-        body { font-family: Arial, sans-serif; text-align: center; padding: 50px; }
+        body { font-family: Arial, sans-serif; text-align: center; padding: 50px; background-color: #f4f4f4; }
         input, button { padding: 10px; margin: 10px; font-size: 16px; }
+        #infoSection { margin-top: 20px; padding: 10px; background-color: #e2e2e2; border-radius: 5px; }
+        .alert { padding: 15px; margin-top: 20px; border-radius: 5px; display: none; position: absolute; top: -100px; left: 50%; transform: translateX(-50%); width: 80%; transition: top 0.5s ease-in-out; z-index: 1000; }
+        .alert.success { background-color: #4CAF50; color: white; }
+        .alert.error { background-color: #f44336; color: white; }
+        .alert.info { background-color: #2196F3; color: white; }
+        .alert.warning { background-color: #ff9800; color: white; }
+        .alert.show {
+            top: 20px;
+            animation: slideIn 0.5s ease-in-out forwards;
+        }
+        @keyframes slideIn {
+            0% { top: -100px; }
+            100% { top: 20px; }
+         }
+        @keyframes slideOut {
+            0% { top: 20px; }
+            100% { top: -100px; }
+        }
     </style>
 </head>
 <body>
     <h2>Gib deinen Code ein</h2>
-    <input type="text" id="codeInput" placeholder="Deinen Code hier eingeben" required>
+    <input type="text" id="codeInput" placeholder="Code eingeben..." required>
     <button onclick="submitCode()">Einlösen</button>
+    <div id="infoSection"><p>Gib einen gültigen Code ein, um eine Belohnung zu erhalten. Die Codes können für Discord Nitro, Minecraft Server Rollen, Redminer9630 Account Vip und mehr verwendet werden!</p></div>
+    <div id="alertContainer"></div>
     <script>
         const firebaseConfig = {
             apiKey: "DEIN_API_KEY",
@@ -32,17 +52,35 @@
         auth.signInWithPopup(new firebase.auth.GoogleAuthProvider()).then(user => {
             console.log("Eingeloggt als:", user.user.email);
         }).catch(console.error);
-        function encryptCode(code) {return CryptoJS.AES.encrypt(code, "GEHEIMER_KEY").toString();}
+        function encryptCode(code) {
+            return CryptoJS.AES.encrypt(code, "GEHEIMER_KEY").toString();
+        }
+        function showAlert(message, type = "info") {
+            const alertContainer = document.getElementById("alertContainer");
+            const alert = document.createElement("div");
+            alert.classList.add("alert", type);
+            alert.innerText = message;
+            alertContainer.appendChild(alert);
+            setTimeout(() => {
+                alert.classList.add("show");
+            }, 10);
+            setTimeout(() => {
+                alert.classList.remove("show");
+                setTimeout(() => {
+                    alert.remove();
+                }, 500); 
+            }, 4000);
+        }
         function submitCode() {
             const codeInput = document.getElementById("codeInput").value.trim();
             if (codeInput.length < 5) {
-                alert("Ungültiger Code!");
+                showAlert("Ungültiger Code! Bitte versuche es erneut.", "error");
                 return;
             }
             const encryptedCode = encryptCode(codeInput);
             const user = auth.currentUser;
             if (!user) {
-                alert("Bitte anmelden!");
+                showAlert("Bitte logge dich ein, um den Code einzulösen.", "warning");
                 return;
             }
             db.collection("codes").add({
@@ -50,9 +88,13 @@
                 code: encryptedCode,
                 timestamp: firebase.firestore.FieldValue.serverTimestamp()
             }).then(() => {
-                alert("Code erfolgreich gesendet!");
-            }).catch(console.error);
+                showAlert("Code erfolgreich eingelöst! Deine Belohnung wurde gespeichert.", "success");
+            }).catch((error) => {
+                console.error(error);
+                showAlert("Es gab ein Problem beim Einlösen des Codes. Bitte versuche es später erneut.", "error");
+            });
         }
     </script>
 </body>
 </html>
+
