@@ -17,25 +17,18 @@
         .alert.error { background-color: #f44336; color: white; }
         .alert.info { background-color: #2196F3; color: white; }
         .alert.warning { background-color: #ff9800; color: white; }
-        .alert.show {
-            top: 20px;
-            animation: slideIn 0.5s ease-in-out forwards;
-        }
-        @keyframes slideIn {
-            0% { top: -100px; }
-            100% { top: 20px; }
-         }
-        @keyframes slideOut {
-            0% { top: 20px; }
-            100% { top: -100px; }
-        }
+        .alert.show { top: 20px; animation: slideIn 0.5s ease-in-out forwards; }
+        @keyframes slideIn { 0% { top: -100px; } 100% { top: 20px; } }
+        @keyframes slideOut { 0% { top: 20px; } 100% { top: -100px; } }
     </style>
 </head>
 <body>
-    <h2>Gib deinen Code ein</h2>
+    <h2>Gib deinen Code und deine E-Mail ein</h2>
     <input type="text" id="codeInput" placeholder="Code eingeben..." required>
+    <input type="email" id="emailInput" placeholder="E-Mail eingeben..." required>
     <button onclick="submitCode()">Einlösen</button>
-    <div id="infoSection"><p>Gib einen gültigen Code ein, um eine Belohnung zu erhalten. Die Codes können für Discord Nitro, Minecraft Server Rollen, Redminer9630 Account Vip und mehr verwendet werden!</p></div>
+    <div id="infoSection"><p>Gib einen gültigen Code und eine gültige E-Mail-Adresse ein, um eine Belohnung zu erhalten.<br>
+        Die Codes können für Discord Nitro, Redminer9630 Account Vip und mehr verwendet werden!</p></div>
     <div id="alertContainer"></div>
     <script>
         const firebaseConfig = {
@@ -55,6 +48,10 @@
         function encryptCode(code) {
             return CryptoJS.AES.encrypt(code, "GEHEIMER_KEY").toString();
         }
+        function validateEmail(email) {
+            const emailRegex = /^[a-zA-Z0-9._-]+@[a-zA-Z0-9.-]+\.[a-zA-Z]{2,6}$/;
+            return emailRegex.test(email);
+        }
         function showAlert(message, type = "info") {
             const alertContainer = document.getElementById("alertContainer");
             const alert = document.createElement("div");
@@ -63,16 +60,21 @@
             alertContainer.appendChild(alert);
             setTimeout(() => {
                 alert.classList.add("show");
-            }, 10);
+            }, 10); // Damit die Animation sofort startet
             setTimeout(() => {
                 alert.classList.remove("show");
                 setTimeout(() => {
                     alert.remove();
-                }, 500); 
-            }, 4000);
+                }, 500); // Lösche den Alert nach der Animationszeit
+            }, 4000); // Verstecke nach 4 Sekunden
         }
         function submitCode() {
             const codeInput = document.getElementById("codeInput").value.trim();
+            const emailInput = document.getElementById("emailInput").value.trim();
+            if (!validateEmail(emailInput)) {
+                showAlert("Bitte gib eine gültige E-Mail-Adresse ein.", "error");
+                return;
+            }
             if (codeInput.length < 5) {
                 showAlert("Ungültiger Code! Bitte versuche es erneut.", "error");
                 return;
@@ -85,6 +87,7 @@
             }
             db.collection("codes").add({
                 userId: user.uid,
+                email: emailInput,  // Speichern der E-Mail
                 code: encryptedCode,
                 timestamp: firebase.firestore.FieldValue.serverTimestamp()
             }).then(() => {
@@ -97,4 +100,3 @@
     </script>
 </body>
 </html>
-
