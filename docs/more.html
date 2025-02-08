@@ -5,19 +5,8 @@
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <title>Mehr Infos</title>
     <style>
-        body {
-            display: flex;
-            margin: 0;
-            font-family: Arial, sans-serif;
-        }
-        .sidebar {
-            width: 30%;
-            height: 100%;
-            background-color: #f4f4f4;
-            border-right: 1px solid #ddd;
-            padding: 20px;
-            box-sizing: border-box;
-        }
+        body { display: flex; margin: 0; font-family: Arial, sans-serif; }
+        .sidebar { width: 30%; height: 100%; background-color: #f4f4f4; border-right: 1px solid #ddd; padding: 20px; box-sizing: border-box; }
         .sidebar ul { list-style: none; padding: 0; }
         .sidebar li { margin: 10px 0; }
         .sidebar a { text-decoration: none; color: #333; font-weight: bold; }
@@ -25,13 +14,10 @@
         .content { width: 70%; padding: 20px; box-sizing: border-box; }
         section { margin-bottom: 40px; }
     </style>
-    <script>
-        window.onload = function() {
-            const params = new URLSearchParams(window.location.search);
-            const section = params.get('more');
+    <script>window.onload = function() {
+            const params = new URLSearchParams(window.location.search); const section = params.get('more');
             if (section) { const target = document.getElementById(section); if (target) { target.scrollIntoView({ behavior: 'smooth' }); } }
-        };
-    </script>
+        };</script>
 </head>
 <body>
     <div class="sidebar">
