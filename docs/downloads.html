@@ -42,30 +42,20 @@
                 background-color: var(--button-bg-color);
             }
         }
-
-        /* Light Mode Styles */
         @media (prefers-color-scheme: light) {
             body {
                 font-family: 'MinecraftFont', sans-serif;
                 background-color: var(--bg-color-light);
                 color: var(--text-color-light);
             }
-
-            table, th, td {
-                border: 1px solid var(--border-color-light);
-            }
-
-            th {
-                background-color: var(--button-bg-color);
-            }
+            table, th, td { border: 1px solid var(--border-color-light); }
+            th { background-color: var(--button-bg-color); }
         }
-
         h1 {
             font-size: 30px;
             margin-bottom: 20px;
             text-align: center;
         }
-
         .header-link {
             color: white;
             font-size: 16px;
@@ -78,11 +68,7 @@
             right: 20px;
             cursor: pointer;
         }
-
-        .header-link:hover {
-            background-color: #e53935;
-        }
-
+        .header-link:hover { background-color: #e53935; }
         .info-button {
             position: absolute;
             top: 20px;
@@ -93,22 +79,16 @@
             background-size: cover;
             cursor: pointer;
         }
-
-        .info-button:hover {
-            background-image: url('downloads/info_hover.png');
-        }
-
+        .info-button:hover { background-image: url('downloads/info_hover.png'); }
         table {
             width: 100%;
             border-collapse: collapse;
             margin-top: 20px;
         }
-
         th, td {
             padding: 8px;
             text-align: left;
         }
-
         .download-button {
             background-color: var(--button-bg-color);
             color: white;
@@ -118,11 +98,7 @@
             font-size: 10px;
             cursor: pointer;
         }
-
-        .download-button:hover {
-            background-color: var(--button-hover-color);
-        }
-
+        .download-button:hover { background-color: var(--button-hover-color); }
         .state-active {
             background-color: green;
             color: white;
@@ -132,7 +108,6 @@
             font-size: 10px;
             cursor: pointer;
         }
-
         .state-edit {
             background-color: blue;            
             color: white;
@@ -142,7 +117,7 @@
             font-size: 10px;
             cursor: pointer;
         }
-
+        .state-edit img { color: grey; }
         .state-buged {
             background-color: orange;
             color: white;
@@ -152,9 +127,19 @@
             font-size: 10px;
             cursor: pointer;
         }
-        
+        .state-buged img { color: grey; }
         .state-error {
             background-color: red;
+            color: white;
+            padding: 10px;
+            text-decoration: none;
+            border-radius: 5px;
+            font-size: 10px;
+            cursor: pointer;
+        }
+        .state-error img { color: grey; }
+        .state-closed {
+            background-color: grey;
             color: white;
             padding: 10px;
             text-decoration: none;
@@ -180,56 +165,47 @@
         </thead>
         <tbody>
             <tr>
-                <td>-</td>
-                <td>Craft Attack Maps</td>
-                <td>Craft Attack Maps(Nicht von Mir)</td>
-                <td>Map</td>
-                <td><a href="https://craftattack.one" class="state-active" download="https://craftattack.one">https://craftattack.one</a></td>
-            </tr>
-            <tr>
                 <td>1.21</td>
                 <td>MC is Bones</td>
                 <td>Veraendert End Game Items zur Knochen Textur und hat support für ein paar Mods. Extrahiere diese Datei um sie richtig zu benutzten</td>
                 <td>Resourcepack/Datapack</td>
-                <td><a href="files/mc_is_bonesDP-RP.zip" class="state-edit" download="mc_is_bonesDP-RP.zip">mc_is_bonesDP-RP.zip</a></td>
+                <td><a href="" class="state-edit"><img src="images/icons/download.png"></a></td>
             </tr>
             <tr>
                 <td>1.21.3</td>
                 <td>MC is Bones</td>
                 <td>Verschiedene Knochenarten und Blöcke wurden hinzugefügt</td>
                 <td>Mod</td>
-                <td><a class"state-edit" >---</td>
+                <td><a href="" class"state-edit"><img src="images/icons/download.png"></td>
             </tr>
             <tr>
                 <td>1.21</td>
                 <td>Higher Enchantments</td>
                 <td>Veraendert die hoechste Stufe von den meisten Verzauberungen</td>
                 <td>Datapack</td>
-                <td><a href="files/higher_enchantments.zip" class="state-buged" download="higher_enchantments.zip">higher_enchantments.zip</a></td>
+                <td><a href="" class="state-buged"><img src="images/icons/download.png"></a></td>
+            </tr>
+            <tr>
+                <td>1.21-1.21.5</td>
+                <td>Katzenhausen</td>
+                <td>Ein Pack gemacht fuer Katzenhausen</td>
+                <td>Resourcepack</td>
+                <td><a href="file/katzenhausen.zip" class="state-active"><img src="images/icons/download.png"></a></td>
             </tr>
         </tbody>
     </table>
-
     <script>
         function sortTable(columnIndex) {
             const table = document.getElementById("downloadTable");
             const tbody = table.querySelector("tbody");
             const rows = Array.from(tbody.rows);
-
             const ascending = !table.dataset.sortDirection || table.dataset.sortDirection === 'descending';
             table.dataset.sortDirection = ascending ? 'ascending' : 'descending';
-
             rows.sort((a, b) => {
                 const aText = a.cells[columnIndex].textContent.trim();
                 const bText = b.cells[columnIndex].textContent.trim();
-
-                if (ascending) {
-                    return aText.localeCompare(bText);
-                } else {
-                    return bText.localeCompare(aText);
-                }
+                if (ascending) { return aText.localeCompare(bText); } else { return bText.localeCompare(aText); }
             });
-
             rows.forEach(row => tbody.appendChild(row));
         }
     </script>
