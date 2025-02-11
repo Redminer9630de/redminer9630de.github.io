@@ -338,6 +338,8 @@ footer {
 }
 input:checked + .slider { background-color: #2ecc71; }
 input:checked + .slider:before { transform: translateX(22px); }
+    .linkbox { display: flex; gap: 10px; }
+    .linkbox a, div { display: flex; }
     </style>
 <script src="https://www.googletagmanager.com/gtag/js?l=dataLayer&amp;id=G-98DDEG10MK" async=""></script></head>
 <body>
@@ -358,7 +360,8 @@ input:checked + .slider:before { transform: translateX(22px); }
     </div>
         <div class="menu-bottom-right"><img src="images/account.png" alt="Account" class="account-icon" onclick="window.location.href=&quot;https://redminer9630.ddns.net/settings&quot;;"></div>
     </header>
-        <div class="search-container"><input type="text" class="searchbar" id="searchInput" placeholder="Suche..."><ul class="suggestions"></ul></div>
+        <div class="linkbox">
+            <div class="search-container"><input type="text" class="searchbar" id="searchInput" placeholder="Suche..."><ul class="suggestions"></ul></div>
             <a href="https://m.youtube.com/channel/UCdpkm8rpRnIi88zWSuubbOQ"><img src="images/youtube.png" title="YouTube" style="width: 50px; height: 50px; margin-right: 5px;"></a>
             <a href="https://twitch.tv/Redminer9630" id="twitch" style="display: list-item;"><img src="images/twitch.png" title="Twitch" style="width: 50px; height: 50px; margin-right: 5px;"></a>
             <a href="streams?from=index" id="liveStreamLink" style="display: none;"><img src="images/twitch.png" title="Twitch" style="width: 50px; height: 50px; margin-right: 5px;"></a>
@@ -372,6 +375,7 @@ input:checked + .slider:before { transform: translateX(22px); }
             <a class="hiddenItem href=" tutorials?from="index&quot;" style="display: none;"><img src="images/icons/mctuto.png" title="Minecraft Tutorials" style="width: 50px; height: 50px; margin-right: 5px;"></a>
             <a href="server?from=index"><img src="images/icons/team.png" title="Minecraft Server - Team" style="width: 50px; height: 50px; margin-right: 5px;"></a>
             <a href="feedback?from=index"><img src="images/icons/feedback.png" title="Feedback" style="width: 50px; height: 50px; margin-right: 5px;"></a>
+        </div>
     <main>
         <section id="about">
             <h2>Ueber Redminer9630</h2>
