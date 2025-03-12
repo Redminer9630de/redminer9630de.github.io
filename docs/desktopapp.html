@@ -5,42 +5,115 @@
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <title>Redminer9630 Desktop App Herunterladen</title>
     <style>
-        body { font-family: Arial, sans-serif; margin: 0; padding: 0; background-color: #f0f0f0; display: flex; justify-content: center; align-items: center; height: 100vh; flex-direction: column; }
-        .container { text-align: center; padding: 20px; background-color: white; border-radius: 8px; box-shadow: 0 4px 8px rgba(0, 0, 0, 0.1); width: 320px; margin-top: 20px; }
-        h1 { color: #333; }
-        p { color: #555; }
-        .download-buttons { margin-top: 20px; }
-        .download-buttons div { margin-bottom: 20px; }
-        .download-buttons button { text-decoration: none; background-color: #007bff; color: white; padding: 10px 20px; border-radius: 4px; margin: 5px; border: none; cursor: pointer; transition: background-color 0.3s; }
-        .download-buttons button:hover { background-color: #0056b3; }
-        .download-buttons button:disabled { opacity: 0.5; cursor: not-allowed; }
-        .os-logo { width: 50px; height: 50px; margin-bottom: 10px; }
+        body {
+            font-family: Arial, sans-serif;
+            margin: 0;
+            padding: 0;
+            display: flex;
+            flex-direction: column;
+            align-items: center;
+            height: 100vh;
+            overflow: hidden;
+        }
+        .container {
+            display: flex;
+            flex-wrap: wrap;
+            justify-content: center;
+            width: 100%;
+            height: 100%;
+            padding: 20px;
+            box-sizing: border-box;
+            background: linear-gradient(-45deg, #e0c3fc, #8ec5fc, #f9c5d1, #a1c4fd);
+            background-size: 400% 400%;
+            animation: gradientAnimation 15s ease infinite;
+        }
+        @keyframes gradientAnimation {
+            0% { background-position: 0% 50%; }
+            50% { background-position: 100% 50%; }
+            100% { background-position: 0% 50%; }
+        }
+        h1 {
+            color: #333;
+            margin: 20px 0;
+        }
+        .os-section {
+            background-color: rgba(255, 255, 255, 0.8);
+            border-radius: 8px;
+            box-shadow: 0 4px 8px rgba(0, 0, 0, 0.1);
+            width: 320px;
+            height: 400px;
+            margin: 10px;
+            padding: 20px;
+            box-sizing: border-box;
+            text-align: center;
+            display: flex;
+            flex-direction: column;
+            align-items: center;
+        }
+        .os-logo {
+            width: 50px;
+            height: 50px;
+            margin-bottom: 10px;
+        }
+        .download-buttons {
+            margin-top: auto;
+            width: 100%;
+        }
+        .download-buttons button {
+            width: 100%;
+            background-color: #007bff;
+            color: white;
+            padding: 10px;
+            border: none;
+            border-radius: 4px;
+            margin: 5px 0;
+            cursor: pointer;
+            transition: background-color 0.3s;
+        }
+        .download-buttons button:hover {
+            background-color: #0056b3;
+        }
+        .download-buttons button:disabled {
+            opacity: 0.5;
+            cursor: not-allowed;
+        }
+        @media (max-width: 768px) {
+            .os-section {
+                width: 100%;
+                max-width: 320px;
+            }
+        }
     </style>
 </head>
 <body>
+    <h1>Redminer9630 Desktop App</h1>
     <div class="container">
-        <h1>Redminer9630 Desktop App</h1>
-        <div class="download-buttons">
-            <div id="windows-div">
-                <h3>Windows</h3>
-                <img class="os-logo" src="https://upload.wikimedia.org/wikipedia/commons/3/34/Windows_logo_-_2012.svg" alt="Windows Logo">
-                <button id="download-winzip">ZIP</button>
+        <div class="os-section" id="windows-section">
+            <h3>Windows</h3>
+            <img class="os-logo" src="https://upload.wikimedia.org/wikipedia/commons/5/5f/Windows_logo_-_2021.svg" alt="Windows Logo">
+            <div class="download-buttons">
                 <button id="download-winexe">EXE</button>
+                <button id="download-winzip">ZIP</button>
             </div>
-            <div id="linux-div">
-                <h3>Linux</h3>
-                <img class="os-logo" src="https://upload.wikimedia.org/wikipedia/commons/3/35/Tux.svg" alt="Linux Logo">
-                <button id="download-linuxzip">ZIP</button>
+        </div>
+        <div class="os-section" id="linux-section">
+            <h3>Linux</h3>
+            <img class="os-logo" src="https://upload.wikimedia.org/wikipedia/commons/3/35/Tux.svg" alt="Linux Logo">
+            <div class="download-buttons">
                 <button id="download-linuxtar">tar.gz</button>
+                <button id="download-linuxzip">ZIP</button>
             </div>
-            <div id="macos-div">
-                <h3>macOS</h3>
-                <img class="os-logo" src="https://upload.wikimedia.org/wikipedia/commons/2/21/MacOS_logo.svg" alt="macOS Logo">
-                <button id="download-macoszip">ZIP</button>
+        </div>
+        <div class="os-section" id="macos-section">
+            <h3>macOS</h3>
+            <img class="os-logo" src="https://upload.wikimedia.org/wikipedia/commons/a/ab/Apple-logo.png" alt="macOS Logo">
+            <div class="download-buttons">
                 <button id="download-macosapp">App</button>
+                <button id="download-macoszip">ZIP</button>
             </div>
         </div>
     </div>
+
     <script>
         const apiUrl = 'https://api.github.com/repos/redminer9630de/redminer9630/releases/latest';
 
@@ -48,30 +121,22 @@
             try {
                 const response = await fetch(apiUrl);
                 const data = await response.json();
-                function getDownloadUrl(namePart) {
-                    const asset = data.assets.find(asset => asset.name.includes(namePart));
-                    return asset ? asset.browser_download_url : null;
-                }
-                const urls = {
-                    winzip: getDownloadUrl('win_zip'),
-                    winexe: getDownloadUrl('win_exe'),
-                    linuxzip: getDownloadUrl('linux_zip'),
-                    linuxtar: getDownloadUrl('linux_tar'),
-                    macoszip: getDownloadUrl('macos_zip'),
-                    macosapp: getDownloadUrl('macos_app')
-                };
-                Object.keys(urls).forEach(id => {
-                    const button = document.getElementById(`download-${id}`);
-                    if (button && urls[id]) {
-                        button.onclick = () => window.location.href = urls[id];
-                    } else if (button) {
-                        button.disabled = true;
-                    }
-                });
 
-            } catch (error) {
-                console.error('Fehler beim Abrufen der neuesten Release-Daten:', error);
-            }
+                const assets = data.assets.reduce((acc, asset) => {
+                    if (asset.name.includes('win_exe')) acc.winexe = asset.browser_download_url;
+                    if (asset.name.includes('win_zip')) acc.winzip = asset.browser_download_url;
+                    if (asset.name.includes('linux_tar')) acc.linuxtar = asset.browser_download_url;
+                    if (asset.name.includes('linux_zip')) acc.linuxzip = asset.browser_download_url;
+                    if (asset.name.includes('macos_app')) acc.macosapp = asset.browser_download_url;
+                    if (asset.name.includes('macos_zip')) acc.macoszip = asset.browser_download_url;
+                    return acc;
+                }, {});
+
+                Object.keys(assets).forEach(key => {
+                    const button = document.getElementById(`download-${key}`);
+                    if (button && assets[key]) { button.onclick = () => window.location.href = assets[key]; } else if (button) { button.disabled = true; }
+                });
+            } catch (error) { console.error('Fehler beim Abrufen der neuesten Release-Daten:', error); }
         }
 
         fetchLatestRelease();
