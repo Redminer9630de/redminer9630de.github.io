@@ -1,0 +1,61 @@
+<!DOCTYPE html>
+<html lang="de">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Redminer9630 Desktop App Herunterladen</title>
+    <style>
+        body { font-family: Arial, sans-serif; margin: 0; padding: 0; background-color: #f0f0f0; display: flex; justify-content: center; align-items: center; height: 100vh; }
+        .container { text-align: center; padding: 20px; background-color: white; border-radius: 8px; box-shadow: 0 4px 8px rgba(0, 0, 0, 0.1); width: 300px; }
+        h1 { color: #333; }
+        p { color: #555; }
+        .download-buttons { margin-top: 20px; }
+        .download-buttons button { text-decoration: none; background-color: #007bff; color: white; padding: 10px 20px; border-radius: 4px; margin: 5px; display: inline-block; transition: background-color 0.3s; }
+        .download-buttons button:hover { background-color: #0056b3; }
+    </style>
+</head>
+<body>
+    <div class="container">
+        <h1>Redminer9630 Desktop App</h1>
+        <div class="download-buttons">
+            <button id="download-win" href="#" target="_blank">Windows ZIP</button>
+            <button id="download-exe" href="#" target="_blank">Windows exe</button>
+            <button id="download-linux" href="#" target="_blank">Linux ZIP</button>
+            <button id="download-tar" href="#" target="_blank">Linux tar.gz</button>
+            <button id="download-macos" href="#" target="_blank">macOS ZIP</button>
+            <button id="download-app" href="#" target="_blank">macOS app</button>
+        </div>
+    </div>
+
+    <script>
+        const apiUrl = https://api.github.com/repos/redminer9630de/redminer9630/releases/latest;
+        async function fetchLatestRelease() {
+            try {
+                const response = await fetch(apiUrl);
+                const data = await response.json();
+
+                const winzipDownloadUrl = data.assets.find(asset => asset.name.includes('win_zip')).browser_download_url;
+                const winexeDownloadUrl = data.assets.find(asset => asset.name.includes('win_exe')).browser_download_url;
+                const linuxzipDownloadUrl = data.assets.find(asset => asset.name.includes('linux_zip')).browser_download_url;
+                const linuxtarDownloadUrl = data.assets.find(asset => asset.name.includes('linux_tar')).browser_download_url;
+                const macoszipDownloadUrl = data.assets.find(asset => asset.name.includes('macos_zip')).browser_download_url;
+                const macosappDownloadUrl = data.assets.find(asset => asset.name.includes('macos_app')).browser_download_url;
+
+                document.getElementById('download-winzip').href = winzipDownloadUrl;
+                document.getElementById('download-winexe').href = winexeDownloadUrl;
+                document.getElementById('download-linuxzip').href = linuxzipDownloadUrl;
+                document.getElementById('download-linuxtar').href = linuxtarDownloadUrl;
+                document.getElementById('download-macoszip').href = macoszipDownloadUrl;
+                document.getElementById('download-macosapp').href = macosappDownloadUrl;
+
+                document.getElementById('loading').style.display = 'none';
+            } catch (error) {
+                console.error('Fehler beim Abrufen der neuesten Release-Daten:', error);
+                document.getElementById('loading').textContent = 'Fehler beim Abrufen der neuesten Version.';
+            }
+        }
+
+        fetchLatestRelease();
+    </script>
+</body>
+</html>
