@@ -14,6 +14,16 @@ app.whenReady().then(() => {
 
     mainWindow.loadFile('src/index.html');
     autoUpdater.checkForUpdatesAndNotify();
+
+    mainWindow.on('closed', () => {
+        mainWindow = null;
+    });
+});
+
+app.on('window-all-closed', () => {
+    if (process.platform !== 'darwin') {
+        app.quit();
+    }
 });
 
 autoUpdater.on('update-available', () => {
