@@ -9,8 +9,7 @@
         .container { display: flex; flex-wrap: wrap; justify-content: center; width: 100%; height: 100%; padding: 20px; box-sizing: border-box; background: linear-gradient(-45deg, #e0c3fc, #8ec5fc, #f9c5d1, #a1c4fd); background-size: 400% 400%; animation: gradientAnimation 15s ease infinite; }
         @keyframes gradientAnimation { 0% { background-position: 0% 50%; } 50% { background-position: 100% 50%; } 100% { background-position: 0% 50%; } }
         h1 { color: #333; margin: 20px 0; }
-        .os-section { background-color: rgba(255, 255, 255, 0.8); border-radius: 8px; box-shadow: 0 4px 8px rgba(0, 0, 0, 0.1); width: 320px; height: 400px; margin: 10px; padding: 20px; box-sizing: border-box; text-align: center; display: flex; flex-direction: column; align-items: center; }
-        .os-logo { width: 50px; height: 50px; margin-bottom: 10px; }
+        .os-section { background-color: rgba(255, 255, 255, 0.8); border-radius: 8px; box-shadow: 0 4px 8px rgba(0, 0, 0, 0.1); width: 260px; height: 150px; margin: 10px; padding: 20px; box-sizing: border-box; text-align: center; display: flex; flex-direction: column; align-items: center; }
         .download-buttons { margin-top: auto; width: 100%; }
         .download-buttons button { width: 100%; background-color: #007bff; color: white; padding: 10px; border: none; border-radius: 4px; margin: 5px 0; cursor: pointer; transition: background-color 0.3s; }
         .download-buttons button:hover { background-color: #0056b3; }
@@ -19,11 +18,10 @@
     </style>
 </head>
 <body>
-    <h1>Redminer9630 Desktop App</h1>
     <div class="container">
+        <h1>Redminer9630 Desktop App</h1>
         <div class="os-section" id="windows-section">
             <h3>Windows</h3>
-            <img class="os-logo" src="https://upload.wikimedia.org/wikipedia/commons/5/5f/Windows_logo_-_2021.svg" alt="Windows Logo">
             <div class="download-buttons">
                 <button id="download-winexe">EXE</button>
                 <button id="download-winzip">ZIP</button>
@@ -31,17 +29,15 @@
         </div>
         <div class="os-section" id="linux-section">
             <h3>Linux</h3>
-            <img class="os-logo" src="https://upload.wikimedia.org/wikipedia/commons/3/35/Tux.svg" alt="Linux Logo">
             <div class="download-buttons">
-                <button id="download-linuxtar">tar.gz</button>
+                <button id="download-linuxtar">TAR.GZ</button>
                 <button id="download-linuxzip">ZIP</button>
             </div>
         </div>
         <div class="os-section" id="macos-section">
             <h3>macOS</h3>
-            <img class="os-logo" src="https://upload.wikimedia.org/wikipedia/commons/a/ab/Apple-logo.png" alt="macOS Logo">
             <div class="download-buttons">
-                <button id="download-macosapp">App</button>
+                <button id="download-macosapp">APP</button>
                 <button id="download-macoszip">ZIP</button>
             </div>
         </div>
