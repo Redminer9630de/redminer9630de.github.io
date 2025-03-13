@@ -66,7 +66,12 @@
                 };
                 Object.keys(urls).forEach(id => {
                     const button = document.getElementById(`download-${id}`);
-                    if (button && urls[id]) { button.onclick = () => window.location.href = urls[id]; } else if (button) { button.disabled = true; }
+                    if (button) {
+                        if (urls[id]) { button.onclick = () => window.location.href = urls[id]; } else {
+                            button.disabled = true;
+                            button.onclick = () => alert(`Es gibt keine Datei für ${button.innerText}.`);
+                        }
+                    }
                 });
             } catch (error) { console.error('Fehler beim Abrufen der neuesten Release-Daten:', error); }
         }
