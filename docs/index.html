@@ -29,18 +29,19 @@
         min-height: 100vh;
         box-sizing: border-box;
     }
-
     header {
         background-color: #2c3e50;
         color: white;
-        padding: 12px;
-        position: relative;
-        z-index: 2;
         display: flex;
         align-items: center;
         justify-content: space-between;
+        position: fixed;
+        top: 0;
+        left: 0;
+        width: 100%;
+        padding: 10px 20px;
+        z-index: 1000;
     }
-
     h1 {
         margin: 0;
         display: flex;
@@ -48,20 +49,19 @@
         width: auto;
         white-space: nowrap;
     }
-
     .logo-container {
         display: flex;
         align-items: center;
         position: relative;
     }
-
     .logo {
         width: 225px;
+        display: flex;
+        align-items: center;
         height: auto;
         border-radius: 4px;
         position: relative;
     }
-
 .border_layer {
     position: relative;
     display: inline-block;
@@ -155,22 +155,16 @@ footer {
         color: #f5f5f5;
     }
 
-    header, footer {
-        background-color: #1c2a34;
-    }
-
-    h2 {
-        color: #27ae60;
-    }
-
+    header, footer { background-color: #1c2a34; }
+    h2 { color: #27ae60; }
     button { background-color: #27ae60; }
     button:hover { background-color: #2ecc71; }
 }
-.search-container { margin: 5px 5px; }      
+.search-container { margin: 5px 5px; }
 .searchbar {
     width: 250px;
     max-width: 250px; /* Maximale Breite der Suchleiste */
-    padding: 0px;
+    padding: 8px;
     padding-left: 10px;
     border: 2px solid #2ecc71; /* Grüne Umrandung */
     border-radius: 8px;
@@ -180,6 +174,7 @@ footer {
     transition: border-color 0.3s ease;
     cursor: pointer; 
 }
+.searchbar:focus { outline: none; }
 .searchbar:focus { border-color: #27ae60; }
 .suggestions {
     position: absolute;
@@ -327,7 +322,7 @@ footer {
 }
 input:checked + .slider { background-color: #2ecc71; }
 input:checked + .slider:before { transform: translateX(22px); }
-    .linkbox { display: flex; gap: 10px; }
+    .linkbox { display: flex; gap: 10px; align-items: center; flex-grow: 1; }
     .linkbox a, div { display: flex; }
     .linkimg { width: 50px; height: 50px; margin-right: 5px; }
     </style>
