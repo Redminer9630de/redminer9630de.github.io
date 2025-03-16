@@ -1,0 +1,45 @@
+name: Create Archives and Release
+
+on:
+  push:
+    branches:
+      - main  # Falls dein Haupt-Branch anders heißt, passe das an
+  workflow_dispatch:  # Ermöglicht manuelles Starten
+
+jobs:
+  build:
+    runs-on: ubuntu-latest
+
+    steps:
+      - name: Repository auschecken
+        uses: actions/checkout@v3
+
+      - name: ZIP-Datei erstellen
+        run: zip -r website.zip . -x "*.git*"
+
+      - name: TAR.GZ-Archiv erstellen
+        run: tar -czvf website.tar.gz --exclude=".git" .
+
+      - name: macOS .app-Archiv erstellen
+        run: mkdir -p Website.app/Contents/MacOS && cp -r * Website.app/Contents/MacOS/ && zip -r website.app.zip Website.app
+
+      - name: Windows EXE erstellen (NSIS)
+        run: |
+          sudo apt-get install nsis
+          echo 'Outfile "website_installer.exe"
+          Section
+            SetOutPath $INSTDIR\Website
+            File /r *
+          SectionEnd' > installer.nsi
+          makensis installer.nsi
+
+      - name: Release erstellen und Dateien hochladen
+        uses: softprops/action-gh-release@v1
+        with:
+          files: |
+            website.zip
+            website.tar.gz
+            website_installer.exe
+            website.app.zip
+        env:
+          GITHUB_TOKEN: ${{ secrets.GITHUB_TOKEN }}
