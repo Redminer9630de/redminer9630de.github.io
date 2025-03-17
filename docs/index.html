@@ -274,30 +274,29 @@ footer {
     cursor: pointer;
     transition: transform 0.2s ease;
 }
+.account-icon {
+    display: flex;
+    align-items: center;
+    gap: 10px;
+}
 .light-dark-icon:hover, .account-icon:hover { transform: scale(1.2); }
-    /* Container für den Toggle */
 .theme-toggle-container {
     display: flex;
     align-items: center;
     justify-content: center;
     margin: 10px;
 }
-
-/* Grundstruktur des Toggles */
 .theme-switch {
     position: relative;
     display: inline-block;
     width: 50px;
     height: 28px;
 }
-
 .theme-switch input {
     opacity: 0;
     width: 0;
     height: 0;
 }
-
-/* Schieberegler */
 .slider {
     position: absolute;
     cursor: pointer;
