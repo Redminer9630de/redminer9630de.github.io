@@ -1,4 +1,3 @@
-<!-- settings.html -->
 <!DOCTYPE html>
 <html lang="en">
 <head>
@@ -25,9 +24,7 @@
             font-weight: bold;
             margin-bottom: 20px;
         }
-        .settings-group {
-            margin-bottom: 30px;
-        }
+        .settings-group { margin-bottom: 30px; }
         .settings-group h2 {
             font-size: 1.25rem;
             border-bottom: 1px solid #ccc;
@@ -41,9 +38,7 @@
             padding: 10px 0;
             border-bottom: 1px solid #eee;
         }
-        .settings-item label {
-            font-size: 1rem;
-        }
+        .settings-item label { font-size: 1rem; }
         .settings-item input {
             padding: 5px 10px;
             font-size: 1rem;
@@ -60,9 +55,7 @@
             border-radius: 5px;
             cursor: pointer;
         }
-        .save-button:hover {
-            background-color: #0056b3;
-        }
+        .save-button:hover { background-color: #0056b3; }
     </style>
 </head>
 <body>
@@ -93,7 +86,7 @@
                 <input type="checkbox" id="theme"><label>White</label>
             </div>
         </div>
-        <button class="save-button">Save Changes</button>
+        <button onclick="updateLanguageText()" class="save-button">Save Changes</button>
     </div>
     <script>
         function updateLanguageText() {
