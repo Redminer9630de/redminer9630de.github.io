@@ -285,7 +285,7 @@
     </select>
     
     <div id="calculator" class="mode">
-        <input id="display" readonly>
+        <input id="display">
         <div id="keys">
             <button onclick="appendToDisplay('+')" class="op-btn">+</button>        
             <button onclick="appendToDisplay('7')">7</button>       
@@ -306,7 +306,15 @@
             <button onclick="calc()" class="equal">=</button>   
         </div>
     </div>
-
+    <div id="itemstack" class="mode" style="display:none;">
+        <h2>Item Stack</h2>
+        <div class="si_input">
+            <input type="number" id="si_stack" placeholder="Stacks">
+            <input type="number" id="id_item" placeholder="Zusätzliche Items">
+            <button onclick="stackitem()">Berechnen</button>
+        </div>
+        <input id="si_result" readonly placeholder="Item Anzahl" class="display">
+    </div>
     <div id="netherMode" class="mode" style="display: none;">
         <h2>Nether Portal Koordinaten</h2>
         <div class="nether-row">
