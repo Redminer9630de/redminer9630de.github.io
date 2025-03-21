@@ -16,98 +16,21 @@
         .header-link:hover { background-color: #e53935; }
         .info-button { position: absolute; top: 20px; left: 20px; width: 32px; height: 32px; background-image: url('downloads/info.png'); background-size: cover; cursor: pointer; }
         .info-button:hover { background-image: url('downloads/info_hover.png'); cursor: help; }
-        button, .button {
-            font-weight: bold;
-            display: inline-block;
-            background-color: hsl(122, 40%, 45%);
-            color: white;
-            padding: 15px;
-            margin: 5px;
-            cursor: pointer;
-            border: none;
-            border-radius: 8px;
-            font-size: 18px;
-            font-family: 'MinecraftFont', sans-serif;
-        }
-        #keys {
-            display: grid;
-            grid-template-columns: repeat(4, 1fr);
-            gap: 5px;
-        }
-
-        #display, .display {
-            font-size: 24px;
-            padding: 10px;
-            border: 1px solid #ddd;
-            border-radius: 8px;
-            background-color: #333;
-            margin-bottom: 10px;
-            color: white;
-            text-align: left;
-            font-family: 'MinecraftFont', sans-serif;
-        }
-
-        button:hover, .button:hover {
-            background-color: hsl(122, 40%, 55%);
-        }
-
-        button:active, .button:active {
-            background-color: hsl(122, 40%, 65%);
-        }
-
-        .op-btn {
-            background-color: hsl(35, 100%, 60%);
-        }
-
-        .op-btn:hover {
-            background-color: hsl(35, 100%, 70%);
-        }
-
-        .op-btn:active {
-            background-color: hsl(35, 100%, 80%);
-        }
-        
-        .equal {
-            grid-column: span 4;
-            background-color: hsl(206, 90%, 55%);
-            color: white;
-            font-size: 24px;
-        }
-
-        .equal:hover {
-            background-color: hsl(206, 90%, 65%);
-        }
-
-        .equal:active {
-            background-color: hsl(206, 90%, 75%);
-        }
-
-        /* Styles für die Item-Multiplikator-Sektion */
-        .item-row {
-            display: flex;
-            gap: 10px;
-            margin-bottom: 10px;
-            align-items: center;
-        }
-
-        .item-row input {
-            padding: 8px;
-            border: 1px solid #555;
-            border-radius: 4px;
-            flex: 1;
-            background-color: #444;
-            color: white;
-            height: 40px;
-        }
-
-        .item-row input::placeholder {
-            color: #ccc;
-        }
-
-        .calculated-list {
-            margin-top: 10px;
-        }
-        
+        button, .button { font-weight: bold; display: inline-block; background-color: hsl(122, 40%, 45%); color: white; padding: 15px; margin: 5px; cursor: pointer; border: none; border-radius: 8px; font-size: 18px; font-family: 'MinecraftFont', sans-serif; }
+        #keys { display: grid; grid-template-columns: repeat(4, 1fr); gap: 5px; }
+        #display, .display { font-size: 24px; padding: 10px; border: 1px solid #ddd; border-radius: 8px; background-color: #333; margin-bottom: 10px; color: white; text-align: left; font-family: 'MinecraftFont', sans-serif; }
+        button:hover, .button:hover { background-color: hsl(122, 40%, 55%); }
+        button:active, .button:active { background-color: hsl(122, 40%, 65%); }
+        .op-btn { background-color: hsl(35, 100%, 60%); }
+        .op-btn:hover { background-color: hsl(35, 100%, 70%); }
+        .op-btn:active { background-color: hsl(35, 100%, 80%); }
+        .equal { grid-column: span 4; background-color: hsl(206, 90%, 55%); color: white; font-size: 24px; }
+        .equal:hover { background-color: hsl(206, 90%, 65%); }
+        .equal:active { background-color: hsl(206, 90%, 75%); }
+        .item-row { display: flex; gap: 10px; margin-bottom: 10px; align-items: center; }
+        .item-row input { padding: 8px; border: 1px solid #555; border-radius: 4px; flex: 1; background-color: #444; color: white; height: 40px; }
+        .item-row input::placeholder { color: #ccc; }
+        .calculated-list { margin-top: 10px; }
         .remove-btn {
             background-color: #f44336;
             color: white;
@@ -120,14 +43,8 @@
             font-size: 18px; /* Erhöht die Schriftgröße für bessere Lesbarkeit */
             display: flex;
             align-items: center;
-            justify-content: center;
-        }
-
-        .remove-btn:hover {
-            background-color: #e53935;
-        }
-
-        /* Styles für den Nether-Portal Modus */
+            justify-content: center; }
+        .remove-btn:hover { background-color: #e53935; }
         .nether-row {
             display: flex;
             gap: 10px;
