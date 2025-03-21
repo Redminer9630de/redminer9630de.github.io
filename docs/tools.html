@@ -31,123 +31,35 @@
         .item-row input { padding: 8px; border: 1px solid #555; border-radius: 4px; flex: 1; background-color: #444; color: white; height: 40px; }
         .item-row input::placeholder { color: #ccc; }
         .calculated-list { margin-top: 10px; }
-        .remove-btn {
-            background-color: #f44336;
-            color: white;
-            border: none;
-            border-radius: 4px;
-            cursor: pointer;
-            padding: 10px; /* Erhöht die Höhe */
-            height: 40px;  /* Gleiche Höhe wie die anderen Eingabefelder */
-            width: 50px;   /* Breitere Schaltfläche */
-            font-size: 18px; /* Erhöht die Schriftgröße für bessere Lesbarkeit */
-            display: flex;
-            align-items: center;
-            justify-content: center; }
+        .remove-btn { background-color: #f44336; color: white; border: none; border-radius: 4px; cursor: pointer; padding: 10px; height: 40px; width: 50px; font-size: 18px; display: flex; align-items: center; justify-content: center; }
         .remove-btn:hover { background-color: #e53935; }
-        .nether-row {
-            display: flex;
-            gap: 10px;
-            margin-bottom: 10px;
-            align-items: center;
-        }
-
+        .nether-row { display: flex; gap: 10px; margin-bottom: 10px; align-items: center; }
         .nether-row input,
         .nether-row select,
-        .nether-row button {
-            padding: 8px;
-            border: 1px solid #555;
-            border-radius: 4px;
-            background-color: #444;
-            color: white;
-            height: 40px;
-            font-family: 'MinecraftFont', sans-serif;
-        }
-
-        .nether-row button {
-            background-color: hsl(206, 90%, 55%);
-            cursor: pointer;
-        }
-
-        .nether-row button:hover {
-            background-color: hsl(206, 90%, 65%);
-        }
-
-        .nether-row button:active {
-            background-color: hsl(206, 90%, 75%);
-        }
-
+        .nether-row button { padding: 8px; border: 1px solid #555; border-radius: 4px; background-color: #444; color: white; height: 40px; font-family: 'MinecraftFont', sans-serif; }
+        .nether-row button { background-color: hsl(206, 90%, 55%); cursor: pointer; }
+        .nether-row button:hover { background-color: hsl(206, 90%, 65%); }
+        .nether-row button:active { background-color: hsl(206, 90%, 75%); }
         #netherMode input,
         #netherMode select,
         #netherMode button,
         #itemMode input,
-        #itemMode button {
-            font-size: 16px;
-        }
-
-        /* Anpassung der calculateItems Funktion */
-        .item-row input.output {
-            background-color: #333;
-            cursor: default;
-        }
-        
+        #itemMode button { font-size: 16px; }
+        .item-row input.output { background-color: #333; cursor: default; }
         @media (prefers-color-scheme: light) {
-            body {
-                background-color: white;   
-                color: black;
-            }
-    
-            h1, h2 {
-                color: black;
-            }    
-    
-            #display, .display {
-                background-color: #f0f0f0;
-                color: #000;
-                border: 1px solid #ccc;
-            }
-
-            .item-row input {
-                background-color: #f9f9f9;
-                color: #000;
-                border: 1px solid #ccc;    
-            }
-
-            .item-row input::placeholder {
-                color: #666;
-            }
-
-            .nether-row input, .nether-row select, .nether-row button {
-                background-color: #f0f0f0;
-                color: #000;
-                border: 1px solid #ccc;
-            }
-
-            .item-row input.output {
-                background-color: #e0e0e0;
-                color: #000;
-            }
+            body { background-color: white; color: black; }
+            h1, h2 { color: black; }
+            #display, .display { background-color: #f0f0f0; color: #000; border: 1px solid #ccc; }
+            .item-row input { background-color: #f9f9f9; color: #000; border: 1px solid #ccc; }
+            .item-row input::placeholder { color: #666; }
+            .nether-row input, .nether-row select, .nether-row button { background-color: #f0f0f0; color: #000; border: 1px solid #ccc; }
+            .item-row input.output { background-color: #e0e0e0; color: #000; } 
         }
-
-        @keyframes moveNumber {
-          0% { transform: translateY(-50px); opacity: 0; }
-          100% { transform: translateY(0); opacity: 1; }
-        }
-
-        .output-number {
-          animation: moveNumber 0.4s ease;
-        }
-
-        .output-number.fast {
-          animation: moveNumber 0.2s ease;
-        }
-        #hex-generator {
-          text-align: center;
-          margin: 20px;
-        }
-        #color-preview {
-          margin: 10px auto;
-        }
+        @keyframes moveNumber { 0% { transform: translateY(-50px); opacity: 0; } 100% { transform: translateY(0); opacity: 1; } }
+        .output-number { animation: moveNumber 0.4s ease; }
+        .output-number.fast { animation: moveNumber 0.2s ease; }
+        #hex-generator { text-align: center; margin: 20px; }
+        #color-preview { margin: 10px auto; }
     </style>
 </head>
 <body>
